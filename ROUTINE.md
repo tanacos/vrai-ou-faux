@@ -34,7 +34,8 @@ garde-fou « file pleine » (étape 0.3) ne s'applique pas ; le fichier `PAUSE` 
    - `action: "reprendre"` → l'épisode `numero` a été interrompu en cours de route ; ses faits ont déjà passé la
      contre-vérification : ne refais ni la recherche ni le script.
      - statut `fabriqué` : refabrique la vidéo depuis `<dossier>/episode.json` (étape 6), puis étape 7 ;
-     - statut `hébergé` : la vidéo est déjà en ligne (champ `video`) : va directement à l'étape 7, créneau compris.
+     - statut `hébergé` : la vidéo est déjà en ligne (champ `video`) ; à l'étape 7, ne relance pas `heberger` ni
+       le journal « hébergé » : commence à `legende`, puis anti-doublon, créneau et programmation avec ce lien.
    - `action: "nouveau"` → épisode `numero` ; l'idée n° 1 est **obligatoirement** `idee_1_imposee` (annoncée à la
      fin de l'épisode précédent). Fais les étapes 1 à 9.
 4. Contrôle des sorties précédentes : dans `getScheduledPosts` (7 derniers jours), une publication dont l'heure est
