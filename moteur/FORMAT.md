@@ -50,8 +50,12 @@ Règles de contenu, vérifiées par `fabriquer.py valider` :
 | `barres` | `titre`, `sous_texte`, `lignes: [{libelle, valeur, affichage, couleur}]` (2 à 4), `reference: {valeur}`, `max`, `source` | comparaison chiffrée (occupe aussi la zone visuelle) |
 | `citation` | `texte` (« … »), `auteur` | citation d'un organisme |
 
-Longueurs conseillées : `texte` ≤ 70 caractères, `sous_texte` ≤ 55, `titre` ≤ 30. Le moteur réduit la taille si besoin et
-signale une erreur s'il ne peut pas faire tenir le texte. `duree` (secondes) force la durée d'un panneau.
+Longueurs **idéales** (gros caractères, lecture en un coup d'œil) : `texte` ≤ 70 caractères, `sous_texte` ≤ 55,
+`titre` ≤ 30. Au-delà, le moteur réduit seul la taille jusqu'à ces **maxima mesurés** (puis `valider` signale une
+erreur précise) : `texte` ≈ 120 caractères seul ou avec un titre, ≈ 90 avec titre + sous-texte ; `sous_texte` ≈ 75 ;
+titre d'un `chiffre` ≈ 65 et sa `legende` ≈ 75 ; libellé de `barres` ≈ 30 (il partage la ligne avec sa valeur) ;
+libellé de repère de `frise` : 2 lignes d'environ 16 caractères (13 avec 4 repères). Préfère toujours couper une idée
+en deux panneaux plutôt que d'approcher ces maxima. `duree` (secondes) force la durée d'un panneau.
 
 ## Scènes (zone visuelle, centre de l'écran)
 
@@ -62,7 +66,7 @@ signale une erreur s'il ne peut pas faire tenir le texte. `duree` (secondes) for
 | `horizon` | `objet` (picto en orbite), `libelle` | vue depuis l'espace, atmosphère |
 | `grille` | `icone`, `total` (≤ 200), `surlignes`, `colonnes`, `couleur_surligne`, `libelle`, `ordre: "hasard"` | proportions (« 1 sur 10 ») |
 | `echelle` | `elements: [{icone, valeur, libelle, affichage}]` (2 ou 3) | tailles, hauteurs, distances |
-| `frise` | `reperes: [{annee, libelle}]` (2 à 4) | histoire, dates |
+| `frise` | `reperes: [{annee, libelle}]` (2 à 4 ; à partir de 3, ils alternent sous et au-dessus de la ligne) | histoire, dates |
 | `duel` | `gauche: {icone, libelle}`, `droite: {…}`, `signe` (`vs`, `=`, `≠`, `>`, `<`), `signe_apres`, `gagnant` (`gauche`, `droite`, `aucun`) | comparaison A contre B |
 
 Champs communs : `couleur` (`cyan`, `corail`, `vert`, `or`, `violet`) et `fond` (`nuit`, `espace`, `aurore`, `chaud`,

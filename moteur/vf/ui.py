@@ -303,6 +303,16 @@ def loop_flash(t, DUR):
 
 # ------------------------------------------------------------------ panneaux d'explication
 ZONE_Y0, ZONE_Y1 = 548, 830        # zone de texte des panneaux (lignes de base)
+W_LOW = 2 * (SAFE_RIGHT_LOW - 8 - 540)   # largeur max d'une ligne centrée sous y = 840 (boutons TikTok à droite)
+
+
+def clear_of_buttons(lines):
+    """lines = [(texte, police, taille, ligne de base)] : vrai si aucune ligne centrée ne mord sur la colonne des
+    boutons TikTok (à droite, sous y = 840)."""
+    for txt, path, sz, yb in lines:
+        if yb + 0.22 * sz > 840 and text_width(txt, path, sz) > W_LOW:
+            return False
+    return True
 
 
 def fmt_num(v, dec=0):
@@ -340,41 +350,64 @@ class PTexte(Panel):
         self.texte = fr(s.get("texte", "") or "")
         self.sous = fr(s.get("sous_texte", "") or "")
         self.ct = col(s.get("couleur_titre"), CYAN)
-        self.items = []
-        blocks = []
+        tb = None
         if self.titre:
             r = fit_block(self.titre, F_DBOLD, (54, 50, 46, 42), 840, 2)
             if r is None:
                 self.errors.append(f"titre trop long : {self.titre!r}")
                 r = (42, wrap(self.titre, F_DBOLD, 42, 840))
-            blocks.append(("titre", r[1], r[0], 1.10))
+            tb = ("titre", r[1], r[0], 1.10)
+        # plus grande taille du texte (puis du sous-texte) pour laquelle tout le panneau tient dans la zone ;
+        # le sous-texte reste nettement plus petit que le texte pour garder la hiérarchie
+        t_opts = [None]
         if self.texte:
-            n_max = 4 if not self.titre else 3
-            if self.sous:
-                n_max -= 1
-            r = fit_block(self.texte, F_DXB, (70, 66, 62, 58, 54), 820, n_max)
-            if r is None:
-                self.errors.append(f"texte trop long ({len(self.texte)} caractères) : {self.texte!r}")
-                r = (54, wrap(self.texte, F_DXB, 54, 820))
-            blocks.append(("texte", r[1], r[0], 1.10))
+            t_opts = []
+            for sz in (70, 66, 62, 58, 54, 50):
+                ln = wrap(self.texte, F_DXB, sz, 820)
+                if len(ln) <= 4 and all(text_width(x, F_DXB, sz) <= 821 for x in ln):
+                    t_opts.append(("texte", ln, sz, 1.10))
+        s_opts = [None]
         if self.sous:
-            r = fit_block(self.sous, F_MEDI, (46, 44, 42, 40, 38), 840, 2)
-            if r is None:
-                self.errors.append(f"sous-texte trop long : {self.sous!r}")
-                r = (38, wrap(self.sous, F_MEDI, 38, 840))
-            blocks.append(("sous", r[1], r[0], 1.15))
-        y = ZONE_Y0
-        prev = None
+            s_opts = []
+            for sz in (46, 44, 42, 40, 38):
+                ln = wrap(self.sous, F_MEDI, sz, 840)
+                if len(ln) <= 2 and all(text_width(x, F_MEDI, sz) <= 841 for x in ln):
+                    s_opts.append(("sous", ln, sz, 1.15))
+        fonts = {"titre": F_DBOLD, "texte": F_DXB, "sous": F_MEDI}
+        for tbk in t_opts:
+            for sbk in s_opts:
+                if tbk and sbk and sbk[2] > 0.8 * tbk[2]:
+                    continue
+                blocks = [b for b in (tb, tbk, sbk) if b]
+                items, y = self._stack(blocks)
+                lines = [(x_, fonts[k], sz, yb + i * sz * lh)
+                         for (k, ln, sz, yb), (_, _, _, lh) in zip(items, blocks) for i, x_ in enumerate(ln)]
+                if y <= ZONE_Y1 + 10 and clear_of_buttons(lines):
+                    self.items, self.y_end = items, y
+                    return
+        # rien ne tient : erreur explicite, mise en page de secours (plus petites tailles) pour l'aperçu
+        if self.texte and not t_opts:
+            self.errors.append(f"texte trop long ({len(self.texte)} caractères, 4 lignes max) : {self.texte!r}")
+        elif self.sous and not s_opts:
+            self.errors.append(f"sous-texte trop long ({len(self.sous)} caractères, 2 lignes max) : {self.sous!r}")
+        else:
+            self.errors.append("panneau trop chargé (titre + texte + sous-texte) : raccourcir le texte ou retirer "
+                               "le sous-texte")
+        fb = [b for b in (tb, ("texte", wrap(self.texte, F_DXB, 50, 820), 50, 1.10) if self.texte else None,
+                          ("sous", wrap(self.sous, F_MEDI, 38, 840), 38, 1.15) if self.sous else None) if b]
+        self.items, self.y_end = self._stack(fb)
+
+    @staticmethod
+    def _stack(blocks):
+        """Lignes de base des blocs empilés depuis le haut de la zone ; renvoie (items, y de la dernière ligne)."""
+        items, y, psz = [], ZONE_Y0, None
         for kind, ln, sz, lh in blocks:
-            if prev is not None:
-                pk, psz = prev
+            if psz is not None:
                 y += psz * (0.30 if kind != "sous" else 0.35) + sz * (1.05 if kind != "sous" else 1.35)
-            self.items.append((kind, ln, sz, y))
+            items.append((kind, ln, sz, y))
             y += (len(ln) - 1) * sz * lh
-            prev = (kind, sz)
-        self.y_end = y
-        if y > ZONE_Y1 + 10:
-            self.errors.append(f"panneau trop haut (fin y={y:.0f} > {ZONE_Y1}) : raccourcir les textes")
+            psz = sz
+        return items, y
 
     def draw(self, img, t):
         a = section(t, self.t0, self.t1)
@@ -410,37 +443,62 @@ class PChiffre(Panel):
             self.suf = NB + self.suf
         self.suf = self.suf.replace(" ", NB) if self.suf.startswith(" ") else self.suf
         self.cfin = col(s.get("couleur"), CYAN)
-        final = self.fmt(self.v)
-        self.big = fit_size(final, F_DBLACK, 150, 840, 80)
-        self.items = []
+        # pendant le comptage, certaines valeurs intermédiaires sont plus larges que la valeur finale : la taille
+        # du grand nombre se règle sur la plus large de toutes celles qui s'afficheront
+        n = int(abs(self.v - self.v0)) + 1 if self.dec == 0 and abs(self.v - self.v0) <= 400 else 240
+        vals = {self.v0 + (self.v - self.v0) * k / max(n - 1, 1) for k in range(n)} | {self.v0, self.v}
+        shown = {self.fmt(round(x) if self.dec == 0 else x) for x in vals}
+        widest = max(shown, key=lambda x_: text_width(x_, F_DBLACK, 150))
+        big_max = fit_size(widest, F_DBLACK, 150, 840, 80)
+        if text_width(widest, F_DBLACK, big_max) > 840:
+            self.errors.append(f"nombre trop long pour l'écran : {widest!r}")
+        t_opts = [(56, [])]
         if self.titre:
-            r = fit_block(self.titre, F_DXB, (60, 56, 52, 48), 840, 2)
-            if r is None:
+            t_opts = [(sz, wrap(self.titre, F_DXB, sz, 840)) for sz in (60, 56, 52, 48)]
+            t_opts = [o for o in t_opts if len(o[1]) <= 2 and all(text_width(x, F_DXB, o[0]) <= 841 for x in o[1])]
+            if not t_opts:
                 self.errors.append(f"titre trop long : {self.titre!r}")
-                r = (48, wrap(self.titre, F_DXB, 48, 840))
-            self.tsz, self.tln = r
-        else:
-            self.tsz, self.tln = 56, []
+                t_opts = [(48, wrap(self.titre, F_DXB, 48, 840))]
+        l_opts = [(44, [])]
         if self.leg:
-            r = fit_block(self.leg, F_MEDI, (44, 42, 40, 38), 840, 2)
-            if r is None:
+            l_opts = [(sz, wrap(self.leg, F_MEDI, sz, 840)) for sz in (44, 42, 40, 38)]
+            l_opts = [o for o in l_opts if len(o[1]) <= 2 and all(text_width(x, F_MEDI, o[0]) <= 841 for x in o[1])]
+            if not l_opts:
                 self.errors.append(f"légende trop longue : {self.leg!r}")
-                r = (38, wrap(self.leg, F_MEDI, 38, 840))
-            self.lsz, self.lln = r
-        else:
-            self.lsz, self.lln = 44, []
-        y = ZONE_Y0
-        self.y_t = y
-        y += max(len(self.tln) - 1, 0) * self.tsz * 1.10
-        self.y_big = (y + 40 + self.big * 0.74) if self.tln else 548 + self.big * 0.55
-        self.y_leg = self.y_big + 18 + self.lsz * 1.05
-        self.y_end = self.y_leg + max(len(self.lln) - 1, 0) * self.lsz * 1.15
-        if self.y_end > ZONE_Y1 + 10:
-            self.errors.append(f"panneau chiffre trop haut (fin y={self.y_end:.0f})")
+                l_opts = [(38, wrap(self.leg, F_MEDI, 38, 840))]
+        bigs = [b for b in range(int(big_max), 89, -10)] or [int(big_max)]
+        fit = None
+        for big in bigs:                         # le grand nombre d'abord, puis le titre, puis la légende
+            for tsz, tln in t_opts:
+                for lsz, lln in l_opts:
+                    geo = self._geo(big, tsz, tln, lsz, lln)
+                    if geo[3] <= ZONE_Y1 + 10:
+                        fit = (big, tsz, tln, lsz, lln, geo)
+                        break
+                if fit:
+                    break
+            if fit:
+                break
+        if fit is None:
+            self.errors.append("panneau chiffre trop chargé (titre + nombre + légende) : raccourcir le titre ou la "
+                               "légende")
+            big, (tsz, tln), (lsz, lln) = bigs[-1], t_opts[-1], l_opts[-1]
+            fit = (big, tsz, tln, lsz, lln, self._geo(big, tsz, tln, lsz, lln))
+        self.big, self.tsz, self.tln, self.lsz, self.lln, (self.y_t, self.y_big, self.y_leg, self.y_end) = fit
         self.t_count = self.t0 + 0.30
         self.d_count = float(s.get("duree_comptage", 1.6))
         self.events.append((self.t_count, "compteur", {"duree": self.d_count}))
         self.events.append((self.t_count + self.d_count, "ding", {}))
+
+    @staticmethod
+    def _geo(big, tsz, tln, lsz, lln):
+        """Lignes de base (titre, grand nombre, légende) et bas du panneau."""
+        y_t = ZONE_Y0
+        y = y_t + max(len(tln) - 1, 0) * tsz * 1.10
+        y_big = (y + 40 + big * 0.74) if tln else ZONE_Y0 + big * 0.55
+        y_leg = y_big + 18 + lsz * 1.05
+        y_end = y_leg + max(len(lln) - 1, 0) * lsz * 1.15 if lln else y_big
+        return y_t, y_big, y_leg, y_end
 
     def fmt(self, v):
         return fr(self.pre + fmt_num(v, self.dec) + self.suf)
@@ -549,9 +607,10 @@ class PBarres(Panel):
         pal = [CYAN, C3(0.85, 0.92, 1.0), GOLD, CORAL]
         for k, r in enumerate(rows):
             lab = fr(r.get("libelle", ""))
-            if text_width(lab, F_SEMI, 30) > 600:
-                self.errors.append(f"libellé de barre trop long : {lab!r}")
             aff = fr(str(r.get("affichage", fmt_num(float(r.get("valeur", 0))))))
+            # libellé (à gauche) et valeur (alignée à droite) partagent la même ligne : 16 px de blanc au minimum
+            if text_width(lab, F_SEMI, 30) > 564 - text_width(aff, F_DBOLD, 40):
+                self.errors.append(f"libellé de barre trop long pour tenir à côté de sa valeur : {lab!r}")
             self.rows.append((lab, aff, float(r.get("valeur", 0)), col(r.get("couleur"), pal[k % 4]), 0.7 * k))
         ref = s.get("reference")
         self.ref = (float(ref["valeur"]), col(ref.get("couleur"), CYAN)) if ref else None
@@ -559,8 +618,10 @@ class PBarres(Panel):
         if self.src and text_width(self.src, F_MEDI, 26) > 600:
             self.errors.append(f"source des barres trop longue : {self.src!r}")
         n = max(len(rows), 1)
-        self.dyr = 105.0 if n <= 3 else 82.0
-        self.box = (150, 845, 790, 845 + 60 + n * self.dyr + 70)
+        # le cadre finit toujours au-dessus de y = 1250 (bas de la zone sûre TikTok) : interligne adapté au nombre de
+        # lignes (105 px pour 2, 95 pour 3, 71 pour 4)
+        self.dyr = float(min(105.0, (1250 - 845 - 56 - 64) / n))
+        self.box = (150, 845, 790, 845 + 56 + n * self.dyr + 64)
         if self.titre:
             r = fit_block(self.titre, F_DXB, (62, 58, 54, 50), 820, 2)
             if r is None:
@@ -591,7 +652,7 @@ class PBarres(Panel):
         if self.sln:
             PARA(img, self.sln, F_MEDI, self.ssz, 540, y + 10, LIGHT, a * ain(t, self.t0 + 0.4), 0, 1.15)
         bars(img, t, a, self.t0 + 0.20, self.rows, self.vmax, self.ref, self.src, box=self.box,
-             y0r=self.box[1] + 60, dyr=self.dyr)
+             y0r=self.box[1] + 56, dyr=self.dyr)
 
 
 def bars(img, t, a, t0, rows, tmax, ref, src, box=(150, 845, 790, 1245), y0r=905.0, dyr=105.0, bx0=180.0, blen=560.0):

@@ -239,20 +239,40 @@ class Episode:
         if self.t2s < 64:
             self.errors.append(f"titre trop long : {t2!r}")
         src = fr(s["sources_ecran"])
-        r = sources_block(src, (34, 32, 30, 28), 800, 4)
+        # 2 lignes de sources de préférence (l'annonce du prochain épisode reste ainsi haut dans l'écran), 3 au plus
+        r = sources_block(src, (34, 32, 30, 28, 26), 800, 2) or sources_block(src, (30, 28, 26), 800, 3)
         if r is None:
-            self.errors.append("« sources_ecran » trop long (4 lignes maximum)")
-            r = (28, wrap(src, F_SEMI, 28, 800)[:4])
+            self.errors.append("« sources_ecran » trop long (3 lignes maximum) : garder les éditeurs principaux")
+            r = (26, wrap(src, F_SEMI, 26, 800)[:3])
         self.src_sz, self.src_ln = r
-        nxt = fr(s["prochain"]["affirmation"])
-        r = U.fit_block(nxt, F_DXB, (54, 50, 46, 42), 800, 3)
-        if r is None:
-            self.errors.append("annonce du prochain épisode trop longue")
-            r = (42, wrap(nxt, F_DXB, 42, 800)[:3])
-        self.nx_sz, self.nx_ln = r
         y = 556 + (len(self.src_ln) - 1) * self.src_sz * 1.18
         self.y_nlab = max(722.0, y + 70)
         self.y_nx = self.y_nlab + 68
+        nxt = fr(s["prochain"]["affirmation"])
+        # sous y = 840, le bord droit est occupé par les boutons TikTok : une ligne centrée y reste étroite
+        w_low = 2 * (U.SAFE_RIGHT_LOW - 8 - 540)
+        r = None
+        for sz in (54, 50, 46, 42):
+            for wmax in (800, 720, 640, 560, w_low):
+                ln = wrap(nxt, F_DXB, sz, wmax)
+                if len(ln) > 3:
+                    continue
+                ok = True
+                for i, x_ in enumerate(ln):
+                    w_ = text_width(x_, F_DXB, sz)
+                    low = self.y_nx + i * sz * 1.10 + 0.22 * sz > 840
+                    if w_ > 801 or (low and w_ > w_low):
+                        ok = False
+                if ok:
+                    r = (sz, ln)
+                    break
+            if r:
+                break
+        if r is None:
+            self.errors.append("annonce du prochain épisode trop longue (elle doit tenir en 3 lignes, les lignes du "
+                               "bas étant plus étroites à cause des boutons TikTok)")
+            r = (42, wrap(nxt, F_DXB, 42, w_low)[:3])
+        self.nx_sz, self.nx_ln = r
         y2 = self.y_nx + (len(self.nx_ln) - 1) * self.nx_sz * 1.10
         self.y_pill = max(1000.0, y2 + 95)
         self.y_abo = self.y_pill + 100

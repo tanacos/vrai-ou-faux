@@ -1,0 +1,258 @@
+{
+ "_avertissement": "Épisode d'essai du moteur (contenu fictif, sources factices) : ne jamais publier.",
+ "numero": 98,
+ "slug": "essai-a",
+ "theme": "essai",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LE SOMMEIL"
+ ],
+ "fond": "nuit",
+ "ambiance": "nature",
+ "idees": [
+  {
+   "affirmation": "« On avale en moyenne huit araignées par an pendant notre sommeil, sans s'en rendre compte. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:spider-alt",
+    "satellites": [
+     "pi:moon",
+     "bed",
+     "pi:alarm"
+    ],
+    "marque": "barre"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Pourquoi c'est un mythe ?",
+     "texte": "Une araignée fuit les vibrations d'un dormeur qui respire et ronfle.",
+     "sous_texte": "Elle nous perçoit comme un danger, pas comme un abri."
+    },
+    {
+     "type": "chiffre",
+     "titre": "Nombre d'araignées avalées par an, d'après les études :",
+     "valeur": 0,
+     "depart": 8,
+     "suffixe": " araignée",
+     "legende": "Aucune étude n'a jamais mesuré ce chiffre."
+    },
+    {
+     "type": "citation",
+     "texte": "« Ce chiffre a été inventé pour montrer qu'on croit n'importe quoi sur Internet. »",
+     "auteur": "Scientific American"
+    },
+    {
+     "type": "texte",
+     "texte": "Le mythe circule depuis les années 1990."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Scientific American",
+     "titre": "t",
+     "url": "https://example.org/a",
+     "extrait": "x"
+    },
+    {
+     "editeur": "Snopes",
+     "titre": "t",
+     "url": "https://example.org/b",
+     "extrait": "x"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Un adulte sur dix fait du somnambulisme. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "grille",
+    "icone": "person",
+    "total": 100,
+    "surlignes": 12,
+    "colonnes": 10,
+    "libelle": "12 sur 100",
+    "ordre": "hasard",
+    "couleur_surligne": "corail"
+   },
+   "panneaux": [
+    {
+     "type": "barres",
+     "titre": "Somnambulisme selon l'âge :",
+     "sous_texte": "Part des personnes concernées au cours de l'année",
+     "lignes": [
+      {
+       "libelle": "Enfants de 2 à 13 ans",
+       "valeur": 29,
+       "affichage": "29 %"
+      },
+      {
+       "libelle": "Adolescents",
+       "valeur": 12,
+       "affichage": "12 %"
+      },
+      {
+       "libelle": "Adultes",
+       "valeur": 4,
+       "affichage": "4 %"
+      },
+      {
+       "libelle": "Plus de 65 ans",
+       "valeur": 2,
+       "affichage": "2 %"
+      }
+     ],
+     "reference": {
+      "valeur": 10
+     },
+     "max": 32,
+     "source": "Sources : Inserm · NHS · Sleep Foundation"
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "C'est surtout une affaire d'enfants : ça passe souvent avec l'âge."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Inserm",
+     "titre": "t",
+     "url": "https://example.org/a",
+     "extrait": "x"
+    },
+    {
+     "editeur": "NHS",
+     "titre": "t",
+     "url": "https://example.org/b",
+     "extrait": "x"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Les rêves en noir et blanc, c'était avant la télé couleur. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "frise",
+    "reperes": [
+     {
+      "annee": "1915",
+      "libelle": "Premières enquêtes"
+     },
+     {
+      "annee": "1955",
+      "libelle": "Télé noir et blanc"
+     },
+     {
+      "annee": "1970",
+      "libelle": "La couleur arrive"
+     },
+     {
+      "annee": "2008",
+      "libelle": "Étude de Dundee"
+     }
+    ]
+   },
+   "panneaux": [
+    {
+     "type": "duo",
+     "titre": "Rêves en noir et blanc",
+     "gauche": {
+      "valeur": "25 %",
+      "legende": "chez les plus de 55 ans"
+     },
+     "droite": {
+      "valeur": "7 %",
+      "legende": "chez les moins de 25 ans"
+     }
+    },
+    {
+     "type": "texte",
+     "texte": "Les médias de notre enfance colorent nos rêves.",
+     "sous_texte": "Étude de l'Université de Dundee, 2008"
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Université de Dundee",
+     "titre": "t",
+     "url": "https://example.org/a",
+     "extrait": "x"
+    },
+    {
+     "editeur": "Scientific American",
+     "titre": "t",
+     "url": "https://example.org/b",
+     "extrait": "x"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Un chat dort plus de la moitié de sa vie. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "echelle",
+    "elements": [
+     {
+      "icone": "person",
+      "valeur": 8,
+      "libelle": "Humain",
+      "affichage": "8 h"
+     },
+     {
+      "icone": "gi:cat",
+      "valeur": 15,
+      "libelle": "Chat",
+      "affichage": "15 h"
+     },
+     {
+      "icone": "gi:koala",
+      "valeur": 20,
+      "libelle": "Koala",
+      "affichage": "20 h"
+     }
+    ]
+   },
+   "panneaux": [
+    {
+     "type": "chiffre",
+     "titre": "Un chat dort en moyenne",
+     "valeur": 15.5,
+     "decimales": 1,
+     "prefixe": "≈ ",
+     "suffixe": " h/jour",
+     "legende": "soit près des deux tiers de sa vie."
+    },
+    {
+     "type": "texte",
+     "texte": "Le koala fait mieux : jusqu'à 20 heures par jour."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Britannica",
+     "titre": "t",
+     "url": "https://example.org/a",
+     "extrait": "x"
+    },
+    {
+     "editeur": "Muséum",
+     "titre": "t",
+     "url": "https://example.org/b",
+     "extrait": "x"
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "Scientific American · Snopes · Inserm · NHS · Université de Dundee · Britannica · Muséum national d'Histoire naturelle",
+ "prochain": {
+  "affirmation": "« Le poisson rouge n'a que trois secondes de mémoire. »"
+ },
+ "publication": {
+  "legende": "Essai. Sources : x #vraioufaux",
+  "hashtags": [
+   "#vraioufaux"
+  ]
+ }
+}

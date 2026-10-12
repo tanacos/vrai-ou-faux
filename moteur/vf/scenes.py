@@ -899,13 +899,20 @@ class Frise(Scene):
         n = max(len(rp), 1)
         self.y = 1060.0
         self.x0, self.x1 = 250.0, 690.0
+        # à partir de 3 repères, ils alternent sous / au-dessus de la ligne : deux voisins du même côté sont alors
+        # séparés de deux intervalles, ce qui laisse la place à des libellés de deux lignes sans chevauchement
+        self.alt = n >= 3
+        step = (self.x1 - self.x0) / max(n - 1, 1)
+        # avec 4 repères, le dernier libellé est poussé vers la gauche par la zone des boutons TikTok : on le garde
+        # étroit (2 lignes de 200 px) pour laisser un vrai blanc avec son voisin du même côté
+        wmax = 200.0 if n >= 4 else min(250.0, (2 * step if self.alt else step) - 26)
         self.rp = []
         for k, r in enumerate(rp):
-            x = self.x0 + (self.x1 - self.x0) * (k / max(n - 1, 1))
+            x = self.x0 + step * k
             lab = U.fr(r.get("libelle", ""))
-            ln = wrap(lab, F_MEDI, 30, 220)
-            if len(ln) > 2:
-                self.errors.append(f"libellé de repère trop long : {lab!r}")
+            ln = wrap(lab, F_MEDI, 30, wmax)
+            if len(ln) > 2 or any(text_width(x_, F_MEDI, 30) > wmax + 1 for x_ in ln):
+                self.errors.append(f"libellé de repère trop long : {lab!r} (2 lignes de {wmax:.0f} px au plus)")
             an = U.fr(str(r.get("annee", "")))
             wl = max([text_width(an, F_DBOLD, 44)] + [text_width(x_, F_MEDI, 30) for x_ in ln[:2]])
             self.rp.append((x, an, ln[:2], wl))
@@ -924,6 +931,9 @@ class Frise(Scene):
             on = 1.0 if neutral else sstep(0, 0.2, t - (self.t0 + 0.55 * k))
             add_glow(hdr, x, self.y, 1.0 + 2.0 * on, self.acc if k < len(self.rp) - 1 else self.vcol, core=6, halo=14,
                      ext=110)
+            if self.alt and on > 0 and not neutral:      # petit trait qui relie le point à son libellé
+                d = 1 if k % 2 == 0 else -1
+                lines_add(hdr, [np.array([(x, self.y + d * 16), (x, self.y + d * 26)])], self.acc, 0.6 * on, th=2)
         return hdr
 
     def ui(self, img, t, cam, neutral=False):
@@ -936,8 +946,15 @@ class Frise(Scene):
                 on = 0
             qx, qy = cam((x, self.y))
             qx = U.safe_cx(qx, lx, 1200)
-            T(img, an, F_DBOLD, 44, qx, qy - 40, WHITE, a * on)
-            PARA(img, ln, F_MEDI, 30, qx, qy + 62, LIGHT, a * on, 0, 1.12)
+            if not self.alt:                     # année au-dessus, libellé dessous
+                T(img, an, F_DBOLD, 44, qx, qy - 40, WHITE, a * on)
+                PARA(img, ln, F_MEDI, 30, qx, qy + 62, LIGHT, a * on, 0, 1.12)
+            elif k % 2 == 0:                     # repère « dessous » : année puis libellé sous la ligne
+                T(img, an, F_DBOLD, 44, qx, qy + 66, WHITE, a * on)
+                PARA(img, ln, F_MEDI, 30, qx, qy + 110, LIGHT, a * on, 0, 1.12)
+            else:                                # repère « dessus » : libellé puis année au-dessus de la ligne
+                T(img, an, F_DBOLD, 44, qx, qy - 34, WHITE, a * on)
+                PARA(img, ln, F_MEDI, 30, qx, qy - 86 - (len(ln) - 1) * 30 * 1.12, LIGHT, a * on, 0, 1.12)
 
 
 class Duel(Scene):
