@@ -6,7 +6,8 @@ Nathan garde ainsi une fenêtre de veto (il peut supprimer la publication dans M
 Personne ne relit ton travail avant la publication : la rigueur des faits est ta première responsabilité.
 
 Si le message de déclenchement contient **MODE ESSAI**, fais tout, mais crée la publication Metricool en
-**brouillon** (`"draft": true`) et note `"statut": "brouillon (essai)"` dans le journal.
+**brouillon** (`"draft": true`) et note `"statut": "brouillon (essai)"` dans le journal. En mode essai seulement, le
+garde-fou « file pleine » (étape 0.3) ne s'applique pas ; le fichier `PAUSE` reste respecté.
 
 ## 0. Préparer l'espace de travail
 
