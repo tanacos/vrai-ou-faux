@@ -5,5 +5,6 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
-| 2026-10-12 20:30 | essai | lancé par la session de mise en place ; résultat à compléter |
-| 2026-10-12 20:24 | essai | arrêt prévu : 3 épisodes déjà en attente (garde-fou « file pleine ») |
+| 2026-10-12 21:23 | essai | refusé par Anthropic en 7 s : limite d'utilisation du compte atteinte (USAGE_LIMIT_REACHED) |
+| 2026-10-12 20:30 | essai | session terminée en 37 s sans rien produire (limite d'utilisation probablement déjà atteinte) |
+| 2026-10-12 20:24 | essai | session terminée en 39 s ; 3 épisodes déjà en attente (garde-fou « file pleine ») |

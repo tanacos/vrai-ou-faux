@@ -15,7 +15,8 @@ garde-fou « file pleine » (étape 0.3) ne s'applique pas ; le fichier `PAUSE` 
    l'outil l'indique (`git clone --depth 1 https://github.com/tanacos/vrai-ou-faux /home/claude/vrai-ou-faux`).
 2. Lis `config.json`, `journal.json`, `sujets.md`, `moteur/FORMAT.md`.
    Ajoute tout de suite une ligne en tête du tableau de `journal_des_runs.md` (date et heure de Paris, mode
-   normal/essai, « démarré »), puis `git commit` et `git push` : c'est la trace visible de chaque déclenchement. Tu
+   normal/essai, « démarré »), puis `git commit` et `git push origin HEAD:main` : c'est la trace visible de chaque
+   déclenchement. Tu
    complètes cette même ligne à la fin (résultat : programmé / brouillon / rien à faire / échec + raison).
 3. **Garde-fous de départ** — arrête-toi proprement (rapport court, aucune action) si :
    - un fichier `PAUSE` existe à la racine du dépôt ;
@@ -126,9 +127,11 @@ python3 moteur/publier.py legende  episodes/NNN-slug /tmp/epNNN/sortie/rapport.j
 ```bash
 python3 moteur/publier.py journal episodes/NNN-slug --statut programmé --publication <date ISO> \
   --metricool_id <id> --metricool_uuid <uuid> --video <lien direct>
-git add -A && git commit -m "Épisode NNN : <thème>" && git push
+git add -A && git commit -m "Épisode NNN : <thème>" && git push origin HEAD:main
 ```
-Si le push est refusé (le dépôt a bougé entre-temps) : `git pull --rebase` puis `git push`. Ne force jamais un push.
+Pousse toujours sur `main` (et la vidéo sur `videos` via `publier.py`), jamais sur une branche `claude/…`.
+Si le push est refusé (le dépôt a bougé entre-temps) : `git pull --rebase origin main` puis
+`git push origin HEAD:main`. Ne force jamais un push.
 
 ## 9. Rapport final (court, en français)
 
