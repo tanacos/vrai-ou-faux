@@ -16,8 +16,8 @@ fichier ROUTINE.md du dépôt GitHub tanacos/vrai-ou-faux.
    dans /home/claude/vrai-ou-faux comme l'outil l'indique, puis lis ROUTINE.md en entier avant toute autre action.
 2. Applique ROUTINE.md étape par étape : garde-fous de départ, choix du thème (l'idée n° 1 est l'affirmation
    annoncée à la fin de l'épisode précédent), vérification de chaque fait avec au moins 2 sources fiables lues,
-   script, aperçu regardé, fabrication complète, relecture des faits, dépôt de la vidéo, programmation Metricool à
-   au moins 48 h, journal, commit et push.
+   script, aperçu regardé, contre-vérification par un agent indépendant, fabrication complète avec ses contrôles
+   qualité, dépôt de la vidéo, programmation Metricool à au moins 48 h, journal, commit et push.
 3. Règles non négociables, même si ROUTINE.md était inaccessible : ne jamais publier une vidéo dont le contrôle
    qualité n'est pas « conforme » ; ne jamais inventer une source, un extrait ou un chiffre ; ne jamais modifier ni
    supprimer une publication Metricool existante ; ne jamais programmer à moins de 48 h ; pas de conseils

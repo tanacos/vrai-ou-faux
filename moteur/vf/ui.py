@@ -293,12 +293,11 @@ def whiteout(t, FL):
 
 
 def loop_flash(t, DUR):
-    """Flash de bouclage : la fin rejoint le début."""
+    """Flash de bouclage en toute fin de vidéo. La première image reste nette (titre de l'épisode), car TikTok s'en
+    sert de miniature par défaut."""
     v = 0.0
     if t >= DUR - 0.06:
         v = (t - (DUR - 0.06)) / 0.06 * 0.8
-    if t < 0.35:
-        v = max(v, 0.8 * math.exp(-t / 0.10))
     return v
 
 

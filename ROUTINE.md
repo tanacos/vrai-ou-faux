@@ -17,7 +17,10 @@ Si le message de déclenchement contient **MODE ESSAI**, fais tout, mais crée l
    - un fichier `PAUSE` existe à la racine du dépôt ;
    - Metricool (`getScheduledPosts`, brand `7381054`, sur les 30 prochains jours) contient déjà `file_max` (3)
      publications TikTok à venir ou plus : la file est pleine, inutile d'en ajouter.
-4. Numéro de l'épisode : `journal.json → dernier_numero + 1`. L'idée n° 1 est **obligatoirement**
+4. Contrôle des sorties précédentes : dans `getScheduledPosts` (7 derniers jours), une publication dont l'heure est
+   passée et qui figure encore avec un statut d'erreur ou en attente n'est pas sortie : signale-le en tête du rapport
+   (ne la modifie pas toi-même).
+5. Numéro de l'épisode : `journal.json → dernier_numero + 1`. L'idée n° 1 est **obligatoirement**
    `journal.json → prochaine_affirmation` (elle a été annoncée à la fin de l'épisode précédent).
 
 ## 1. Choisir le thème et les 4 idées
@@ -65,7 +68,17 @@ python3 fabriquer.py apercu  ../episodes/NNN-slug/episode.json /tmp/epNNN/apercu
 Regarde `apercu.png` et `pictogrammes.png` (outil Read) : textes lisibles, rien qui se chevauche, pictogrammes justes.
 Corrige et recommence jusqu'à ce que ce soit propre. Durée visée : 65 à 85 s.
 
-## 5. Fabrication complète (≈ 20 à 25 min)
+## 5. Contre-vérification indépendante (obligatoire, avant la fabrication)
+
+1. Lance un agent de vérification (outil `Agent`, type `general-purpose`) qui n'a pas vu ta recherche. Donne-lui
+   seulement le contenu de `episode.json` et cette consigne : « Pour chaque idée, ouvre chaque URL de `sources`
+   (WebFetch) et vérifie que (a) l'extrait figure bien sur la page, (b) le verdict VRAI/FAUX découle des sources,
+   (c) chaque nombre, date ou nom affiché dans `affirmation`, `panneaux` et `scene` est confirmé par une source, (d) aucune formulation n'exagère les sources. Rends la liste des écarts, ou « aucun écart ». »
+2. Zéro écart exigé. Sinon corrige le script (et refais l'aperçu), puis refais vérifier (2 tours au maximum).
+3. Relis toi-même une dernière fois : la formulation peut-elle être mal comprise ? Au moindre doute non résolu,
+   **ne publie pas** : abandonne proprement et signale-le.
+
+## 6. Fabrication complète (≈ 15 à 25 min)
 
 Lance-la en arrière-plan, puis surveille le journal toutes les 2 à 3 minutes :
 ```bash
@@ -79,12 +92,6 @@ tail -5 /tmp/epNNN/fabrication.log
 - Code de sortie / statut : `conforme` exigé. Sinon lis `rapport.json`, corrige (3 tentatives maximum), puis
   abandonne proprement si ça échoue encore.
 - Regarde `planche.png` (outil Read) une dernière fois.
-
-## 6. Relecture finale des faits (obligatoire)
-
-Relis le script comme un vérificateur extérieur : pour chaque idée, le verdict découle-t-il des extraits ? Chaque
-chiffre et chaque date à l'écran sont-ils dans un extrait ? La formulation peut-elle être mal comprise ?
-Au moindre doute non résolu : **ne publie pas** ; corrige et refabrique, ou abandonne et signale-le.
 
 ## 7. Hébergement et programmation
 
@@ -117,6 +124,7 @@ python3 moteur/publier.py journal episodes/NNN-slug --statut programmé --public
   --metricool_id <id> --metricool_uuid <uuid> --video <lien direct>
 git add -A && git commit -m "Épisode NNN : <thème>" && git push
 ```
+Si le push est refusé (le dépôt a bougé entre-temps) : `git pull --rebase` puis `git push`. Ne force jamais un push.
 
 ## 9. Rapport final (court, en français)
 
@@ -126,7 +134,7 @@ En cas d'arrêt ou d'échec : ce qui a bloqué, ce qui n'a **pas** été publié
 
 ## Interdits absolus
 
-- Publier sans `statut: conforme` ou sans la relecture de l'étape 6.
+- Publier sans `statut: conforme` ou sans « aucun écart » de la contre-vérification (étape 5).
 - Modifier ou supprimer une publication Metricool existante (seule exception : ta propre publication de ce run).
 - Dépasser `file_max` publications en attente ; publier à moins de 48 h.
 - Donner des conseils médicaux, juridiques ou financiers ; traiter de politique, de religion, de drames, de

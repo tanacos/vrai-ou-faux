@@ -98,6 +98,8 @@ def run(path, ep, audit_bad=None, size_max_mb=200.0):
     n_expected = ep.TL.NF
     add("nombre d'images", abs(len(v) - n_expected) <= 1, f"{len(v)} images (prévu {n_expected})")
     lum = v.mean((1, 2))
+    add("miniature (1re image)", 8.0 < lum[0] < 110.0, f"luminosité moyenne de la 1re image : {lum[0]:.0f}/255 "
+        "(TikTok s'en sert de miniature : ni noire ni délavée)")
     black = np.nonzero(lum < 3.0)[0]
     add("pas d'image noire", len(black) == 0, f"{len(black)} image(s) noire(s)" + (f", ex. t={black[0] / FPS:.2f} s" if len(black) else ""))
     d = np.abs(np.diff(v, axis=0)).mean((1, 2))
