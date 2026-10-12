@@ -14,6 +14,9 @@ garde-fou « file pleine » (étape 0.3) ne s'applique pas ; le fichier `PAUSE` 
 1. Rattache le dépôt (outil `add_repo`, owner `tanacos`, repo `vrai-ou-faux`, accès `push`), puis clone-le comme
    l'outil l'indique (`git clone --depth 1 https://github.com/tanacos/vrai-ou-faux /home/claude/vrai-ou-faux`).
 2. Lis `config.json`, `journal.json`, `sujets.md`, `moteur/FORMAT.md`.
+   Ajoute tout de suite une ligne en tête du tableau de `journal_des_runs.md` (date et heure de Paris, mode
+   normal/essai, « démarré »), puis `git commit` et `git push` : c'est la trace visible de chaque déclenchement. Tu
+   complètes cette même ligne à la fin (résultat : programmé / brouillon / rien à faire / échec + raison).
 3. **Garde-fous de départ** — arrête-toi proprement (rapport court, aucune action) si :
    - un fichier `PAUSE` existe à la racine du dépôt ;
    - Metricool (`getScheduledPosts`, brand `7381054`, sur les 30 prochains jours) contient déjà `file_max` (3)
