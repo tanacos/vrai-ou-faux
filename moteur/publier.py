@@ -93,7 +93,9 @@ def heberger(ep_dir, mp4):
     meta = json.loads(sh("gh", "api", f"repos/{repo}/contents/{name}?ref=videos").stdout)
     size_local = os.path.getsize(mp4)
     ok = int(meta.get("size", -1)) == size_local
-    url = f"https://raw.githubusercontent.com/{repo}/videos/{name}"
+    # lien figé sur le commit : immuable, donc jamais servi depuis un cache périmé
+    sha = sh("git", "-C", VIDEOS_DIR, "rev-parse", "HEAD").stdout.strip()
+    url = f"https://raw.githubusercontent.com/{repo}/{sha}/{name}"
     print(json.dumps(dict(url=url, present_sur_github=ok, taille=size_local), ensure_ascii=False))
     return url if ok else None
 

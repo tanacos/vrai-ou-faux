@@ -57,9 +57,9 @@ P5A = (TL.S_OUT + 0.20, TL.S_OUT + 3.40)
 P5B = (P5A[1], DUR)
 
 # ------------------------------------------------------------------ décors précalculés
-BL = BR.lateral_brain(505.0, 1040.0, 650.0, seed=8)
+BL = BR.lateral_brain(505.0, 1075.0, 650.0, seed=8)
 HS = BR.head_scene(540.0, 1015.0, 470.0, seed=8)
-DB = BR.dorsal_brain(540.0, 1045.0, 560.0, seed=5)
+DB = BR.dorsal_brain(540.0, 1075.0, 560.0, seed=5)
 GT = BR.galaxy_texture()
 
 
@@ -71,9 +71,9 @@ def _background(top, bot, glow_xy, glow_col, glow_r, seed):
     return bg.astype(f32)
 
 
-BG_BRAIN = _background(C3(0.004, 0.005, 0.014), C3(0.010, 0.012, 0.030), (505, 1040), C3(0.020, 0.040, 0.110), 420, 1)
+BG_BRAIN = _background(C3(0.004, 0.005, 0.014), C3(0.010, 0.012, 0.030), (505, 1075), C3(0.020, 0.040, 0.110), 420, 1)
 BG_HEAD = _background(C3(0.004, 0.005, 0.014), C3(0.012, 0.010, 0.026), (540, 1000), C3(0.022, 0.030, 0.080), 400, 2)
-BG_TOP = _background(C3(0.004, 0.005, 0.014), C3(0.010, 0.012, 0.030), (540, 1045), C3(0.020, 0.040, 0.110), 380, 3)
+BG_TOP = _background(C3(0.004, 0.005, 0.014), C3(0.010, 0.012, 0.030), (540, 1075), C3(0.020, 0.040, 0.110), 380, 3)
 
 
 def _particles(n, seed, size=(2160, 1080), blur=2.2, inten=0.25):
@@ -169,7 +169,7 @@ def draw_network(hdr, t, a, gain=1.0):
     segs = [np.round(np.array([_N[i], _N[j]]) * 16).astype(np.int32) for (i, j), v in zip(_E, ea) if v > 0.3]
     if segs:
         cv2.polylines(m, segs, False, 255, 1, cv2.LINE_AA, 4)
-        hdr += (m.astype(f32) / 255.0 * f32(0.10 * gain))[..., None] * C3(0.35, 0.80, 1.0)
+        hdr += (m.astype(f32) / 255.0 * f32(0.16 * gain))[..., None] * C3(0.35, 0.80, 1.0)
     on = (PULSES[:, 1] <= t) & (t < PULSES[:, 1] + PULSES[:, 2])
     for e_i, t0, du, rev in PULSES[on]:
         e_i = int(e_i)
@@ -180,8 +180,8 @@ def draw_network(hdr, t, a, gain=1.0):
             u = 1 - u
         i, j = _E[e_i]
         p = _N[i] + (_N[j] - _N[i]) * u
-        add_glow(hdr, float(p[0]), float(p[1]), 0.9 * gain * math.sin(math.pi * min(max((t - t0) / du, 0), 1)),
-                 C3(0.55, 0.92, 1.0), core=1.8, halo=5.0, ext=26)
+        add_glow(hdr, float(p[0]), float(p[1]), 1.8 * gain * math.sin(math.pi * min(max((t - t0) / du, 0), 1)),
+                 C3(0.60, 0.95, 1.0), core=2.6, halo=8.0, ext=40)
 
 
 def outline_glow(hdr, pts, col, I, th=2, blur=5.0, closed=True):
@@ -193,14 +193,20 @@ def outline_glow(hdr, pts, col, I, th=2, blur=5.0, closed=True):
         hdr += (cv2.GaussianBlur(mm, (0, 0), blur) * f32(I * 1.2))[..., None] * col
 
 
+_hh, _ww = BL.labels.shape
+SPARK1 = BR.dog_noise((_hh, _ww), 0.010 * 650, 31)
+SPARK2 = BR.dog_noise((_hh, _ww), 0.010 * 650, 32)
+
+
 def cortex_glow(hdr, B, a, t, I=1.0, col=None):
     col = C3(0.22, 0.85, 1.0) if col is None else col
     img = a[B.labels]
-    img = cv2.GaussianBlur(img, (0, 0), 0.010 * B.L) * B.mask_cer
-    fl = 0.85 + 0.15 * math.sin(t * 5.3) * math.sin(t * 2.1 + 1.0)
-    em = img * (0.30 + 0.70 * B.g) * f32(I * fl)
-    halo = cv2.GaussianBlur(img, (0, 0), 0.05 * B.L) * f32(0.35 * I)
-    BR.place(hdr, B, em[..., None] * col * f32(1.2))
+    img = cv2.GaussianBlur(img, (0, 0), 0.022 * B.L) * B.mask_cer
+    w = 7.0
+    sp = 0.5 + 0.5 * np.tanh(1.3 * (SPARK1 * math.cos(w * t) + SPARK2 * math.sin(w * t)))
+    em = img * (0.10 + 0.90 * B.g * B.g) * (0.35 + 0.65 * sp) * f32(I)
+    halo = cv2.GaussianBlur(img, (0, 0), 0.05 * B.L) * f32(0.14 * I)
+    BR.place(hdr, B, em[..., None] * col * f32(1.5))
     BR.place(hdr, B, halo[..., None] * col)
 
 
@@ -209,11 +215,19 @@ def world_brain(t):
     hdr = BG_BRAIN.copy()
     hdr += drift(DUST_FAR, t, 6, -9)
     hdr += drift(DUST_NEAR, t, -10, -16)
-    BR.composite(hdr, BL, 1.0)
+    fg = np.zeros_like(hdr)
+    BR.composite(fg, BL, 1.0)
     a, frac = activity(t)
-    outline_glow(hdr, BL.outline, C3(0.30, 0.75, 1.0), 0.22, 2, 6.0)
-    cortex_glow(hdr, BL, a, t, 1.0)
-    draw_network(hdr, t, a, 1.0)
+    outline_glow(fg, BL.outline, C3(0.30, 0.75, 1.0), 0.22, 2, 6.0)
+    cortex_glow(fg, BL, a, t, 1.0)
+    draw_network(fg, t, a, 1.0)
+    dim = 1.0
+    if TL.scene_index(t) == 4:
+        dim = 1 - 0.50 * sstep(P5A[0] - 0.4, P5A[0] + 0.3, t)
+    m = BL.mask
+    x0, y0, x1, y1 = BL.box
+    hdr[y0:y1, x0:x1] *= (1 - m)[..., None]
+    hdr += fg * f32(dim)
     return hdr
 
 
@@ -252,7 +266,7 @@ def world_head(t):
     ap = section(t, *P2B)
     if ap > 0:
         tip = B.tr([(-0.255, -0.035)])[0] + [B.box[0], B.box[1]]
-        top = (tip[0] + 260, tip[1] - 330)
+        top = (tip[0] + 170, tip[1] - 205)
         reach = ain(t, P2B[0] + 0.2, 0.8)
         p_end = (top[0] + (tip[0] - top[0]) * reach, top[1] + (tip[1] - top[1]) * reach)
         m = np.zeros((H, W), np.uint8)
@@ -297,28 +311,39 @@ def world_top(t):
     al = section(t, *P3C)
     if al > 0:
         for (px, py), col in ((LANG, CYAN), (ATTN, GREEN)):
-            add_glow(hdr, px, py, 1.4 * al * pul, col, core=9, halo=22, ext=140)
+            add_glow(hdr, px, py, 2.4 * al * pul, col, core=12, halo=26, ext=160)
     return hdr
 
 
 LANG = (DB.cx - 0.31 * DB.L, DB.cy - 0.05 * DB.L)
-ATTN = (DB.cx + 0.24 * DB.L, DB.cy + 0.22 * DB.L)
+ATTN = (DB.cx + 0.24 * DB.L, DB.cy + 0.14 * DB.L)
 
-N_GRID_C, N_GRID_R = 16, 16
-GX0, GX1, GY0, GY1 = 150.0, 930.0, 870.0, 1250.0
-_mini = cv2.resize(GT, (52, 52), interpolation=cv2.INTER_AREA)
-MINIS = []
-for k in range(4):
-    Mr = cv2.getRotationMatrix2D((26, 26), 90 * k + 20, 1.0)
-    MINIS.append(cv2.warpAffine(_mini, Mr, (52, 52)))
+# champ de galaxies (façon « champ profond ») : 256 galaxies pour figurer « des centaines de Voies lactées »
+GX0, GX1, GY0, GY1 = 140.0, 940.0, 860.0, 1250.0
+_mini = cv2.resize(GT, (96, 96), interpolation=cv2.INTER_AREA)
+_mini = (np.clip(_mini, 0, None) ** 0.75).astype(f32)
+_mini /= _mini.max()
 _gr = np.random.default_rng(12)
 GRID = []
-for r_ in range(N_GRID_R):
-    for c_ in range(N_GRID_C):
-        x = GX0 + (GX1 - GX0) * (c_ + 0.5) / N_GRID_C + _gr.normal(0, 3)
-        y = GY0 + (GY1 - GY0) * (r_ + 0.5) / N_GRID_R + _gr.normal(0, 2)
-        d = math.hypot((c_ - 7.5) / 8, (r_ - 7.5) / 8)
-        GRID.append((x, y, d, int(_gr.integers(0, 4))))
+_tries = 0
+while len(GRID) < 256 and _tries < 200000:
+    _tries += 1
+    x, y = _gr.uniform(GX0, GX1), _gr.uniform(GY0, GY1)
+    if all((x - q[0]) ** 2 + ((y - q[1]) * 1.9) ** 2 > 33.0 ** 2 for q in GRID):
+        d = math.hypot((x - 540) / 400, (y - 1055) / 195)
+        size = _gr.uniform(30, 58)
+        ang = _gr.uniform(0, TAU)
+        sq = _gr.uniform(0.30, 0.95)
+        GRID.append((x, y, d, size, ang, sq))
+SPRITES = []
+for (x, y, d, size, ang, sq) in GRID:
+    sc = size / 96
+    c, s_ = math.cos(ang), math.sin(ang)
+    M = np.array([[sc * c, -sc * s_], [sc * sq * s_, sc * sq * c]])
+    A = np.zeros((2, 3))
+    A[:, :2] = M
+    A[:, 2] = np.array([40.0, 40.0]) - M @ np.array([48.0, 48.0])
+    SPRITES.append(cv2.warpAffine(_mini, A, (80, 80), flags=cv2.INTER_LINEAR))
 
 
 def place_galaxy(hdr, cx, cy, width, ang, squash, gain):
@@ -340,18 +365,16 @@ def world_galaxy(t):
     if grid < 0.995:
         place_galaxy(hdr, 540, 1060 + 20 * grid, big_w, math.radians(20) + t * 0.025, 0.45, 2.1 * (1 - 0.6 * grid))
     if grid > 0.01:
-        for (x, y, d, k) in GRID:
-            ak = sstep(0.15 + 0.6 * d / 1.5, 0.30 + 0.6 * d / 1.5, grid)
+        for (x, y, d, size, ang, sq), spr in zip(GRID, SPRITES):
+            ak = sstep(0.10 + 0.55 * min(d, 1.4) / 1.4, 0.30 + 0.55 * min(d, 1.4) / 1.4, grid)
             if ak <= 0.01:
                 continue
-            spr = MINIS[k]
-            sq = cv2.resize(spr, (52, 24), interpolation=cv2.INTER_AREA)
-            xi, yi = int(x - 26), int(y - 12)
-            hdr[yi:yi + 24, xi:xi + 52] += sq * f32(2.2 * ak)
+            xi, yi = int(round(x)) - 40, int(round(y)) - 40
+            hdr[yi:yi + 80, xi:xi + 80] += spr * f32(2.4 * ak)
     return hdr
 
 
-SC_CENTER = [(505.0, 1040.0), (540.0, 1015.0), (540.0, 1045.0), (540.0, 1060.0), (505.0, 1040.0)]
+SC_CENTER = [(505.0, 1075.0), (540.0, 1015.0), (540.0, 1075.0), (540.0, 1060.0), (505.0, 1075.0)]
 WORLDS = [world_brain, world_head, world_top, world_galaxy, world_brain]
 
 
@@ -408,7 +431,7 @@ def ui(img, t):
     # ---------- idée n° 1 : 10 %
     a = section(t, *P1A)
     if a > 0:
-        PARA(img, [fr("L'imagerie montre de l'activité"), "dans tout le cerveau…"], F_DXB, 64, 540, 540, WHITE, a, 0,
+        PARA(img, [fr("L'imagerie montre de l'activité"), "dans tout le cerveau…"], F_DXB, 58, 540, 540, WHITE, a, 0,
              1.10, t=t, t0=P1A[0])
         T(img, "…même pendant le sommeil.", F_MEDI, 46, 540, 700, LIGHT, a * ain(t, P1A[0] + 1.6))
         _, frac = activity(t)
@@ -425,7 +448,7 @@ def ui(img, t):
     a = section(t, *P1C)
     if a > 0:
         PARA(img, [fr("Pourquoi l'évolution aurait gardé"), "un organe aussi gourmand", fr("s'il ne servait qu'à 10 % ?")],
-             F_DXB, 60, 540, 545, WHITE, a, 0, 1.12, t=t, t0=P1C[0])
+             F_DXB, 54, 540, 545, WHITE, a, 0, 1.14, t=t, t0=P1C[0])
 
     # ---------- idée n° 2 : la douleur
     a = section(t, *P2A)
@@ -455,7 +478,7 @@ def ui(img, t):
         PILL(img, "CRÉATIF", 670, 880, CORAL, WHITE, a_lab, size=34, pad=20)
     a = section(t, *P3A)
     if a > 0:
-        T(img, "Une étude a observé le cerveau de", F_DXB, 56, 540, 548, WHITE, a * ain(t, P3A[0]))
+        T(img, "Une étude a observé le cerveau de", F_DXB, 50, 540, 548, WHITE, a * ain(t, P3A[0]))
         n = int(round(1011 * eout(sat((t - P3A[0] - 0.3) / 1.6), 2)))
         BIG(img, fr(f"{n:,}".replace(",", " ")), F_DBLACK, 150, 540, 710, 1.0, CYAN if n == 1011 else WHITE,
             a * ain(t, P3A[0] + 0.2))
@@ -469,13 +492,13 @@ def ui(img, t):
         eq_sign(img, x_eq, y_eq, a * ain(t, P3B[0] + 0.4, 0.3))
     a = section(t, *P3C)
     if a > 0:
-        T(img, fr("Certaines fonctions ont un côté :"), F_DBOLD, 50, 540, 540, CYAN, a * ain(t, P3C[0]))
-        T(img, fr("le langage à gauche, l'attention à droite…"), F_MEDI, 42, 540, 606, LIGHT, a * ain(t, P3C[0] + 0.3))
-        PARA(img, wrap(fr("…mais personne n'est « cerveau gauche » ou « cerveau droit »."), F_DXB, 58, 820), F_DXB, 58,
-             540, 690, WHITE, a, 0, 1.10, t=t, t0=P3C[0] + 1.1)
+        T(img, fr("Certaines fonctions ont un côté :"), F_DBOLD, 48, 540, 532, CYAN, a * ain(t, P3C[0]))
+        T(img, fr("le langage à gauche, l'attention à droite…"), F_MEDI, 40, 540, 594, LIGHT, a * ain(t, P3C[0] + 0.3))
+        PARA(img, wrap(fr("…mais personne n'a de côté dominant."), F_DXB, 56, 820), F_DXB, 56,
+             540, 684, WHITE, a, 0, 1.10, t=t, t0=P3C[0] + 1.1)
         for (px, py), lab, col in ((LANG, "langage", CYAN), (ATTN, "attention", GREEN)):
             qx, qy = cam_pt((px, py), t)
-            PILL(img, lab, qx, qy + 64, C3(0.05, 0.06, 0.09), col, a * ain(t, P3C[0] + 0.5), size=28, pad=16, tracking=1.0,
+            PILL(img, lab, qx, qy - 52, C3(0.05, 0.06, 0.09), col, a * ain(t, P3C[0] + 0.5), size=32, pad=18, tracking=1.0,
                  path=F_DBOLD)
 
     # ---------- idée n° 4 : neurones et étoiles
@@ -488,7 +511,7 @@ def ui(img, t):
         PARA(img, wrap(fr("Et les « 100 milliards de neurones » souvent cités ?"), F_DBOLD, 50, 820), F_DBOLD, 50, 540,
              540, LIGHT, a, 0, 1.10, t=t, t0=P4B[0])
         T(img, "Un chiffre jamais démontré.", F_DXB, 62, 540, 690, WHITE, a * ain(t, P4B[0] + 0.7))
-        T(img, fr("Premier vrai comptage (2009) : 86 milliards."), F_MEDI, 40, 540, 760, CYAN, a * ain(t, P4B[0] + 1.3))
+        T(img, fr("Premier vrai comptage (2009) : 86 milliards"), F_MEDI, 36, 540, 760, CYAN, a * ain(t, P4B[0] + 1.3))
     a = bump(t, P4A[0] + 0.1, P4A[0] + 0.45, P4B[1] - 0.35, P4B[1] - 0.05)
     if a > 0:
         U.bars(img, t, a, P4A[0] + 0.20, ROWS4, 400.0, (86.0, CYAN), "Sources : Azevedo et al. 2009 · NASA")
@@ -511,12 +534,12 @@ def ui(img, t):
         PARA(img, wrap("Santé.fr · PNAS 2002 · BrainFacts (SfN) · Université de l'Utah · Azevedo et al. 2009 · NASA · UCLA",
                        F_SEMI, 34, 800), F_SEMI, 34, 540, 556, WHITE, a, 0, 1.18)
         a2 = a * ain(t, P5B[0] + 0.5, 0.4)
-        T(img, "PROCHAIN ÉPISODE", F_DBOLD, 30, 540, 722, CYAN, a2, 0, 6.0)
-        PARA(img, wrap(fr("« La Grande Muraille de Chine se voit depuis l'espace »"), F_DXB, 54, 800), F_DXB, 54, 540, 790,
+        T(img, "PROCHAIN ÉPISODE", F_DBOLD, 30, 540, 700, CYAN, a2, 0, 6.0)
+        PARA(img, wrap(fr("« La Grande Muraille de Chine se voit depuis l'espace »"), F_DXB, 52, 800), F_DXB, 52, 540, 764,
              WHITE, a2, 0, 1.10)
         a3 = a * ain(t, P5B[0] + 1.0, 0.4)
-        PILL(img, fr("VRAI OU FAUX ?"), 540, 1000, CYAN, C3(0.02, 0.04, 0.06), a3, size=40)
-        T(img, "Abonne-toi pour la réponse", F_SEMI, 36, 540, 1100, LIGHT, a3)
+        PILL(img, fr("VRAI OU FAUX ?"), 540, 960, CYAN, C3(0.02, 0.04, 0.06), a3, size=40)
+        T(img, "Abonne-toi pour la réponse", F_SEMI, 36, 540, 1050, LIGHT, a3)
 
 
 ROWS4 = [("Neurones (ton cerveau)", "86", 86.0, CYAN, 0.0),
@@ -527,10 +550,8 @@ ROWS4 = [("Neurones (ton cerveau)", "86", 86.0, CYAN, 0.0),
 def loop_flash(t):
     """Flash de bouclage : la fin rejoint le début."""
     v = 0.0
-    if t >= DUR - 0.06:
-        v = (t - (DUR - 0.06)) / 0.06 * 0.8
-    if t < 0.35:
-        v = max(v, 0.8 * math.exp(-t / 0.10))
+    if t >= DUR - 0.12:                                 # la fin s'éclaire ; l'image 0 reste nette (miniature)
+        v = (t - (DUR - 0.12)) / 0.12 * 0.85
     return v
 
 
