@@ -11,7 +11,8 @@ lundi et jeudi, 6 h 07 (Paris) ── routine Claude planifiée
    1. choisit le thème (l'idée n° 1 est celle annoncée à la fin de l'épisode précédent)
    2. vérifie chaque fait : 2 sources fiables minimum, extraits recopiés, chiffres sourcés
    3. écrit le script  episodes/NNN-theme/episode.json
-   4. fabrique la vidéo (moteur/) : images, bande-son, encodage, 13 contrôles qualité
+   4. fait recontrôler les faits par un agent indépendant, puis fabrique la vidéo (moteur/) : images, bande-son,
+      encodage, 15 contrôles qualité (dont textes hors zone sûre et textes superposés)
    5. dépose la vidéo dans la branche « videos » de ce dépôt (lien direct public)
    6. programme la publication TikTok dans Metricool, mercredi ou samedi vers 18 h, au moins 48 h plus tard
    7. met à jour journal.json et envoie un rapport
@@ -25,6 +26,12 @@ La procédure complète suivie par la routine est dans [`ROUTINE.md`](ROUTINE.md
   racine de ce dépôt (bouton « Add file » sur GitHub). La routine s'arrête tant que ce fichier existe.
 - **Orienter les sujets** : modifier [`sujets.md`](sujets.md).
 - La routine n'ajoute rien si 3 épisodes sont déjà en attente.
+- **Run interrompu** (limite d'utilisation du compte Claude, panne) : rien à faire. Le run suivant reprend l'épisode
+  là où il s'était arrêté (`publier.py etat`), sans refaire la recherche et sans créer de doublon dans Metricool.
+- **Entretien, environ une fois par an** : chaque vidéo reste dans l'historique de la branche `videos`
+  (≈ 35 Mo par épisode) et les sessions Claude n'ont pas le droit de le purger. Quand un rapport signale que le
+  dépôt dépasse 2 Gio, supprimer la branche `videos` sur GitHub (onglet « Branches », icône corbeille) : la routine
+  la recrée toute seule au prochain épisode, et Metricool garde ses propres copies.
 
 ## Contenu du dépôt
 
@@ -37,6 +44,7 @@ La procédure complète suivie par la routine est dans [`ROUTINE.md`](ROUTINE.md
 | `sujets.md` | pistes de thèmes et interdits |
 | `archives/` | scripts sur mesure des épisodes 1 (foudre) et 2 (cerveau) |
 | branche `videos` | vidéos en attente de publication (MP4 1080 × 1920, 30 i/s, H.264 + AAC, −14,5 LUFS) ; retirées une fois publiées |
+| `journal_des_runs.md` | une ligne par déclenchement de la tâche planifiée : résultat, ou raison de l'arrêt |
 
 ## Fabriquer un épisode à la main
 

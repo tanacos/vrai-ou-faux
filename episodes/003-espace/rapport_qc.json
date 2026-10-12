@@ -1,6 +1,6 @@
 {
- "script": "/home/claude/vrai-ou-faux/episodes/003-espace/episode.json",
- "debut": "2026-10-12 18:05:52",
+ "script": "episodes/003-espace/episode.json",
+ "debut": "2026-10-12 22:12:38",
  "statut": "conforme",
  "controles": [
   {
@@ -44,6 +44,11 @@
    "detail": "2487 images (prévu 2487)"
   },
   {
+   "controle": "miniature (1re image)",
+   "ok": true,
+   "detail": "luminosité moyenne de la 1re image : 40/255 (TikTok s'en sert de miniature : ni noire ni délavée)"
+  },
+  {
    "controle": "pas d'image noire",
    "ok": true,
    "detail": "0 image(s) noire(s)"
@@ -67,6 +72,11 @@
    "controle": "zones sûres TikTok",
    "ok": true,
    "detail": "aucun texte hors zone"
+  },
+  {
+   "controle": "textes sans chevauchement",
+   "ok": true,
+   "detail": "aucun texte superposé à un autre"
   }
  ],
  "duree_video": 82.9,
@@ -78,7 +88,7 @@
   "duree": 82.9
  },
  "credits_pictogrammes": [],
- "fin": "2026-10-12 18:19:41",
- "duree_fabrication_s": 863,
- "note": "contrôles relancés après correction de la mesure de synchro (vidéo inchangée)"
+ "fin": "2026-10-12 22:37:05",
+ "duree_fabrication_s": 1526,
+ "note": "refabriqué le 13 octobre 2026 : libellés de la scène « echelle » masqués pendant le compte à rebours (ils chevauchaient « TA RÉPONSE ? » à 62 s) et sources de fin coupées entre éditeurs"
 }

@@ -107,10 +107,10 @@
    "prochain": "« On avale 8 araignées par an en dormant. »",
    "statut": "programmé",
    "publication": "2026-10-17T18:00:00+02:00",
-   "metricool_id": "394279123",
+   "metricool_id": "394446875",
    "metricool_uuid": "8738986342292604104",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/eb38387a9282d4b1d257aea8b001a4932d534ac2/vrai_ou_faux_03_espace.mp4",
-   "fabrication": "moteur générique (fabriquer.py tout), 14/14 contrôles conformes (miniature nette)"
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/b5e44234ca4787343aaad26597db0112d42fe85f/vrai_ou_faux_03_espace.mp4",
+   "fabrication": "moteur générique, refabriqué le 13 octobre (chevauchement de textes corrigé), 15/15 contrôles conformes"
   }
  ]
 }

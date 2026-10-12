@@ -125,7 +125,7 @@ LOG = None
 
 def _log(txt, x0, y0, x1, y1, a):
     if LOG is not None and a > 0.05:
-        LOG.append((txt, x0, y0, x1, y1))
+        LOG.append((txt, x0, y0, x1, y1, a))
 
 
 def T(img, txt, path, size, x, y, col_, a=1.0, align=0, tracking=0.0, sh=True):
@@ -630,9 +630,29 @@ def make_panel(spec, t0, t1):
     return PANELS[k](spec, t0, t1)
 
 
-# ------------------------------------------------------------------ audit des zones sûres
+# ------------------------------------------------------------------ audit des zones sûres et des chevauchements
+CHEVAUCHEMENT = "chevauchement"
+OVERLAP_A = 0.30            # deux textes visibles au moins à 30 % chacun…
+OVERLAP_PX = 6.0            # … dont les boîtes se recouvrent de plus de 6 px dans les deux directions
+
+
+def overlaps(entries):
+    """Paires de textes visibles en même temps dont les boîtes se recouvrent (illisible à l'écran)."""
+    vis = [e for e in entries if e[5] >= OVERLAP_A]
+    out = []
+    for i in range(len(vis)):
+        a = vis[i]
+        for b in vis[i + 1:]:
+            ix = min(a[3], b[3]) - max(a[1], b[1])
+            iy = min(a[4], b[4]) - max(a[2], b[2])
+            if ix > OVERLAP_PX and iy > OVERLAP_PX:
+                out.append((a, b))
+    return out
+
+
 def audit(ui_fn, NF, step=1):
-    """Rejoue l'interface image par image et signale le texte hors des zones sûres TikTok."""
+    """Rejoue l'interface image par image et signale le texte hors des zones sûres TikTok, ainsi que les textes qui
+    se superposent (clé (texte, "chevauchement avec « autre »"))."""
     global LOG
     bad = {}
     img = np.zeros((H, W, 3), f32)
@@ -641,7 +661,11 @@ def audit(ui_fn, NF, step=1):
         LOG = []
         img[:] = 0
         ui_fn(img, t)
-        for (txt, x0, y0, x1, y1) in LOG:
+        for a, b in overlaps(LOG):
+            key = (a[0], f"{CHEVAUCHEMENT} avec {b[0]!r}")
+            if key not in bad:
+                bad[key] = (t, round(a[1]), round(a[2]), round(a[3]), round(a[4]))
+        for (txt, x0, y0, x1, y1, _a) in LOG:
             why = []
             if y0 < SAFE_TOP:
                 why.append("haut")

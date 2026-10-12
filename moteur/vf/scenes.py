@@ -337,6 +337,12 @@ class Scene:
         a = ain(t, self.g["body"] + 0.2) * (1 - sstep(self.g["end"] - 0.3, self.g["end"] - 0.05, t))
         return a * (1 - self.ctx["visual_busy"](t))
 
+    def cd_hide(self, t):
+        """0 pendant le compte à rebours (les libellés de la scène s'effacent pour laisser lire « TA RÉPONSE ? »
+        et le chiffre), 1 sinon ; ils reviennent peu après le verdict."""
+        return 1 - (sstep(self.g["cd"] - 0.2, self.g["cd"], t) *
+                    (1 - sstep(self.g["reveal"] + 0.6, self.g["reveal"] + 0.9, t)))
+
     def world(self, t, neutral=False):
         return self.fond.render(t)
 
@@ -868,7 +874,7 @@ class Echelle(Scene):
         if neutral:
             return
         a_l = ain(t, self.g["claim"] + 0.3) * (1 - sstep(self.g["end"] - 0.3, self.g["end"] - 0.05, t))
-        a_l *= 1 - self.ctx["visual_busy"](t)
+        a_l *= (1 - self.ctx["visual_busy"](t)) * self.cd_hide(t)
         for k, e in enumerate(self.els):
             if e["lab"]:
                 qx, qy = cam((e["x"], self.base_y + 52))
@@ -987,7 +993,7 @@ class Duel(Scene):
             return
         a = ain(t, self.g["claim"] + 0.2) * (1 - sstep(self.g["end"] - 0.3, self.g["end"] - 0.05, t))
         a *= 1 - self.ctx["visual_busy"](t)
-        hide_cd = 1 - (sstep(self.g["cd"] - 0.2, self.g["cd"], t) * (1 - sstep(self.g["reveal"] + 0.6, self.g["reveal"] + 0.9, t)))
+        hide_cd = self.cd_hide(t)
         for sd in self.sides:
             if sd["ln"]:
                 y0 = 1218 if len(sd["ln"]) == 1 else 1190

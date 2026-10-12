@@ -117,6 +117,11 @@ def run(path, ep, audit_bad=None, size_max_mb=200.0):
     worst = max([abs(o[3]) for o in offs] + [0])
     add("synchro son/image", worst <= 60, "écarts aux transitions : " + ", ".join(f"{o[3]:+.0f} ms" for o in offs))
     if audit_bad is not None:
-        add("zones sûres TikTok", len(audit_bad) == 0,
-            "aucun texte hors zone" if not audit_bad else "; ".join(f"{k[0]!r} [{k[1]}] t={v_[0]:.2f}" for k, v_ in list(audit_bad.items())[:5]))
+        zone = {k: v_ for k, v_ in audit_bad.items() if not k[1].startswith("chevauchement")}
+        chev = {k: v_ for k, v_ in audit_bad.items() if k[1].startswith("chevauchement")}
+        add("zones sûres TikTok", len(zone) == 0,
+            "aucun texte hors zone" if not zone else "; ".join(f"{k[0]!r} [{k[1]}] t={v_[0]:.2f}" for k, v_ in list(zone.items())[:5]))
+        add("textes sans chevauchement", len(chev) == 0,
+            "aucun texte superposé à un autre" if not chev else
+            "; ".join(f"{k[0]!r} [{k[1]}] t={v_[0]:.2f}" for k, v_ in list(chev.items())[:5]))
     return checks

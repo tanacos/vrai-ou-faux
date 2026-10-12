@@ -73,7 +73,10 @@ def cmd_valider(path, audit_step=2, quiet=False):
             log(ep.summary())
         bad = U.audit(ep.ui, ep.TL.NF, audit_step)
         for (txt, why), v in sorted(bad.items(), key=lambda kv: kv[1][0]):
-            errors.append(f"texte hors zone sûre [{why}] à t={v[0]:.2f} s : {txt!r} {v[1:]}")
+            if why.startswith(U.CHEVAUCHEMENT):
+                errors.append(f"textes superposés à t={v[0]:.2f} s : {txt!r} ({why}) {v[1:]}")
+            else:
+                errors.append(f"texte hors zone sûre [{why}] à t={v[0]:.2f} s : {txt!r} {v[1:]}")
     else:
         bad = None
     for w in warns:

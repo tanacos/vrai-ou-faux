@@ -26,6 +26,25 @@ from .ui import T, PARA, BIG, PILL, ain, section, fr, CYAN, WHITE, LIGHT, CORAL,
 MIN_DUR, MAX_DUR = 61.0, 90.0
 
 
+def sources_block(src, sizes, max_w, max_lines, path=F_SEMI):
+    """Lignes des sources de fin : on ne coupe qu'entre deux éditeurs (« ESA · NASA » / « Scientific American »),
+    jamais au milieu d'un nom ; un nom plus large qu'une ligne est coupé entre ses mots en dernier recours."""
+    items = [p.strip() for p in src.replace(" ·", " ·").split("·") if p.strip()]
+    for sz in sizes:
+        lines = []
+        for it in items:
+            if text_width(it, path, sz) > max_w:
+                lines += wrap(it, path, sz, max_w)
+                continue
+            if lines and text_width(lines[-1] + " · " + it, path, sz) <= max_w:
+                lines[-1] = lines[-1] + " · " + it
+            else:
+                lines.append(it)
+        if len(lines) <= max_lines and all(text_width(x, path, sz) <= max_w + 1 for x in lines):
+            return sz, lines
+    return None
+
+
 def load(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
@@ -220,7 +239,7 @@ class Episode:
         if self.t2s < 64:
             self.errors.append(f"titre trop long : {t2!r}")
         src = fr(s["sources_ecran"])
-        r = U.fit_block(src, F_SEMI, (34, 32, 30, 28), 800, 4)
+        r = sources_block(src, (34, 32, 30, 28), 800, 4)
         if r is None:
             self.errors.append("« sources_ecran » trop long (4 lignes maximum)")
             r = (28, wrap(src, F_SEMI, 28, 800)[:4])

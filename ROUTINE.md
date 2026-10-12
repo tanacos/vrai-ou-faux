@@ -18,15 +18,28 @@ garde-fou « file pleine » (étape 0.3) ne s'applique pas ; le fichier `PAUSE` 
    normal/essai, « démarré »), puis `git commit` et `git push origin HEAD:main` : c'est la trace visible de chaque
    déclenchement. Tu
    complètes cette même ligne à la fin (résultat : programmé / brouillon / rien à faire / échec + raison).
-3. **Garde-fous de départ** — arrête-toi proprement (rapport court, aucune action) si :
-   - un fichier `PAUSE` existe à la racine du dépôt ;
-   - Metricool (`getScheduledPosts`, brand `7381054`, sur les 30 prochains jours) contient déjà `file_max` (3)
-     publications TikTok à venir ou plus : la file est pleine, inutile d'en ajouter.
+3. **État de départ** : appelle `getScheduledPosts` (brand `7381054`, fuseau `Europe/Paris`, de maintenant à
+   J+60), enregistre la réponse brute dans `/tmp/posts.json` (outil Write), puis :
+   ```bash
+   cd /home/claude/vrai-ou-faux && python3 moteur/publier.py etat /tmp/posts.json
+   ```
+   Décide d'après cette sortie, **dans cet ordre** :
+   - `pause: true` → arrêt propre, aucune action (rapport : « série en pause »).
+   - `orphelins` non vide → un run précédent a été interrompu **après** avoir programmé : ne fabrique rien.
+     Rattache chaque orphelin à l'épisode du journal dont le thème correspond à sa légende :
+     `python3 moteur/publier.py journal episodes/NNN-slug --statut programmé --publication <dateTime>
+     --metricool_id <id> --metricool_uuid <uuid>` (heure de Paris telle que Metricool la donne), puis étape 8.
+     Si aucun épisode ne correspond, ne touche à rien et signale-le en tête du rapport.
+   - `file_pleine: true` (hors MODE ESSAI) → arrêt propre : la file est pleine, rien à faire.
+   - `action: "reprendre"` → l'épisode `numero` a été interrompu en cours de route ; ses faits ont déjà passé la
+     contre-vérification : ne refais ni la recherche ni le script.
+     - statut `fabriqué` : refabrique la vidéo depuis `<dossier>/episode.json` (étape 6), puis étape 7 ;
+     - statut `hébergé` : la vidéo est déjà en ligne (champ `video`) : va directement à l'étape 7, créneau compris.
+   - `action: "nouveau"` → épisode `numero` ; l'idée n° 1 est **obligatoirement** `idee_1_imposee` (annoncée à la
+     fin de l'épisode précédent). Fais les étapes 1 à 9.
 4. Contrôle des sorties précédentes : dans `getScheduledPosts` (7 derniers jours), une publication dont l'heure est
    passée et qui figure encore avec un statut d'erreur ou en attente n'est pas sortie : signale-le en tête du rapport
    (ne la modifie pas toi-même).
-5. Numéro de l'épisode : `journal.json → dernier_numero + 1`. L'idée n° 1 est **obligatoirement**
-   `journal.json → prochaine_affirmation` (elle a été annoncée à la fin de l'épisode précédent).
 
 ## 1. Choisir le thème et les 4 idées
 
@@ -85,33 +98,47 @@ Corrige et recommence jusqu'à ce que ce soit propre. Durée visée : 65 à 85 s
 
 ## 6. Fabrication complète (≈ 15 à 25 min)
 
-Lance-la en arrière-plan, puis surveille le journal toutes les 2 à 3 minutes :
+Lance-la en arrière-plan :
 ```bash
 cd /home/claude/vrai-ou-faux/moteur
-setsid nohup python3 fabriquer.py tout ../episodes/NNN-slug/episode.json /tmp/epNNN/sortie \
+mkdir -p /tmp/epNNN && setsid nohup python3 fabriquer.py tout ../episodes/NNN-slug/episode.json /tmp/epNNN/sortie \
   > /tmp/epNNN/fabrication.log 2>&1 < /dev/null & disown
-tail -5 /tmp/epNNN/fabrication.log
 ```
+Puis surveille-la avec **une seule commande toutes les 8 minutes** (délai de l'outil : 600000 ms), ce qui économise
+les tours sans rien perdre : `sleep 480; tail -3 /tmp/epNNN/fabrication.log`.
 - Si le processus a disparu sans ligne « terminé » (la machine peut redémarrer), relance **la même commande** : elle
   reprend aux tronçons déjà faits.
-- Code de sortie / statut : `conforme` exigé. Sinon lis `rapport.json`, corrige (3 tentatives maximum), puis
-  abandonne proprement si ça échoue encore.
+- Code de sortie / statut : `conforme` exigé (15 contrôles, dont « zones sûres TikTok » et « textes sans
+  chevauchement »). Sinon lis `rapport.json`, corrige (3 tentatives maximum), puis abandonne proprement.
 - Regarde `planche.png` (outil Read) une dernière fois.
+- **Point de sauvegarde** (un run interrompu plus tard reprendra ici, sans refaire la recherche) :
+  ```bash
+  cd /home/claude/vrai-ou-faux
+  cp /tmp/epNNN/sortie/planche.png episodes/NNN-slug/planche.png
+  cp /tmp/epNNN/sortie/rapport.json episodes/NNN-slug/rapport_qc.json
+  python3 moteur/publier.py journal episodes/NNN-slug --statut fabriqué
+  git add -A && git commit -q -m "Épisode NNN : fabriqué" && git push origin HEAD:main
+  ```
 
 ## 7. Hébergement et programmation
 
 ```bash
 cd /home/claude/vrai-ou-faux
 python3 moteur/publier.py heberger episodes/NNN-slug /tmp/epNNN/sortie/video.mp4   # -> lien direct public
-python3 moteur/publier.py legende  episodes/NNN-slug /tmp/epNNN/sortie/rapport.json # -> légende finale
+python3 moteur/publier.py journal  episodes/NNN-slug --statut hébergé --video <lien direct>
+git add -A && git commit -q -m "Épisode NNN : vidéo hébergée" && git push origin HEAD:main
+python3 moteur/publier.py legende  episodes/NNN-slug episodes/NNN-slug/rapport_qc.json # -> légende finale
 ```
+- Si la sortie de `heberger` contient `alerte` (dépôt trop lourd), recopie-la telle quelle en tête du rapport.
+- **Anti-doublon** : juste avant `createScheduledPost`, relis `getScheduledPosts` ; si une publication porte déjà
+  la légende de cet épisode, ne la recrée pas : reprends son `id` et son `uuid` pour l'étape 8.
 - Créneau : `getScheduledPosts` (brand `7381054`, 60 prochains jours, fuseau Europe/Paris) enregistré dans
   `/tmp/epNNN/posts.json`, puis `python3 moteur/publier.py creneau /tmp/epNNN/posts.json` (premier mercredi ou samedi
   libre à au moins 48 h). Affine l'heure avec `getBestTimeToPostByNetwork` (tiktok, ce jour-là) en restant dans
   `fenetre_horaire` ; à défaut, garde 18:00.
 - La vidéo est déposée dans la branche `videos` du dépôt (les releases GitHub sont refusées aux sessions Claude) ;
-  le lien `https://raw.githubusercontent.com/tanacos/vrai-ou-faux/videos/…mp4` est public. Metricool la télécharge
-  et en garde sa propre copie ; la branche est nettoyée aux runs suivants.
+  le lien `https://raw.githubusercontent.com/tanacos/vrai-ou-faux/<commit>/…mp4` est public. Metricool la télécharge
+  et en garde sa propre copie ; la branche est nettoyée aux runs suivants (et recréée seule si Nathan l'a supprimée).
 - `createScheduledPost` (`blogId` 7381054), champ `info` :
   `autoPublish: true`, `draft: false` (true en MODE ESSAI), `providers: [{"network": "tiktok"}]`,
   `media: [lien direct de la vidéo]`, `text: légende`, `publicationDate: {dateTime, timezone: "Europe/Paris"}`,
