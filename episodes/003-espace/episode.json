@@ -31,7 +31,7 @@
       "panneaux": [
         {
           "type": "texte",
-          "texte": "À 400 km d'altitude, elle est invisible à l'œil nu.",
+          "texte": "Depuis l'orbite, elle est quasi invisible à l'œil nu.",
           "sous_texte": "Le premier astronaute chinois ne l'a pas vue (2003)."
         },
         {
@@ -127,7 +127,7 @@
         {
           "type": "texte",
           "titre": "Petite nuance",
-          "texte": "D'un lever de Soleil au suivant, il ne s'écoule « que » 117 jours.",
+          "texte": "Entre deux levers de Soleil, il s'écoule environ 117 jours.",
           "sous_texte": "Les astronomes appellent ça le jour solaire."
         }
       ],

@@ -90,16 +90,19 @@ Au moindre doute non résolu : **ne publie pas** ; corrige et refabrique, ou aba
 
 ```bash
 cd /home/claude/vrai-ou-faux
-python3 moteur/publier.py heberger episodes/NNN-slug /tmp/epNNN/sortie/video.mp4   # -> URL publique vérifiée
+python3 moteur/publier.py heberger episodes/NNN-slug /tmp/epNNN/sortie/video.mp4   # -> lien direct public
 python3 moteur/publier.py legende  episodes/NNN-slug /tmp/epNNN/sortie/rapport.json # -> légende finale
 ```
 - Créneau : `getScheduledPosts` (brand `7381054`, 60 prochains jours, fuseau Europe/Paris) enregistré dans
   `/tmp/epNNN/posts.json`, puis `python3 moteur/publier.py creneau /tmp/epNNN/posts.json` (premier mercredi ou samedi
   libre à au moins 48 h). Affine l'heure avec `getBestTimeToPostByNetwork` (tiktok, ce jour-là) en restant dans
   `fenetre_horaire` ; à défaut, garde 18:00.
+- La vidéo est déposée dans la branche `videos` du dépôt (les releases GitHub sont refusées aux sessions Claude) ;
+  le lien `https://raw.githubusercontent.com/tanacos/vrai-ou-faux/videos/…mp4` est public. Metricool la télécharge
+  et en garde sa propre copie ; la branche est nettoyée aux runs suivants.
 - `createScheduledPost` (`blogId` 7381054), champ `info` :
   `autoPublish: true`, `draft: false` (true en MODE ESSAI), `providers: [{"network": "tiktok"}]`,
-  `media: [URL de la release]`, `text: légende`, `publicationDate: {dateTime, timezone: "Europe/Paris"}`,
+  `media: [lien direct de la vidéo]`, `text: légende`, `publicationDate: {dateTime, timezone: "Europe/Paris"}`,
   `tiktokData: {privacyOption: "PUBLIC_TO_EVERYONE", title: légende, isAigc: true, disableComment: false,
   disableDuet: false, disableStitch: false, autoAddMusic: false, commercialContentThirdParty: false,
   commercialContentOwnBrand: false}`, plus `descendants: []`, `firstCommentText: ""`, `hasNotReadNotes: false`,
@@ -111,13 +114,13 @@ python3 moteur/publier.py legende  episodes/NNN-slug /tmp/epNNN/sortie/rapport.j
 
 ```bash
 python3 moteur/publier.py journal episodes/NNN-slug --statut programmé --publication <date ISO> \
-  --metricool_id <id> --metricool_uuid <uuid> --video <URL release>
+  --metricool_id <id> --metricool_uuid <uuid> --video <lien direct>
 git add -A && git commit -m "Épisode NNN : <thème>" && git push
 ```
 
 ## 9. Rapport final (court, en français)
 
-Titre de l'épisode, date et heure de publication, lien de la vidéo (release GitHub), les 4 idées avec leur verdict,
+Titre de l'épisode, date et heure de publication, lien de la vidéo, les 4 idées avec leur verdict,
 les sources principales, et la phrase : « Pour l'annuler, supprime la publication dans Metricool avant cette heure. »
 En cas d'arrêt ou d'échec : ce qui a bloqué, ce qui n'a **pas** été publié, et ce qu'il faut faire.
 

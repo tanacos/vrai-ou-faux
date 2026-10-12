@@ -12,7 +12,7 @@ lundi et jeudi, 6 h 07 (Paris) ── routine Claude planifiée
    2. vérifie chaque fait : 2 sources fiables minimum, extraits recopiés, chiffres sourcés
    3. écrit le script  episodes/NNN-theme/episode.json
    4. fabrique la vidéo (moteur/) : images, bande-son, encodage, 13 contrôles qualité
-   5. dépose la vidéo dans une release GitHub de ce dépôt (lien public)
+   5. dépose la vidéo dans la branche « videos » de ce dépôt (lien direct public)
    6. programme la publication TikTok dans Metricool, mercredi ou samedi vers 18 h, au moins 48 h plus tard
    7. met à jour journal.json et envoie un rapport
 ```
@@ -36,7 +36,7 @@ La procédure complète suivie par la routine est dans [`ROUTINE.md`](ROUTINE.md
 | `config.json` | jours et heures de publication, délai de veto, taille maximale de la file |
 | `sujets.md` | pistes de thèmes et interdits |
 | `archives/` | scripts sur mesure des épisodes 1 (foudre) et 2 (cerveau) |
-| Releases | les vidéos finales (MP4 1080 × 1920, 30 i/s, H.264 + AAC, −14,5 LUFS) |
+| branche `videos` | vidéos en attente de publication (MP4 1080 × 1920, 30 i/s, H.264 + AAC, −14,5 LUFS) ; retirées une fois publiées |
 
 ## Fabriquer un épisode à la main
 

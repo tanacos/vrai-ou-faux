@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 2,
- "prochaine_affirmation": "« La Grande Muraille de Chine se voit depuis l'espace »",
+ "dernier_numero": 3,
+ "prochaine_affirmation": "« On avale 8 araignées par an en dormant. »",
  "episodes": [
   {
    "numero": 1,
@@ -9,10 +9,22 @@
    "titre": "4 IDÉES REÇUES SUR LA FOUDRE",
    "theme": "la foudre",
    "idees": [
-    {"affirmation": "« La foudre ne tombe jamais deux fois au même endroit. »", "verdict": "FAUX"},
-    {"affirmation": "« Pendant un orage, s'abriter sous un arbre, c'est sûr. »", "verdict": "FAUX"},
-    {"affirmation": "« La foudre est plus chaude que la surface du Soleil. »", "verdict": "VRAI"},
-    {"affirmation": "« Toucher une personne foudroyée est dangereux : elle est électrisée. »", "verdict": "FAUX"}
+    {
+     "affirmation": "« La foudre ne tombe jamais deux fois au même endroit. »",
+     "verdict": "FAUX"
+    },
+    {
+     "affirmation": "« Pendant un orage, s'abriter sous un arbre, c'est sûr. »",
+     "verdict": "FAUX"
+    },
+    {
+     "affirmation": "« La foudre est plus chaude que la surface du Soleil. »",
+     "verdict": "VRAI"
+    },
+    {
+     "affirmation": "« Toucher une personne foudroyée est dangereux : elle est électrisée. »",
+     "verdict": "FAUX"
+    }
    ],
    "sources_ecran": "National Weather Service et NSSL (NOAA), UCAR, service-public.gouv.fr",
    "prochain": "« On n'utilise que 10 % de notre cerveau »",
@@ -27,10 +39,22 @@
    "titre": "4 IDÉES REÇUES SUR LE CERVEAU",
    "theme": "le cerveau",
    "idees": [
-    {"affirmation": "« On n'utilise que 10 % de notre cerveau. »", "verdict": "FAUX"},
-    {"affirmation": "« Le cerveau ne ressent pas la douleur. »", "verdict": "VRAI"},
-    {"affirmation": "« Les logiques utilisent le cerveau gauche, les créatifs le droit. »", "verdict": "FAUX"},
-    {"affirmation": "« Il y a plus de neurones dans ton cerveau que d'étoiles dans la Voie lactée. »", "verdict": "FAUX"}
+    {
+     "affirmation": "« On n'utilise que 10 % de notre cerveau. »",
+     "verdict": "FAUX"
+    },
+    {
+     "affirmation": "« Le cerveau ne ressent pas la douleur. »",
+     "verdict": "VRAI"
+    },
+    {
+     "affirmation": "« Les logiques utilisent le cerveau gauche, les créatifs le droit. »",
+     "verdict": "FAUX"
+    },
+    {
+     "affirmation": "« Il y a plus de neurones dans ton cerveau que d'étoiles dans la Voie lactée. »",
+     "verdict": "FAUX"
+    }
    ],
    "sources_ecran": "Santé.fr · PNAS 2002 · BrainFacts (SfN) · Université de l'Utah · Azevedo et al. 2009 · NASA · UCLA",
    "prochain": "« La Grande Muraille de Chine se voit depuis l'espace »",
@@ -38,6 +62,55 @@
    "metricool_id": "394082937",
    "publication": "2026-10-16T18:00:00+02:00",
    "statut": "programmé"
+  },
+  {
+   "numero": 3,
+   "slug": "espace",
+   "titre": "4 IDÉES REÇUES SUR L'ESPACE",
+   "theme": "espace",
+   "idees": [
+    {
+     "affirmation": "« La Grande Muraille de Chine se voit depuis l'espace. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.esa.int/ESA_Multimedia/Images/2021/05/Great_Wall_of_China_from_space",
+      "https://www.esa.int/ESA_Multimedia/Images/2018/06/Great_Wall_of_China",
+      "https://www.nasa.gov/image-article/great-wall/",
+      "https://www.scientificamerican.com/article/is-chinas-great-wall-visible-from-space/"
+     ]
+    },
+    {
+     "affirmation": "« Sur Vénus, une journée dure plus longtemps qu'une année. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://science.nasa.gov/venus/venus-facts/",
+      "https://bira-iasb.be/en/encyclopedia/venus-backwards-rotation-and-orbital-period"
+     ]
+    },
+    {
+     "affirmation": "« Dans la Station spatiale, il n'y a pas de gravité. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/",
+      "https://cnes.fr/dossiers/impesanteur"
+     ]
+    },
+    {
+     "affirmation": "« Dans l'espace, les astronautes grandissent. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.nasa.gov/image-article/spinal-ultrasound-investigation/",
+      "https://www.scientificamerican.com/article/astronauts-get-taller-in-space/"
+     ]
+    }
+   ],
+   "prochain": "« On avale 8 araignées par an en dormant. »",
+   "statut": "programmé",
+   "publication": "2026-10-17T18:00:00+02:00",
+   "metricool_id": "394265638",
+   "metricool_uuid": "8738986342292604104",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/videos/vrai_ou_faux_03_espace.mp4",
+   "fabrication": "moteur générique (fabriquer.py tout), 13/13 contrôles conformes"
   }
  ]
 }

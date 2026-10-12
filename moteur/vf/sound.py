@@ -298,6 +298,10 @@ def build(ep, ambiance="aucune", seed=202):
         sw = np.sin(TAU * np.cumsum(110 * 4 ** ((x / x[-1]) ** 1.6)) / SR) * (x / x[-1]) ** 2.5
         put(tf - 0.85, sw, 0.025, rev=0.3)
         put(tf, sub_hit(0.8, 1.0, 36, 80), 0.45)
+        x = tl_(0.3)                                     # impact large bande, calé sur le flash blanc
+        put(tf, filt("lowpass", 1400, noise(len(x))) * np.exp(-x / 0.035) * np.clip(x / 0.0015, 0, 1), 0.60)
+        put(tf, filt("bandpass", (1500, 6500), noise(len(x)), 2) * np.exp(-x / 0.014) * np.clip(x / 0.001, 0, 1), 0.32,
+            rev=0.2)
     # événements des panneaux et des scènes
     for (t, kind, p) in ep.events():
         if kind == "entree":

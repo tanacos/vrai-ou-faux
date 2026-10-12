@@ -38,26 +38,30 @@ def decode_audio(path):
 
 
 def sync_offsets(v, a, flashes):
-    """Écart son/image aux flashes de transition : montée de luminosité vs attaque sonore la plus forte."""
+    """Écart son/image à chaque flash de transition : montée de luminosité la plus forte (image) contre début du
+    transitoire le plus fort de la bande 1,5-6,5 kHz (son : l'impact large bande calé sur le flash)."""
     from scipy import signal
     lum = v.mean((1, 2))
     tv = np.arange(len(lum)) / FPS
-    hp = signal.sosfilt(signal.butter(4, 60, "highpass", fs=48000, output="sos"), a)
-    hop = 240
-    e = np.sqrt(np.convolve(hp ** 2, np.ones(hop) / hop, "same")[::hop])
-    te = np.arange(len(e)) * hop / 48000
-    de = np.maximum(np.diff(np.log(e + 1e-5)), 0)
-    out = []
     dl = np.diff(lum)
+    band = signal.sosfilt(signal.butter(4, (1500, 6500), "bandpass", fs=48000, output="sos"), a)
+    hop = 48                                             # 1 ms
+    env = np.sqrt(np.convolve(band ** 2, np.ones(240) / 240, "same")[::hop])
+    te = np.arange(len(env)) * hop / 48000
+    out = []
     for t0 in flashes:
         sel = (tv[1:] > t0 - 0.25) & (tv[1:] < t0 + 0.25)
         if not sel.any():
             continue
         k = np.argmax(np.where(sel, dl, -1e9)) + 1
         ti = tv[k]
-        sa = (te[1:] > t0 - 0.25) & (te[1:] < t0 + 0.25)
-        ka = np.argmax(np.where(sa, de, -1e9))
-        ta = te[1:][ka]
+        w = (te > t0 - 0.15) & (te < t0 + 0.15)
+        if not w.any():
+            continue
+        e = env[w]
+        i_pk = int(np.argmax(e))
+        above = np.nonzero(e[:i_pk + 1] >= 0.5 * e[i_pk])[0]
+        ta = te[w][above[0] if len(above) else i_pk]
         out.append((t0, ti, ta, 1000 * (ta - ti)))
     return out
 
@@ -109,7 +113,7 @@ def run(path, ep, audit_bad=None, size_max_mb=200.0):
     add("pas de silence", long_sil < 20, "aucun trou de 2 s sous -60 dBFS" if long_sil < 20 else "silence de 2 s détecté")
     offs = sync_offsets(v, a, ep.TL.FL)
     worst = max([abs(o[3]) for o in offs] + [0])
-    add("synchro son/image", worst <= 70, "écarts aux transitions : " + ", ".join(f"{o[3]:+.0f} ms" for o in offs))
+    add("synchro son/image", worst <= 60, "écarts aux transitions : " + ", ".join(f"{o[3]:+.0f} ms" for o in offs))
     if audit_bad is not None:
         add("zones sûres TikTok", len(audit_bad) == 0,
             "aucun texte hors zone" if not audit_bad else "; ".join(f"{k[0]!r} [{k[1]}] t={v_[0]:.2f}" for k, v_ in list(audit_bad.items())[:5]))

@@ -3,8 +3,8 @@
 """Mise en ligne d'une vidéo terminée et tenue du journal.
 
   python3 moteur/publier.py heberger episodes/004-sommeil SORTIE/video.mp4
-      -> crée (ou complète) la release GitHub « ep-004 » du dépôt public et y dépose la vidéo ;
-         affiche l'URL publique à donner à Metricool, après avoir vérifié qu'elle répond.
+      -> dépose la vidéo dans la branche « videos » du dépôt public et affiche son lien direct
+         (raw.githubusercontent.com) à donner à Metricool ; vérifie sa présence via l'API GitHub.
   python3 moteur/publier.py creneau [JSON_DES_POSTS_METRICOOL]
       -> prochain créneau libre (mercredi ou samedi, au moins 48 h plus tard), au format ISO, d'après config.json
          et la liste des publications déjà programmées (fichier JSON de getScheduledPosts, facultatif).
@@ -54,30 +54,47 @@ def url_ok(url, tries=6):
     return False, str(last), 0
 
 
+VIDEOS_DIR = "/tmp/vrai-ou-faux-videos"
+
+
 def heberger(ep_dir, mp4):
+    """Dépose la vidéo dans la branche « videos » du dépôt public (les releases GitHub sont refusées aux sessions
+    Claude) et renvoie son lien direct raw.githubusercontent.com, que Metricool télécharge puis recopie chez lui.
+    Les vidéos des épisodes déjà publiés sont retirées de la branche (Metricool en garde sa propre copie)."""
+    import shutil
     spec, num, slug = episode_info(ep_dir)
     repo = CONFIG["depot"]
-    tag = f"ep-{num:03d}"
     name = f"vrai_ou_faux_{num:02d}_{slug}.mp4"
-    tmp = os.path.join(os.path.dirname(os.path.abspath(mp4)), name)
-    if os.path.abspath(tmp) != os.path.abspath(mp4):
-        import shutil
-        shutil.copyfile(mp4, tmp)
-    notes = [f"Épisode {num} — {' '.join(spec['titre'])}", ""]
-    for i, idee in enumerate(spec["idees"]):
-        notes.append(f"{i + 1}. {idee['affirmation']} → {idee['verdict']}")
-        for s in idee.get("sources", []):
-            notes.append(f"   - {s.get('editeur')} : {s.get('url')}")
-    notes_txt = "\n".join(notes)
-    have = sh("gh", "release", "view", tag, "--repo", repo, check=False)
-    if have.returncode != 0:
-        sh("gh", "release", "create", tag, tmp, "--repo", repo, "--title", f"Épisode {num} — {slug}",
-           "--notes", notes_txt)
+    if not os.path.isdir(os.path.join(VIDEOS_DIR, ".git")):
+        shutil.rmtree(VIDEOS_DIR, ignore_errors=True)
+        sh("git", "clone", "--depth", "1", "--branch", "videos", "--single-branch",
+           f"https://github.com/{repo}", VIDEOS_DIR)
     else:
-        sh("gh", "release", "upload", tag, tmp, "--repo", repo, "--clobber")
-    url = f"https://github.com/{repo}/releases/download/{tag}/{name}"
-    ok, code, size = url_ok(url)
-    print(json.dumps(dict(url=url, accessible=ok, code=code, taille=size, release=tag), ensure_ascii=False))
+        sh("git", "-C", VIDEOS_DIR, "pull", "--ff-only")
+    # ménage : retirer les vidéos d'épisodes dont la date de publication est passée
+    J = json.load(open(os.path.join(ROOT, "journal.json"), encoding="utf-8"))
+    now = dt.datetime.now(TZ)
+    for e in J.get("episodes", []):
+        f = f"vrai_ou_faux_{int(e['numero']):02d}_{e.get('slug', '')}.mp4"
+        pub = e.get("publication")
+        if pub and os.path.exists(os.path.join(VIDEOS_DIR, f)) and f != name:
+            if dt.datetime.fromisoformat(pub) < now:
+                sh("git", "-C", VIDEOS_DIR, "rm", "-q", f)
+    for f in os.listdir(VIDEOS_DIR):
+        if f.startswith("essai") and f.endswith(".mp4"):
+            sh("git", "-C", VIDEOS_DIR, "rm", "-q", f)
+    shutil.copyfile(mp4, os.path.join(VIDEOS_DIR, name))
+    sh("git", "-C", VIDEOS_DIR, "add", "-A")
+    st = sh("git", "-C", VIDEOS_DIR, "status", "--porcelain").stdout.strip()
+    if st:
+        sh("git", "-C", VIDEOS_DIR, "commit", "-q", "-m", f"Vidéo de l'épisode {num} ({slug})")
+        sh("git", "-C", VIDEOS_DIR, "push", "-q", "origin", "videos")
+    # vérification côté GitHub : le fichier existe bien dans la branche, avec la bonne taille
+    meta = json.loads(sh("gh", "api", f"repos/{repo}/contents/{name}?ref=videos").stdout)
+    size_local = os.path.getsize(mp4)
+    ok = int(meta.get("size", -1)) == size_local
+    url = f"https://raw.githubusercontent.com/{repo}/videos/{name}"
+    print(json.dumps(dict(url=url, present_sur_github=ok, taille=size_local), ensure_ascii=False))
     return url if ok else None
 
 

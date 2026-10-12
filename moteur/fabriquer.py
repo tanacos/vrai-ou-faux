@@ -32,7 +32,7 @@ from vf import icons as IC  # noqa: E402
 from vf.base import W, H, FPS  # noqa: E402
 
 CHUNK = 300                    # images par tronçon intermédiaire (10 s)
-VIDEO_KBPS = 4200              # débit vidéo cible de l'encodage final (deux passes)
+VIDEO_KBPS = 3300              # débit vidéo cible de l'encodage final (deux passes), comme les épisodes 1 et 2
 EP = None                      # épisode partagé avec les processus de rendu (fork)
 
 
