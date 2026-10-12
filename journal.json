@@ -1,0 +1,43 @@
+{
+ "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
+ "dernier_numero": 2,
+ "prochaine_affirmation": "« La Grande Muraille de Chine se voit depuis l'espace »",
+ "episodes": [
+  {
+   "numero": 1,
+   "slug": "foudre",
+   "titre": "4 IDÉES REÇUES SUR LA FOUDRE",
+   "theme": "la foudre",
+   "idees": [
+    {"affirmation": "« La foudre ne tombe jamais deux fois au même endroit. »", "verdict": "FAUX"},
+    {"affirmation": "« Pendant un orage, s'abriter sous un arbre, c'est sûr. »", "verdict": "FAUX"},
+    {"affirmation": "« La foudre est plus chaude que la surface du Soleil. »", "verdict": "VRAI"},
+    {"affirmation": "« Toucher une personne foudroyée est dangereux : elle est électrisée. »", "verdict": "FAUX"}
+   ],
+   "sources_ecran": "National Weather Service et NSSL (NOAA), UCAR, service-public.gouv.fr",
+   "prochain": "« On n'utilise que 10 % de notre cerveau »",
+   "fabrication": "script sur mesure (archives/ep01x.py)",
+   "metricool_id": "394082686",
+   "publication": "2026-10-14T18:00:00+02:00",
+   "statut": "programmé"
+  },
+  {
+   "numero": 2,
+   "slug": "cerveau",
+   "titre": "4 IDÉES REÇUES SUR LE CERVEAU",
+   "theme": "le cerveau",
+   "idees": [
+    {"affirmation": "« On n'utilise que 10 % de notre cerveau. »", "verdict": "FAUX"},
+    {"affirmation": "« Le cerveau ne ressent pas la douleur. »", "verdict": "VRAI"},
+    {"affirmation": "« Les logiques utilisent le cerveau gauche, les créatifs le droit. »", "verdict": "FAUX"},
+    {"affirmation": "« Il y a plus de neurones dans ton cerveau que d'étoiles dans la Voie lactée. »", "verdict": "FAUX"}
+   ],
+   "sources_ecran": "Santé.fr · PNAS 2002 · BrainFacts (SfN) · Université de l'Utah · Azevedo et al. 2009 · NASA · UCLA",
+   "prochain": "« La Grande Muraille de Chine se voit depuis l'espace »",
+   "fabrication": "script sur mesure (archives/ep02.py)",
+   "metricool_id": "394082937",
+   "publication": "2026-10-16T18:00:00+02:00",
+   "statut": "programmé"
+  }
+ ]
+}

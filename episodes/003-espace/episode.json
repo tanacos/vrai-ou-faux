@@ -1,0 +1,260 @@
+{
+  "numero": 3,
+  "slug": "espace",
+  "titre": [
+    "4 IDÉES REÇUES",
+    "SUR L'ESPACE"
+  ],
+  "fond": "espace",
+  "ambiance": "espace",
+  "idees": [
+    {
+      "affirmation": "« La Grande Muraille de Chine se voit depuis l'espace. »",
+      "verdict": "FAUX",
+      "scene": {
+        "type": "globe",
+        "fond": "espace",
+        "marqueurs": [
+          {
+            "lat": 40.36,
+            "lon": 116.02,
+            "libelle": "Grande Muraille"
+          }
+        ],
+        "orbite": {
+          "altitude_km": 400,
+          "inclinaison": 51.6,
+          "libelle": "ISS · 400 km"
+        },
+        "visee": true
+      },
+      "panneaux": [
+        {
+          "type": "texte",
+          "texte": "À 400 km d'altitude, elle est invisible à l'œil nu.",
+          "sous_texte": "Le premier astronaute chinois ne l'a pas vue (2003)."
+        },
+        {
+          "type": "chiffre",
+          "titre": "Pour la photographier, Thomas Pesquet a pris un objectif de",
+          "valeur": 1150,
+          "suffixe": " mm",
+          "legende": "… et il a dû viser à l'aveugle."
+        },
+        {
+          "type": "texte",
+          "titre": "Pourquoi ?",
+          "texte": "Elle est très longue, mais large de quelques mètres seulement.",
+          "sous_texte": "Et depuis la Lune ? Encore moins."
+        },
+        {
+          "type": "texte",
+          "titre": "Le mythe",
+          "texte": "Il circulait déjà en 1932… avant tout voyage dans l'espace !"
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "ESA",
+          "titre": "Great Wall of China from space (Thomas Pesquet, 2021)",
+          "url": "https://www.esa.int/ESA_Multimedia/Images/2021/05/Great_Wall_of_China_from_space",
+          "extrait": "Everyone always asks whether it's possible to see the Great Wall of China from space. It is not (sorry to disappoint). […] Thomas used the longest lens available onboard: 1150 mm. […] It is impossible to see it in the tiny viewfinder of the camera."
+        },
+        {
+          "editeur": "ESA",
+          "titre": "Great Wall of China (Alexander Gerst, 19 juin 2018)",
+          "url": "https://www.esa.int/ESA_Multimedia/Images/2018/06/Great_Wall_of_China",
+          "extrait": "Next to impossible with the naked eye."
+        },
+        {
+          "editeur": "NASA",
+          "titre": "Great Wall (photo de Leroy Chiao, 2009)",
+          "url": "https://www.nasa.gov/image-article/great-wall/",
+          "extrait": "difficult or impossible to see from Earth orbit without the high-powered lenses used for this photo"
+        },
+        {
+          "editeur": "Scientific American",
+          "titre": "Is China's Great Wall Visible from Space?",
+          "url": "https://www.scientificamerican.com/article/is-chinas-great-wall-visible-from-space/",
+          "extrait": "Yang Liwei, premier astronaute chinois (Shenzhou 5, 2003), a dit ne pas avoir vu la Muraille ; une bande dessinée Ripley's Believe It or Not! de 1932 la disait visible depuis la Lune."
+        }
+      ]
+    },
+    {
+      "affirmation": "« Sur Vénus, une journée dure plus longtemps qu'une année. »",
+      "verdict": "VRAI",
+      "scene": {
+        "type": "duel",
+        "fond": "chaud",
+        "couleur": "or",
+        "gauche": {
+          "icone": "pi:arrow-clockwise",
+          "libelle": "Un jour"
+        },
+        "droite": {
+          "icone": "sun",
+          "libelle": "Un an"
+        },
+        "signe": "vs",
+        "signe_apres": ">",
+        "gagnant": "gauche"
+      },
+      "panneaux": [
+        {
+          "type": "barres",
+          "titre": "Sur Vénus :",
+          "lignes": [
+            {
+              "libelle": "1 tour sur elle-même = un jour",
+              "valeur": 243,
+              "affichage": "243 j"
+            },
+            {
+              "libelle": "1 tour du Soleil = un an",
+              "valeur": 225,
+              "affichage": "225 j"
+            }
+          ],
+          "max": 260,
+          "source": "Sources : NASA · BIRA-IASB"
+        },
+        {
+          "type": "texte",
+          "titre": "Pourquoi ?",
+          "texte": "Vénus tourne sur elle-même très lentement… et à l'envers.",
+          "sous_texte": "Là-bas, le Soleil se lève à l'ouest."
+        },
+        {
+          "type": "texte",
+          "titre": "Petite nuance",
+          "texte": "D'un lever de Soleil au suivant, il ne s'écoule « que » 117 jours.",
+          "sous_texte": "Les astronomes appellent ça le jour solaire."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "NASA",
+          "titre": "Venus: Facts",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "extrait": "a day on Venus would be 243 Earth days long […] longer even than a Venus year […] one trip around the Sun takes only 225 Earth days […] the Sun would rise in the west and set in the east"
+        },
+        {
+          "editeur": "BIRA-IASB (Institut royal d'aéronomie spatiale de Belgique)",
+          "titre": "Venus, backwards rotation and orbital period",
+          "url": "https://bira-iasb.be/en/encyclopedia/venus-backwards-rotation-and-orbital-period",
+          "extrait": "it turns once in 243.0185 Earth days […] one full tour is 224.70096 Earth days […] a year on Venus is therefore shorter than a sidereal day […] solar day: 116 and ¾ Earth days"
+        }
+      ]
+    },
+    {
+      "affirmation": "« Dans la Station spatiale, il n'y a pas de gravité. »",
+      "verdict": "FAUX",
+      "scene": {
+        "type": "horizon",
+        "objet": "md:satellite-alt",
+        "libelle": "400 km d'altitude"
+      },
+      "panneaux": [
+        {
+          "type": "duo",
+          "titre": "La gravité, là-haut :",
+          "gauche": {
+            "valeur": "100 %",
+            "legende": "au sol"
+          },
+          "droite": {
+            "valeur": "90 %",
+            "legende": "à 400 km d'altitude"
+          }
+        },
+        {
+          "type": "texte",
+          "titre": "Alors pourquoi ça flotte ?",
+          "texte": "La station est en chute libre permanente autour de la Terre.",
+          "sous_texte": "Tout tombe en même temps qu'elle… donc tout flotte."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "NASA",
+          "titre": "What Is Microgravity? (Grades 5-8)",
+          "url": "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/",
+          "extrait": "At that altitude, Earth's gravity is about 90 percent of what it is on the planet's surface. […] The answer is because they are in free fall."
+        },
+        {
+          "editeur": "CNES",
+          "titre": "C'est quoi l'impesanteur ?",
+          "url": "https://cnes.fr/dossiers/impesanteur",
+          "extrait": "la gravité est encore quasiment identique à ce qu'elle est sur Terre (90 %) […] l'ISS soit en orbite, qui est comme une chute libre permanente autour de la Terre"
+        }
+      ]
+    },
+    {
+      "affirmation": "« Dans l'espace, les astronautes grandissent. »",
+      "verdict": "VRAI",
+      "scene": {
+        "type": "echelle",
+        "fond": "nuit",
+        "elements": [
+          {
+            "icone": "person",
+            "valeur": 1.75,
+            "libelle": "Au départ",
+            "affichage": "1,75 m"
+          },
+          {
+            "icone": "person",
+            "valeur": 1.8,
+            "libelle": "En orbite",
+            "affichage": "≈ 1,80 m"
+          }
+        ]
+      },
+      "panneaux": [
+        {
+          "type": "chiffre",
+          "titre": "En impesanteur, la taille peut augmenter de",
+          "prefixe": "+",
+          "valeur": 3,
+          "suffixe": " %",
+          "legende": "soit jusqu'à 5 cm pour 1,80 m"
+        },
+        {
+          "type": "texte",
+          "titre": "Pourquoi ?",
+          "texte": "Sans la gravité qui la tasse, la colonne vertébrale s'allonge.",
+          "sous_texte": "De retour sur Terre, ils retrouvent leur taille."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "NASA",
+          "titre": "Spinal Ultrasound Investigation (2015)",
+          "url": "https://www.nasa.gov/image-article/spinal-ultrasound-investigation/",
+          "extrait": "crew members grow up to three percent taller during their long duration missions […] return to their normal height when back on Earth"
+        },
+        {
+          "editeur": "Scientific American / Space.com",
+          "titre": "Strange but True: Astronauts Get Taller in Space (2013)",
+          "url": "https://www.scientificamerican.com/article/astronauts-get-taller-in-space/",
+          "extrait": "Astronauts in space can grow up to 3 percent taller […] a 6-foot person could gain up to 2 inches (5 centimeters) […] When the spine is not exposed to the pull of Earth's gravity, the vertebra can expand and relax."
+        }
+      ]
+    }
+  ],
+  "sources_ecran": "ESA · NASA · CNES · BIRA-IASB · Scientific American",
+  "prochain": {
+    "affirmation": "« On avale 8 araignées par an en dormant. »"
+  },
+  "publication": {
+    "legende": "Vrai ou faux ? 🚀 4 idées reçues sur l'espace. Compte tes bonnes réponses et dis ton score en commentaire 👇\nSources : ESA, NASA, CNES, BIRA-IASB (Institut royal d'aéronomie spatiale de Belgique), Scientific American\n#vraioufaux #espace #astronomie #science #culturegenerale #apprendresurtiktok",
+    "hashtags": [
+      "#vraioufaux",
+      "#espace",
+      "#astronomie",
+      "#science",
+      "#culturegenerale",
+      "#apprendresurtiktok"
+    ]
+  }
+}

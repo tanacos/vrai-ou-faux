@@ -1,0 +1,16 @@
+{
+  "depot": "tanacos/vrai-ou-faux",
+  "metricool_brand_id": "7381054",
+  "reseau": "tiktok",
+  "compte_tiktok": "tanacos34",
+  "fuseau": "Europe/Paris",
+  "jours_publication": ["mercredi", "samedi"],
+  "heure_defaut": "18:00",
+  "fenetre_horaire": ["17:00", "20:30"],
+  "delai_veto_h": 48,
+  "file_max": 3,
+  "contenu_ia": true,
+  "confidentialite": "PUBLIC_TO_EVERYONE",
+  "duree_min_s": 61,
+  "duree_max_s": 90
+}

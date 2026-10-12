@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+sortie/
+troncons/
+*.mkv
+*.wav
+*.mp4
