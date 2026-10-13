@@ -1,0 +1,50 @@
+name: relais-medias
+# Télécharge les médias générés par ElevenLabs (inaccessibles depuis les sessions Claude) et les dépose dans cette
+# branche jetable, d'où la session les récupère par git. Déclenché par l'ajout d'une demande dans demandes/.
+on:
+  push:
+    branches: [relais]
+    paths: ['demandes/**']
+permissions:
+  contents: write
+concurrency:
+  group: relais
+  cancel-in-progress: false
+jobs:
+  telecharger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: relais
+      - name: Télécharger
+        run: |
+          python3 - <<'PY'
+          import glob, json, os, urllib.parse, urllib.request
+          OK_HOSTS = ("storage.googleapis.com", "elevenlabs.io")
+          os.makedirs("medias", exist_ok=True)
+          for f in sorted(glob.glob("demandes/*.json")):
+              d = json.load(open(f, encoding="utf-8"))
+              nom = os.path.basename(d["nom"])
+              out = os.path.join("medias", nom)
+              if os.path.exists(out):
+                  continue
+              host = urllib.parse.urlparse(d["url"]).hostname or ""
+              if not any(host == h or host.endswith("." + h) for h in OK_HOSTS):
+                  print("hôte refusé :", host); continue
+              req = urllib.request.Request(d["url"], headers={"User-Agent": "vrai-ou-faux-relais"})
+              with urllib.request.urlopen(req, timeout=60) as r:
+                  data = r.read(60 * 1024 * 1024 + 1)
+              if len(data) > 60 * 1024 * 1024:
+                  print("trop gros :", nom); continue
+              open(out, "wb").write(data)
+              print("téléchargé :", nom, len(data), "octets")
+          PY
+      - name: Déposer
+        run: |
+          git config user.name "relais-medias"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add medias
+          git commit -q -m "relais : médias téléchargés" || exit 0
+          git push -q origin HEAD:relais
