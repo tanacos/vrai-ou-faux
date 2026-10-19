@@ -27,14 +27,15 @@ jobs:
       - name: Génération
         run: |
           set -e
-          set -o pipefail
           for f in demandes/*.json; do
             [ -e "$f" ] || continue
-            python scripts/generer.py "$f" sorties 2>&1 | tee -a sorties/journal.txt
+            python scripts/generer.py "$f" sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC generer $f" >> sorties/journal.txt
             git rm -q "$f"
           done
-          python scripts/transcrire.py sorties 2>&1 | tee -a sorties/journal.txt
+          python scripts/transcrire.py sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC transcription" >> sorties/journal.txt
+          tail -40 sorties/journal.txt
       - name: Dépôt du résultat
+        if: always()
         run: |
           git config user.name "essai-voix (GitHub Actions)"
           git config user.email "actions@github.com"

@@ -1,0 +1,67 @@
+{
+ "langue": "french_24l",
+ "jobs": [
+  {
+   "nom": "accroche_charles",
+   "voix": "charles",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_paul",
+   "voix": "paul",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_george",
+   "voix": "george",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_michael",
+   "voix": "michael",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_marius",
+   "voix": "marius",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_javert",
+   "voix": "javert",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_fabien_clonage",
+   "voix": "hf://kyutai/tts-voices/unmute-prod-website/fabieng-enhanced-v2.wav",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+   ]
+  }
+ ]
+}

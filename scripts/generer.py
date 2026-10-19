@@ -27,7 +27,7 @@ try:
 except Exception as e:  # noqa: BLE001
     print("inventaire impossible :", e)
 
-for job in dem["jobs"]:
+def faire(job):
     t1 = time.time()
     st = model.get_state_for_audio_prompt(job["voix"])
     parts, chrono, t = [], [], 0.0
@@ -50,3 +50,13 @@ for job in dem["jobs"]:
     json.dump({"voix": job["voix"], "langue": dem.get("langue"), "sr": sr, "blocs": chrono},
               open(os.path.join(out, job["nom"] + "_blocs.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"{job['nom']} : {t:.1f} s d'audio en {duree_calcul:.1f} s de calcul (voix {job['voix']})", flush=True)
+
+
+import traceback
+
+for job in dem["jobs"]:
+    try:
+        faire(job)
+    except Exception:  # noqa: BLE001 — une voix en échec ne bloque pas les autres
+        print(f"ÉCHEC {job['nom']} (voix {job['voix']}) :", flush=True)
+        traceback.print_exc()
