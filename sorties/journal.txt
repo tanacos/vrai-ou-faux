@@ -153,3 +153,21 @@ modèle french_24l (température 0.4) chargé en 8.9 s
 estelle_tv_v : 81.1 s d'audio en 238.4 s de calcul
 whisper medium chargé en 2.4 s
 estelle_tv_v.mp3 : 273 mots transcrits en 46.2 s
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+pocket-tts 3.3.0 requires sentencepiece>=0.2.1, but you have sentencepiece 0.2.0 which is incompatible.
+Kyutai TTS 1.6B chargé en 15.6 s (4 cœurs)
+k16_estelle : 15.4 s d'audio en 130.4 s de calcul (unmute-prod-website/developpeuse-3.wav)
+k16_10087 : 7.8 s d'audio en 71.1 s de calcul (cml-tts/fr/10087_11650_000028-0002_enhanced.wav)
+k16_12080 : 6.6 s d'audio en 62.2 s de calcul (cml-tts/fr/12080_11650_000047-0001_enhanced.wav)
+k16_1406 : 7.4 s d'audio en 67.4 s de calcul (cml-tts/fr/1406_1028_000009-0003_enhanced.wav)
+k16_2114 : 7.0 s d'audio en 64.7 s de calcul (cml-tts/fr/2114_1656_000053-0001_enhanced.wav)
+k16_2465 : 7.5 s d'audio en 68.9 s de calcul (cml-tts/fr/2465_1943_000152-0002_enhanced.wav)
+k16_4724 : 9.6 s d'audio en 84.7 s de calcul (cml-tts/fr/4724_3731_000031-0001_enhanced.wav)
+whisper medium chargé en 7.4 s
+k16_10087.mp3 : 24 mots transcrits en 9.5 s
+k16_12080.mp3 : 24 mots transcrits en 9.4 s
+k16_1406.mp3 : 24 mots transcrits en 9.4 s
+k16_2114.mp3 : 24 mots transcrits en 9.2 s
+k16_2465.mp3 : 24 mots transcrits en 9.4 s
+k16_4724.mp3 : 24 mots transcrits en 9.5 s
+k16_estelle.mp3 : 49 mots transcrits en 13.2 s
