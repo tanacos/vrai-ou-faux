@@ -89,3 +89,14 @@ Traceback (most recent call last):
   File "av/container/core.py", line 479, in av.container.core.open
 TypeError: open() got an unexpected keyword argument 'metadata_errors'
 ÉCHEC transcription
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+modèle french_24l chargé en 6.3 s, 24000 Hz
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+whisper medium chargé en 10.8 s
+accroche_charles.mp3 : 49 mots transcrits en 12.6 s
+accroche_george.mp3 : 49 mots transcrits en 12.9 s
+accroche_javert.mp3 : 50 mots transcrits en 13.0 s
+accroche_marius.mp3 : 49 mots transcrits en 12.9 s
+accroche_michael.mp3 : 49 mots transcrits en 13.5 s
+accroche_paul.mp3 : 50 mots transcrits en 13.6 s
+infiniment_v5_estelle.wav : 275 mots transcrits en 77.5 s
