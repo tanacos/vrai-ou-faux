@@ -581,6 +581,74 @@ def narration_quiz(spec):
     return blocs
 
 
+def _milieu_silence(env, thr, a, b, hop=0.01):
+    """Instant au milieu du plus long silence entre a et b (secondes) ; à défaut, le point le plus calme."""
+    i0, i1 = max(int(a / hop), 0), min(int(b / hop) + 1, len(env))
+    if i1 <= i0:
+        return (a + b) / 2
+    seg = env[i0:i1]
+    best, cur, bstart = 0, 0, 0
+    for k, s in enumerate(seg < thr):
+        cur = cur + 1 if s else 0
+        if cur > best:
+            best, bstart = cur, k - cur + 1
+    j = i0 + (bstart + best // 2 if best else int(np.argmin(seg)))
+    return j * hop
+
+
+def retirer_phrase(prise, mots_json, texte, ids, bloc, phrase, sortie_audio, sortie_mots):
+    """Retire une phrase d'une prise sans régénérer la voix (correction de fond après coup) : la prise et ses mots
+    horodatés sont réécrits sans elle, coupés au milieu des silences qui l'encadrent. La narration doit être réécrite
+    sans cette phrase de son côté. Renvoie un compte rendu (tranche retirée, niveaux aux points de coupe)."""
+    narr = Narration(texte, ids)
+    ws = json.load(open(mots_json, encoding="utf-8"))
+    liste = ws["words"] if isinstance(ws, dict) else ws
+    times, taux = aligner(narr, charger_mots_scribe(mots_json))
+    bi = narr.ids.index(bloc)
+    cible = [nettoyer_mot(t) for t in Narration.sans_balises(phrase).split() if nettoyer_mot(t)]
+    norms = [w["norm"] for w in narr.mots]
+    i0 = next((k for k in range(len(norms) - len(cible) + 1)
+               if narr.mots[k]["bloc"] == bi and norms[k:k + len(cible)] == cible), None)
+    if i0 is None:
+        raise ValueError(f"phrase introuvable dans le bloc {bloc!r} : {phrase!r}")
+    i1 = i0 + len(cible) - 1
+    x = lire_audio(prise)
+    env = enveloppe_db(x)
+    thr = seuil_silence(env)
+    a = _milieu_silence(env, thr, times[i0 - 1][1], times[i0][0]) if i0 > 0 else max(times[i0][0] - 0.05, 0.0)
+    b = (_milieu_silence(env, thr, times[i1][1], times[i1 + 1][0]) if i1 + 1 < len(times)
+         else min(times[i1][1] + 0.3, len(x) / SR))
+    ia, ib = int(round(a * SR)), int(round(b * SR))
+    f = int(0.010 * SR)
+    tete, queue = x[:ia].copy(), x[ib:].copy()
+    if len(tete) > f and len(queue) > f:
+        tete[-f:] *= np.linspace(1, 0, f)
+        queue[:f] *= np.linspace(0, 1, f)
+    y = np.concatenate([tete, queue])
+    pcm = np.clip(y * 32767, -32768, 32767).astype("<i2")
+    import wave
+    with wave.open(sortie_audio, "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(SR)
+        wf.writeframes(pcm.tobytes())
+    d = b - a
+    garde = []
+    for w in liste:
+        s = float(w.get("start", 0.0))
+        if a <= s < b:
+            continue
+        w2 = dict(w)
+        if s >= b:
+            w2["start"] = round(s - d, 3)
+            w2["end"] = round(float(w["end"]) - d, 3)
+        garde.append(w2)
+    json.dump({"words": garde}, open(sortie_mots, "w", encoding="utf-8"), ensure_ascii=False)
+    niv = lambda t: round(float(env[min(int(t / 0.01), len(env) - 1)]), 1)  # noqa: E731
+    return dict(bloc=bloc, phrase=phrase, debut=round(a, 3), fin=round(b, 3), duree=round(d, 3),
+                niveau_coupe_db=(niv(a), niv(b)), seuil_silence_db=round(thr, 1), alignement=round(taux, 3))
+
+
 def mots_a_ecouter(prise_mp3, mots_json, marge_db=10.0):
     """Mots dont l'intervalle horodaté ne contient presque pas de voix (mot avalé, sauté ou mal placé ?).
 

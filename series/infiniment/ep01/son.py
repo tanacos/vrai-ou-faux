@@ -141,7 +141,7 @@ def build(chrono):
     pad_layer(M, ts - 0.2, te + 0.3, (45, 52, 57, 64, 69), 0.20, 1800, 0.5)
     # chaise : intime, puis accord final
     cs, ce = B["chaise"]
-    t_au = cue("chaise:au")
+    t_au = cue("chaise:au", 0, cue("chaise:toucher"))       # sans la chute finale : l'accord arrive sur « Toucher »
     pad_layer(M, cs - 0.2, t_au, (43, 50, 55, 58, 62), 0.20, 1100, 0.8)
     pad_layer(M, t_au - 0.1, ce + 0.6, (46, 53, 58, 62, 65, 69), 0.24, 1700, 1.0, 1.4)
     for k, tt in enumerate(np.arange(cs + 0.3, t_au - 0.3, 0.86)):
@@ -214,7 +214,7 @@ def build(chrono):
     sfx(cue("chaise:repoussent"), S.whoosh(0.5, 4000, 900, 1.3, 0.2), 0.06, pan=-0.3)
     sfx(cue("chaise:quantique"), S.chime((88, 95), 1.4, (0.7, 0.5)), 0.05, rev=0.6)
     sfx(cue("chaise:toucher"), S.pop(480, 0.12), 0.08, rev=0.3)
-    t_touche = cue("chaise:touche")
+    t_touche = cue("chaise:touche", 0, ce)                   # sans la chute finale : impact à la fin de « répulsion »
     sfx(t_au - 0.2, S.riser(t_touche - t_au + 0.6, 200, 2500, 1.4, 1.8), 0.04)
     sfx(t_touche + 0.15, S.sub_hit(0.9, 1.6, 36, 90), 0.45, rev=0.0)
     sfx(t_touche + 0.16, S.chime((74, 81, 86), 2.8, (1.6, 1.2, 0.9)), 0.06, rev=0.7)

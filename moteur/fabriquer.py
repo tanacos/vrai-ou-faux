@@ -274,6 +274,10 @@ def cmd_tout(path, out):
     rapport.update(statut="conforme" if ok else "contrôle qualité en échec", controles=checks,
                    duree_video=ep.TL.DUR, bande_son=ainfo, credits_pictogrammes=credits,
                    fin=time.strftime("%Y-%m-%d %H:%M:%S"), duree_fabrication_s=round(time.time() - t_start))
+    if getattr(ep, "voix", None) is not None:
+        vc = ep.spec.get("voix") or {}
+        rapport["voix"] = dict(fournisseur=vc.get("fournisseur"), modele=vc.get("modele"), nom=vc.get("nom"),
+                               alignement=round(ep.voix_taux, 3), licence=vc.get("licence"))
     json.dump(rapport, open(os.path.join(out, "rapport.json"), "w"), ensure_ascii=False, indent=1)
     log(f"terminé en {time.time() - t_start:.0f} s : {rapport['statut']}")
     if ok:

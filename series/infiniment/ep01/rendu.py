@@ -400,20 +400,52 @@ def caption_at(t):
     return None
 
 
-def _cap_lines(words, size, t):
-    imgs = [_cap_patch(w["t"], size, c255(AMBER) if (w["s"] + T0 <= t < w["e"] + T0 + 0.04) else (255, 255, 255))
-            for w in words]
-    space = int(size * 0.26)
-    lines, cur, cw = [], [], 0
-    for p in imgs:
-        if cur and cw + space + p.shape[1] > CAP_W:
-            lines.append(cur)
-            cur, cw = [], 0
-        cur.append(p)
-        cw += p.shape[1] + (space if len(cur) > 1 else 0)
-    if cur:
-        lines.append(cur)
-    return lines, space
+POP = 1.07                    # grossissement d'entrée d'un sous-titre (0,12 s)
+MOTS_OUTILS = {"LE", "LA", "LES", "L'", "DE", "DU", "DES", "D'", "UN", "UNE", "ET", "À", "AU", "AUX", "QUE", "QUI",
+               "CE", "CET", "CETTE", "CES", "TA", "TON", "TES", "SON", "SA", "SES", "DANS", "EN", "SUR", "POUR", "PAR",
+               "NE", "SE", "OR", "SI", "ON", "TU", "IL", "ELLE", "PLUS", "C'EST"}
+_MISE_EN_PAGE = {}
+
+
+def _cap_largeurs(words, size):
+    return [_cap_patch(w["t"], size, (255, 255, 255)).shape[1] for w in words]
+
+
+def _cap_layout(c):
+    """Taille et coupure d'un sous-titre, fixées pour toute sa durée (la mise en page ne saute pas pendant
+    l'animation d'entrée). Une ligne de 80 à 60 px ; sinon deux lignes équilibrées (68 px au plus), la première ne
+    finissant pas sur un mot-outil quand c'est possible : jamais de mot seul orphelin. Renvoie aussi la largeur de la
+    ligne la plus longue (le grossissement d'entrée est limité pour ne jamais dépasser CAP_W)."""
+    key = (c["debut"], len(c["mots"]))
+    if key in _MISE_EN_PAGE:
+        return _MISE_EN_PAGE[key]
+    words, n = c["mots"], len(c["mots"])
+    res = None
+    for size in (80, 76, 72, 68, 64, 60):
+        ws = _cap_largeurs(words, size)
+        larg = sum(ws) + int(size * 0.26) * (n - 1)
+        if larg <= CAP_W:
+            res = (size, [n], larg)
+            break
+    if res is None:
+        for size in (68, 64, 60, 56, 52):
+            ws = _cap_largeurs(words, size)
+            sp = int(size * 0.26)
+            best = None
+            for k in range(1, n):
+                w1, w2 = sum(ws[:k]) + sp * (k - 1), sum(ws[k:]) + sp * (n - k - 1)
+                if max(w1, w2) > CAP_W:
+                    continue
+                score = (words[k - 1]["t"].upper() in MOTS_OUTILS, max(w1, w2))
+                if best is None or score < best[0]:
+                    best = (score, k)
+            if best is not None:
+                res = (size, [best[1], n - best[1]], best[0][1])
+                break
+    if res is None:
+        res = (52, [n], CAP_W)
+    _MISE_EN_PAGE[key] = res
+    return res
 
 
 CAP_BAS = 1252                # bas de la zone sûre (1260) moins une marge
@@ -423,15 +455,16 @@ def draw_captions(img, t, a=1.0):
     c = caption_at(t)
     if not c or a <= 0.003:
         return
-    pop = 1 + 0.07 * (1 - eout((t - c["debut"] - T0) / 0.12))
-    size = CAP_SIZE
-    while True:
-        lines, space = _cap_lines(c["mots"], int(size * pop), t)
-        if len(lines) == 1 or size <= 62:
-            break
-        size -= 4
-    if len(lines) > 2:
-        lines, space = _cap_lines(c["mots"], int(52 * pop), t)
+    pop = 1 + (POP - 1) * (1 - eout((t - c["debut"] - T0) / 0.12))
+    size, coupe, larg = _cap_layout(c)
+    sz = int(size * min(pop, max(1.0, CAP_W / max(larg, 1))))
+    imgs = [_cap_patch(w["t"], sz, c255(AMBER) if (w["s"] + T0 <= t < w["e"] + T0 + 0.04) else (255, 255, 255))
+            for w in c["mots"]]
+    space = int(sz * 0.26)
+    lines, i = [], 0
+    for m in coupe:
+        lines.append(imgs[i:i + m])
+        i += m
     hmax_all = max(p.shape[0] for ln in lines for p in ln)
     lh = hmax_all + 6
     y_top = (CAP_Y - lh / 2) if len(lines) == 1 else (CAP_BAS - len(lines) * lh)
@@ -485,15 +518,18 @@ def sc_hook(t):
     label(cv, ["L'HUMANITÉ", "DANS UN SUCRE ?"], a_cov, y0=500, size=92, cols=[WHITE, AMBER])
     a_cnt = sstep(t_huit - 0.35, t_huit + 0.1, t) * (1 - sstep(t_tenir - 0.35, t_tenir - 0.1, t))
     if a_cnt > 0:
-        kk = eout((t - t_huit + 0.3) / 1.3)
-        val = int(8_200_000_000 * kk)
-        s = f"{val:,}".replace(",", " ")
-        txt(cv, s, 540, 500, 92, F_DBLACK, WHITE, a_cnt)
-        txt(cv, "HUMAINS", 540, 592, 40, F_DBOLD, CYAN, a_cnt, 0, 10.0)
+        prog = (t - t_huit + 0.3) / 0.8                   # comptage en 0,8 s : le chiffre final reste lisible
+        kk = eout(prog)
+        s = f"{8.2 * kk:.1f}".replace(".", ",")          # arrondi de l'ONU (2024) : pas de fausse précision
+        txt(cv, s, 540, 492, 150, F_DBLACK, WHITE, a_cnt)
+        txt(cv, "MILLIARDS D'HUMAINS", 540, 608, 40, F_DBOLD, CYAN, a_cnt, 0, 10.0)
+        # la source n'apparaît qu'une fois le compte arrivé à 8,2 (une capture en cours de comptage ne doit pas
+        # attribuer « 7,8 » à l'ONU)
+        txt(cv, "ONU, 2024", 540, 662, 28, F_SEMI, LIGHT, 0.8 * a_cnt * sstep(1.0, 1.25, prog), 0, 4.0)
     a_q = sstep(t_tenir - 0.02, t_tenir + 0.25, t) * (1 - sstep(t_phys - 0.45, t_phys - 0.2, t))
     label(cv, ["DANS UN SUCRE ?"], a_q, y0=520, size=92, cols=[AMBER])
     a_ph = sstep(t_phys - 0.1, t_phys + 0.2, t)
-    label(cv, ["LA PHYSIQUE", "EST FORMELLE"], a_ph, y0=500, size=86, cols=[WHITE, CYAN])
+    label(cv, ["UN VRAI CALCUL", "DE PHYSIQUE"], a_ph, y0=500, size=86, cols=[WHITE, CYAN])
     return cv
 
 
@@ -665,7 +701,7 @@ def sc_atome(t):
         crisp_lines(cv, [[(CX + 10, CY - 10), (CX + 120, CY - 120), (CX + 190, CY - 120)]], AMBER, pulse, 3)
         txt(cv, "NOYAU", CX + 200, CY - 120, 52, F_DBLACK, AMBER, pulse, -1)
     ca = sstep(t_cent - 0.1, t_cent + 0.35, t)
-    label(cv, ["100 000 ×", "PLUS PETIT QUE L'ATOME"], ca, y0=500, size=96, cols=[WHITE, CYAN])
+    label(cv, ["≈ 100 000 ×", "PLUS PETIT QUE L'ATOME"], ca, y0=500, size=96, cols=[WHITE, CYAN])
     return cv
 
 
@@ -923,9 +959,9 @@ def sc_experience(t):
     a3 = sstep(t_tasse - 0.1, t_tasse + 0.2, t) * (1 - sstep(t_dense - 0.35, t_dense - 0.1, t))
     label(cv, ["ON TASSE", "LES NOYAUX"], a3, y0=505, size=92, cols=[WHITE, AMBER])
     a4 = sstep(t_dense - 0.2, t_dense + 0.2, t) * (1 - sstep(t_nasa - 0.4, t_nasa - 0.15, t))
-    label(cv, ["AUSSI DENSE QU'UN CŒUR", "D'ÉTOILE À NEUTRONS"], a4, y0=510, size=66, cols=[WHITE, CYAN])
+    label(cv, ["UNE DENSITÉ", "D'ÉTOILE À NEUTRONS"], a4, y0=510, size=76, cols=[WHITE, CYAN])
     a5 = sstep(t_nasa - 0.2, t_nasa + 0.2, t) * (1 - sstep(t_hum - 0.35, t_hum - 0.1, t))
-    label(cv, ["1 SUCRE DE CETTE MATIÈRE", "≈\u202f1 MILLIARD DE TONNES"], a5, y0=510, size=66, cols=[WHITE, AMBER])
+    label(cv, ["1 SUCRE D'ÉTOILE À NEUTRONS", "≈\u202f1 MILLIARD DE TONNES"], a5, y0=510, size=66, cols=[WHITE, AMBER])
     a6 = sstep(t_hum - 0.2, t_hum + 0.2, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.15, t))
     label(cv, ["L'HUMANITÉ PÈSE", "BIEN MOINS QUE ÇA"], a6, y0=505, size=80, cols=[WHITE, CYAN])
     a7 = sstep(t_tiend - 0.2, t_tiend + 0.2, t) * (1 - sstep(t_sucre2 - 0.35, t_sucre2 - 0.1, t))
@@ -935,12 +971,12 @@ def sc_experience(t):
     # légendes au-dessus des deux cubes pendant la comparaison (au-dessus de y = 840 : pas de boutons TikTok)
     a_r = sstep(t_hum - 0.2, t_hum + 0.3, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.1, t))
     if a_r > 0:
-        txt(cv, "1 sucre de cette matière", 760, CY - 205, 30, F_SEMI, LIGHT, a_r)
+        txt(cv, "1 sucre d'étoile à neutrons", 760, CY - 205, 30, F_SEMI, LIGHT, a_r)
         txt(cv, "≈\u202f1 milliard de t", 760, CY - 158, 44, F_DBLACK, WHITE, a_r)
     a_l = sstep(t_hum - 0.2, t_hum + 0.3, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.1, t))
     if a_l > 0:
         txt(cv, "toute l'humanité", 320, CY - 205, 30, F_SEMI, LIGHT, a_l)
-        txt(cv, "≈\u202f0,5 milliard de t", 320, CY - 158, 44, F_DBLACK, AMBER, a_l)
+        txt(cv, "≤\u202f0,5 milliard de t", 320, CY - 158, 44, F_DBLACK, AMBER, a_l)
     return cv
 
 
@@ -1053,7 +1089,7 @@ def sc_chaise(t):
     t_rep = cue("chaise:repoussent", 0, s0 + 4.1)
     t_quant = cue("chaise:quantique", 0, s0 + 5.6)
     t_touch = cue("chaise:toucher", 0, s0 + 8.4)
-    t_au = cue("chaise:au", 0, s0 + 11.2)
+    t_au = cue("chaise:au", 0, 1e9)              # chute « tu n'as jamais touché ta chaise » : retirée en v2
     wipe = sstep(t_parce - 0.2, t_parce + 0.5, t)
     if wipe < 1:
         for q in partial(CHAIR, eout((t - s0) / 1.6)):
@@ -1160,7 +1196,7 @@ def ui_layer(img, t):
     a_head = 1.0
     a_rule = sstep(SC["descente"][0] - 0.2, SC["descente"][0] + 0.5, t)
     if name == "chaise":
-        a_rule *= 1 - sstep(cue("chaise:au", 0, SC["chaise"][0] + 11) - 0.3, cue("chaise:au", 0, SC["chaise"][0] + 11), t)
+        a_rule *= 1 - sstep(cue("chaise:au", 0, 1e9) - 0.3, cue("chaise:au", 0, 1e9), t)
     if name == "stade":
         a_rule *= 0.0
     if name == "stade" or (name == "atome" and t > SC["atome"][1] - XF):
@@ -1168,7 +1204,7 @@ def ui_layer(img, t):
     header(img, t, a_head, expo_at(t), a_rule)
     a_cap = 1.0
     if name == "chaise":
-        a_cap = 1 - sstep(cue("chaise:au", 0, SC["chaise"][0] + 11) - 0.4, cue("chaise:au", 0, SC["chaise"][0] + 11) - 0.1, t)
+        a_cap = 1 - sstep(cue("chaise:au", 0, 1e9) - 0.4, cue("chaise:au", 0, 1e9) - 0.1, t)
     if name == "outro":
         a_cap = 0.0
     draw_captions(img, t, a_cap)
@@ -1248,7 +1284,7 @@ def key_times():
           cue("experience:dense") + 0.6, cue("experience:milliard") + 0.6, cue("experience:lhumanite") + 0.9,
           cue("experience:sucre", 1) + 0.6, cue("etoile:etoile") + 0.6, cue("etoile:kilometres") + 0.6,
           cue("chaise:pourquoi") + 0.4, cue("chaise:repoussent") + 0.5, cue("chaise:quantique") + 0.6,
-          cue("chaise:repulsion") + 0.2, cue("chaise:touche") + 0.5, cue("outro:observable") + 0.4,
+          cue("chaise:repulsion") + 0.2, cue("chaise:touche", 0, bloc("chaise")[1]) + 0.5, cue("outro:observable") + 0.4,
           DUR - 0.2]
     return [min(x, DUR - 1 / FPS) for x in ts]
 

@@ -56,12 +56,40 @@ def sortie(ep_dir):
     return d
 
 
+def appliquer_retraits(ep_dir, c):
+    """Phrases retirées de la prise après coup (correction de fond sans régénérer la voix) : « voix.retraits » =
+    [{"bloc", "phrase"}], appliqués à la prise lue d'après « voix.narration_prise ». La narration finale (« narration »)
+    doit être exactement ce texte moins ces phrases. Renvoie (prise, mots) à utiliser."""
+    import re
+    v = c["voix"]
+    prise, mots = os.path.join(ep_dir, v["prise"]), os.path.join(ep_dir, v["mots"])
+    if not v.get("retraits"):
+        return prise, mots
+    texte = open(os.path.join(ep_dir, v["narration_prise"]), encoding="utf-8").read()
+    out = sortie(ep_dir)
+    for k, r in enumerate(v["retraits"]):
+        pa, pm = os.path.join(out, f"prise_retrait{k}.wav"), os.path.join(out, f"prise_retrait{k}_mots.json")
+        rep = V.retirer_phrase(prise, mots, texte, c["blocs"], r["bloc"], r["phrase"], pa, pm)
+        log(f"retrait ({r['bloc']}) : {rep['duree']:.2f} s retirées, coupes à {rep['niveau_coupe_db'][0]:.0f} et "
+            f"{rep['niveau_coupe_db'][1]:.0f} dBFS (silence < {rep['seuil_silence_db']:.0f})")
+        if max(rep["niveau_coupe_db"]) > rep["seuil_silence_db"] + 6:
+            raise RuntimeError(f"retrait {k} : coupe dans la parole ({rep['niveau_coupe_db']})")
+        texte = re.sub(r"[ \t]*(\[[^\]]*\][ \t]*)?" + re.escape(r["phrase"]), "", texte, count=1)
+        prise, mots = pa, pm
+    final = open(os.path.join(ep_dir, c["narration"]), encoding="utf-8").read()
+    mots_a = [V.nettoyer_mot(m) for m in V.Narration.sans_balises(texte).split()]
+    mots_b = [V.nettoyer_mot(m) for m in V.Narration.sans_balises(final).split()]
+    if mots_a != mots_b:
+        raise RuntimeError("la narration finale ne correspond pas à la prise moins les phrases retirées")
+    return prise, mots
+
+
 def cmd_voix(ep_dir):
     c = conf(ep_dir)
     v = c["voix"]
+    prise, mots = appliquer_retraits(ep_dir, c)
     narr = V.Narration(open(os.path.join(ep_dir, c["narration"]), encoding="utf-8").read(), ids=c["blocs"])
-    M = V.Montage(narr, os.path.join(ep_dir, v["prise"]), os.path.join(ep_dir, v["mots"]), tempo=v.get("tempo", 1.0),
-                  respirations=v.get("respirations"))
+    M = V.Montage(narr, prise, mots, tempo=v.get("tempo", 1.0), respirations=v.get("respirations"))
     ch = M.chrono()
     json.dump(ch, open(os.path.join(ep_dir, "chrono.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     np.save(os.path.join(sortie(ep_dir), "voix.npy"), M.voix.astype(np.float32))

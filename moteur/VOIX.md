@@ -58,6 +58,14 @@ Voir `series/infiniment/fabriquer.py` : la narration est un fichier texte (balis
 crochets, `[curious]`, `[pause]`…), la voix pilote toute la chronologie (`chrono.json` : blocs, repères au mot près,
 sous-titres), puis `fabriquer.py tout` rend, mixe et contrôle.
 
+## Corriger après coup sans régénérer
+
+Une phrase à **supprimer** d'une prise déjà générée (fait contesté découvert après coup) se retire sans dépenser de
+crédits : dans `episode.json` (série INFINIMENT), `voix.narration_prise` = texte lu dans la prise,
+`voix.retraits` = `[{"bloc": "…", "phrase": "…"}]`, et `narration` = ce texte moins ces phrases. La fabrication coupe
+la prise au milieu des silences qui encadrent la phrase (`vf.voix.retirer_phrase`) et refuse une coupe tombée dans la
+parole. Une phrase à **reformuler** impose une nouvelle prise.
+
 ## Ce que les contrôles ne garantissent pas
 
 - La « transcription » d'une prise générée renvoie le texte demandé (balises comprises) avec des horodatages : c'est un
