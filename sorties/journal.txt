@@ -100,3 +100,11 @@ accroche_marius.mp3 : 49 mots transcrits en 12.9 s
 accroche_michael.mp3 : 49 mots transcrits en 13.5 s
 accroche_paul.mp3 : 50 mots transcrits en 13.6 s
 infiniment_v5_estelle.wav : 275 mots transcrits en 77.5 s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+modèle french_24l chargé en 5.6 s, 24000 Hz
+infiniment_v5_george : 85.4 s d'audio en 80.6 s de calcul (voix george)
+infiniment_v5_charles : 83.6 s d'audio en 78.1 s de calcul (voix charles)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+whisper medium chargé en 12.5 s
+infiniment_v5_charles.mp3 : 274 mots transcrits en 64.8 s
+infiniment_v5_george.mp3 : 263 mots transcrits en 70.9 s
