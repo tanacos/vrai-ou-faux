@@ -909,6 +909,9 @@ def _human_points(n=2600):
 HUM_P = _human_points()
 
 
+S_SUC = 160                   # arête (unités de cube_polys) du sucre de la comparaison
+
+
 def sc_experience(t):
     s0, s1 = SC["experience"]
     cv, gl = new_frame(t)
@@ -939,13 +942,15 @@ def sc_experience(t):
     nest = eout((t - t_tiend) / max(t_sucre2 - t_tiend, 0.6))      # entre dans le vrai sucre
     sug_x = lerp(760, CX, nest)
     hx = lerp(lerp(CX, 320, side), sug_x, nest)
-    cy_c = CY + 40 * max(side, nest)
+    cy_c = CY - 5                                # (v2) plus haut : un sous-titre sur 2 lignes ne touche pas les cubes
     hy = cy_c + 10 * nest
-    hs = lerp(lerp(90 + 25 * ca, 100, side), 66, nest)
+    # (v2) proportions honnêtes : à la même densité, l'humanité (≤ 0,5 milliard de t) fait au moins la moitié du
+    # volume d'un sucre de matière d'étoile à neutrons (≈ 1 milliard de t) : arête ≈ 0,8 fois celle du sucre
+    hs = lerp(lerp(90 + 25 * ca, 0.80 * S_SUC, side), 0.78 * S_SUC, nest)
     sa = sstep(t_nasa - 0.3, t_nasa + 0.3, t)
     glass = sstep(t_tiend - 0.4, t_tiend + 0.4, t)
     if sa > 0:
-        draw_sugar(cv, gl, sug_x, cy_c, 190, sa, 0.25 + 0.05 * math.sin(t * 0.7), glass)
+        draw_sugar(cv, gl, sug_x, cy_c, S_SUC, sa, 0.25 + 0.05 * math.sin(t * 0.7), glass)
     draw_hot_cube(cv, gl, hx, hy, hs, ca, 0.3 + 0.1 * math.sin(t))
     if nest > 0.98:
         u = eout((t - t_sucre2) / 0.8)
@@ -971,12 +976,12 @@ def sc_experience(t):
     # légendes au-dessus des deux cubes pendant la comparaison (au-dessus de y = 840 : pas de boutons TikTok)
     a_r = sstep(t_hum - 0.2, t_hum + 0.3, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.1, t))
     if a_r > 0:
-        txt(cv, "1 sucre d'étoile à neutrons", 760, CY - 205, 30, F_SEMI, LIGHT, a_r)
-        txt(cv, "≈\u202f1 milliard de t", 760, CY - 158, 44, F_DBLACK, WHITE, a_r)
+        txt(cv, "1 sucre d'étoile à neutrons", 760, CY - 248, 30, F_SEMI, LIGHT, a_r)
+        txt(cv, "≈\u202f1 milliard de t", 760, CY - 201, 44, F_DBLACK, WHITE, a_r)
     a_l = sstep(t_hum - 0.2, t_hum + 0.3, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.1, t))
     if a_l > 0:
-        txt(cv, "toute l'humanité", 320, CY - 205, 30, F_SEMI, LIGHT, a_l)
-        txt(cv, "≤\u202f0,5 milliard de t", 320, CY - 158, 44, F_DBLACK, AMBER, a_l)
+        txt(cv, "toute l'humanité", 320, CY - 248, 30, F_SEMI, LIGHT, a_l)
+        txt(cv, "≤\u202f0,5 milliard de t", 320, CY - 201, 44, F_DBLACK, AMBER, a_l)
     return cv
 
 

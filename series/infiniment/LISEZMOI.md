@@ -29,6 +29,9 @@ dépasse les sources : leçons de la contre-vérification de l'épisode 1 :
 - conditionnel pour une expérience de pensée ; « environ », « au moins », « presque » quand la source le dit ;
 - pas de formule choc qui contredit ce qu'on vient d'expliquer (« tu n'as jamais touché ta chaise ») ;
 - citer la NASA mot pour mot : « matière d'étoile à neutrons », « pèserait environ ».
+- les images aussi sont des affirmations : deux volumes comparés sont dessinés à l'échelle (la v1 montrait
+  l'humanité 11 à 16 fois trop petite dans le sucre), et un compteur n'affiche sa source qu'une fois arrivé au
+  vrai chiffre.
 
 ## Rigueur (comme la série « Vrai ou faux ? »)
 
