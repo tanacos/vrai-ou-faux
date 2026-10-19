@@ -23,19 +23,28 @@ print(f"Kyutai TTS 1.6B charg√© en {time.time() - t0:.1f} s ({os.cpu_count()} c≈
 for job in dem["jobs"]:
     try:
         t1 = time.time()
-        entries = tts.prepare_script([job["texte"]], padding_between=1)
         voice = tts.get_voice_path(job["voix"])
         cond = tts.make_condition_attributes([voice], cfg_coef=job.get("cfg", 2.0))
-        res = tts.generate([entries], [cond])
-        with tts.mimi.streaming(1), torch.no_grad():
-            pcm = np.concatenate([np.clip(tts.mimi.decode(f[:, 1:, :]).cpu().numpy()[0, 0], -1, 1)
-                                  for f in res.frames[tts.delay_steps:]], axis=-1)
+        textes = job.get("blocs") or [job["texte"]]
+        morceaux, chrono, t = [], [], 0.0
+        for k, tx in enumerate(textes):
+            entries = tts.prepare_script([tx], padding_between=1)
+            res = tts.generate([entries], [cond])
+            with tts.mimi.streaming(1), torch.no_grad():
+                a = np.concatenate([np.clip(tts.mimi.decode(f[:, 1:, :]).cpu().numpy()[0, 0], -1, 1)
+                                    for f in res.frames[tts.delay_steps:]], axis=-1)
+            chrono.append({"bloc": k, "debut": round(t, 3), "fin": round(t + len(a) / tts.mimi.sample_rate, 3), "texte": tx})
+            sil = np.zeros(int(job.get("silence_entre_blocs", 0.5) * tts.mimi.sample_rate), np.float32)
+            morceaux += [a, sil]
+            t += (len(a) + len(sil)) / tts.mimi.sample_rate
+            print(f"  bloc {k} : {len(a) / tts.mimi.sample_rate:.1f} s", flush=True)
+        pcm = np.concatenate(morceaux).astype(np.float32)
         wav = os.path.join(out, job["nom"] + ".wav")
         sphn.write_wav(wav, pcm, tts.mimi.sample_rate)
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", wav, "-c:a", "libmp3lame", "-b:a", "160k",
                         os.path.join(out, job["nom"] + ".mp3")], check=True)
         os.remove(wav)
-        json.dump({"voix": job["voix"], "moteur": "kyutai tts-1.6b-en_fr", "blocs": [{"texte": job["texte"]}]},
+        json.dump({"voix": job["voix"], "moteur": "kyutai tts-1.6b-en_fr", "blocs": chrono},
                   open(os.path.join(out, job["nom"] + "_blocs.json"), "w", encoding="utf-8"), ensure_ascii=False)
         d = len(pcm) / tts.mimi.sample_rate
         print(f"{job['nom']} : {d:.1f} s d'audio en {time.time() - t1:.1f} s de calcul ({job['voix']})", flush=True)
