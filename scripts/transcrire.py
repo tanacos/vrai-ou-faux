@@ -3,8 +3,11 @@ attendu par moteur/vf/voix.py (clé « words »). Traite chaque audio de sorties
 import glob
 import json
 import os
+import subprocess
 import sys
 import time
+
+import numpy as np
 
 from faster_whisper import WhisperModel
 
@@ -18,7 +21,11 @@ m = WhisperModel("medium", device="cpu", compute_type="int8")
 print(f"whisper medium chargé en {time.time() - t0:.1f} s", flush=True)
 for a in todo:
     t1 = time.time()
-    segs, info = m.transcribe(a, language="fr", word_timestamps=True, beam_size=5, vad_filter=False)
+    # décodage par ffmpeg (évite l'incompatibilité de PyAV) : mono 16 kHz flottant
+    pcm = subprocess.run(["ffmpeg", "-v", "error", "-i", a, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"],
+                         capture_output=True, check=True).stdout
+    audio = np.frombuffer(pcm, np.float32)
+    segs, info = m.transcribe(audio, language="fr", word_timestamps=True, beam_size=5, vad_filter=False)
     words, text = [], []
     for s in segs:
         text.append(s.text)
