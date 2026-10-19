@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 3,
- "prochaine_affirmation": "« On avale 8 araignées par an en dormant. »",
+ "dernier_numero": 4,
+ "prochaine_affirmation": "« Le poisson rouge a une mémoire de 3 secondes. »",
  "episodes": [
   {
    "numero": 1,
@@ -111,6 +111,51 @@
    "metricool_uuid": "8738986342292604104",
    "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/b5e44234ca4787343aaad26597db0112d42fe85f/vrai_ou_faux_03_espace.mp4",
    "fabrication": "moteur générique, refabriqué le 13 octobre (chevauchement de textes corrigé), 15/15 contrôles conformes"
+  },
+  {
+   "numero": 4,
+   "slug": "sommeil",
+   "titre": "4 IDÉES REÇUES SUR LE SOMMEIL",
+   "theme": "le sommeil",
+   "idees": [
+    {
+     "affirmation": "« On avale 8 araignées par an en dormant. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.scientificamerican.com/article/fact-or-fiction-people-swallow-8-spiders-a-year-while-they-sleep1/",
+      "https://www.thenakedscientists.com/node/190173"
+     ]
+    },
+    {
+     "affirmation": "« Les dauphins dorment avec un œil ouvert. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.scientificamerican.com/article/how-do-whales-and-dolphin/",
+      "https://www.scientificamerican.com/article/meet-the-animals-that-literally-sleep-with-one-eye-open/",
+      "https://utmsi.utexas.edu/science-and-the-sea/radio-program/sleeping-dolphins/",
+      "https://www.smithsonianmag.com/smart-news/dolphins-sleep-with-only-half-their-brain-at-a-time-81426439/"
+     ]
+    },
+    {
+     "affirmation": "« À l'adolescence, l'horloge du sommeil se décale. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://member.thoracic.org/patients/patient-resources/resources/healthy-sleep-in-teens.pdf",
+      "https://www.sante.fr/node/1409399"
+     ]
+    },
+    {
+     "affirmation": "« On ne rêve qu'en noir et blanc. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.thenakedscientists.com/node/172520",
+      "https://bps.org.uk/research-digest/older-people-have-more-black-and-white-dreams",
+      "https://pubmed.ncbi.nlm.nih.gov/18845457/"
+     ]
+    }
+   ],
+   "prochain": "« Le poisson rouge a une mémoire de 3 secondes. »",
+   "statut": "fabriqué"
   }
  ]
 }

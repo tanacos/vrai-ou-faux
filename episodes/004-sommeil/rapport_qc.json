@@ -1,0 +1,95 @@
+{
+ "script": "/home/claude/vrai-ou-faux/episodes/004-sommeil/episode.json",
+ "debut": "2026-10-19 04:22:49",
+ "statut": "conforme",
+ "controles": [
+  {
+   "controle": "format vidéo",
+   "ok": true,
+   "detail": "h264 High 1080x1920 yuv420p 30.00 i/s"
+  },
+  {
+   "controle": "format audio",
+   "ok": true,
+   "detail": "aac 48000 Hz 2 canaux"
+  },
+  {
+   "controle": "durée",
+   "ok": true,
+   "detail": "73.80 s (prévu 73.80 s, minimum 61 s)"
+  },
+  {
+   "controle": "poids",
+   "ok": true,
+   "detail": "31.0 Mio"
+  },
+  {
+   "controle": "lecture immédiate (faststart)",
+   "ok": true,
+   "detail": "atome moov en tête de fichier"
+  },
+  {
+   "controle": "sonie intégrée",
+   "ok": true,
+   "detail": "-14.7 LUFS (cible -14,5 ± 1)"
+  },
+  {
+   "controle": "crête vraie",
+   "ok": true,
+   "detail": "-2.6 dBTP (maximum -1)"
+  },
+  {
+   "controle": "nombre d'images",
+   "ok": true,
+   "detail": "2214 images (prévu 2214)"
+  },
+  {
+   "controle": "miniature (1re image)",
+   "ok": true,
+   "detail": "luminosité moyenne de la 1re image : 48/255 (TikTok s'en sert de miniature : ni noire ni délavée)"
+  },
+  {
+   "controle": "pas d'image noire",
+   "ok": true,
+   "detail": "0 image(s) noire(s)"
+  },
+  {
+   "controle": "pas d'image figée",
+   "ok": true,
+   "detail": "plus longue séquence immobile : 0.00 s"
+  },
+  {
+   "controle": "pas de silence",
+   "ok": true,
+   "detail": "aucun trou de 2 s sous -60 dBFS"
+  },
+  {
+   "controle": "synchro son/image",
+   "ok": true,
+   "detail": "écarts aux transitions : +0 ms, +16 ms, +0 ms, +17 ms"
+  },
+  {
+   "controle": "zones sûres TikTok",
+   "ok": true,
+   "detail": "aucun texte hors zone"
+  },
+  {
+   "controle": "textes sans chevauchement",
+   "ok": true,
+   "detail": "aucun texte superposé à un autre"
+  }
+ ],
+ "duree_video": 73.8,
+ "bande_son": {
+  "lufs": -14.628004285324797,
+  "true_peak": -3.0499999999999323,
+  "gain_db": 1.6439131685888686,
+  "max_gr_db": 4.643845950804931,
+  "duree": 73.8
+ },
+ "credits_pictogrammes": [
+  "Pictogrammes : game-icons.net (CC BY 3.0)"
+ ],
+ "fin": "2026-10-19 04:39:45",
+ "duree_fabrication_s": 1051
+}
