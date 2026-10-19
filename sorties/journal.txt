@@ -171,3 +171,18 @@ k16_2114.mp3 : 24 mots transcrits en 9.2 s
 k16_2465.mp3 : 24 mots transcrits en 9.4 s
 k16_4724.mp3 : 24 mots transcrits en 9.5 s
 k16_estelle.mp3 : 49 mots transcrits en 13.2 s
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+pocket-tts 3.3.0 requires sentencepiece>=0.2.1, but you have sentencepiece 0.2.0 which is incompatible.
+Kyutai TTS 1.6B chargé en 15.3 s (4 cœurs)
+  bloc 0 : 7.2 s
+  bloc 1 : 7.8 s
+  bloc 2 : 10.7 s
+  bloc 3 : 8.8 s
+  bloc 4 : 6.0 s
+  bloc 5 : 22.4 s
+  bloc 6 : 8.9 s
+  bloc 7 : 11.7 s
+  bloc 8 : 6.3 s
+k16_estelle_complet : 94.3 s d'audio en 1067.7 s de calcul (unmute-prod-website/developpeuse-3.wav)
+whisper medium chargé en 10.3 s
+k16_estelle_complet.mp3 : 274 mots transcrits en 70.8 s
