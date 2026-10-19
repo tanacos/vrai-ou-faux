@@ -58,6 +58,22 @@ Voir `series/infiniment/fabriquer.py` : la narration est un fichier texte (balis
 crochets, `[curious]`, `[pause]`…), la voix pilote toute la chronologie (`chrono.json` : blocs, repères au mot près,
 sous-titres), puis `fabriquer.py tout` rend, mixe et contrôle.
 
+## Voix libre et gratuite : Kyutai Pocket TTS (`moteur/voix_libre.py`)
+
+Alternative sans abonnement, utilisable commercialement : poids du modèle sous CC BY 4.0 (mention « Voix :
+Kyutai Pocket TTS (CC BY 4.0) » dans la légende), voix « estelle » (enregistrement de Kyutai cédé en CC0). Chaque
+paragraphe est relu par une transcription indépendante (faster-whisper) et refait s'il manque un passage : lors des
+essais du 19/10/2026, sans cette vérification, une prise sur trois commençait par une syllabe parasite, et des
+morceaux trop longs (120 jetons) ont fait sauter une phrase entière dans trois prises sur trois. Réglages retenus
+pour un ton « reportage » : paragraphes entiers (80 jetons au plus), température 0,4, ponctuation sans points de
+suspension (`narration_v5_tv.txt`), débit posé au montage (`"tempo": 0.92`, `"pauses": 1.4` dans `voix`).
+
+Où la faire tourner : le modèle doit être installé (PyPI, index PyTorch CPU) et ses poids téléchargés (Hugging Face),
+ce que l'environnement par défaut de la routine bloque. Il faut donc élargir l'accès réseau de l'environnement
+(niveau « Custom » avec ces domaines, ou « Full ») et installer les paquets par un script de démarrage. Les essais
+ont tourné sur GitHub Actions (branche `essai-voix`), ce qui convient pour tester mais pas pour produire chaque
+semaine : les conditions de GitHub réservent ses machines à la construction et aux tests du logiciel.
+
 ## Corriger après coup sans régénérer
 
 Une phrase à **supprimer** d'une prise déjà générée (fait contesté découvert après coup) se retire sans dépenser de
