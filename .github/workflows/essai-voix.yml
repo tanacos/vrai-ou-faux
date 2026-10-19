@@ -19,17 +19,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Installation (PyTorch CPU)
+      - name: Installation (PyTorch CPU, ffmpeg, Whisper)
         run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
           python -m pip install --upgrade pip
-          pip install pocket-tts scipy --extra-index-url https://download.pytorch.org/whl/cpu
+          pip install pocket-tts scipy faster-whisper --extra-index-url https://download.pytorch.org/whl/cpu
       - name: Génération
         run: |
           set -e
+          set -o pipefail
           for f in demandes/*.json; do
+            [ -e "$f" ] || continue
             python scripts/generer.py "$f" sorties 2>&1 | tee -a sorties/journal.txt
             git rm -q "$f"
           done
+          python scripts/transcrire.py sorties 2>&1 | tee -a sorties/journal.txt
       - name: Dépôt du résultat
         run: |
           git config user.name "essai-voix (GitHub Actions)"

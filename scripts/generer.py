@@ -43,9 +43,10 @@ for job in dem["jobs"]:
     y = y / max(1e-6, float(np.abs(y).max())) * 0.89
     wav = os.path.join(out, job["nom"] + ".wav")
     scipy.io.wavfile.write(wav, sr, (y * 32767).astype(np.int16))
+    duree_calcul = time.time() - t1
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", wav, "-c:a", "libmp3lame", "-b:a", "160k",
                     os.path.join(out, job["nom"] + ".mp3")], check=True)
     os.remove(wav)
     json.dump({"voix": job["voix"], "langue": dem.get("langue"), "sr": sr, "blocs": chrono},
               open(os.path.join(out, job["nom"] + "_blocs.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(f"{job['nom']} : {t:.1f} s d'audio en {time.time() - t1:.1f} s (voix {job['voix']})", flush=True)
+    print(f"{job['nom']} : {t:.1f} s d'audio en {duree_calcul:.1f} s de calcul (voix {job['voix']})", flush=True)

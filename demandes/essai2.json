@@ -1,0 +1,39 @@
+{
+ "langue": "french_24l",
+ "jobs": [
+  {
+   "nom": "infiniment_v5_fabien",
+   "voix": "hf://kyutai/tts-voices/unmute-prod-website/fabieng-enhanced-v2.wav",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Pour comprendre, il faut descendre. Plus bas que ta peau. Plus bas que tes cellules. Plus bas que ton A.D.N.… jusqu'aux atomes dont tu es fait.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome.",
+    "Si l'atome était un stade, son noyau serait un moustique, posé au milieu. Tout autour… presque rien. Juste un nuage d'électrons, presque sans masse.",
+    "Pourtant, ce noyau contient plus de quatre-vingt-dix-neuf virgule neuf pour cent de la masse de l'atome.",
+    "Alors, faisons une expérience de pensée. On prend tous les humains, on retire ce vide, et on tasse les noyaux les uns contre les autres. On obtient une matière presque aussi dense qu'une étoile à neutrons. Selon la Nasa, un morceau de sucre de matière d'étoile à neutrons pèserait environ un milliard de tonnes. Or l'humanité entière pèse au moins deux fois moins. Elle tiendrait donc… dans un morceau de sucre.",
+    "Et cette matière existe : une étoile à neutrons, c'est plus que la masse du Soleil, tassée dans une boule d'une vingtaine de kilomètres.",
+    "Mais alors, pourquoi tu ne passes pas à travers ta chaise ? Parce que les électrons se repoussent, et la physique quantique leur interdit de s'entasser dans le même état. Toucher, c'est sentir cette répulsion.",
+    "Prochain épisode : on part dans l'autre sens, jusqu'au bord de l'univers observable. Les sources sont en description."
+   ]
+  },
+  {
+   "nom": "accroche_developer1",
+   "voix": "hf://kyutai/tts-voices/unmute-prod-website/developer-1.mp3",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  },
+  {
+   "nom": "accroche_default",
+   "voix": "hf://kyutai/tts-voices/unmute-prod-website/default_voice.wav",
+   "silence_entre_blocs": 0.6,
+   "blocs": [
+    "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+    "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+   ]
+  }
+ ]
+}
