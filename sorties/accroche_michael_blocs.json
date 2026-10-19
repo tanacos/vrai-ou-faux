@@ -1,0 +1,19 @@
+{
+ "voix": "michael",
+ "langue": "french_24l",
+ "sr": 24000,
+ "blocs": [
+  {
+   "bloc": 0,
+   "debut": 0.0,
+   "fin": 6.48,
+   "texte": "Toute l'humanité… plus de huit milliards de personnes… pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "bloc": 1,
+   "debut": 7.08,
+   "fin": 14.36,
+   "texte": "Et là, première surprise : un atome, c'est presque entièrement… du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+  }
+ ]
+}
