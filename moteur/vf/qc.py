@@ -116,6 +116,22 @@ def run(path, ep, audit_bad=None, size_max_mb=200.0):
     offs = sync_offsets(v, a, ep.TL.FL)
     worst = max([abs(o[3]) for o in offs] + [0])
     add("synchro son/image", worst <= 60, "écarts aux transitions : " + ", ".join(f"{o[3]:+.0f} ms" for o in offs))
+    if getattr(ep, "voix", None) is not None:
+        lag, c = synchro_voix(path, ep.voix.piste(ep.TL.V, int(round(ep.TL.DUR * 48000))), 0.0)
+        add("synchro voix", abs(lag) <= 40 and c > 0.5, f"décalage {lag:+d} ms, corrélation {c:.2f}")
+        add("voix alignée sur le script", ep.voix_taux >= 0.9, f"{ep.voix_taux * 100:.0f} % des mots retrouvés")
+        dout = ep.voix.coupes_douteuses()
+        add("phrases découpées dans les silences", not dout,
+            "aucune coupe dans la parole" if not dout else "coupes dans la parole : " +
+            ", ".join(f"{k} ({v:.0f} dBFS)" for k, v in dout.items()))
+        pl = sorted(ep.TL.V)
+        serre = []
+        for (t0_, k0_), (t1_, k1_) in zip(pl, pl[1:]):
+            c0_ = ep.voix.clips.get(k0_)
+            if c0_ is not None and t1_ < t0_ + c0_["parole"] + 0.15:
+                serre.append(f"{k0_}→{k1_} ({t1_ - t0_ - c0_['parole']:+.2f} s)")
+        add("phrases sans chevauchement", not serre, "au moins 0,15 s entre deux phrases" if not serre else
+            "trop serré : " + ", ".join(serre))
     if audit_bad is not None:
         zone = {k: v_ for k, v_ in audit_bad.items() if not k[1].startswith("chevauchement")}
         chev = {k: v_ for k, v_ in audit_bad.items() if k[1].startswith("chevauchement")}

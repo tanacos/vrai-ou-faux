@@ -517,3 +517,202 @@ def ecrire_wav(path, stereo):
         wf.setsampwidth(2)
         wf.setframerate(SR)
         wf.writeframes(pcm.tobytes())
+
+
+# ------------------------------------------------------------------ format quiz « Vrai ou faux ? » : voix par blocs
+NUMEROS = ("Un", "Deux", "Trois", "Quatre")
+UNITES_PARLEES = {"h": "heures", "%": "pour cent", "mm": "millimètres", "cm": "centimètres", "m": "mètres",
+                  "km": "kilomètres", "j": "jours", "ans": "ans", "kg": "kilos", "t": "tonnes", "°C": "degrés"}
+
+
+def _sans_guillemets(s):
+    return s.replace("«", "").replace("»", "").replace(" ", " ").replace("\xa0", " ").strip()
+
+
+def _nombre_parle(p):
+    v = p.get("valeur", "")
+    dec = int(p.get("decimales", 0))
+    s = f"{float(v):.{dec}f}".replace(".", ",") if isinstance(v, (int, float)) else str(v)
+    suf = (p.get("suffixe") or "").strip()
+    suf = UNITES_PARLEES.get(suf, suf)
+    return " ".join(x for x in ((p.get("prefixe") or "").strip(), s, suf) if x)
+
+
+def voix_panneau_defaut(p):
+    """Texte lu par défaut pour un panneau (le script peut toujours le remplacer par sa clé « voix »)."""
+    k = p.get("type", "texte")
+    titre = _sans_guillemets(p.get("titre") or "")
+    if k == "texte":
+        t = _sans_guillemets(p.get("texte") or "")
+        return (titre + " " + t).strip() if titre.endswith("?") else t
+    if k == "chiffre":
+        return f"{titre} {_nombre_parle(p)}.".strip()
+    if k == "citation":
+        return _sans_guillemets(p.get("texte") or "")
+    if k in ("duo", "barres"):
+        return titre
+    return ""
+
+
+def narration_quiz(spec):
+    """Blocs (identifiant, texte lu) d'un épisode « Vrai ou faux ? » : ouverture, puis pour chaque idée l'affirmation,
+    le verdict et ses panneaux, enfin le score et l'annonce du prochain épisode. Chaque texte peut être fixé dans le
+    script : « voix_intro », idée.« voix_affirmation » / « voix_verdict », panneau.« voix » (chaîne vide = muet),
+    « voix_score », « voix_prochain »."""
+    theme = spec.get("theme", "")
+    blocs = [("intro", spec.get("voix_intro") or f"Vrai ou faux ? Quatre idées reçues sur {theme}. "
+                                                 "Compte tes bonnes réponses !")]
+    for i, idee in enumerate(spec["idees"]):
+        n = i + 1
+        blocs.append((f"i{n}_affirmation", idee.get("voix_affirmation")
+                      or f"{NUMEROS[i]}. {_sans_guillemets(idee['affirmation'])}"))
+        blocs.append((f"i{n}_verdict", idee.get("voix_verdict")
+                      or ("Vrai !" if idee["verdict"].upper() == "VRAI" else "Faux !")))
+        for k, p in enumerate(idee.get("panneaux", [])):
+            t = p.get("voix")
+            if t is None:
+                t = voix_panneau_defaut(p)
+            if t:
+                blocs.append((f"i{n}_p{k + 1}", t))
+    blocs.append(("score", spec.get("voix_score") or "Alors, ton score ? Dis-le en commentaire !"))
+    nxt = _sans_guillemets((spec.get("prochain") or {}).get("affirmation", ""))
+    nxt = nxt[:1].lower() + nxt[1:] if nxt[:2] != nxt[:2].upper() else nxt
+    blocs.append(("prochain", spec.get("voix_prochain") or f"Prochain épisode : {nxt} Vrai ou faux ?"))
+    return blocs
+
+
+def mots_a_ecouter(prise_mp3, mots_json, marge_db=10.0):
+    """Mots dont l'intervalle horodaté ne contient presque pas de voix (mot avalé, sauté ou mal placé ?).
+
+    Limite : la « transcription » renvoyée par ElevenLabs pour une prise générée reprend le texte demandé (balises
+    comprises) : c'est un alignement forcé, pas une vraie reconnaissance. Le taux d'alignement ne prouve donc pas que
+    chaque mot a été prononcé ; ce relevé acoustique signale seulement les cas suspects, l'écoute reste le juge."""
+    x = lire_audio(prise_mp3)
+    env = enveloppe_db(x)
+    thr = seuil_silence(env)
+    out = []
+    for w in charger_mots_scribe(mots_json):
+        if len(nettoyer_mot(w["text"])) < 2:
+            continue
+        i0 = int(w["start"] / 0.01)
+        i1 = max(int((w["end"] + 0.06) / 0.01), i0 + 1)       # +60 ms : occlusion d'une consonne (« qui », « pas »)
+        mx = float(env[i0:i1 + 1].max()) if i0 < len(env) else -120.0
+        if mx < thr + marge_db:
+            out.append(dict(mot=w["text"], debut=round(w["start"], 2), niveau_db=round(mx, 1)))
+    return out
+
+
+def texte_narration(blocs):
+    """Texte complet envoyé à ElevenLabs (un bloc par paragraphe) et nombre de caractères (≈ crédits)."""
+    t = "\n\n".join(b for _, b in blocs)
+    return t, len(t)
+
+
+class Clips:
+    """Découpe une prise montée en un extrait par bloc, pour placer chaque phrase où le montage la veut.
+
+    Chaque extrait garde un peu de silence de part et d'autre (coupe au milieu du silence entre deux blocs) ;
+    « attaque » = instant du premier mot dans l'extrait, « parole » = durée du premier au dernier mot."""
+
+    def __init__(self, M):
+        self.M = M
+        ids = M.narr.ids
+        b = M.blocs()
+        order = [k for k in ids if k in b]
+        # point de coupe choisi dans la forme d'onde : milieu du plus long silence entre la fin (horodatée) d'un bloc
+        # et le début du suivant, fenêtre élargie de part et d'autre (les horodatages peuvent rogner une fin de mot)
+        hop = 0.01
+        env = enveloppe_db(M.voix)
+        thr = seuil_silence(env)
+        cuts = [0.0]
+        self.niveaux_coupe = {}                      # niveau de la voix (dBFS) à chaque coupe, pour le contrôle
+        for k0, k1 in zip(order, order[1:]):
+            lo, hi = b[k0][1] - 0.06, b[k1][0] + 0.04
+            if hi - lo < 0.03:
+                lo, hi = (b[k0][1] + b[k1][0]) / 2 - 0.05, (b[k0][1] + b[k1][0]) / 2 + 0.05
+            i0, i1 = max(int(lo / hop), 0), min(int(hi / hop) + 1, len(env))
+            seg = env[i0:i1]
+            sil = seg < thr
+            best, cur, bstart = 0, 0, 0
+            for k, s in enumerate(sil):
+                cur = cur + 1 if s else 0
+                if cur > best:
+                    best, bstart = cur, k - cur + 1
+            j = i0 + (bstart + best // 2 if best else int(np.argmin(seg)))
+            c = j * hop
+            cuts.append(c)
+            self.niveaux_coupe[f"{k0}|{k1}"] = round(float(env[min(j, len(env) - 1)]), 1)
+        self.seuil_silence = round(thr, 1)
+        cuts.append(M.duree)
+        fade = int(0.010 * SR)
+        self.clips = {}
+        for k, c0, c1 in zip(order, cuts[:-1], cuts[1:]):
+            a, z = int(round(c0 * SR)), int(round(c1 * SR))
+            x = M.voix[a:z].copy()
+            if len(x) > 2 * fade:
+                x[:fade] *= np.linspace(0, 1, fade)
+                x[-fade:] *= np.linspace(1, 0, fade)
+            self.clips[k] = dict(audio=x, attaque=b[k][0] - c0, parole=b[k][1] - b[k][0])
+
+    def durees(self):
+        return {k: c["parole"] for k, c in self.clips.items()}
+
+    def coupes_douteuses(self, marge_db=10.0):
+        """Coupes tombées dans de la parole (niveau nettement au-dessus du silence) : une fin ou un début de phrase
+        risque d'être rogné."""
+        return {k: v for k, v in self.niveaux_coupe.items() if v > self.seuil_silence + marge_db}
+
+    def piste(self, placements, n):
+        """Piste voix mono de n échantillons : placements = [(instant du premier mot, id du bloc)]."""
+        out = np.zeros(n)
+        for t, k in placements:
+            c = self.clips.get(k)
+            if c is None:
+                continue
+            i0 = int(round((t - c["attaque"]) * SR))
+            x = c["audio"]
+            if i0 < 0:
+                x, i0 = x[-i0:], 0
+            m = min(len(x), n - i0)
+            if m > 0:
+                out[i0:i0 + m] += x[:m]
+        return out
+
+
+# ------------------------------------------------------------------ ligne de commande (format quiz)
+def _main(argv):
+    """python3 -m vf.voix texte    ../episodes/NNN-slug/episode.json   -> texte à faire lire + nombre de caractères
+       python3 -m vf.voix verifier ../episodes/NNN-slug/episode.json   -> contrôle de la prise avant fabrication"""
+    import os
+    import sys
+    if len(argv) < 2 or argv[0] not in ("texte", "verifier"):
+        print(_main.__doc__)
+        return 1
+    path = argv[1]
+    spec = json.load(open(path, encoding="utf-8"))
+    blocs = narration_quiz(spec)
+    if argv[0] == "texte":
+        t, n = texte_narration(blocs)
+        print(t)
+        print(f"\n--- {len(blocs)} blocs, {n} caractères (≈ {n} crédits ElevenLabs par prise)", file=sys.stderr)
+        return 0
+    vc = spec.get("voix") or {}
+    base = os.path.dirname(os.path.abspath(path))
+    prise, mots = os.path.join(base, vc.get("prise", "")), os.path.join(base, vc.get("mots", ""))
+    if not (os.path.isfile(prise) and os.path.isfile(mots)):
+        print(json.dumps({"ok": False, "erreur": "prise ou mots introuvables (champ « voix » du script)"},
+                         ensure_ascii=False))
+        return 2
+    narr = Narration("\n\n".join(t for _, t in blocs), ids=[k for k, _ in blocs])
+    M = Montage(narr, prise, mots, tempo=float(vc.get("tempo", 1.0)))
+    C = Clips(M)
+    rep = dict(alignement=round(M.taux, 3), duree_prise=round(M.duree_prise, 2), duree_montee=round(M.duree, 2),
+               coupes_douteuses=C.coupes_douteuses(), mots_a_ecouter=mots_a_ecouter(prise, mots))
+    rep["ok"] = M.taux >= 0.9 and not rep["coupes_douteuses"]
+    print(json.dumps(rep, ensure_ascii=False, indent=1))
+    return 0 if rep["ok"] else 2
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(_main(sys.argv[1:]))

@@ -389,7 +389,16 @@ def render(ep, out_wav, ambiance="aucune", target_lufs=-14.5, ceiling_db=-3.0):
     over = a > T
     mix[over] = np.sign(mix[over]) * (T + (1 - T) * np.tanh((a[over] - T) / (1 - T)))
     mix = signal.sosfilt(signal.butter(2, 15000, "lowpass", fs=SR, output="sos"), mix, axis=0)
-    out, info = LN.master(mix, target_lufs, ceiling_db)
+    if getattr(ep, "voix", None) is not None:
+        # couche voix : musique et bruitages 10 LU sous la voix, effacés de 7 dB de plus quand elle parle
+        from . import voix as VX
+        v = ep.voix.piste(ep.TL.V, len(mix))
+        Lv = LN.integrated_lufs(np.stack([v, v], 1))
+        mix *= 10 ** (((Lv - 10.0) - LN.integrated_lufs(mix)) / 20)
+        out, info = VX.mixer(v, mix, None, ducking_db=-7.0, cible=target_lufs, plafond=ceiling_db)
+        info["voix"] = True
+    else:
+        out, info = LN.master(mix, target_lufs, ceiling_db)
     fade = int(0.004 * SR)
     out[:fade] *= np.linspace(0, 1, fade)[:, None]
     out[-fade:] *= np.linspace(1, 0, fade)[:, None]

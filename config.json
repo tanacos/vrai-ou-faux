@@ -12,5 +12,7 @@
   "contenu_ia": true,
   "confidentialite": "PUBLIC_TO_EVERYONE",
   "duree_min_s": 61,
-  "duree_max_s": 90
+  "duree_max_s": 90,
+  "voix_active": false,
+  "voix_offre_gratuite": true
 }

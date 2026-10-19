@@ -12,6 +12,7 @@ bruitages, mixage). La voix pilote tout : chaque animation et chaque sous-titre 
 
 Sortie : <épisode>/sortie/ (video.mp4, audio.wav, planche.png, rapport.json). Codes : 0 conforme, 1 erreur de
 préparation, 2 contrôle qualité en échec."""
+import hashlib
 import importlib.util
 import json
 import multiprocessing as mp
@@ -71,6 +72,15 @@ def cmd_voix(ep_dir):
     return ch
 
 
+def signature(ep_dir):
+    """Empreinte du contenu qui détermine les images : un tronçon déjà rendu reste valable tant qu'elle ne change pas
+    (même après une interruption de la machine, ou si « voix » réécrit une chronologie identique)."""
+    h = hashlib.sha1()
+    for f in ("rendu.py", "chrono.json"):
+        h.update(open(os.path.join(ep_dir, f), "rb").read())
+    return h.hexdigest()
+
+
 def _frame(i):
     return R.frame(i / R.FPS, i).tobytes()
 
@@ -82,7 +92,7 @@ def render_chunks(ep_dir, out):
     NF = R.nframes()
     cdir = os.path.join(out, "troncons")
     os.makedirs(cdir, exist_ok=True)
-    sig = str(os.path.getmtime(os.path.join(ep_dir, "rendu.py"))) + str(os.path.getmtime(os.path.join(ep_dir, "chrono.json")))
+    sig = signature(ep_dir)
     sp = os.path.join(cdir, "signature.txt")
     if not os.path.exists(sp) or open(sp).read() != sig:
         for f in os.listdir(cdir):
@@ -111,14 +121,26 @@ def render_chunks(ep_dir, out):
     return paths, NF, R.DUR
 
 
-def cmd_apercu(ep_dir):
+def cmd_apercu(ep_dir, cache=False):
+    """Planche des moments clés + audit des zones sûres. Avec cache=True, réutilise l'audit déjà fait sur le même
+    contenu (sortie/audit.json)."""
+    out = sortie(ep_dir)
+    ap = os.path.join(out, "audit.json")
+    sig = signature(ep_dir)
+    if cache and os.path.exists(ap) and os.path.exists(os.path.join(out, "planche.png")):
+        a = json.load(open(ap, encoding="utf-8"))
+        if a.get("signature") == sig:
+            bad = {(txt, why): t for txt, why, t in a["problemes"]}
+            log("planche et audit déjà faits sur ce contenu :", "aucun problème" if not bad else f"{len(bad)} problème(s)")
+            return bad
     R_ = charger_module(os.path.join(ep_dir, "rendu.py"), "rendu_ep")
     R_.setup(os.path.join(ep_dir, "chrono.json"))
-    out = sortie(ep_dir)
     p = R_.planche(os.path.join(out, "planche.png"))
     bad = R_.audit(3)
     for (txt, why), t in bad.items():
         log(f"AUDIT : {txt!r} [{why}] à t={t}")
+    json.dump({"signature": sig, "problemes": [[txt, why, t] for (txt, why), t in bad.items()]},
+              open(ap, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     log("planche :", p, "| audit :", "aucun problème" if not bad else f"{len(bad)} problème(s)")
     return bad
 
@@ -129,7 +151,7 @@ def cmd_tout(ep_dir):
     out = sortie(ep_dir)
     rapport = dict(serie=c["serie"], numero=c["numero"], debut=time.strftime("%Y-%m-%d %H:%M:%S"))
     ch = cmd_voix(ep_dir)
-    bad = cmd_apercu(ep_dir)
+    bad = cmd_apercu(ep_dir, cache=True)
     S_ = charger_module(os.path.join(ep_dir, "son.py"), "son_ep")
     wav = os.path.join(out, "audio.wav")
     ainfo = S_.render(os.path.join(ep_dir, "chrono.json"), os.path.join(out, "voix.npy"), wav)

@@ -83,6 +83,20 @@ python3 -m vf.icons chercher araignée lit          # noms disponibles (françai
 python3 -m vf.icons planche /tmp/p.png gi:spider pi:bed   # image de contrôle à regarder avant de valider
 ```
 
+## Voix (facultative, voir `moteur/VOIX.md`)
+
+Sans champ `voix`, l'épisode est muet comme avant (musique et bruitages seuls). Avec une prise ElevenLabs :
+
+```json
+"voix": {"fournisseur": "ElevenLabs", "modele": "eleven_v4", "voice_id": "DGTOOUoGpoP6UZ9uSWfA", "nom": "Célian",
+         "tempo": 1.03, "prise": "voix/prise.mp3", "mots": "voix/prise_mots.json"},
+"voix_intro": "Vrai ou faux ? …",            // facultatifs : texte lu à la place du texte par défaut
+"voix_score": "…", "voix_prochain": "…"
+```
+Dans une idée : `voix_affirmation`, `voix_verdict` ; dans un panneau : `voix` (`""` = panneau muet). Le texte lu par
+défaut est celui de l'écran (`python3 -m vf.voix texte <episode.json>` l'affiche). Chemins relatifs au dossier du
+script. La chronologie s'adapte à la voix ; la durée reste bornée à 61-90 s.
+
 ## Commandes
 
 ```bash

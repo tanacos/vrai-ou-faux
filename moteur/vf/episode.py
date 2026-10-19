@@ -46,8 +46,11 @@ def sources_block(src, sizes, max_w, max_lines, path=F_SEMI):
 
 
 def load(path):
+    import os
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        spec = json.load(f)
+    spec["_dir"] = os.path.dirname(os.path.abspath(path))
+    return spec
 
 
 def _chars(*xs):
@@ -80,9 +83,16 @@ def panel_duration(p):
 
 
 class Timeline:
-    """Chronologie : ouverture (2,4 s), 4 idées (question, 3-2-1, verdict, panneaux), conclusion."""
+    """Chronologie : ouverture (2,4 s), 4 idées (question, 3-2-1, verdict, panneaux), conclusion.
 
-    def __init__(self, spec, stretch=1.0):
+    Avec une voix (voix = {id de bloc: durée de parole}), chaque étape s'allonge au besoin pour laisser la phrase
+    se finir ; self.V liste les placements (instant du premier mot, id du bloc) pour la bande-son."""
+
+    def __init__(self, spec, stretch=1.0, voix=None):
+        self.V = []
+        if voix is not None:
+            self._init_voix(spec, stretch, voix)
+            return
         self.S, self.FL, self.G = [], [], []
         s = 2.40
         self.panels_t = []
@@ -107,6 +117,50 @@ class Timeline:
         self.DUR = round(self.P5B[1] * FPS) / FPS
         self.NF = int(round(self.DUR * FPS))
 
+    def _init_voix(self, spec, stretch, D):
+        self.S, self.FL, self.G = [], [], []
+        self.panels_t = []
+        V = self.V
+        V.append((0.30, "intro"))
+        s = max(2.40, 0.30 + D.get("intro", 0.0) + 0.35)
+        for i, idee in enumerate(spec["idees"]):
+            n = i + 1
+            t_aff = s + 0.25
+            V.append((t_aff, f"i{n}_affirmation"))
+            cd = max(s + 1.20, t_aff + D.get(f"i{n}_affirmation", 0.0) + 0.30)
+            reveal = cd + 1.95
+            V.append((reveal + 0.10, f"i{n}_verdict"))
+            body = reveal + max(1.15, 0.10 + D.get(f"i{n}_verdict", 0.0) + 0.45)
+            g = dict(i=i, claim=s, cd=cd, reveal=reveal, body=body)
+            t = body
+            spans = []
+            for k, p in enumerate(idee.get("panneaux", [])):
+                d_lecture = panel_duration(p) * stretch
+                bid = f"i{n}_p{k + 1}"
+                if bid in D:
+                    d_voix = 0.25 + D[bid] + 0.45
+                    V.append((t + 0.25, bid))
+                    d = max(d_voix, min(d_lecture, d_voix + 1.2))
+                else:
+                    d = d_lecture
+                spans.append((t, t + d))
+                t += d
+            g["end"] = t + 0.10
+            self.S.append(s)
+            self.FL.append(g["end"])
+            self.G.append(g)
+            self.panels_t.append(spans)
+            s = g["end"] + 0.25
+        self.CUT = [f + 0.02 for f in self.FL]
+        self.S_OUT = self.FL[-1] + 0.25
+        a0 = self.S_OUT + 0.20
+        V.append((a0 + 0.45, "score"))
+        self.P5A = (a0, a0 + max(3.20, 0.45 + D.get("score", 0.0) + 0.85))
+        V.append((self.P5A[1] + 0.50, "prochain"))
+        self.P5B = (self.P5A[1], self.P5A[1] + max(4.80, 0.50 + D.get("prochain", 0.0) + 1.0))
+        self.DUR = round(self.P5B[1] * FPS) / FPS
+        self.NF = int(round(self.DUR * FPS))
+
     def scene_index(self, t):
         k = 0
         for c in self.CUT:
@@ -120,14 +174,14 @@ class Timeline:
         return b[k], min(b[k + 1], self.DUR)
 
 
-def make_timeline(spec):
-    tl = Timeline(spec)
+def make_timeline(spec, voix=None):
+    tl = Timeline(spec, voix=voix)
     if tl.DUR < MIN_DUR + 1.0:
-        base = Timeline(spec, 1.0)
+        base = Timeline(spec, 1.0, voix=voix)
         fixed = base.DUR - sum(e - s for sp in base.panels_t for (s, e) in sp)
         var = sum(e - s for sp in base.panels_t for (s, e) in sp)
         need = (MIN_DUR + 1.0 - fixed) / max(var, 1e-6)
-        tl = Timeline(spec, float(min(max(need, 1.0), 1.30)))
+        tl = Timeline(spec, float(min(max(need, 1.0), 1.30)), voix=voix)
     return tl
 
 
@@ -138,7 +192,11 @@ class Episode:
         self._validate_top()
         if self.errors:
             raise ValueError("\n".join(self.errors))
-        self.TL = make_timeline(spec)
+        self.voix = None
+        durees = self._charger_voix()
+        if self.errors:
+            raise ValueError("\n".join(self.errors))
+        self.TL = make_timeline(spec, durees)
         TL = self.TL
         self.num = int(spec.get("numero", 0))
         self.verdicts = [idee["verdict"].upper() for idee in spec["idees"]]
@@ -168,6 +226,31 @@ class Episode:
             self.scenes.append(sc)
         self._layout_outro()
         self._validate_timing()
+
+    # ------------------------------------------------------------------ voix (facultative)
+    def _charger_voix(self):
+        """Si le script décrit une voix (« voix » : {"prise", "mots", "tempo"}), la prise ElevenLabs est alignée,
+        resserrée et découpée par blocs ; renvoie {id de bloc: durée de parole} pour la chronologie."""
+        import os
+        vc = self.spec.get("voix") or {}
+        if not (vc.get("prise") and vc.get("mots")):
+            return None
+        from . import voix as VX
+        base = self.spec.get("_dir", ".")
+        prise, mots = os.path.join(base, vc["prise"]), os.path.join(base, vc["mots"])
+        for f in (prise, mots):
+            if not os.path.exists(f):
+                self.errors.append(f"voix : fichier introuvable {f}")
+                return None
+        blocs = VX.narration_quiz(self.spec)
+        narr = VX.Narration("\n\n".join(t for _, t in blocs), ids=[k for k, _ in blocs])
+        M = VX.Montage(narr, prise, mots, tempo=float(vc.get("tempo", 1.0)))
+        if M.taux < 0.90:
+            self.errors.append(f"voix : seulement {M.taux * 100:.0f} % des mots du script retrouvés dans la prise "
+                               "(texte de la voix différent du script ? refaire la voix)")
+        self.voix = VX.Clips(M)
+        self.voix_taux = M.taux
+        return self.voix.durees()
 
     # ------------------------------------------------------------------ validation
     def _validate_top(self):

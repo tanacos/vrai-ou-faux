@@ -97,6 +97,14 @@ Corrige et recommence jusqu'à ce que ce soit propre. Durée visée : 65 à 85 s
 3. Relis toi-même une dernière fois : la formulation peut-elle être mal comprise ? Au moindre doute non résolu,
    **ne publie pas** : abandonne proprement et signale-le.
 
+## 5 bis. Voix (seulement si `config.json` contient `"voix_active": true`)
+
+Sinon, saute cette étape : l'épisode reste sans voix. Si elle est active, suis `moteur/VOIX.md` (texte, génération
+ElevenLabs, relais, horodatage, champ `voix` du script, `python3 -m vf.voix verifier` avec `"ok": true`), puis refais
+`valider` et `apercu` (la chronologie change). Si une étape de la voix échoue (crédits épuisés, relais muet après
+2 essais), fabrique l'épisode **sans voix** et signale-le dans le rapport : la voix ne doit jamais bloquer la sortie.
+Titre TikTok : si `config.json` contient `"voix_offre_gratuite": true`, ajoute « (voix : elevenlabs.io) » au titre.
+
 ## 6. Fabrication complète (≈ 15 à 25 min)
 
 Lance-la en arrière-plan :
