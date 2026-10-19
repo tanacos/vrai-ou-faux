@@ -58,10 +58,13 @@ Voir `series/infiniment/fabriquer.py` : la narration est un fichier texte (balis
 crochets, `[curious]`, `[pause]`…), la voix pilote toute la chronologie (`chrono.json` : blocs, repères au mot près,
 sous-titres), puis `fabriquer.py tout` rend, mixe et contrôle.
 
-## Voix libre et gratuite : Kyutai Pocket TTS (`moteur/voix_libre.py`)
+## Voix libre et gratuite : modèles Kyutai (`moteur/voix_libre.py`)
 
-Alternative sans abonnement, utilisable commercialement : poids du modèle sous CC BY 4.0 (mention « Voix :
-Kyutai Pocket TTS (CC BY 4.0) » dans la légende), voix « estelle » (enregistrement de Kyutai cédé en CC0). Chaque
+Alternative sans abonnement, utilisable commercialement : poids des modèles sous CC BY 4.0 (mention « Voix :
+Kyutai TTS (CC BY 4.0) » dans la légende), voix « estelle » (enregistrement de Kyutai cédé en CC0). Moteur conseillé :
+**Kyutai TTS 1.6B** (essai du 20/10/2026 : nettement moins robotique que Pocket TTS, débit naturel d'environ 2,8 mots/s,
+98 % des mots retrouvés par une transcription indépendante ; environ 18 min de calcul pour 90 s sur 4 cœurs).
+Pocket TTS (100 M de paramètres) reste plus rapide mais plus robotique. Chaque
 paragraphe est relu par une transcription indépendante (faster-whisper) et refait s'il manque un passage : lors des
 essais du 19/10/2026, sans cette vérification, une prise sur trois commençait par une syllabe parasite, et des
 morceaux trop longs (120 jetons) ont fait sauter une phrase entière dans trois prises sur trois. Réglages retenus

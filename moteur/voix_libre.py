@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Voix libre : narration lue par Kyutai Pocket TTS (poids CC BY 4.0, usage commercial avec attribution « Kyutai »),
+"""Voix libre : narration lue par un modèle Kyutai (poids CC BY 4.0, usage commercial avec attribution « Kyutai »),
 chaque paragraphe vérifié par une transcription indépendante (faster-whisper) et refait s'il manque un passage.
+
+Deux moteurs (episode.json → "voix_libre" → "moteur") :
+  "kyutai-1.6b" (conseillé) : Kyutai TTS 1.6B en/fr, nettement moins robotique, voix « estelle »
+      (unmute-prod-website/developpeuse-3.wav, CC0) ; environ 11 fois plus lent que le temps réel sur 4 cœurs
+      (≈ 18 min pour un épisode de 90 s). pip install "moshi==0.2.11" sphn
+  "pocket" : Kyutai Pocket TTS, 100 M de paramètres, plus rapide que le temps réel mais plus robotique.
 
 Dépendances (absentes de l'environnement par défaut, voir moteur/VOIX.md) :
     pip install pocket-tts faster-whisper scipy --extra-index-url https://download.pytorch.org/whl/cpu
@@ -80,7 +86,10 @@ def verifier(transcrire, audio16, attendu):
 def main(ep_dir):
     import scipy.io.wavfile
     from faster_whisper import WhisperModel
-    from pocket_tts import TTSModel
+    try:
+        from pocket_tts import TTSModel
+    except ImportError:          # moteur kyutai-1.6b seul
+        TTSModel = None
     from scipy.signal import resample_poly
 
     c = json.load(open(os.path.join(ep_dir, "episode.json"), encoding="utf-8"))
@@ -90,20 +99,40 @@ def main(ep_dir):
     texte = open(os.path.join(ep_dir, c["narration"]), encoding="utf-8").read()
     blocs = [texte_parle(b) for b in re.split(r"\n\s*\n", texte.strip()) if b.strip()]
     t0 = time.time()
-    tts = TTSModel.load_model(language=r["langue"], temp=r["temperature"])
     asr = WhisperModel("medium", device="cpu", compute_type="int8")
-    sr = tts.sample_rate
+    if r.get("moteur", "kyutai-1.6b") == "kyutai-1.6b":
+        import torch
+        from moshi.models.loaders import CheckpointInfo
+        from moshi.models.tts import DEFAULT_DSM_TTS_REPO, TTSModel as DSM
+
+        dsm = DSM.from_checkpoint_info(CheckpointInfo.from_hf_repo(DEFAULT_DSM_TTS_REPO), n_q=32,
+                                       temp=r.get("temperature_16b", 0.6), device="cpu")
+        cond = dsm.make_condition_attributes([dsm.get_voice_path(r.get("voix_16b",
+                                              "unmute-prod-website/developpeuse-3.wav"))], cfg_coef=2.0)
+        sr = dsm.mimi.sample_rate
+
+        def generer(texte):
+            res = dsm.generate([dsm.prepare_script([texte], padding_between=1)], [cond])
+            with dsm.mimi.streaming(1), torch.no_grad():
+                return np.concatenate([np.clip(dsm.mimi.decode(f[:, 1:, :]).cpu().numpy()[0, 0], -1, 1)
+                                       for f in res.frames[dsm.delay_steps:]]).astype(np.float32)
+    else:
+        tts = TTSModel.load_model(language=r["langue"], temp=r["temperature"])
+        etat = tts.get_state_for_audio_prompt(r["voix"])
+        sr = tts.sample_rate
+
+        def generer(texte):
+            return tts.generate_audio(etat, texte, max_tokens=r["max_tokens"]).numpy().astype(np.float32)
 
     def transcrire(a16):
         segs, _ = asr.transcribe(a16, language="fr", beam_size=5, vad_filter=False)
         return " ".join(s.text for s in segs).strip()
 
-    etat = tts.get_state_for_audio_prompt(r["voix"])
     parts, rapport = [], []
     for k, b in enumerate(blocs):
         essais = []
         for n in range(r["tentatives"]):
-            a = tts.generate_audio(etat, b, max_tokens=r["max_tokens"]).numpy().astype(np.float32)
+            a = generer(b)
             ok, det = verifier(transcrire, resample_poly(a, 2, 3).astype(np.float32), b)
             essais.append((ok, det, a))
             if ok:
