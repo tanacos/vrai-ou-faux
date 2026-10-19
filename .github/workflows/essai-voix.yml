@@ -13,7 +13,7 @@ concurrency:
 jobs:
   generer:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,7 +29,12 @@ jobs:
           set -e
           for f in demandes/*.json; do
             [ -e "$f" ] || continue
-            python scripts/generer.py "$f" sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC generer $f" >> sorties/journal.txt
+            if grep -q '"moteur": "kyutai16"' "$f"; then
+              pip install -q "moshi==0.2.11" sphn --extra-index-url https://download.pytorch.org/whl/cpu >> sorties/journal.txt 2>&1
+              python scripts/kyutai16.py "$f" sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC kyutai16 $f" >> sorties/journal.txt
+            else
+              python scripts/generer.py "$f" sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC generer $f" >> sorties/journal.txt
+            fi
             git rm -q "$f"
           done
           python scripts/transcrire.py sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC transcription" >> sorties/journal.txt

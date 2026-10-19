@@ -1,0 +1,41 @@
+{
+ "moteur": "kyutai16",
+ "temperature": 0.6,
+ "jobs": [
+  {
+   "nom": "k16_estelle",
+   "voix": "unmute-prod-website/developpeuse-3.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit. Et là, première surprise : un atome, c'est presque entièrement du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+  },
+  {
+   "nom": "k16_10087",
+   "voix": "cml-tts/fr/10087_11650_000028-0002_enhanced.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "nom": "k16_12080",
+   "voix": "cml-tts/fr/12080_11650_000047-0001_enhanced.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "nom": "k16_1406",
+   "voix": "cml-tts/fr/1406_1028_000009-0003_enhanced.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "nom": "k16_2114",
+   "voix": "cml-tts/fr/2114_1656_000053-0001_enhanced.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "nom": "k16_2465",
+   "voix": "cml-tts/fr/2465_1943_000152-0002_enhanced.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "nom": "k16_4724",
+   "voix": "cml-tts/fr/4724_3731_000031-0001_enhanced.wav",
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  }
+ ]
+}
