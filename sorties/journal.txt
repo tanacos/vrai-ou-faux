@@ -133,3 +133,23 @@ whisper medium chargé en 19.7 s
 estelle_tv_1.mp3 : 265 mots transcrits en 64.3 s
 estelle_tv_2.mp3 : 265 mots transcrits en 63.6 s
 estelle_tv_3.mp3 : 265 mots transcrits en 64.7 s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+modèle french_24l (température 0.4) chargé en 8.9 s
+  bloc 0 essai 1 : à refaire  (ajout au début)
+  bloc 0 essai 2 : à refaire  (ajout au début)
+  bloc 0 essai 3 : à refaire  (ajout au début)
+  bloc 0 essai 4 : ok 
+  bloc 1 essai 1 : ok 
+  bloc 2 essai 1 : ok 
+  bloc 3 essai 1 : ok 
+  bloc 4 essai 1 : à refaire ['quatre vingt dix neuf virgule neuf pour cent']
+  bloc 4 essai 2 : à refaire ['quatre vingt dix neuf virgule neuf pour cent']
+  bloc 4 essai 3 : à refaire ['quatre vingt dix neuf virgule neuf pour cent']
+  bloc 4 essai 4 : à refaire ['quatre vingt dix neuf virgule neuf pour cent']
+  bloc 5 essai 1 : ok 
+  bloc 6 essai 1 : ok 
+  bloc 7 essai 1 : ok 
+  bloc 8 essai 1 : ok 
+estelle_tv_v : 81.1 s d'audio en 238.4 s de calcul
+whisper medium chargé en 2.4 s
+estelle_tv_v.mp3 : 273 mots transcrits en 46.2 s

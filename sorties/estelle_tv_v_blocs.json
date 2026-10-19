@@ -1,0 +1,95 @@
+{
+ "voix": "estelle",
+ "options": {
+  "voix": "estelle",
+  "max_tokens": 80,
+  "temperature": 0.4,
+  "silence_entre_blocs": 0.5,
+  "verifier": true,
+  "tentatives": 4
+ },
+ "sr": 24000,
+ "blocs": [
+  {
+   "bloc": 0,
+   "debut": 0.0,
+   "fin": 6.24,
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit.",
+   "verifie": true,
+   "essais": 4,
+   "entendu": "toute l'humanité, plus de 8 milliards de personnes pourraient tenir dans un morceau  de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "bloc": 1,
+   "debut": 6.74,
+   "fin": 12.98,
+   "texte": "Pour comprendre, il faut descendre : plus bas que ta peau, plus bas que tes cellules, plus bas que ton A-D-N, jusqu'aux atomes dont tu es fait.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "Pour comprendre, il faut descendre plus bas que ta peau, plus bas que tes cellules,  plus bas que ton ADN, jusqu'aux atomes dont tu es fait."
+  },
+  {
+   "bloc": 2,
+   "debut": 13.48,
+   "fin": 21.24,
+   "texte": "Et là, première surprise : un atome, c'est presque entièrement du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "Et la première surprise, un atome, c'est presque entièrement du vide.  Au centre, un noyau environ 100 000 fois plus petit que l'atome."
+  },
+  {
+   "bloc": 3,
+   "debut": 21.74,
+   "fin": 30.86,
+   "texte": "Si l'atome était un stade, son noyau serait un moustique posé au milieu. Tout autour, presque rien : juste un nuage d'électrons, presque sans masse.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "Si l'atome était un stade, son noyau serait un moustique posé au milieu, tout autour,  presque rien, juste un nuage d'électrons, presque sans masse."
+  },
+  {
+   "bloc": 4,
+   "debut": 31.36,
+   "fin": 35.36,
+   "texte": "Pourtant, ce noyau contient plus de quatre-vingt-dix-neuf virgule neuf pour cent de la masse de l'atome.",
+   "verifie": false,
+   "essais": 4,
+   "entendu": "Pourtant, ce noyau contient plus de 99,9% de la masse de l'atome."
+  },
+  {
+   "bloc": 5,
+   "debut": 35.86,
+   "fin": 55.86,
+   "texte": "Alors, faisons une expérience de pensée. On prend tous les humains, on retire ce vide, et on tasse les noyaux les uns contre les autres. On obtient une matière presque aussi dense qu'une étoile à neutrons. Selon la Nasa, un morceau de sucre de matière d'étoile à neutrons pèserait environ un milliard de tonnes. Or l'humanité entière pèse au moins deux fois moins. Elle tiendrait donc dans un morceau de sucre.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "Alors, faisons une expérience de pensée, on prend tous les humains, on retire ce vide,  et on tasse les noyaux les uns contre les autres.  On obtient une matière presque aussi dense qu'une étoile à neutron.  Selon la NASA, un morceau de sucre de matière d'étoile à neutron pèserait environ 1  milliard de tonnes.  Or, l'humanité entière pèse au moins deux fois moins.  Elle tiendrait donc dans un morceau de sucre."
+  },
+  {
+   "bloc": 6,
+   "debut": 56.36,
+   "fin": 62.6,
+   "texte": "Et cette matière existe : une étoile à neutrons, c'est plus que la masse du Soleil, tassée dans une boule d'une vingtaine de kilomètres.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "et cette matière existe, une étoile à neutrons, c'est plus que la masse du soleil tassée dans une boule d'une vingtaine de kilomètres."
+  },
+  {
+   "bloc": 7,
+   "debut": 63.1,
+   "fin": 73.74,
+   "texte": "Mais alors, pourquoi tu ne passes pas à travers ta chaise ? Parce que les électrons se repoussent, et la physique quantique leur interdit de s'entasser dans le même état. Toucher, c'est sentir cette répulsion.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "Mais alors, pourquoi tu ne passes pas à travers ta chaise ?  Parce que les électrons se repoussent,  et la physique quantique leur interdit de s'entasser dans le même état.  Toucher, c'est sentir cette répulsion."
+  },
+  {
+   "bloc": 8,
+   "debut": 74.24,
+   "fin": 80.56,
+   "texte": "Prochain épisode : on part dans l'autre sens, jusqu'au bord de l'univers observable. Les sources sont en description.",
+   "verifie": true,
+   "essais": 1,
+   "entendu": "épisode, on part dans l'autre sens, jusqu'au bord de l'univers observable.  Les sources sont en description."
+  }
+ ]
+}
