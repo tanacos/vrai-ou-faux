@@ -436,11 +436,12 @@ def _cap_layout(c):
                 w1, w2 = sum(ws[:k]) + sp * (k - 1), sum(ws[k:]) + sp * (n - k - 1)
                 if max(w1, w2) > CAP_W:
                     continue
-                score = (words[k - 1]["t"].upper() in MOTS_OUTILS, max(w1, w2))
+                orphelin = n >= 3 and (k == 1 or k == n - 1)          # un mot seul sur une ligne
+                score = (orphelin, words[k - 1]["t"].upper() in MOTS_OUTILS, max(w1, w2))
                 if best is None or score < best[0]:
                     best = (score, k)
             if best is not None:
-                res = (size, [best[1], n - best[1]], best[0][1])
+                res = (size, [best[1], n - best[1]], best[0][2])
                 break
     if res is None:
         res = (52, [n], CAP_W)
@@ -1114,7 +1115,7 @@ def sc_chaise(t):
         k = wipe * (1 - gone)
         ak = k * sstep(t_parce - 0.2, t_parce + 0.3, t)
         txt(cv, "TES ÉLECTRONS", 150, CY - 150, 42, F_DBLACK, CYAN, ak, -1)
-        txt(cv, "CEUX DE LA CHAISE", 150, CY + 165, 42, F_DBLACK, WARM, ak, -1)
+        txt(cv, "CEUX DE LA CHAISE", 150, CY + 135, 42, F_DBLACK, WARM, ak, -1)   # au-dessus des sous-titres sur 2 lignes
         ra = sstep(t_rep - 0.1, t_rep + 0.4, t) * k
         crisp_lines(cv, [[(900, CY - 40), (900, CY - 110)], [(880, CY - 90), (900, CY - 110), (920, CY - 90)],
                          [(900, CY + 40), (900, CY + 110)], [(880, CY + 90), (900, CY + 110), (920, CY + 90)]],
