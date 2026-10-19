@@ -1,0 +1,39 @@
+name: essai-voix-libre
+# Évaluation ponctuelle d'une voix de synthèse libre (Kyutai Pocket TTS, poids CC BY 4.0) pour le moteur
+# vrai-ou-faux : génère un échantillon à partir d'une demande déposée dans demandes/, le dépose dans sorties/.
+on:
+  push:
+    branches: [essai-voix]
+    paths: ["demandes/**"]
+permissions:
+  contents: write
+concurrency:
+  group: essai-voix
+  cancel-in-progress: false
+jobs:
+  generer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installation (PyTorch CPU)
+        run: |
+          python -m pip install --upgrade pip
+          pip install pocket-tts scipy --extra-index-url https://download.pytorch.org/whl/cpu
+      - name: Génération
+        run: |
+          set -e
+          for f in demandes/*.json; do
+            python scripts/generer.py "$f" sorties 2>&1 | tee -a sorties/journal.txt
+            git rm -q "$f"
+          done
+      - name: Dépôt du résultat
+        run: |
+          git config user.name "essai-voix (GitHub Actions)"
+          git config user.email "actions@github.com"
+          git add -A sorties
+          git commit -q -m "essai-voix : échantillons" || exit 0
+          for i in 1 2 3 4; do git push -q origin HEAD:essai-voix && break; git pull -q --rebase origin essai-voix; sleep 3; done
