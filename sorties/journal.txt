@@ -123,3 +123,13 @@ tv_B_suite.mp3 : 23 mots transcrits en 6.8 s
 tv_C_suite_long.mp3 : 64 mots transcrits en 10.2 s
 tv_D_suite_t05.mp3 : 26 mots transcrits en 6.3 s
 tv_E_suite_long_t05.mp3 : 64 mots transcrits en 10.2 s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+modèle french_24l (température 0.4) chargé en 29.7 s
+estelle_tv_1 : 77.7 s d'audio en 106.4 s de calcul
+estelle_tv_2 : 81.2 s d'audio en 78.6 s de calcul
+estelle_tv_3 : 81.8 s d'audio en 77.8 s de calcul
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+whisper medium chargé en 19.7 s
+estelle_tv_1.mp3 : 265 mots transcrits en 64.3 s
+estelle_tv_2.mp3 : 265 mots transcrits en 63.6 s
+estelle_tv_3.mp3 : 265 mots transcrits en 64.7 s
