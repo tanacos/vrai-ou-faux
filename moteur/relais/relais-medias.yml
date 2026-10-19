@@ -1,0 +1,66 @@
+name: relais-medias
+# Relais des médias générés par ElevenLabs (voix, musique, bruitages, images) vers les sessions Claude.
+# Les sessions Claude n'ont pas accès au réseau d'ElevenLabs : ce runner télécharge chaque fichier demandé et le
+# dépose dans cette branche jetable « relais », d'où la session le récupère par git (moteur/relais.py).
+# Déclenché par l'ajout d'une demande dans demandes/ ; n'accepte que les hôtes d'ElevenLabs et de son stockage.
+on:
+  push:
+    branches: [relais]
+    paths: ['demandes/**']
+permissions:
+  contents: write
+concurrency:
+  group: relais-medias
+  cancel-in-progress: false
+jobs:
+  telecharger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: relais
+      - name: Télécharger les médias demandés
+        run: |
+          python3 - <<'PY'
+          import glob, hashlib, json, os, time, urllib.parse, urllib.request
+          HOTES = ("storage.googleapis.com", "elevenlabs.io", "googleusercontent.com")
+          MAX = 95 * 1024 * 1024
+          os.makedirs("medias", exist_ok=True)
+          for f in sorted(glob.glob("demandes/*.json")):
+              d = json.load(open(f, encoding="utf-8"))
+              nom = os.path.basename(d["nom"])
+              out = os.path.join("medias", nom)
+              if not os.path.exists(out):
+                  host = urllib.parse.urlparse(d["url"]).hostname or ""
+                  if not any(host == h or host.endswith("." + h) for h in HOTES):
+                      print("hôte refusé :", host)
+                      open(out + ".erreur", "w").write("hôte refusé : " + host)
+                  else:
+                      data, err = None, ""
+                      for k in range(4):
+                          try:
+                              req = urllib.request.Request(d["url"], headers={"User-Agent": "vrai-ou-faux-relais"})
+                              with urllib.request.urlopen(req, timeout=90) as r:
+                                  data = r.read(MAX + 1)
+                              break
+                          except Exception as e:  # noqa: BLE001
+                              err = str(e)
+                              time.sleep(3 * (k + 1))
+                      if data is None:
+                          open(out + ".erreur", "w").write(err[:500])
+                      elif len(data) > MAX:
+                          open(out + ".erreur", "w").write("fichier trop gros")
+                      else:
+                          open(out, "wb").write(data)
+                          print("téléchargé :", nom, len(data), "octets", hashlib.sha256(data).hexdigest()[:12])
+              os.remove(f)
+          PY
+      - name: Déposer dans la branche
+        run: |
+          git config user.name "relais-medias"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A medias demandes
+          git commit -q -m "relais : médias téléchargés" || exit 0
+          for i in 1 2 3 4; do git push -q origin HEAD:relais && exit 0; git pull -q --rebase origin relais; done
+          exit 1

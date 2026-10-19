@@ -125,3 +125,96 @@ def run(path, ep, audit_bad=None, size_max_mb=200.0):
             "aucun texte superposé à un autre" if not chev else
             "; ".join(f"{k[0]!r} [{k[1]}] t={v_[0]:.2f}" for k, v_ in list(chev.items())[:5]))
     return checks
+
+
+# ------------------------------------------------------------------ contrôles des vidéos narrées (couche voix)
+def synchro_voix(path, voix, t0=0.0, sr=48000):
+    """Décalage (ms) entre la piste voix montée (placée à t0) et la voix entendue dans la vidéo finale : corrélation
+    des enveloppes de la bande 300-3400 Hz (10 ms) sur ± 400 ms. Renvoie (décalage_ms, coefficient de corrélation)."""
+    from scipy import signal
+    a = decode_audio(path)
+    v = np.zeros(len(a))
+    i0 = int(round(t0 * sr))
+    n = max(0, min(len(voix), len(a) - i0))
+    v[i0:i0 + n] = voix[:n]
+    sos = signal.butter(4, (300, 3400), "bandpass", fs=sr, output="sos")
+    hop = sr // 100
+
+    def env(x):
+        y = signal.sosfilt(sos, x)
+        e = np.sqrt(np.convolve(y ** 2, np.ones(hop) / hop, "same")[::hop])
+        e = np.log(e + 1e-4)
+        return (e - e.mean()) / (e.std() + 1e-9)
+    ea, ev = env(a), env(v)
+    m = min(len(ea), len(ev))
+    ea, ev = ea[:m], ev[:m]
+    best, lag = -2.0, 0
+    for k in range(-40, 41):
+        if k >= 0:
+            c = float(np.mean(ea[k:] * ev[:m - k]))
+        else:
+            c = float(np.mean(ea[:m + k] * ev[-k:]))
+        if c > best:
+            best, lag = c, k
+    return lag * 10, best
+
+
+def run_narre(path, duree, nf, audit_bad=None, voix=None, t0=0.0, size_max_mb=200.0, duree_min=61.0):
+    """Contrôles d'une vidéo narrée (formats sans compte à rebours) : mêmes exigences techniques que la série,
+    plus la synchronisation de la voix. duree / nf : durée et nombre d'images prévus."""
+    checks = []
+
+    def add(name, ok, detail):
+        checks.append(dict(controle=name, ok=bool(ok), detail=detail))
+
+    info = ffprobe(path)
+    vs = [s for s in info["streams"] if s["codec_type"] == "video"]
+    as_ = [s for s in info["streams"] if s["codec_type"] == "audio"]
+    if not vs or not as_:
+        add("flux", False, "piste vidéo ou audio absente")
+        return checks
+    v0, a0 = vs[0], as_[0]
+    fr = v0.get("r_frame_rate", "0/1").split("/")
+    fps = float(fr[0]) / float(fr[1])
+    add("format vidéo", v0["codec_name"] == "h264" and v0.get("profile") == "High" and v0["width"] == 1080
+        and v0["height"] == 1920 and v0.get("pix_fmt") == "yuv420p" and abs(fps - 30) < 0.01,
+        f"{v0['codec_name']} {v0.get('profile')} {v0['width']}x{v0['height']} {v0.get('pix_fmt')} {fps:.2f} i/s")
+    add("format audio", a0["codec_name"] == "aac" and int(a0["sample_rate"]) == 48000 and int(a0["channels"]) == 2,
+        f"{a0['codec_name']} {a0['sample_rate']} Hz {a0['channels']} canaux")
+    dur = float(info["format"]["duration"])
+    add("durée", abs(dur - duree) < 0.15 and dur > duree_min, f"{dur:.2f} s (prévu {duree:.2f} s, minimum {duree_min:.0f} s)")
+    mb = float(info["format"]["size"]) / 2 ** 20
+    add("poids", mb < size_max_mb, f"{mb:.1f} Mio")
+    add("lecture immédiate (faststart)", faststart(path), "atome moov en tête de fichier")
+    m = LN.ffmpeg_measure(path)
+    add("sonie intégrée", m["lufs"] is not None and -15.5 <= m["lufs"] <= -13.5, f"{m['lufs']} LUFS (cible -14,5 ± 1)")
+    add("crête vraie", m["true_peak"] is not None and m["true_peak"] <= -1.0, f"{m['true_peak']} dBTP (maximum -1)")
+    v = decode_small(path)
+    add("nombre d'images", abs(len(v) - nf) <= 1, f"{len(v)} images (prévu {nf})")
+    lum = v.mean((1, 2))
+    add("miniature (1re image)", 8.0 < lum[0] < 110.0, f"luminosité moyenne de la 1re image : {lum[0]:.0f}/255")
+    black = np.nonzero(lum < 3.0)[0]
+    add("pas d'image noire", len(black) == 0, f"{len(black)} image(s) noire(s)")
+    d = np.abs(np.diff(v, axis=0)).mean((1, 2))
+    still = d < 0.02
+    run_, best = 0, 0
+    for s in still:
+        run_ = run_ + 1 if s else 0
+        best = max(best, run_)
+    add("pas d'image figée", best < 3 * FPS, f"plus longue séquence immobile : {best / FPS:.2f} s")
+    a = decode_audio(path)
+    sil = np.sqrt(np.convolve(a ** 2, np.ones(4800) / 4800, "valid")[::4800])
+    long_sil = int(np.max(np.convolve((sil < 10 ** (-60 / 20)).astype(int), np.ones(20), "valid"))) if len(sil) > 20 else 0
+    add("pas de silence", long_sil < 20, "aucun trou de 2 s sous -60 dBFS" if long_sil < 20 else "silence de 2 s détecté")
+    if voix is not None:
+        lag, c = synchro_voix(path, voix, t0)
+        add("synchro voix", abs(lag) <= 40 and c > 0.5, f"décalage {lag:+d} ms, corrélation {c:.2f} (voix montée / vidéo)")
+    if audit_bad is not None:
+        zone = {k: v_ for k, v_ in audit_bad.items() if not k[1].startswith("chevauchement")}
+        chev = {k: v_ for k, v_ in audit_bad.items() if k[1].startswith("chevauchement")}
+        add("zones sûres TikTok", len(zone) == 0,
+            "aucun texte hors zone" if not zone else "; ".join(f"{k[0]!r} [{k[1]}] t={v_}" for k, v_ in list(zone.items())[:5]))
+        add("textes sans chevauchement", len(chev) == 0,
+            "aucun texte superposé à un autre" if not chev else
+            "; ".join(f"{k[0]!r} [{k[1]}] t={v_}" for k, v_ in list(chev.items())[:5]))
+    return checks
