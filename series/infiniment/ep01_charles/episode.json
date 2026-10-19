@@ -1,0 +1,148 @@
+{
+  "serie": "INFINIMENT",
+  "numero": 1,
+  "slug": "sucre",
+  "titre": "L'humanité dans un sucre",
+  "narration": "narration_v5.txt",
+  "blocs": [
+    "hook",
+    "descente",
+    "atome",
+    "stade",
+    "masse",
+    "experience",
+    "etoile",
+    "chaise",
+    "outro"
+  ],
+  "voix": {
+    "fournisseur": "Kyutai Pocket TTS (modèle libre, poids CC BY 4.0)",
+    "modele": "pocket-tts french_24l",
+    "nom": "charles (corpus VCTK, CC BY 4.0)",
+    "prise": "voix/charles.mp3",
+    "mots": "voix/charles_mots.json",
+    "horodatage": "faster-whisper medium (transcription indépendante, sans le script)",
+    "tempo": 1.0,
+    "respirations": {
+      "hook": 0.75,
+      "experience": 1.35,
+      "chaise": 1.7
+    },
+    "avance_image_s": 0.3,
+    "licence": "usage commercial autorisé avec attribution : « Voix : Kyutai Pocket TTS (CC BY 4.0), voix VCTK (CC BY 4.0) »"
+  },
+  "sources": [
+    {
+      "affirmation": "Plus de 8 milliards d'humains (8,2 milliards en 2024)",
+      "editeur": "INED (d'après l'ONU, World Population Prospects 2024)",
+      "url": "https://www.ined.fr/fr/tout-savoir-population/memos-demo/focus/2024-les-nations-unies-publient-de-nouvelles-projections-de-population-mondiale",
+      "extrait": "La planète compte 8,2 milliards d'habitants en 2024"
+    },
+    {
+      "affirmation": "Le noyau est environ 100 000 fois plus petit que l'atome",
+      "editeur": "CEA (livret « L'atome »)",
+      "url": "https://www.cea.fr/multimedia/Documents/publications/livrets-thematiques/livret-atome.pdf",
+      "extrait": "Le diamètre du noyau est à peu près 100 000 fois plus petit que celui de l'atome lui-même."
+    },
+    {
+      "affirmation": "Le noyau est environ 100 000 fois plus petit que l'atome ; atome = stade, noyau = moustique ; plus de 99,9 % de la masse dans le noyau",
+      "editeur": "Richard A. Muller, UC Berkeley (Physics for Future Presidents, chap. 4)",
+      "url": "https://muller.lbl.gov/teaching/Physics10/PffP_textbook/PffP-04-radioactivity-5-27.pdf",
+      "extrait": "The nucleus has a radius of about 10-13 cm, which means it is 100,000 times smaller than the atom itself. […] an atom were enlarged until it was the size of a baseball or football stadium (300 m) […] would only be the size of a mosquito (3 mm). […] The nucleus contains more than 99.9% of the mass of the atom."
+    },
+    {
+      "affirmation": "Plus de 99,9 % de la masse de l'atome est dans le noyau",
+      "editeur": "U.S. Department of Energy, Office of Science (DOE Explains… Nuclei)",
+      "url": "https://www.energy.gov/science/doe-explainsnuclei",
+      "extrait": "typically contains more than 99.9% of the mass of the atom. The nucleus makes up much less than .01% of the volume of the atom."
+    },
+    {
+      "affirmation": "Au cœur d'une étoile à neutrons, les neutrons sont tassés jusqu'à deux fois la densité d'un noyau atomique (densité comparable) ; diamètres mesurés d'environ 25 km",
+      "editeur": "NASA Goddard (NICER, 2021)",
+      "url": "https://www.nasa.gov/feature/goddard/2021/nasa-s-nicer-probes-the-squeezability-of-neutron-stars",
+      "extrait": "a sea of mostly neutrons that are eventually packed together at up to twice the density of an atomic nucleus. […] about 1.4 times the Sun's mass and 16 miles (26 kilometers) across."
+    },
+    {
+      "affirmation": "Un morceau de sucre de matière d'étoile à neutrons pèserait environ un milliard de tonnes ; étoile d'environ 20 km",
+      "editeur": "NASA (Imagine the Universe, « Neutron Stars »)",
+      "url": "https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html",
+      "extrait": "One sugar cube of neutron star material would weigh about 1 trillion kilograms (or 1 billion tons) on Earth […] These stellar remnants measure about 20 kilometers (12.5 miles) across."
+    },
+    {
+      "affirmation": "Étoile à neutrons : plus que la masse du Soleil, environ 20 km de diamètre",
+      "editeur": "Encyclopædia Britannica (« Neutron star »)",
+      "url": "https://www.britannica.com/topic/neutron-star",
+      "extrait": "Their masses range between 1.18 and 1.97 times that of the Sun, but most are 1.35 times that of the Sun. […] Neutron stars are typically about 20 km (12 miles) in diameter."
+    },
+    {
+      "affirmation": "Masse de l'humanité : au plus ≈ 0,5 milliard de tonnes (8,2 milliards × 62 kg, masse moyenne d'un adulte)",
+      "editeur": "Walpole et al., BMC Public Health 12:439 (2012)",
+      "url": "https://link.springer.com/article/10.1186/1471-2458-12-439",
+      "extrait": "In 2005, global adult human biomass was approximately 287 million tonnes […] Average body mass globally was 62 kg."
+    },
+    {
+      "affirmation": "On ne traverse pas la chaise : répulsion électrique entre électrons et principe d'exclusion de Pauli",
+      "editeur": "Live Science (L. G. Capella, 25 août 2025)",
+      "url": "https://livescience.com/physics-mathematics/why-cant-we-walk-through-walls-if-atoms-are-mostly-empty-space",
+      "extrait": "the atoms in my body are going to see the [ones] in the wall, and they are going to repel each other […] That is called electromagnetic repulsion […] certain particles, called fermions, can't share the same energy state or be in the same place at the same time."
+    },
+    {
+      "affirmation": "Rôle de la répulsion coulombienne et de l'exclusion de Pauli ; « toucher » n'a pas de sens strict à l'échelle quantique",
+      "editeur": "University of Illinois, Physics Van (« Can Objects Touch? »)",
+      "url": "https://van.physics.illinois.edu/ask/listing/20935",
+      "extrait": "I'm not sure that in a modern quantum picture, the old \"touch\" question is even meaningful anymore. […] Coulomb (electrical) force does play a major role. […] only two electrons, not more, can share the same spatial pattern."
+    },
+    {
+      "affirmation": "Un morceau de sucre de matière d'étoile à neutrons pèserait autant que toute l'humanité",
+      "editeur": "NASA (Astronomy Picture of the Day, glossaire « Neutron Star »)",
+      "url": "https://apod.nasa.gov/apod/lib/ns.html",
+      "extrait": "A sugarcube of neutron-star stuff on Earth would weigh as much as all of humanity!"
+    },
+    {
+      "affirmation": "Au contact, les nuages d'électrons se recouvrent et se repoussent ; aucune particule ne « touche » l'autre",
+      "editeur": "University of Warwick (Physics outreach)",
+      "url": "https://warwick.ac.uk/fac/sci/physics/outreach/journalclub/weeksevenanswers",
+      "extrait": "the electron clouds overlap and repel. No subatomic particles make contact with any others."
+    }
+  ],
+  "calcul": "Masse de l'humanité ≤ 8,2 milliards × 62 kg ≈ 0,51 milliard de tonnes (majorant : 62 kg est la masse moyenne d'un adulte en 2005, les enfants pèsent moins). Tassée à la densité d'un noyau (≈ 2,3 × 10^17 kg/m³), elle occuperait ≈ 2,2 cm³ ; un morceau de sucre n° 4 (5 à 6 g de saccharose poreux) fait au moins 3 cm³. Recoupements : un sucre de matière d'étoile à neutrons ≈ 1 milliard de tonnes (NASA) ; « pèserait autant que toute l'humanité » (NASA APOD). Marge : un facteur 1,5 à 2, ce qui reste un ordre de grandeur.",
+  "publication": {
+    "titre": "L'humanité tiendrait dans un sucre",
+    "legende": "Toute l'humanité tiendrait dans un morceau de sucre. Et c'est un vrai calcul de physique. INFINIMENT, épisode 1 : de l'infiniment petit à l'infiniment grand.\nLe calcul : 8,2 milliards d'humains × 62 kg (masse moyenne d'un adulte, donc un maximum : les enfants pèsent moins) ≈ 0,5 milliard de tonnes ; un sucre de matière d'étoile à neutrons pèserait ≈ 1 milliard de tonnes (NASA).\nSources : CEA, U.S. Department of Energy, R. Muller (UC Berkeley), NASA (Imagine the Universe, NICER, APOD), Britannica, INED/ONU, Walpole et al. (BMC Public Health, 2012), Live Science, universités de l'Illinois et de Warwick.\nVoix de synthèse : Kyutai Pocket TTS (CC BY 4.0), voix issue du corpus VCTK (CC BY 4.0)\n#infiniment #science #physique #atome #espace #culturegenerale #apprendresurtiktok",
+    "hashtags": [
+      "#infiniment",
+      "#science",
+      "#physique",
+      "#atome",
+      "#espace",
+      "#culturegenerale",
+      "#apprendresurtiktok"
+    ],
+    "contenu_ia": true
+  },
+  "prochain": "Le bord de l'univers observable",
+  "verification": {
+    "date": "2026-10-19",
+    "methode": "contre-vérification indépendante (agent sans accès à la recherche)",
+    "resultat": "aucun écart bloquant ; 3 à corriger, 8 mineurs",
+    "corrige_dans_la_video": [
+      "« LA PHYSIQUE EST FORMELLE » -> « UN VRAI CALCUL DE PHYSIQUE »",
+      "densité : « UNE DENSITÉ D'ÉTOILE À NEUTRONS » à l'écran",
+      "phrase finale sur la chaise retirée de la voix et de l'écran",
+      "≈ 100 000 ×, ≤ 0,5 milliard de t, 1 sucre d'étoile à neutrons, compteur ≈ 8,2 milliards",
+      "titre au conditionnel, légende, sources NICER / APOD / Warwick",
+      "proportions des cubes : à la même densité, l'humanité occupe environ la moitié à deux tiers d'un sucre (2,2 cm³ pour 3,2 à 4,8 cm³), dessinée à ≈ 48 % ; la v1 la montrait à ≈ 4 % (11 à 16 fois trop petite)",
+      "cubes remontés : un sous-titre sur deux lignes ne les touche plus"
+    ],
+    "reste_dans_la_voix": [
+      "« aussi dense que le cœur d'une étoile à neutrons » (cœur jusqu'à 2 fois plus dense)",
+      "« pèse un milliard de tonnes » (NASA : « environ », pour de la matière d'étoile à neutrons)",
+      "« bien moins que ça » (au moins 2 fois moins)",
+      "« cent mille fois » (environ)",
+      "« Tout autour… rien » (presque rien)",
+      "« occuper la même place » (le même état)"
+    ],
+    "a_regenerer": "narration_v5.txt corrige tout ce qui reste dans la voix (prochaine prise, offre payante)"
+  },
+  "variante": "ép. 1 avec voix libre (Pocket TTS, voix charles) et narration v5 corrigée ; essai du 19/10/2026"
+}

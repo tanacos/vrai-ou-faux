@@ -91,7 +91,8 @@ def charger_mots_scribe(path):
         if dans_balise:
             dans_balise = not t.endswith("]")
             continue
-        if t in ("?", "!", ":", ";", "%", "…") and out:
+        if (t in ("?", "!", ":", ";", "%", "…") or t[0] in "'’") and out:
+            # ponctuation isolée, ou élision coupée par la transcription (Whisper : « l » + « 'humanité »)
             out[-1]["text"] += t
             out[-1]["end"] = max(out[-1]["end"], float(w["end"]))
             continue
