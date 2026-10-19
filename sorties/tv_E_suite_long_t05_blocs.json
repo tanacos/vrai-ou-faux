@@ -1,0 +1,18 @@
+{
+ "voix": "estelle",
+ "options": {
+  "voix": "estelle",
+  "suite": true,
+  "max_tokens": 120,
+  "temperature": 0.5
+ },
+ "sr": 24000,
+ "blocs": [
+  {
+   "bloc": "tout",
+   "debut": 0.0,
+   "fin": 15.68,
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit. Pour comprendre, il faut descendre : plus bas que ta peau, plus bas que tes cellules, plus bas que ton A-D-N, jusqu'aux atomes dont tu es fait. Et là, première surprise : un atome, c'est presque entièrement du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+  }
+ ]
+}

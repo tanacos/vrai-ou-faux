@@ -1,0 +1,28 @@
+{
+ "voix": "estelle",
+ "options": {
+  "voix": "estelle",
+  "silence_entre_blocs": 0.45
+ },
+ "sr": 24000,
+ "blocs": [
+  {
+   "bloc": 0,
+   "debut": 0.0,
+   "fin": 6.56,
+   "texte": "Toute l'humanité, plus de huit milliards de personnes, pourrait tenir dans un morceau de sucre. Et c'est la physique qui le dit."
+  },
+  {
+   "bloc": 1,
+   "debut": 7.01,
+   "fin": 15.25,
+   "texte": "Pour comprendre, il faut descendre : plus bas que ta peau, plus bas que tes cellules, plus bas que ton A-D-N, jusqu'aux atomes dont tu es fait."
+  },
+  {
+   "bloc": 2,
+   "debut": 15.7,
+   "fin": 23.06,
+   "texte": "Et là, première surprise : un atome, c'est presque entièrement du vide. Au centre, un noyau environ cent mille fois plus petit que l'atome."
+  }
+ ]
+}

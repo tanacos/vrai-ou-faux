@@ -108,3 +108,18 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 whisper medium chargé en 12.5 s
 infiniment_v5_charles.mp3 : 274 mots transcrits en 64.8 s
 infiniment_v5_george.mp3 : 263 mots transcrits en 70.9 s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+modèle french_24l (température 0.3) chargé en 7.1 s
+tv_A_base : 23.5 s d'audio en 32.4 s de calcul
+tv_B_suite : 7.9 s d'audio en 9.8 s de calcul
+tv_C_suite_long : 16.2 s d'audio en 18.2 s de calcul
+modèle french_24l (température 0.5) chargé en 1.2 s
+tv_D_suite_t05 : 7.4 s d'audio en 10.4 s de calcul
+tv_E_suite_long_t05 : 15.7 s d'audio en 17.8 s de calcul
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+whisper medium chargé en 13.9 s
+tv_A_base.mp3 : 75 mots transcrits en 11.8 s
+tv_B_suite.mp3 : 23 mots transcrits en 6.8 s
+tv_C_suite_long.mp3 : 64 mots transcrits en 10.2 s
+tv_D_suite_t05.mp3 : 26 mots transcrits en 6.3 s
+tv_E_suite_long_t05.mp3 : 64 mots transcrits en 10.2 s
