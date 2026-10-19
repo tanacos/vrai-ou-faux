@@ -6,14 +6,17 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 4 — le sommeil** : idée 1 imposée « On avale 8 araignées par an en dormant. » (faux présumé).
-  Autres pistes : « Réveiller un somnambule est dangereux » (nuance), « On ne rêve qu'en noir et blanc » (faux),
-  « Le fromage le soir donne des cauchemars » (faux présumé), « Les ados ont besoin de se coucher plus tard »
-  (vrai présumé : décalage de l'horloge biologique).
+- **Épisode 5 — les animaux** : idée 1 imposée « Le poisson rouge a une mémoire de 3 secondes. » (faux présumé ;
+  pistes de sources : BBC Discover Wildlife, The Naked Scientists). Voir les autres pistes « Les animaux » ci-dessous.
+
+## Déjà traité (épisode 4, le sommeil)
+
+- ~~8 araignées par an~~ (FAUX), ~~dauphins et œil ouvert~~ (VRAI), ~~horloge décalée des ados~~ (VRAI),
+  ~~rêver en noir et blanc~~ (FAUX). Restent possibles : somnambule (nuance), fromage et cauchemars (sources faibles).
 
 ## Thèmes en réserve
 
-- **Les animaux** : poisson rouge et mémoire de 3 secondes (faux) ; chauves-souris aveugles (faux) ; autruche qui
+- **Les animaux** : ~~poisson rouge et mémoire de 3 secondes~~ (annoncé pour l'épisode 5) ; chauves-souris aveugles (faux) ; autruche qui
   cache sa tête dans le sable (faux) ; la pieuvre a trois cœurs (vrai) ; flamants roses à cause de leur nourriture
   (vrai) ; le rouge rend les taureaux furieux (faux).
 - **Le corps humain** : on perd la plupart de sa chaleur par la tête (faux) ; ongles et cheveux poussent après la

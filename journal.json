@@ -155,8 +155,12 @@
     }
    ],
    "prochain": "« Le poisson rouge a une mémoire de 3 secondes. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/56e41a49b657c9d75b0d00c56c0431fe7b4c37e1/vrai_ou_faux_04_sommeil.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/56e41a49b657c9d75b0d00c56c0431fe7b4c37e1/vrai_ou_faux_04_sommeil.mp4",
+   "publication": "2026-10-21T18:00:00+02:00",
+   "metricool_id": "399628161",
+   "metricool_uuid": "-2960338805566193440",
+   "fabrication": "moteur générique, 15/15 contrôles conformes ; contre-vérification : tour 1 = 1 écart (œil ouvert, source ajoutée), tour 2 = 1 écart (15 jours de vigilance : panneau retiré)"
   }
  ]
 }
