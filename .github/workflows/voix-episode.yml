@@ -37,9 +37,11 @@ jobs:
           cat "$RUNNER_TEMP/a_faire.txt"
           for d in $(cat "$RUNNER_TEMP/a_faire.txt"); do
             [ -f "$d/episode.json" ] || continue
-            rm -rf "$d/voix"
-            echo "=== $d"
-            /usr/bin/time -v python "$RUNNER_TEMP/src/moteur/voix_libre.py" generer "$d" > "$d/journal.txt" 2>&1 || echo "code de sortie $?" >> "$d/journal.txt"
+            ARGS=""
+            [ -f "$d/args.txt" ] && ARGS="$(cat "$d/args.txt")"
+            case "$ARGS" in *--refaire*) ;; *) rm -rf "$d/voix" ;; esac
+            echo "=== $d $ARGS"
+            /usr/bin/time -v python "$RUNNER_TEMP/src/moteur/voix_libre.py" generer "$d" $ARGS > "$d/journal.txt" 2>&1 || echo "code de sortie $?" >> "$d/journal.txt"
             grep -v -E "^\s+(Command|User|System|Percent|Average|Exit|Socket|Signals|Swaps|File system|Page size|Voluntary|Involuntary|Minor|Major)" "$d/journal.txt" | tail -40
           done
       - name: Dépôt du résultat
