@@ -1,0 +1,236 @@
+{
+ "numero": 4,
+ "slug": "sommeil",
+ "theme": "le sommeil",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LE SOMMEIL"
+ ],
+ "fond": "nuit",
+ "ambiance": "nature",
+ "idees": [
+  {
+   "affirmation": "« On avale 8 araignées par an en dormant. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:hanging-spider",
+    "satellites": [
+     "gi:night-sleep"
+    ],
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "texte": "Pour une araignée, un dormeur n'est pas une proie : c'est comme un gros rocher.",
+     "sous_texte": "Elle n'a aucune raison de s'en approcher.",
+     "voix": "Pour une araignée, un dormeur n'est pas une proie : c'est un gros rocher."
+    },
+    {
+     "type": "texte",
+     "titre": "Et surtout…",
+     "texte": "Ton cœur, ta respiration et tes ronflements la font fuir.",
+     "sous_texte": "Elle sent très bien les vibrations.",
+     "voix": "Ton cœur, ta respiration et tes ronflements la font fuir."
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "En avaler une, ce n'est pas impossible… mais ce serait un pur hasard.",
+     "sous_texte": "Pas une habitude de « 8 par an ».",
+     "voix": "En avaler une, ce n'est pas impossible… mais ce serait un pur hasard."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Scientific American",
+     "titre": "Do People Really Swallow 8 Spiders a Year While They Sleep?",
+     "url": "https://www.scientificamerican.com/article/fact-or-fiction-people-swallow-8-spiders-a-year-while-they-sleep1/",
+     "extrait": "Luckily for all of us, the “fact” that people swallow eight spiders in their sleep yearly isn’t true. […] it would be a strictly random event. […] Spiders regard us much like they’d regard a big rock. […] A sleeping person is not something a spider would willingly approach."
+    },
+    {
+     "editeur": "The Naked Scientists",
+     "titre": "Mythconception: you eat 8 spiders every year",
+     "url": "https://www.thenakedscientists.com/node/190173",
+     "extrait": "spiders are more likely to run away from a sleeping human than start exploring us. […] They’re scared off by vibrations, produced by our heartbeats, breathing and especially snoring […] So although we probably do eat the odd spider during a lifetime, it’s impossible to know for sure, or how many."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Les dauphins dorment avec un œil ouvert. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:dolphin",
+    "satellites": [
+     "pi:eye",
+     "pi:eye-closed"
+    ],
+    "marque": "coche",
+    "fond": "ocean"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "texte": "Le dauphin endort une seule moitié de son cerveau à la fois.",
+     "sous_texte": "L'œil du côté opposé se ferme, l'autre reste ouvert.",
+     "voix": "Le dauphin endort une seule moitié de son cerveau à la fois."
+    },
+    {
+     "type": "texte",
+     "titre": "Pourquoi ?",
+     "texte": "Il ne respire pas en automatique : il commande chaque respiration.",
+     "sous_texte": "La moitié éveillée le fait remonter à la surface.",
+     "voix": "Pourquoi ? Il ne respire pas en automatique : il doit commander chaque respiration."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Scientific American",
+     "titre": "How do Whales and Dolphins Sleep Without Drowning?",
+     "url": "https://www.scientificamerican.com/article/how-do-whales-and-dolphin/",
+     "extrait": "While sleeping, the bottlenose dolphin shuts down only half of its brain, along with the opposite eye. […] The other half of the brain stays awake at a low level of alertness. […] must keep part of the brain alert to trigger each breath"
+    },
+    {
+     "editeur": "Scientific American (Gian Gastone Mascetti, juin 2019)",
+     "titre": "Meet the Animals That Literally Sleep with One Eye Open",
+     "url": "https://www.scientificamerican.com/article/meet-the-animals-that-literally-sleep-with-one-eye-open/",
+     "extrait": "the animal's one open eye, linked to the contralateral awake hemisphere of the brain, […] allows a dolphin to monitor for predators and swim in unison with its companions […] one hemisphere of the animals' brain was in a state of slow-wave sleep, while the other was awake."
+    },
+    {
+     "editeur": "University of Texas Marine Science Institute",
+     "titre": "Sleeping Dolphins (Science and the Sea)",
+     "url": "https://utmsi.utexas.edu/science-and-the-sea/radio-program/sleeping-dolphins/",
+     "extrait": "So they sleep with half a brain at a time. One side of the brain goes to sleep, with the eye on the opposite side of the head closed. […] know when it's time to head to the surface for a breath. […] they consciously control each breath, even while they sleep."
+    },
+    {
+     "editeur": "Smithsonian Magazine",
+     "titre": "Dolphins Sleep With Only Half Their Brain at a Time (19 octobre 2012)",
+     "url": "https://www.smithsonianmag.com/smart-news/dolphins-sleep-with-only-half-their-brain-at-a-time-81426439/",
+     "extrait": "Dolphins sleep with only half of their brains at a time."
+    }
+   ]
+  },
+  {
+   "affirmation": "« À l'adolescence, l'horloge du sommeil se décale. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:alarm-clock",
+    "satellites": [
+     "pi:moon-stars"
+    ],
+    "marque": "coche",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "chiffre",
+     "titre": "À la puberté, l'horloge interne se décale d'environ",
+     "valeur": 2,
+     "suffixe": " h",
+     "legende": "On s'endort plus tard… et on se réveille plus tard.",
+     "voix": "À la puberté, l'horloge interne se décale d'environ deux heures."
+    },
+    {
+     "type": "texte",
+     "titre": "Pourquoi ?",
+     "texte": "La mélatonine, qui prépare le corps au sommeil, est libérée plus tard le soir.",
+     "sous_texte": "Et elle s'arrête plus tard le matin.",
+     "voix": "La mélatonine, qui prépare au sommeil, est libérée plus tard le soir."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "American Thoracic Society",
+     "titre": "Healthy Sleep In Teens (Patient Education | Information Series)",
+     "url": "https://member.thoracic.org/patients/patient-resources/resources/healthy-sleep-in-teens.pdf",
+     "extrait": "During puberty, this clock shifts by about two hours […] During puberty, melatonin is released later in the night. […] turns off later in the morning"
+    },
+    {
+     "editeur": "Santé.fr (Réseau Morphée)",
+     "titre": "Le sommeil de l'adolescent",
+     "url": "https://www.sante.fr/node/1409399",
+     "extrait": "l’horloge interne de l’adolescent a tendance à se décaler avec un endormissement et un réveil plus tardifs. […] Lorsque la luminosité baisse, donc en fin de journée, la mélatonine commence à être libérée et prépare le corps au sommeil."
+    }
+   ]
+  },
+  {
+   "affirmation": "« On ne rêve qu'en noir et blanc. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "duel",
+    "fond": "aurore",
+    "gauche": {
+     "icone": "pi:television",
+     "libelle": "Noir et blanc"
+    },
+    "droite": {
+     "icone": "pi:rainbow",
+     "libelle": "Couleur"
+    },
+    "signe": "vs",
+    "gagnant": "droite"
+   },
+   "panneaux": [
+    {
+     "type": "chiffre",
+     "titre": "Chez les jeunes adultes, rêver en noir et blanc concerne",
+     "prefixe": "moins de ",
+     "valeur": 5,
+     "suffixe": " %",
+     "legende": "Université de Dundee, 2008",
+     "voix": "Chez les jeunes adultes, moins de 5 % rêvent en noir et blanc."
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "Ça arrive plus souvent à ceux qui ont grandi avec la télé en noir et blanc.",
+     "voix": "C'est plus fréquent chez ceux qui ont grandi avec la télé en noir et blanc."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "The Naked Scientists",
+     "titre": "Colourful dreaming (19 octobre 2008)",
+     "url": "https://www.thenakedscientists.com/node/172520",
+     "extrait": "In the younger age group less than 5% of people dreamed in black and white […] That's low compared to 25% of the older age group who had not seen a colour TV as a child, and who still dream in black and white."
+    },
+    {
+     "editeur": "British Psychological Society (Research Digest)",
+     "titre": "Older people have more black and white dreams",
+     "url": "https://bps.org.uk/research-digest/older-people-have-more-black-and-white-dreams",
+     "extrait": "than the younger participants (22 per cent vs. 4 per cent)."
+    },
+    {
+     "editeur": "Consciousness and Cognition (Murzyn, Université de Dundee, 2008), résumé PubMed",
+     "titre": "Do we only dream in colour? A comparison of reported dream colour in younger and older adults with different experiences of black and white media",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/18845457/",
+     "extrait": "people who had access to black and white media before colour media experienced more greyscale dreams"
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "Scientific American · Naked Scientists · Smithsonian · Univ. du Texas · American Thoracic Society · Santé.fr · Univ. de Dundee · BPS",
+ "prochain": {
+  "affirmation": "« Le poisson rouge a une mémoire de 3 secondes. »"
+ },
+ "publication": {
+  "legende": "Vrai ou faux ? 😴 4 idées reçues sur le sommeil. Compte tes bonnes réponses et dis ton score en commentaire 👇\nSources : Scientific American, The Naked Scientists, Smithsonian, University of Texas Marine Science Institute, American Thoracic Society, Santé.fr, Université de Dundee (2008), British Psychological Society\n#vraioufaux #sommeil #reves #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#sommeil",
+   "#reves",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ },
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur le sommeil. Compte tes bonnes réponses !",
+ "voix_prochain": "Prochain épisode : le poisson rouge a une mémoire de trois secondes. Vrai ou faux ?",
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ }
+}

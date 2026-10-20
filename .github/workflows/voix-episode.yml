@@ -1,0 +1,47 @@
+name: voix-episode
+# Essai du script de production moteur/voix_libre.py (branche voix-elevenlabs) sur un épisode déposé dans
+# episodes_voix/<nom>/episode.json : prise Kyutai TTS 1.6B (voix Estelle) vérifiée bloc par bloc, rendue dans le même
+# dossier (voix/prise.mp3, voix/prise_mots.json, journal.txt). Usage : essais du moteur seulement.
+on:
+  push:
+    branches: [essai-voix]
+    paths: ["episodes_voix/**/episode.json"]
+permissions:
+  contents: write
+jobs:
+  voix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installation (PyTorch CPU, Kyutai, Whisper, ffmpeg)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          python -m pip install -q --upgrade pip
+          /usr/bin/time -v pip install -q "moshi==0.2.11" sphn faster-whisper scipy --extra-index-url https://download.pytorch.org/whl/cpu 2>&1 | grep -E "Elapsed|Maximum resident" || true
+      - name: Moteur de la branche voix-elevenlabs
+        run: |
+          git fetch -q --depth 1 origin voix-elevenlabs
+          mkdir -p "$RUNNER_TEMP/src" && git archive FETCH_HEAD moteur | tar -x -C "$RUNNER_TEMP/src"
+          git log -1 --format="moteur : %h %s" FETCH_HEAD
+          python "$RUNNER_TEMP/src/moteur/voix_libre.py" diagnostic || true
+      - name: Génération
+        run: |
+          for d in episodes_voix/*/; do
+            [ -f "$d/episode.json" ] || continue
+            [ -f "$d/voix/prise.mp3" ] && continue
+            echo "=== $d"
+            /usr/bin/time -v python "$RUNNER_TEMP/src/moteur/voix_libre.py" generer "$d" > "$d/journal.txt" 2>&1 || echo "code de sortie $?" >> "$d/journal.txt"
+            grep -v -E "^\s+(Command|User|System|Percent|Average|Exit|Socket|Signals|Swaps|File system|Page size|Voluntary|Involuntary|Minor|Major)" "$d/journal.txt" | tail -40
+          done
+      - name: Dépôt du résultat
+        if: always()
+        run: |
+          git config user.name "voix-episode (GitHub Actions)"
+          git config user.email "actions@github.com"
+          git add -A episodes_voix
+          git commit -q -m "voix-episode : prises" || exit 0
+          for i in 1 2 3 4 5; do git push -q origin HEAD:essai-voix && break; git pull -q --rebase origin essai-voix; sleep 5; done
