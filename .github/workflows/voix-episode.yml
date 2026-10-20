@@ -14,6 +14,8 @@ jobs:
     timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -30,9 +32,12 @@ jobs:
           python "$RUNNER_TEMP/src/moteur/voix_libre.py" diagnostic || true
       - name: Génération
         run: |
-          for d in episodes_voix/*/; do
+          # seulement les épisodes déposés ou modifiés par ce push (deux essais lancés coup sur coup ne se gênent pas)
+          git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- episodes_voix | grep "/episode.json$" | xargs -r -n1 dirname | sort -u > "$RUNNER_TEMP/a_faire.txt" || true
+          cat "$RUNNER_TEMP/a_faire.txt"
+          for d in $(cat "$RUNNER_TEMP/a_faire.txt"); do
             [ -f "$d/episode.json" ] || continue
-            [ -f "$d/voix/prise.mp3" ] && continue
+            rm -rf "$d/voix"
             echo "=== $d"
             /usr/bin/time -v python "$RUNNER_TEMP/src/moteur/voix_libre.py" generer "$d" > "$d/journal.txt" 2>&1 || echo "code de sortie $?" >> "$d/journal.txt"
             grep -v -E "^\s+(Command|User|System|Percent|Average|Exit|Socket|Signals|Swaps|File system|Page size|Voluntary|Involuntary|Minor|Major)" "$d/journal.txt" | tail -40
