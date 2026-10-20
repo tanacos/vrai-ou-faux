@@ -107,18 +107,19 @@ Voix « Estelle » (Kyutai TTS 1.6B, modèle libre, usage commercial autorisé a
    ```bash
    cd /home/claude/vrai-ou-faux && python3 moteur/voix_libre.py diagnostic
    ```
-   Si `"ok": false`, installe (`pip install --break-system-packages "moshi==0.2.11" sphn faster-whisper
-   --extra-index-url https://download.pytorch.org/whl/cpu` ; `apt-get install -y ffmpeg` si absent) et relance le
-   diagnostic. S'il reste négatif (PyPI, download.pytorch.org ou Hugging Face refusés par l'environnement) :
-   épisode **sans voix**, rapport : « voix non faite : l'environnement de la tâche bloque … (voir moteur/VOIX.md) ».
-2. Génération en arrière-plan (20 à 40 min), surveillée par une seule commande toutes les 8 minutes :
+   Si `"ok": false` : `python3 moteur/voix_libre.py installer` (paquets PyPI + index CPU de PyTorch, ffmpeg ; 2 à
+   5 min), qui refait le diagnostic. S'il reste négatif (PyPI, download.pytorch.org ou Hugging Face refusés par
+   l'environnement) : épisode **sans voix**, rapport : « voix non faite : l'environnement de la tâche bloque … (voir
+   moteur/VOIX.md) ».
+2. Génération en arrière-plan (20 à 45 min), surveillée par une seule commande toutes les 8 minutes :
    ```bash
    mkdir -p /tmp/epNNN && setsid nohup python3 moteur/voix_libre.py generer episodes/NNN-slug --declarer \
      > /tmp/epNNN/voix.log 2>&1 < /dev/null & disown
    sleep 480; tail -3 /tmp/epNNN/voix.log
    ```
-   Code de sortie 0 exigé (chaque phrase relue par une transcription indépendante) : le champ `voix` est alors écrit
-   dans `episode.json`. Sinon : épisode sans voix (supprime `voix/` et ne déclare rien).
+   Exigé : une dernière ligne avec `"tout_verifie": true` et `"declare": true` (chaque phrase relue par une
+   transcription indépendante) ; le champ `voix` est alors écrit dans `episode.json`. Sinon (paragraphe non vérifié,
+   processus disparu sans cette ligne, plus de 60 min) : épisode sans voix (supprime `voix/` et ne déclare rien).
 3. Contrôle de la prise : `cd moteur && python3 -m vf.voix verifier ../episodes/NNN-slug/episode.json` →
    `"ok": true` exigé ; sinon retire le champ `voix` (épisode sans voix).
 4. Refais `valider` et `apercu` (la chronologie s'allonge pour laisser chaque phrase se finir ; jusqu'à 96 s avec

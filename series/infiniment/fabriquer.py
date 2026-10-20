@@ -250,6 +250,22 @@ if __name__ == "__main__":
     if cmd == "provisoire":
         from rp import provisoire as PV
         PV.main(ep)
+    elif cmd == "valider" and sur_mesure(ep, "rendu.py"):
+        # épisode fait sur mesure (ép. 1) : ses scènes sont dans son rendu.py, pas dans episode.json ; on vérifie
+        # ce qui reste vérifiable ici (chronologie réelle, durée, alignement de la voix)
+        ch = json.load(open(os.path.join(ep, "chrono.json"), encoding="utf-8"))
+        err = []
+        if ch.get("provisoire"):
+            err.append("chronologie provisoire : lancer « fabriquer.py voix » d'abord")
+        if not 61 <= float(ch.get("duree", 0)) <= 96:
+            err.append(f"durée {ch.get('duree')} s hors de 61 à 96 s")
+        if float(ch.get("taux_alignement", 0)) < 0.9:
+            err.append(f"alignement de la voix {ch.get('taux_alignement')} < 0,90")
+        r = dict(ok=not err, erreurs=err, avertissements=["épisode sur mesure : scènes contrôlées par l'aperçu et "
+                                                          "l'audit des zones sûres, pas par ce validateur"],
+                 duree=ch.get("duree"), scenes=len(conf(ep).get("blocs", [])))
+        print(json.dumps(r, ensure_ascii=False, indent=1))
+        sys.exit(0 if r["ok"] else 2)
     elif cmd == "valider":
         from rp import rendu as RG
         RG.setup(os.path.join(ep, "chrono.json"), os.path.join(ep, "episode.json"))

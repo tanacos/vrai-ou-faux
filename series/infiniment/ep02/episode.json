@@ -36,7 +36,7 @@
     {
      "quand": "46",
      "lignes": [
-      "46 MILLIARDS",
+      "≈ 46 MILLIARDS",
       "D'*ANNÉES-LUMIÈRE*"
      ]
     },
@@ -63,7 +63,7 @@
     {
      "quand": "46",
      "rayon": 46,
-     "texte": "46 MILLIARDS D'AL",
+     "texte": "≈ 46 MILLIARDS D'AL",
      "couleur": "ambre"
     },
     {
@@ -111,8 +111,8 @@
       "couleur": "corail"
      },
      "titre": [
-      "L'ÉTOILE LA",
-      "PLUS *PROCHE*"
+      "L'ÉTOILE LA PLUS",
+      "PROCHE DU *SOLEIL*"
      ],
      "info": "SA LUMIÈRE : PLUS DE 4 ANS",
      "expo": 16.6
@@ -186,12 +186,13 @@
      "quand": "vieille",
      "lignes": [
       "LA PLUS VIEILLE",
-      "*LUMIÈRE*"
+      "LUMIÈRE *VISIBLE*"
      ]
     }
    ],
    "objet": {
-    "type": "cmb"
+    "type": "cmb",
+    "mention": "ILLUSTRATION"
    },
    "objet_quand": "vieille",
    "chiffres": [
@@ -375,7 +376,7 @@
   {
    "editeur": "Encyclopædia Britannica",
    "titre": "Observable universe",
-   "url": "https://www.britannica.com/science/observable-universe",
+   "url": "https://www.britannica.com/topic/observable-universe",
    "extraits": [
     "The observable universe is approximately 93 billion light-years in diameter.",
     "The estimated age of the universe since the big bang is 13.8 billion years.",
@@ -404,6 +405,16 @@
     "the Universe as it was about 380 000 years after the Big Bang"
    ],
    "sert_a": "13,8 milliards d'années ; lumière émise ≈ 380 000 ans après le Big Bang"
+  },
+  {
+   "editeur": "ESA",
+   "titre": "Cosmic Microwave Background (CMB) radiation",
+   "url": "https://esa.int/Science_Exploration/Space_Science/Cosmic_Microwave_Background_CMB_radiation",
+   "extraits": [
+    "The CMB is the farthest and oldest light any telescope can detect.",
+    "It is impossible to see further beyond the time of its release because then the Universe was completely 'opaque'."
+   ],
+   "sert_a": "« la plus vieille lumière qu'on puisse voir », « libérée » (avant, l'univers était opaque) ; la valeur 380 000 ans vient de l'ESA (Planck) et de la NASA (WMAP), cette page donnant un arrondi plus ancien (« about 300 000 years »)"
   },
   {
    "editeur": "NASA (Goddard)",
@@ -493,11 +504,11 @@
    "sert_a": "taille de la Terre (règle : 10⁷ m)"
   }
  ],
- "calcul": "46 / 13,8 ≈ 3,3 : « plus de trois fois ». En 13,8 milliards d'années, la lumière parcourt 13,8 milliards d'années-lumière (définition de l'année-lumière, NASA) : c'est la « distance parcourue par la lumière depuis le Big Bang » ; le bord est aujourd'hui à ≈ 46 milliards d'années-lumière (Britannica : 93 de diamètre ; Astronomy : rayon ≈ 46) parce que l'espace a grandi pendant le trajet. Voie lactée ≈ 100 000 années-lumière de large, donc ≈ 100 000 ans de trajet pour la lumière (définition). Andromède à 2,5 millions d'années-lumière, donc vue telle qu'il y a ≈ 2,5 millions d'années. La plus vieille lumière, émise ≈ 380 000 ans après le Big Bang, voyage depuis 13,8 milliards d'années moins 380 000 ans : « presque 13,8 milliards ». Règle des puissances de dix (ordre de grandeur, en mètres) : Terre 1,3 × 10⁷ ; Terre-Soleil 1,5 × 10¹¹ ; Proxima 4,2 × 9,46 × 10¹⁵ ≈ 4,0 × 10¹⁶ ; Voie lactée 10⁵ × 9,46 × 10¹⁵ ≈ 9,5 × 10²⁰ ; Andromède 2,5 × 10⁶ × 9,46 × 10¹⁵ ≈ 2,4 × 10²² ; univers observable (rayon) 46 × 10⁹ × 9,46 × 10¹⁵ ≈ 4,4 × 10²⁶ (affiché 10²⁷ : puissance de dix la plus proche).",
- "images": "Les deux anneaux de l'ouverture sont à l'échelle (rayons 13,8 et 46). L'élastique est une image de l'expansion (étirement ×4, chemin parcouru et distance finale à l'échelle de ce modèle), pas un calcul cosmologique. Proxima du Centaure est une naine rouge (couleur corail). Le fond diffus est une carte marbrée illustrative (bleu froid, orange chaud), pas la vraie carte de Planck.",
+ "calcul": "46 / 13,8 ≈ 3,3 : « plus de trois fois ». En 13,8 milliards d'années, la lumière parcourt 13,8 milliards d'années-lumière (définition de l'année-lumière, NASA) : c'est la « distance parcourue par la lumière depuis le Big Bang » ; le bord est aujourd'hui à ≈ 46 milliards d'années-lumière (Britannica : 93 de diamètre ; Astronomy : rayon ≈ 46) parce que l'espace a grandi pendant le trajet. Voie lactée ≈ 100 000 années-lumière de large, donc ≈ 100 000 ans de trajet pour la lumière (définition). Andromède à 2,5 millions d'années-lumière, donc vue telle qu'il y a ≈ 2,5 millions d'années. La plus vieille lumière qu'on puisse voir, libérée ≈ 380 000 ans après le Big Bang, voyage depuis 13,8 milliards d'années moins 380 000 ans : « presque 13,8 milliards ». Règle des puissances de dix (ordre de grandeur, en mètres) : Terre 1,3 × 10⁷ ; Terre-Soleil 1,5 × 10¹¹ ; Proxima 4,2 × 9,46 × 10¹⁵ ≈ 4,0 × 10¹⁶ ; Voie lactée 10⁵ × 9,46 × 10¹⁵ ≈ 9,5 × 10²⁰ ; Andromède 2,5 × 10⁶ × 9,46 × 10¹⁵ ≈ 2,4 × 10²² ; univers observable (rayon) 46 × 10⁹ × 9,46 × 10¹⁵ ≈ 4,4 × 10²⁶ (affiché 10²⁶ : ordre de grandeur selon la règle enseignée en France, a ≤ 5 → 10ⁿ ; Proxima 4,0 × 10¹⁶ → 10¹⁶).",
+ "images": "Les deux anneaux de l'ouverture sont à l'échelle (rayons 13,8 et 46). L'élastique est une image de l'expansion (étirement ×4, chemin parcouru et distance finale à l'échelle de ce modèle), pas un calcul cosmologique. Proxima du Centaure est une naine rouge (couleur corail). Le fond diffus est une carte marbrée illustrative (bleu froid, orange chaud), marquée « ILLUSTRATION » à l'écran : ce n'est pas la vraie carte de Planck.",
  "publication": {
   "titre": "Le bord de l'univers observable",
-  "legende": "L'univers a 13,8 milliards d'années… mais le bord de ce qu'on peut voir est à 46 milliards d'années-lumière. Comment est-ce possible ? INFINIMENT, épisode 2 : de l'infiniment petit à l'infiniment grand.\nEn bref : pendant que la plus vieille lumière voyageait vers nous, l'espace lui-même a grandi.\nSources : Britannica, Astronomy (Southworth Planetarium, Univ. of Southern Maine), ESA (Planck, Gaia), NASA (WMAP, Webb, What is a light-year?), ESA/Hubble, Smithsonian, StarDate (McDonald Observatory).\nVoix de synthèse : Kyutai TTS (CC BY 4.0)\n#infiniment #science #espace #univers #astronomie #culturegenerale #apprendresurtiktok",
+  "legende": "L'univers a 13,8 milliards d'années… mais le bord de ce qu'on peut voir est aujourd'hui à environ 46 milliards d'années-lumière. Comment est-ce possible ? INFINIMENT, épisode 2 : de l'infiniment petit à l'infiniment grand.\nEn bref : pendant que la plus vieille lumière qu'on puisse voir voyageait vers nous, l'espace lui-même a grandi.\nSources : Britannica, Astronomy (Southworth Planetarium, Univ. of Southern Maine), ESA (Planck, Gaia, CMB), NASA (WMAP, Webb, What is a light-year?, Earth: Facts), ESA/Hubble, Smithsonian, StarDate (McDonald Observatory).\nVoix de synthèse : Kyutai TTS (CC BY 4.0)\n#infiniment #science #espace #univers #astronomie #culturegenerale #apprendresurtiktok",
   "hashtags": [
    "#infiniment",
    "#science",

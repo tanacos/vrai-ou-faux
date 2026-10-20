@@ -350,8 +350,16 @@ SUP = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
 RX0, RX1, RY = 170.0, 910.0, 410.0
 
 
+def ordre_grandeur(e):
+    """Puissance de dix affichée pour une taille de 10^e mètres, selon la règle enseignée en France : a × 10ⁿ avec
+    a ≤ 5 → 10ⁿ, a > 5 → 10ⁿ⁺¹ (4,4 × 10²⁶ m → 10²⁶ ; contre-vérification du 20/10/2026 : l'arrondi du
+    logarithme donnait 10²⁷, ce qu'un élève corrigerait)."""
+    n = math.floor(e + 1e-9)
+    return int(n + (1 if e - n > math.log10(5) + 1e-9 else 0))
+
+
 def exp_str(e):
-    return "10" + str(int(round(e))).translate(SUP) + " m"
+    return "10" + str(ordre_grandeur(e)).translate(SUP) + " m"
 
 
 def entete(img, t, serie, numero, a_head, expo, a_rule):

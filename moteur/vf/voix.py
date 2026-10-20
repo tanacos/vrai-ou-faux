@@ -96,13 +96,30 @@ def charger_mots_scribe(path):
         if dans_balise:
             dans_balise = not t.endswith("]")
             continue
-        if (t in ("?", "!", ":", ";", "%", "…") or t[0] in "'’") and out:
-            # ponctuation isolée, ou élision coupée par la transcription (Whisper : « l » + « 'humanité »)
-            out[-1]["text"] += t
+        if out and _recoller(out[-1], t, float(w["start"])):
+            # ponctuation isolée, élision coupée (Whisper : « l » + « 'humanité »), décimale (« 13 » + « ,8 »),
+            # trait d'union (« lui » + « -même »), tranche de milliers (« 100 » + « 000 ») : un seul mot, comme au script
+            sep = " " if re.fullmatch(r"\d{3}[.,!?;:]?", t) else ""
+            out[-1]["text"] += sep + t
             out[-1]["end"] = max(out[-1]["end"], float(w["end"]))
             continue
         out.append(dict(text=t, start=float(w["start"]), end=float(w["end"])))
     return out
+
+
+def _recoller(prec, t, debut):
+    """Le morceau t (transcription) prolonge-t-il le mot précédent ?"""
+    if t in ("?", "!", ":", ";", "%", "…") or t[0] in "'’":
+        return True
+    p = prec["text"]
+    proche = debut - prec["end"] < 0.25
+    if re.fullmatch(r",\d+[.,!?;:]?", t) and re.search(r"\d$", p):
+        return True                                       # « 13 » + « ,8 »
+    if t[0] == "-" and len(t) > 1 and t[1].isalpha() and proche and p[-1:].isalpha():
+        return True                                       # « années » + « -lumière »
+    if re.fullmatch(r"\d{3}[.,!?;:]?", t) and re.fullmatch(r"\d{1,3}( \d{3})*", p) and proche:
+        return True                                       # « 100 » + « 000 »
+    return False
 
 
 def aligner(narr, mots_scribe):
@@ -134,6 +151,68 @@ def aligner(narr, mots_scribe):
         d = (t1 - t0) / max(n_gap, 1)
         times[i] = (t0 + k_in * d, t0 + (k_in + 1) * d)
     return times, ok / max(len(a), 1)
+
+
+def aligner_dans_blocs(narr, mots_scribe, bornes, x, sr=SR, marge=0.25):
+    """Alignement d'une prise générée bloc par bloc (bornes exactes connues) : un mot apparié hors de son bloc est
+    rejeté (la transcription a décalé ou sauté un passage : constaté le 20/10/2026, Whisper a fondu « Elle voyage
+    vers nous… » dans la phrase suivante), puis chaque suite de mots non retrouvés est répartie sur les trames de
+    PAROLE réelles de son bloc (silences exclus), au prorata de la longueur des mots. Renvoie (temps, taux, estimés)."""
+    a = [w["norm"] for w in narr.mots]
+    b = [nettoyer_mot(w["text"]) for w in mots_scribe]
+    W = narr.mots
+    times = [None] * len(a)
+    for blk in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks():
+        for k in range(blk.size):
+            w = mots_scribe[blk.b + k]
+            times[blk.a + k] = (float(w["start"]), float(w["end"]))
+    for i, t in enumerate(times):
+        if t is not None:
+            d, f = bornes[W[i]["bloc"]]
+            if t[0] < d - marge or t[1] > f + marge:
+                times[i] = None
+    # ordre chronologique : un mot apparié avant son prédécesseur est rejeté lui aussi
+    dernier = -1.0
+    for i, t in enumerate(times):
+        if t is not None:
+            if t[0] < dernier - 0.05:
+                times[i] = None
+            else:
+                dernier = t[1]
+    ok = sum(t is not None for t in times)
+    env = enveloppe_db(x, sr)
+    parole = env >= seuil_silence(env)
+    hop = 0.01
+    estimes = []
+    i, n = 0, len(a)
+    while i < n:
+        if times[i] is not None:
+            i += 1
+            continue
+        j = i
+        while j + 1 < n and times[j + 1] is None and W[j + 1]["bloc"] == W[i]["bloc"]:
+            j += 1
+        d, f = bornes[W[i]["bloc"]]
+        meme_bloc_avant = i > 0 and W[i - 1]["bloc"] == W[i]["bloc"]
+        meme_bloc_apres = j + 1 < n and W[j + 1]["bloc"] == W[i]["bloc"] and times[j + 1] is not None
+        t0 = max(times[i - 1][1], d) if meme_bloc_avant else d
+        t1 = min(times[j + 1][0], f) if meme_bloc_apres else f
+        if t1 - t0 < 0.05 * (j - i + 1):
+            t1 = t0 + 0.05 * (j - i + 1)
+        k0, k1 = int(t0 / hop), max(int(t1 / hop), int(t0 / hop) + 1)
+        idx = np.nonzero(parole[k0:k1])[0]
+        poids = np.array([len(a[k]) + 2 for k in range(i, j + 1)], float)
+        cum = np.concatenate([[0.0], np.cumsum(poids)]) / poids.sum()
+        for m, k in enumerate(range(i, j + 1)):
+            if len(idx) >= 2:
+                s = idx[min(int(cum[m] * len(idx)), len(idx) - 1)]
+                e = idx[max(min(int(np.ceil(cum[m + 1] * len(idx))) - 1, len(idx) - 1), 0)]
+                times[k] = ((k0 + s) * hop, (k0 + max(e, s) + 1) * hop)
+            else:
+                times[k] = (t0 + cum[m] * (t1 - t0), t0 + cum[m + 1] * (t1 - t0))
+            estimes.append(k)
+        i = j + 1
+    return times, ok / max(len(a), 1), estimes
 
 
 # ------------------------------------------------------------------ audio
@@ -204,7 +283,11 @@ class Montage:
                 self.bornes_prise = [(float(b["debut"]), float(b["fin"])) for b in bp]
         except (AttributeError, KeyError, TypeError, ValueError):
             self.bornes_prise = None
-        times, self.taux = aligner(narr, mots_s)
+        self.mots_estimes = []
+        if self.bornes_prise:
+            times, self.taux, self.mots_estimes = aligner_dans_blocs(narr, mots_s, self.bornes_prise, x)
+        else:
+            times, self.taux = aligner(narr, mots_s)
         env = enveloppe_db(x)
         thr = seuil_silence(env)
         sil = env < thr
@@ -614,8 +697,9 @@ def narration_quiz(spec):
         n = i + 1
         blocs.append((f"i{n}_affirmation", idee.get("voix_affirmation")
                       or f"{NUMEROS[i]}. {_sans_guillemets(idee['affirmation'])}"))
+        # « C'est faux ! » plutôt que « Faux ! » seul : un mot isolé sortait étiré de Kyutai (« Fouuuu… », 1,1 s)
         blocs.append((f"i{n}_verdict", idee.get("voix_verdict")
-                      or ("Vrai !" if idee["verdict"].upper() == "VRAI" else "Faux !")))
+                      or ("C'est vrai !" if idee["verdict"].upper() == "VRAI" else "C'est faux !")))
         for k, p in enumerate(idee.get("panneaux", [])):
             t = p.get("voix")
             if t is None:
@@ -691,7 +775,12 @@ def retirer_phrase(prise, mots_json, texte, ids, bloc, phrase, sortie_audio, sor
             w2["start"] = round(s - d, 3)
             w2["end"] = round(float(w["end"]) - d, 3)
         garde.append(w2)
-    json.dump({"words": garde}, open(sortie_mots, "w", encoding="utf-8"), ensure_ascii=False)
+    sortie_json = {"words": garde}
+    if isinstance(ws, dict) and isinstance(ws.get("blocs"), list):        # bornes des blocs décalées d'autant
+        sortie_json["blocs"] = [dict(bb, debut=round(bb["debut"] - d if bb["debut"] >= b else bb["debut"], 3),
+                                     fin=round(bb["fin"] - d if bb["fin"] >= b else bb["fin"], 3))
+                                for bb in ws["blocs"]]
+    json.dump(sortie_json, open(sortie_mots, "w", encoding="utf-8"), ensure_ascii=False)
     niv = lambda t: round(float(env[min(int(t / 0.01), len(env) - 1)]), 1)  # noqa: E731
     return dict(bloc=bloc, phrase=phrase, debut=round(a, 3), fin=round(b, 3), duree=round(d, 3),
                 niveau_coupe_db=(niv(a), niv(b)), seuil_silence_db=round(thr, 1), alignement=round(taux, 3))

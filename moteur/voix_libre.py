@@ -7,6 +7,10 @@ refait s'il manque ou s'il s'ajoute un passage.
     python3 moteur/voix_libre.py diagnostic
         -> {"ok": true} si le modèle peut tourner ici (paquets installés, Hugging Face joignable), sinon ce qui manque.
            Code de sortie 0 (prêt) ou 3 (pas prêt : l'épisode se fait sans voix).
+    python3 moteur/voix_libre.py installer
+        -> installe les paquets (PyPI, index CPU de PyTorch) et ffmpeg, puis refait le diagnostic (codes 0 / 3).
+    python3 moteur/voix_libre.py horodater <dossier de l'épisode>
+        -> refait les mots horodatés d'une prise existante, bloc par bloc, sans régénérer la voix.
     python3 moteur/voix_libre.py generer <dossier de l'épisode> [--declarer] [--refaire bloc1,bloc2]
         -> voix/prise.mp3 et voix/prise_mots.json (mots horodatés au format attendu par moteur/vf/voix.py).
            --declarer écrit aussi le champ « voix » dans episode.json. Code 0 : tous les paragraphes vérifiés ;
@@ -85,8 +89,9 @@ def mots(texte):
 
 def verifier(transcrire, audio16, attendu):
     """Transcription indépendante d'un paragraphe. Échec si un passage de 3 mots ou plus manque, si 3 mots ou plus
-    s'ajoutent (hors nombres transcrits en chiffres), ou si quelque chose est ajouté avant le premier mot."""
-    entendu = transcrire(audio16)
+    s'ajoutent (hors nombres transcrits en chiffres), ou si quelque chose est ajouté avant le premier mot.
+    La même transcription fournit les mots horodatés du paragraphe (« mots », en secondes depuis son début)."""
+    entendu, mots_h = transcrire(audio16)
     e, h = mots(attendu), mots(entendu)
     ops = difflib.SequenceMatcher(None, e, h, autojunk=False).get_opcodes()
     trous, ajouts = [], []
@@ -102,8 +107,31 @@ def verifier(transcrire, audio16, attendu):
             ajouts.append(" ".join(h[j1:j2]))
     ajout_debut = bool(ops) and ops[0][0] == "insert"
     court = len(e) <= 3 and len(h) > len(e) + 2               # « Faux ! » suivi d'une phrase inventée
-    ok = not trous and not ajouts and not ajout_debut and not court
-    return ok, {"entendu": entendu, "trous": trous, "ajouts": ajouts, "ajout_debut": ajout_debut}
+    # bloc très court : chaque mot doit être entendu tel quel, et la parole ne doit pas s'étirer (20/10/2026 : un
+    # « Faux ! » sorti en « Fouuuuu… » de 1,1 s était passé, faute de mot manquant à compter)
+    deforme, etire = [], None
+    if len(e) <= 3:
+        chiffres_h = any(ch.isdigit() for w in h for ch in w)
+        deforme = [w for w in e if w not in h and not (chiffres_h and w in NOMBRES_LETTRES)]
+        p = duree_parole(audio16)
+        if p > 0.32 * len(e) + 0.4:
+            etire = round(p, 2)
+    ok = not trous and not ajouts and not ajout_debut and not court and not deforme and etire is None
+    return ok, {"entendu": entendu, "trous": trous + deforme, "ajouts": ajouts, "ajout_debut": ajout_debut,
+                "parole_etiree_s": etire, "mots": mots_h}
+
+
+NOMBRES_LETTRES = {"un", "une", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix"}
+
+
+def duree_parole(a, sr=16000):
+    """Durée (s) des trames de parole d'un court extrait : fenêtres de 30 ms au-dessus de max(-50 dBFS, crête - 30 dB)."""
+    hop, win = int(sr * 0.01), int(sr * 0.03)
+    if len(a) < win:
+        return 0.0
+    p = np.convolve(np.asarray(a, np.float64) ** 2, np.ones(win) / win, "same")[::hop]
+    db = 10 * np.log10(p + 1e-12)
+    return float((db > max(-50.0, db.max() - 30.0)).sum() * 0.01)
 
 
 def blocs_a_lire(ep_dir, c):
@@ -177,12 +205,43 @@ def memoire_gio():
     return 0.0
 
 
+def assurer_memoire(cible_gio=14.0):
+    """Le modèle de voix et la transcription montent à ≈ 7,5 Gio (mesuré sur GitHub Actions) : sur une machine de
+    8 Go, le noyau tuerait la génération. On ajoute un fichier d'échange sur disque (plus lent qu'en mémoire, mais
+    seulement pour les pics) quand mémoire + échange < cible. Sans droits root ou sans place : on continue sans."""
+    try:
+        page = os.sysconf("SC_PAGE_SIZE")
+        ram = page * os.sysconf("SC_PHYS_PAGES") / 2 ** 30
+        swap = 0.0
+        for ligne in open("/proc/meminfo"):
+            if ligne.startswith("SwapTotal:"):
+                swap = int(ligne.split()[1]) / 2 ** 20
+        manque = cible_gio - ram - swap
+        if manque <= 0.5:
+            return dict(memoire_gio=round(ram, 1), echange_gio=round(swap, 1), ajoute_gio=0)
+        taille = int(np.ceil(manque))
+        libre = os.statvfs("/").f_bavail * os.statvfs("/").f_frsize / 2 ** 30
+        if libre < taille + 8:                             # garder la place des poids (≈ 6 Go) et de la vidéo
+            return dict(memoire_gio=round(ram, 1), echange_gio=round(swap, 1), ajoute_gio=0, raison="disque")
+        f = "/var/tmp/voix_libre.swap"
+        if not os.path.exists(f):
+            subprocess.run(["fallocate", "-l", f"{taille}G", f], check=True, capture_output=True)
+            os.chmod(f, 0o600)
+            subprocess.run(["mkswap", f], check=True, capture_output=True)
+        subprocess.run(["swapon", f], check=True, capture_output=True)
+        return dict(memoire_gio=round(ram, 1), echange_gio=round(swap + taille, 1), ajoute_gio=taille)
+    except Exception as e:  # noqa: BLE001 — confort, jamais bloquant
+        return dict(erreur=f"{type(e).__name__}: {e}"[:200])
+
+
 def generer(ep_dir, declarer=False, refaire=None):
     import resource
 
     import scipy.io.wavfile
     from faster_whisper import WhisperModel
     from scipy.signal import resample_poly
+
+    print("mémoire :", json.dumps(assurer_memoire(), ensure_ascii=False), flush=True)
 
     path_ep = os.path.join(ep_dir, "episode.json")
     c = json.load(open(path_ep, encoding="utf-8"))
@@ -228,8 +287,12 @@ def generer(ep_dir, declarer=False, refaire=None):
           f"mémoire {memoire_gio():.1f} Gio)", flush=True)
 
     def transcrire(a16):
-        segs, _ = asr.transcribe(a16, language="fr", beam_size=5, vad_filter=False)
-        return " ".join(s.text for s in segs).strip()
+        """Texte entendu + mots horodatés (secondes depuis le début du paragraphe)."""
+        segs, _ = asr.transcribe(a16, language="fr", beam_size=5, vad_filter=False, word_timestamps=True)
+        segs = list(segs)
+        ws = [{"text": w.word.strip(), "type": "word", "start": round(w.start, 3), "end": round(w.end, 3)}
+              for s in segs for w in (s.words or []) if w.word.strip()]
+        return " ".join(s.text for s in segs).strip(), ws
 
     anciens = {}                                           # --refaire : blocs repris de la prise existante
     if refaire is not None:
@@ -238,20 +301,23 @@ def generer(ep_dir, declarer=False, refaire=None):
         verif = {v["bloc"]: v for v in mj.get("verification", [])}
         for b in mj.get("blocs", []):
             v = verif.get(b["bloc"], {})
-            anciens[b["bloc"]] = (v.get("texte_lu"), v, vieux[int(b["debut"] * sr):int(b["fin"] * sr)])
+            # mots horodatés de ce bloc dans l'ancienne prise, ramenés au début du bloc (même audio, mêmes instants)
+            mots_b = [dict(w, start=round(float(w["start"]) - b["debut"], 3), end=round(float(w["end"]) - b["debut"], 3))
+                      for w in mj.get("words", []) if b["debut"] - 0.05 <= float(w["start"]) < b["fin"] + 0.05]
+            anciens[b["bloc"]] = (v.get("texte_lu"), v, vieux[int(b["debut"] * sr):int(b["fin"] * sr)], mots_b)
         for bid, _ecran, lu in blocs:
             if bid not in refaire and (bid not in anciens or anciens[bid][0] != lu):
                 raise SystemExit(f"bloc {bid} : texte changé ou absent de la prise existante, à mettre dans --refaire")
 
-    parts, rapport, bornes, deja = [], [], [], {}
+    parts, rapport, bornes, deja, mots_prise = [], [], [], {}, []
     t_cur = 0.0
     for k, (bid, _ecran, lu) in enumerate(blocs):
         t1 = time.time()
         if refaire is not None and bid not in refaire:     # repris tel quel (déjà vérifié)
-            _, v, a = anciens[bid]
+            _, v, a, mots_b = anciens[bid]
             ok, n_essais = bool(v.get("verifie")), 0
             det = dict(trous=v.get("trous", []), ajouts=v.get("ajouts", []), ajout_debut=v.get("ajout_debut", False),
-                       entendu=v.get("entendu", ""))
+                       entendu=v.get("entendu", ""), mots=mots_b)
         elif lu in deja:                                   # même phrase (« Vrai ! ») : même prise vérifiée
             ok, det, a, n_essais = deja[lu]
         else:
@@ -270,6 +336,13 @@ def generer(ep_dir, declarer=False, refaire=None):
         a = (a * (0.1 / max(niveau_parole(a, sr), 1e-4))).astype(np.float32)    # blocs au même niveau
         d = len(a) / sr
         bornes.append(dict(bloc=bid, debut=round(t_cur, 3), fin=round(t_cur + d, 3)))
+        # mots horodatés du bloc, placés sur la prise : chaque bloc garde SA transcription (une transcription de la
+        # prise entière peut sauter ou décaler un passage : constaté le 20/10/2026 sur INFINIMENT 2)
+        mots_b = [dict(w, start=round(t_cur + float(w["start"]), 3), end=round(t_cur + min(float(w["end"]), d), 3))
+                  for w in det.get("mots") or [] if float(w["start"]) < d]
+        if not mots_b and lu.strip():
+            print(f"  (bloc {bid} : aucun mot horodaté, ses mots seront répartis sur sa parole au montage)", flush=True)
+        mots_prise += mots_b
         print(f"bloc {k + 1}/{len(blocs)} {bid} : {'vérifié' if ok else 'NON VÉRIFIÉ'} en {n_essais} essai(s)"
               f"{' (repris)' if refaire is not None and bid not in refaire else ''}, {d:.1f} s d'audio, "
               f"{time.time() - t1:.0f} s", flush=True)
@@ -284,13 +357,11 @@ def generer(ep_dir, declarer=False, refaire=None):
     mp3 = os.path.join(ep_dir, "voix", "prise.mp3")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", wav, "-c:a", "libmp3lame", "-b:a", "160k", mp3], check=True)
     os.remove(wav)
-    # horodatage mot à mot de la prise complète (transcription indépendante, sans le script en invite)
-    segs, _ = asr.transcribe(resample_poly(y, 2, 3).astype(np.float32), language="fr", beam_size=5,
-                             word_timestamps=True, vad_filter=False)
-    ws = [{"text": w.word.strip(), "type": "word", "start": round(w.start, 3), "end": round(w.end, 3)}
-          for s in segs for w in (s.words or [])]
+    # horodatage mot à mot : la transcription indépendante de chaque bloc (faite pour la vérification), placée
+    # sur la prise ; un bloc repris de l'ancienne prise garde ses mots d'origine
+    ws = mots_prise
     tout_ok = all(x["verifie"] for x in rapport)
-    json.dump({"words": ws, "modele": f"faster-whisper {r['asr']}", "voix": r, "blocs": bornes,
+    json.dump({"words": ws, "modele": f"faster-whisper {r['asr']} (par bloc)", "voix": r, "blocs": bornes,
                "verification": rapport, "tout_verifie": tout_ok},
               open(os.path.join(ep_dir, "voix", "prise_mots.json"), "w", encoding="utf-8"), ensure_ascii=False)
     if declarer and tout_ok:
@@ -310,6 +381,63 @@ def generer(ep_dir, declarer=False, refaire=None):
     return 0 if tout_ok else 2
 
 
+def blocs_changes(ep_dir):
+    """--refaire auto : blocs dont le texte lu a changé depuis la prise existante (ou absents de celle-ci, ou non
+    vérifiés). None s'il n'y a pas de prise utilisable : tout est à générer."""
+    chemin = os.path.join(ep_dir, "voix", "prise_mots.json")
+    if not (os.path.exists(chemin) and os.path.exists(os.path.join(ep_dir, "voix", "prise.mp3"))):
+        return None
+    mj = json.load(open(chemin, encoding="utf-8"))
+    if not mj.get("blocs") or not mj.get("verification"):
+        return None
+    verif = {v["bloc"]: v for v in mj["verification"]}
+    c = json.load(open(os.path.join(ep_dir, "episode.json"), encoding="utf-8"))
+    return {bid for bid, _e, lu in blocs_a_lire(ep_dir, c)
+            if bid not in verif or verif[bid].get("texte_lu") != lu or not verif[bid].get("verifie")}
+
+
+def horodater(ep_dir):
+    """Refait les mots horodatés d'une prise existante bloc par bloc (bornes de prise_mots.json → « blocs »), sans
+    régénérer la voix : pour une prise dont la transcription d'ensemble a sauté ou décalé un passage."""
+    from faster_whisper import WhisperModel
+    chemin = os.path.join(ep_dir, "voix", "prise_mots.json")
+    mj = json.load(open(chemin, encoding="utf-8"))
+    if not mj.get("blocs"):
+        raise SystemExit("prise sans bornes de blocs (« blocs ») : rien à refaire bloc par bloc")
+    x = lire_prise(os.path.join(ep_dir, "voix", "prise.mp3"), 16000)
+    asr = WhisperModel((mj.get("voix") or {}).get("asr", "medium"), device="cpu", compute_type="int8",
+                       cpu_threads=os.cpu_count() or 4)
+    ws = []
+    for b in mj["blocs"]:
+        d = b["fin"] - b["debut"]
+        segs, _ = asr.transcribe(x[int(b["debut"] * 16000):int(b["fin"] * 16000)], language="fr", beam_size=5,
+                                 vad_filter=False, word_timestamps=True)
+        n0 = len(ws)
+        for s in segs:
+            for w in s.words or []:
+                if w.word.strip() and w.start < d:
+                    ws.append(dict(text=w.word.strip(), type="word", start=round(b["debut"] + w.start, 3),
+                                   end=round(b["debut"] + min(w.end, d), 3)))
+        print(f"bloc {b['bloc']} : {len(ws) - n0} mots", flush=True)
+    mj.update(words=ws, modele=f"faster-whisper {(mj.get('voix') or {}).get('asr', 'medium')} (par bloc)")
+    json.dump(mj, open(chemin, "w", encoding="utf-8"), ensure_ascii=False)
+    return 0
+
+
+def installer():
+    """Installe les paquets de la voix (PyPI + index CPU de PyTorch) et ffmpeg si besoin, puis refait le diagnostic.
+    Code 0 : prêt ; 3 : pas prêt (accès réseau refusé par l'environnement de la tâche, voir moteur/VOIX.md)."""
+    if subprocess.run(["which", "ffmpeg"], capture_output=True).returncode != 0:
+        subprocess.run("apt-get update -qq && apt-get install -y -qq ffmpeg", shell=True, capture_output=True)
+    r = subprocess.run([sys.executable, "-m", "pip", "install", "--break-system-packages", "-q",
+                        "--root-user-action=ignore", "moshi==0.2.11", "sphn", "faster-whisper", "scipy",
+                        "--extra-index-url", "https://download.pytorch.org/whl/cpu"],
+                       capture_output=True, text=True, timeout=1500)
+    if r.returncode != 0:
+        print(json.dumps(dict(pip="échec", detail=(r.stderr or r.stdout)[-600:]), ensure_ascii=False), flush=True)
+    return 0 if diagnostic()["ok"] else 3
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
     if not a:
@@ -317,6 +445,14 @@ if __name__ == "__main__":
         sys.exit(1)
     if a[0] == "diagnostic":
         sys.exit(0 if diagnostic()["ok"] else 3)
+    if a[0] == "installer":
+        sys.exit(installer())
+    if a[0] in ("generer", "horodater") and os.environ.get("MALLOC_ARENA_MAX") is None:
+        # moins de mémoire « réservée » par les fils de calcul (glibc) : relance du même processus avec ce réglage
+        os.environ["MALLOC_ARENA_MAX"] = "2"
+        os.execv(sys.executable, [sys.executable] + sys.argv)
+    if a[0] == "horodater":
+        sys.exit(horodater(a[1]))
     if a[0] == "generer":
         a = a[1:]
     if not a or not os.path.isdir(a[0]):
@@ -324,5 +460,8 @@ if __name__ == "__main__":
         sys.exit(1)
     ref = None
     if "--refaire" in a:
-        ref = set(a[a.index("--refaire") + 1].split(","))
+        val = a[a.index("--refaire") + 1]
+        ref = blocs_changes(a[0]) if val == "auto" else set(val.split(","))
+        if ref is not None:
+            print(f"blocs à refaire : {', '.join(sorted(ref)) or 'aucun (prise reprise telle quelle)'}", flush=True)
     sys.exit(generer(a[0], declarer="--declarer" in a, refaire=ref))

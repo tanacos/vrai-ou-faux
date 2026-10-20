@@ -103,21 +103,25 @@ Au moindre doute non résolu, **ne publie pas** : abandonne proprement et signal
 ```bash
 python3 moteur/voix_libre.py diagnostic
 ```
-- Si `"ok": false` : installe les paquets (`pip install --break-system-packages "moshi==0.2.11" sphn faster-whisper
-  --extra-index-url https://download.pytorch.org/whl/cpu` et `apt-get install -y ffmpeg` si absent), puis relance le
-  diagnostic. S'il reste négatif (accès réseau à PyPI, à download.pytorch.org ou à Hugging Face refusé) :
-  **arrête-toi là**. Pousse le dossier de l'épisode (statut `en attente de voix` dans le journal :
+- Si `"ok": false` : `python3 moteur/voix_libre.py installer` (paquets PyPI + index CPU de PyTorch, ffmpeg ; 2 à
+  5 min), qui refait le diagnostic. S'il reste négatif (accès réseau à PyPI, à download.pytorch.org ou à Hugging Face
+  refusé) : **arrête-toi là**. Pousse le dossier de l'épisode (statut `en attente de voix` dans le journal :
   `python3 moteur/publier.py journal series/infiniment/epNN --statut "en attente de voix"`), et explique dans le
   rapport que l'environnement de la tâche doit autoriser ces domaines (voir `moteur/VOIX.md`). Aucune publication
   sans voix pour ce format.
-- Sinon, génère en arrière-plan (20 à 40 min) et surveille avec une seule commande toutes les 8 minutes :
+- Sinon, génère en arrière-plan (20 à 45 min) et surveille avec une seule commande toutes les 8 minutes :
   ```bash
-  setsid nohup python3 moteur/voix_libre.py generer series/infiniment/epNN --declarer > /tmp/voix_epNN.log 2>&1 < /dev/null & disown
+  setsid nohup python3 moteur/voix_libre.py generer series/infiniment/epNN --declarer --refaire auto \
+    > /tmp/voix_epNN.log 2>&1 < /dev/null & disown
   sleep 480; tail -3 /tmp/voix_epNN.log
   ```
-  Code de sortie 0 et `"tout_verifie": true` exigés (chaque paragraphe relu par une transcription indépendante). Un
-  paragraphe non vérifié après 4 essais : reformule-le légèrement dans `narration.txt` (mêmes faits), puis
-  régénère. Ajoute dans `episode.json` → `voix` des `respirations` (0,8 à 1,3 s après les révélations).
+  (`--refaire auto` : s'il existe déjà une prise vérifiée, seuls les paragraphes dont le texte a changé sont
+  refaits ; sinon tout est généré.) Exigé : une dernière ligne avec `"tout_verifie": true` et `"declare": true`
+  (chaque paragraphe relu par une transcription indépendante). Un paragraphe non vérifié après 4 essais : reformule-le légèrement dans
+  `narration.txt` sans toucher à aucun fait ni nombre, puis ne régénère que lui (`… generer series/infiniment/epNN
+  --declarer --refaire <bloc>`) et signale la reformulation dans le rapport. Processus disparu sans dernière ligne :
+  relance la même commande une fois. Ajoute dans `episode.json` → `voix` des `respirations` (0,8 à 1,3 s après les
+  révélations).
 - Point de sauvegarde : `python3 moteur/publier.py journal series/infiniment/epNN --statut "voix faite"`, commit, push.
 
 ## 7. Fabrication complète (≈ 25 à 40 min)

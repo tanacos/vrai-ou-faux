@@ -6,8 +6,15 @@ calcul, sources (URL + extraits) et légende, en texte simple, pour un vérifica
     python3 moteur/rp/dossier.py series/infiniment/epNN > /tmp/dossier_epNN.txt
 """
 import json
+import math
 import os
 import sys
+
+
+def ordre_grandeur(e):
+    """Même règle que l'affichage (moteur/rp/base.py) : a × 10ⁿ avec a ≤ 5 → 10ⁿ, sinon 10ⁿ⁺¹."""
+    n = math.floor(float(e) + 1e-9)
+    return int(n + (1 if float(e) - n > math.log10(5) + 1e-9 else 0))
 
 
 def lignes_scene(s):
@@ -28,7 +35,8 @@ def lignes_scene(s):
         out.append(f"objet dessiné : {json.dumps(o.get('objet'), ensure_ascii=False)}")
     for p in s.get("paliers", []):
         out.append(f"palier (sur « {p.get('quand')} ») : objet {p['objet'].get('type')}, titre "
-                   f"{' / '.join(p.get('titre', []))}, info {p.get('info', '')}, règle 10^{p.get('expo')} m")
+                   f"{' / '.join(p.get('titre', []))}, info {p.get('info', '')}, règle 10^{p.get('expo')} m "
+                   f"(affichée : 10^{ordre_grandeur(p['expo'])} m)" if p.get('expo') is not None else "")
     for a in s.get("anneaux", []):
         out.append(f"anneau à l'échelle (rayon relatif {a['rayon']}) : {a.get('texte', '')}")
     if (s.get("centre") or {}).get("texte"):
@@ -52,9 +60,10 @@ def lignes_scene(s):
         out.append("textes fixes : PROCHAIN ÉPISODE ; Sources en description ↓")
     ex = s.get("expo")
     if isinstance(ex, (int, float)):
-        out.append(f"règle des puissances de dix : {ex} (affichée : 10^{round(ex)} m)")
+        out.append(f"règle des puissances de dix : {ex} (affichée : 10^{ordre_grandeur(ex)} m)")
     elif isinstance(ex, list):
-        out.append("règle des puissances de dix : " + ", ".join(f"{v} sur « {k} »" for k, v in ex))
+        out.append("règle des puissances de dix : " + ", ".join(f"{v} sur « {k} » (affichée : 10^{ordre_grandeur(v)} m)"
+                                                             for k, v in ex))
     return out
 
 

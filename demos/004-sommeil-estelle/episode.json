@@ -56,7 +56,8 @@
      "url": "https://www.thenakedscientists.com/node/190173",
      "extrait": "spiders are more likely to run away from a sleeping human than start exploring us. […] They’re scared off by vibrations, produced by our heartbeats, breathing and especially snoring […] So although we probably do eat the odd spider during a lifetime, it’s impossible to know for sure, or how many."
     }
-   ]
+   ],
+   "voix_verdict": "Faux !"
   },
   {
    "affirmation": "« Les dauphins dorment avec un œil ouvert. »",
@@ -111,7 +112,8 @@
      "url": "https://www.smithsonianmag.com/smart-news/dolphins-sleep-with-only-half-their-brain-at-a-time-81426439/",
      "extrait": "Dolphins sleep with only half of their brains at a time."
     }
-   ]
+   ],
+   "voix_verdict": "Vrai !"
   },
   {
    "affirmation": "« À l'adolescence, l'horloge du sommeil se décale. »",
@@ -155,7 +157,8 @@
      "url": "https://www.sante.fr/node/1409399",
      "extrait": "l’horloge interne de l’adolescent a tendance à se décaler avec un endormissement et un réveil plus tardifs. […] Lorsque la luminosité baisse, donc en fin de journée, la mélatonine commence à être libérée et prépare le corps au sommeil."
     }
-   ]
+   ],
+   "voix_verdict": "Vrai !"
   },
   {
    "affirmation": "« On ne rêve qu'en noir et blanc. »",
@@ -210,7 +213,8 @@
      "url": "https://pubmed.ncbi.nlm.nih.gov/18845457/",
      "extrait": "people who had access to black and white media before colour media experienced more greyscale dreams"
     }
-   ]
+   ],
+   "voix_verdict": "Faux !"
   }
  ],
  "sources_ecran": "Scientific American · Naked Scientists · Smithsonian · Univ. du Texas · American Thoracic Society · Santé.fr · Univ. de Dundee · BPS",

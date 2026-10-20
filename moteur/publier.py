@@ -289,8 +289,9 @@ def legende(ep_dir, rapport=None):
         if c in txt or (c.startswith("Voix de synthèse") and "Kyutai TTS (CC BY 4.0)" in txt):
             continue
         lignes = txt.split("\n")
-        if c.startswith("Voix de synthèse") and lignes and lignes[-1].lstrip().startswith("#"):
-            lignes.insert(len(lignes) - 1, c)                     # avant la ligne des mots-dièse
+        k_hash = max((k for k, l_ in enumerate(lignes) if l_.lstrip().startswith("#")), default=None)
+        if c.startswith("Voix de synthèse") and k_hash is not None:
+            lignes.insert(k_hash, c)                              # avant la ligne des mots-dièse
             txt = "\n".join(lignes)
         else:
             txt += "\n" + c

@@ -344,7 +344,9 @@ RX0, RX1, RY = 170.0, 910.0, 410.0
 
 
 def exp_str(e):
-    return "10" + str(int(round(e))).translate(SUP) + " m"
+    """Règle française de l'ordre de grandeur : a × 10ⁿ avec a ≤ 5 → 10ⁿ, sinon 10ⁿ⁺¹ (comme moteur/rp/base.py)."""
+    n = math.floor(e + 1e-9)
+    return "10" + str(int(n + (1 if e - n > math.log10(5) + 1e-9 else 0))).translate(SUP) + " m"
 
 
 def header(img, t, a_head, expo, a_rule):
@@ -676,7 +678,7 @@ def expo_at(t):
     if t < SC["outro"][0]:
         return -10.0
     tb = cue("outro:bord", 0, SC["outro"][0] + 3)
-    return float(np.interp(t, [SC["outro"][0], tb + 0.8], [-10, 26.9]))
+    return float(np.interp(t, [SC["outro"][0], tb + 0.8], [-10, 26.64]))   # bord : rayon ≈ 4,4 × 10²⁶ m
 
 
 # 3. l'atome : presque entièrement du vide

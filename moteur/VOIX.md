@@ -14,7 +14,10 @@ Deux voix possibles ; tout le reste (montage, sous-titres, mixage, contrôles) s
 
 ```bash
 python3 moteur/voix_libre.py diagnostic                          # {"ok": true} si tout est prêt, sinon ce qui manque
+python3 moteur/voix_libre.py installer                           # paquets + ffmpeg, puis diagnostic (code 0 = prêt)
 python3 moteur/voix_libre.py generer DOSSIER_DE_L_EPISODE --declarer
+python3 moteur/voix_libre.py generer DOSSIER --declarer --refaire bloc1,bloc2   # ne refait que ces paragraphes
+python3 moteur/voix_libre.py horodater DOSSIER                   # refait les mots horodatés d'une prise, bloc par bloc
 ```
 - Texte lu : épisode « Vrai ou faux ? » → les blocs de `vf.voix.narration_quiz` (ouverture, affirmations,
   verdicts, panneaux, score, annonce ; clés `voix_*` du script pour corriger une lecture) ; reportage → le fichier
@@ -24,15 +27,25 @@ python3 moteur/voix_libre.py generer DOSSIER_DE_L_EPISODE --declarer
 - Chaque bloc est généré séparément (0,5 s de silence entre deux blocs, bornes exactes notées dans
   `prise_mots.json` → `blocs` : le découpage du quiz se fait sur ces bornes, pas sur la transcription), puis relu
   par une transcription indépendante (faster-whisper medium) et refait (4 essais) s'il manque 3 mots ou plus, s'il
-  s'en ajoute, ou s'il y a une syllabe parasite au début. Code de sortie 0 seulement si tout est vérifié ;
-  `--declarer` écrit alors le champ `voix` dans `episode.json` (`"eclaircir": true` : étape « micro studio »).
-- Mots horodatés : transcription indépendante de la prise entière (`voix/prise_mots.json`), alignée ensuite sur le
-  script (`vf.voix.aligner`, ≥ 90 % exigé).
+  s'en ajoute, ou s'il y a une syllabe parasite au début. Un bloc de 3 mots ou moins doit en plus être entendu mot
+  pour mot et ne pas s'étirer (parole ≤ 0,32 s par mot + 0,4 s) : le 20/10/2026, un « Faux ! » isolé était sorti en
+  « Fouuuu… » de 1,1 s ; le verdict se dit donc désormais « C'est faux ! » / « C'est vrai ! ». Code de sortie 0
+  seulement si tout est vérifié ; `--declarer` écrit alors le champ `voix` dans `episode.json` (`"eclaircir": true` :
+  étape « micro studio »).
+- Mots horodatés : la transcription indépendante de **chaque bloc** (celle de la vérification), placée sur la prise
+  (`voix/prise_mots.json`) ; un bloc repris par `--refaire` garde ses mots d'origine. Ils sont ensuite alignés sur le
+  script **à l'intérieur de leur bloc** (`vf.voix.aligner_dans_blocs`, ≥ 90 % exigé) : un mot retrouvé hors de son
+  bloc est rejeté, et les mots non retrouvés sont répartis sur la parole réelle de leur bloc. (Le 20/10/2026, la
+  transcription d'une prise entière avait sauté « vers nous depuis presque 13,8 milliards d'années. Alors pourquoi
+  46 milliards, et » : les sous-titres de ce passage auraient défilé en un éclair.)
+- Mémoire : modèle de voix + transcription ≈ 7,5 Gio au maximum. Sur une machine de moins de 14 Gio, `generer`
+  ajoute un fichier d'échange sur disque (`/var/tmp/voix_libre.swap`) pour que le pic ne fasse pas tuer le calcul.
 
 Mesures (GitHub Actions, 4 cœurs, 16 Go, 20/10/2026) : quiz « sommeil » (20 blocs, 81 s de voix) en 22 min, mémoire
 maximale 7,2 Gio ; reportage INFINIMENT 2 (7 blocs, 88 s) en 19 min, 6,4 Gio ; tous les blocs vérifiés au premier
-essai. Sur 2 cœurs, compter environ le double. Une session à 8 Go de mémoire est juste : si la génération est tuée
-faute de mémoire, l'épisode sort sans voix (quiz) ou attend (reportage).
+essai. Sur 2 cœurs, compter environ le double. Une session à 8 Go de mémoire est juste : `generer` y ajoute un
+fichier d'échange de 6 à 7 Go ; si la génération est tout de même tuée, l'épisode sort sans voix (quiz) ou attend
+(reportage).
 
 ### Ce que l'environnement de la tâche planifiée doit autoriser
 

@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 from .base import (W, H, HW, HH, CYAN, AMBER, WHITE, VIOLET, LIGHT, WARM, GREEN, couleur, clamp, add_pts,
-                   add_pts_col, gline, gcircle, crisp_lines, crisp_fill, crisp_dot, circle_poly, coller)
+                   add_pts_col, gline, gcircle, crisp_lines, crisp_fill, crisp_dot, circle_poly, coller, txt, F_DBOLD)
 
 TYPES = ("soleil", "etoile", "terre", "lune", "planete", "cmb", "galaxie", "univers", "trou_noir", "atome",
          "molecule", "cellule", "virus", "goutte", "verre", "sucre", "fourmi", "lumiere", "point", "icone")
@@ -522,7 +522,12 @@ def dessiner(cv, gl, spec, cx, cy, R, a, t):
     if f is None:
         raise KeyError(f"objet inconnu : {spec.get('type')!r} (types : {', '.join(TYPES)})")
     R = R * float(spec.get("taille", 1.0))
-    f(cv, gl, spec, cx + spec.get("dx", 0) * R_SCALE[0], cy + spec.get("dy", 0) * R_SCALE[0], R, a, t)
+    x, y = cx + spec.get("dx", 0) * R_SCALE[0], cy + spec.get("dy", 0) * R_SCALE[0]
+    f(cv, gl, spec, x, y, R, a, t)
+    if spec.get("mention"):
+        # « ILLUSTRATION », « PAS À L'ÉCHELLE »… : ce que l'image n'affirme pas, écrit sous l'objet (audité comme
+        # tout texte : zones sûres, chevauchements)
+        txt(cv, str(spec["mention"]).upper(), x, y + R + 28, 24, F_DBOLD, LIGHT, 0.85 * a, 0, 4.0)
 
 
 R_SCALE = [1.0]               # les décalages dx/dy sont en pixels de référence
