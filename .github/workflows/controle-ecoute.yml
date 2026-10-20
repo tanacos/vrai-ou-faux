@@ -1,0 +1,53 @@
+name: controle-ecoute
+# Contrôle d'écoute indépendant : chaque extrait déposé dans controles/ (mp3) est transcrit par Whisper large-v3
+# (modèle plus fort que celui de la chaîne de production) ; le texte est écrit à côté (même nom, .txt).
+on:
+  push:
+    branches: [essai-voix]
+    paths: ["controles/**.mp3"]
+permissions:
+  contents: write
+jobs:
+  transcrire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installation
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q faster-whisper
+      - name: Transcription
+        run: |
+          python - <<'PY'
+          import glob, os, subprocess
+          import numpy as np
+          from faster_whisper import WhisperModel
+          m = WhisperModel("large-v3", device="cpu", compute_type="int8")
+          for f in sorted(glob.glob("controles/*.mp3")):
+              out = f[:-4] + ".txt"
+              if os.path.exists(out):
+                  continue
+              pcm = subprocess.run(["ffmpeg", "-v", "error", "-i", f, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"],
+                                   capture_output=True, check=True).stdout
+              a = np.frombuffer(pcm, np.float32)
+              res = []
+              for beam, prompt in ((5, None), (5, "Transcription en toutes lettres, nombres écrits en chiffres.")):
+                  segs, _ = m.transcribe(a, language="fr", beam_size=beam, initial_prompt=prompt, word_timestamps=True)
+                  segs = list(segs)
+                  res.append(" ".join(s.text.strip() for s in segs) + "\n  mots : " +
+                             " | ".join(f"{w.word.strip()}[{w.start:.2f}-{w.end:.2f}]" for s in segs for w in (s.words or [])))
+              open(out, "w", encoding="utf-8").write("\n".join(res) + "\n")
+              print(f, "->", res[0].splitlines()[0])
+          PY
+      - name: Dépôt
+        if: always()
+        run: |
+          git config user.name "controle-ecoute (GitHub Actions)"
+          git config user.email "actions@github.com"
+          git add -A controles
+          git commit -q -m "controle-ecoute : transcriptions" || exit 0
+          for i in 1 2 3 4 5; do git push -q origin HEAD:essai-voix && break; git pull -q --rebase origin essai-voix; sleep 5; done
