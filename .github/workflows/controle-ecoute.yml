@@ -1,6 +1,7 @@
 name: controle-ecoute
 # Contrôle d'écoute indépendant : chaque extrait déposé dans controles/ (mp3) est transcrit par Whisper large-v3
-# (modèle plus fort que celui de la chaîne de production) ; le texte est écrit à côté (même nom, .txt).
+# (modèle plus fort que celui de la chaîne de production) et par Vosk (autre famille de modèle, qui écrit les
+# nombres en toutes lettres : utile pour « quatre-vingt ») ; le texte est écrit à côté (même nom, .txt).
 on:
   push:
     branches: [essai-voix]
@@ -19,7 +20,8 @@ jobs:
       - name: Installation
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
-          pip install -q faster-whisper
+          pip install -q faster-whisper vosk
+          curl -sSL -o /tmp/vosk.zip https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip && unzip -q /tmp/vosk.zip -d /tmp/vosk
       - name: Transcription
         run: |
           python - <<'PY'
@@ -40,6 +42,19 @@ jobs:
                   segs = list(segs)
                   res.append(" ".join(s.text.strip() for s in segs) + "\n  mots : " +
                              " | ".join(f"{w.word.strip()}[{w.start:.2f}-{w.end:.2f}]" for s in segs for w in (s.words or [])))
+              try:
+                  import json as _j
+                  from vosk import Model, KaldiRecognizer
+                  vm = Model(glob.glob("/tmp/vosk/*")[0])
+                  rec = KaldiRecognizer(vm, 16000)
+                  rec.SetWords(True)
+                  pcm16 = (np.clip(a, -1, 1) * 32767).astype("<i2").tobytes()
+                  rec.AcceptWaveform(pcm16)
+                  r = _j.loads(rec.FinalResult())
+                  res.append("VOSK : " + r.get("text", "") + "\n  mots : " + " | ".join(
+                      f"{w['word']}[{w['start']:.2f}-{w['end']:.2f}]" for w in r.get("result", [])))
+              except Exception as e:  # noqa: BLE001
+                  res.append(f"VOSK : échec ({e})")
               open(out, "w", encoding="utf-8").write("\n".join(res) + "\n")
               print(f, "->", res[0].splitlines()[0])
           PY
