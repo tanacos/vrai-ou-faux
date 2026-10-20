@@ -29,7 +29,9 @@ jobs:
           set -e
           for f in demandes/*.json; do
             [ -e "$f" ] || continue
-            if grep -q '"moteur": "kyutai16"' "$f"; then
+            if grep -q '"moteur": "ameliorer"' "$f"; then
+              python scripts/ameliorer.py "$(python -c "import json,sys; print(json.load(open('$f'))['source'])")" sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC ameliorer" >> sorties/journal.txt
+            elif grep -q '"moteur": "kyutai16"' "$f"; then
               pip install -q "moshi==0.2.11" sphn --extra-index-url https://download.pytorch.org/whl/cpu >> sorties/journal.txt 2>&1
               python scripts/kyutai16.py "$f" sorties >> sorties/journal.txt 2>&1 || echo "ÉCHEC kyutai16 $f" >> sorties/journal.txt
             else
