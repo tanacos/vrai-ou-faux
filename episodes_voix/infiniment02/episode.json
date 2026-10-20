@@ -1,0 +1,18 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 2,
+ "slug": "bord-univers",
+ "narration": "narration.txt",
+ "blocs": [
+  "hook",
+  "voyage",
+  "passe",
+  "limite",
+  "paradoxe",
+  "horizon",
+  "outro"
+ ],
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ }
+}
