@@ -4,15 +4,39 @@
   "reseau": "tiktok",
   "compte_tiktok": "tanacos34",
   "fuseau": "Europe/Paris",
-  "jours_publication": ["mercredi", "samedi"],
+  "jours_publication": [
+    "mercredi",
+    "samedi"
+  ],
   "heure_defaut": "18:00",
-  "fenetre_horaire": ["17:00", "20:30"],
+  "fenetre_horaire": [
+    "17:00",
+    "20:30"
+  ],
   "delai_veto_h": 48,
   "file_max": 3,
   "contenu_ia": true,
   "confidentialite": "PUBLIC_TO_EVERYONE",
   "duree_min_s": 61,
   "duree_max_s": 90,
-  "voix_active": false,
-  "voix_offre_gratuite": true
+  "voix_active": true,
+  "voix_offre_gratuite": false,
+  "voix_moteur": "kyutai-1.6b",
+  "reportage": {
+    "serie": "INFINIMENT",
+    "hashtag": "#infiniment",
+    "journal": "journal_reportages.json",
+    "dossier": "series/infiniment",
+    "jours_publication": [
+      "lundi"
+    ],
+    "heure_defaut": "18:00",
+    "fenetre_horaire": [
+      "17:00",
+      "20:30"
+    ],
+    "file_max": 2,
+    "duree_min_s": 61,
+    "duree_max_s": 95
+  }
 }

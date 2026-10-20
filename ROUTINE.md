@@ -99,11 +99,32 @@ Corrige et recommence jusqu'à ce que ce soit propre. Durée visée : 65 à 85 s
 
 ## 5 bis. Voix (seulement si `config.json` contient `"voix_active": true`)
 
-Sinon, saute cette étape : l'épisode reste sans voix. Si elle est active, suis `moteur/VOIX.md` (texte, génération
-ElevenLabs, relais, horodatage, champ `voix` du script, `python3 -m vf.voix verifier` avec `"ok": true`), puis refais
-`valider` et `apercu` (la chronologie change). Si une étape de la voix échoue (crédits épuisés, relais muet après
-2 essais), fabrique l'épisode **sans voix** et signale-le dans le rapport : la voix ne doit jamais bloquer la sortie.
-Titre TikTok : si `config.json` contient `"voix_offre_gratuite": true`, ajoute « (voix : elevenlabs.io) » au titre.
+Voix « Estelle » (Kyutai TTS 1.6B, modèle libre, usage commercial autorisé avec mention) : détails dans
+`moteur/VOIX.md`. **La voix ne doit jamais bloquer la sortie** : à la moindre étape en échec, l'épisode sort sans voix
+(comme avant) et tu le signales dans le rapport.
+
+1. Environnement :
+   ```bash
+   cd /home/claude/vrai-ou-faux && python3 moteur/voix_libre.py diagnostic
+   ```
+   Si `"ok": false`, installe (`pip install --break-system-packages "moshi==0.2.11" sphn faster-whisper
+   --extra-index-url https://download.pytorch.org/whl/cpu` ; `apt-get install -y ffmpeg` si absent) et relance le
+   diagnostic. S'il reste négatif (PyPI, download.pytorch.org ou Hugging Face refusés par l'environnement) :
+   épisode **sans voix**, rapport : « voix non faite : l'environnement de la tâche bloque … (voir moteur/VOIX.md) ».
+2. Génération en arrière-plan (20 à 40 min), surveillée par une seule commande toutes les 8 minutes :
+   ```bash
+   mkdir -p /tmp/epNNN && setsid nohup python3 moteur/voix_libre.py generer episodes/NNN-slug --declarer \
+     > /tmp/epNNN/voix.log 2>&1 < /dev/null & disown
+   sleep 480; tail -3 /tmp/epNNN/voix.log
+   ```
+   Code de sortie 0 exigé (chaque phrase relue par une transcription indépendante) : le champ `voix` est alors écrit
+   dans `episode.json`. Sinon : épisode sans voix (supprime `voix/` et ne déclare rien).
+3. Contrôle de la prise : `cd moteur && python3 -m vf.voix verifier ../episodes/NNN-slug/episode.json` →
+   `"ok": true` exigé ; sinon retire le champ `voix` (épisode sans voix).
+4. Refais `valider` et `apercu` (la chronologie s'allonge pour laisser chaque phrase se finir ; jusqu'à 96 s avec
+   la voix). Au-delà, raccourcis le texte lu d'un panneau (clé `voix`) ou le panneau lui-même.
+5. Légende : `publier.py legende` ajoute seul la mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » exigée par
+   la licence (avant la ligne des mots-dièse).
 
 ## 6. Fabrication complète (≈ 15 à 25 min)
 

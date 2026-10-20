@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Mise en ligne d'une vidéo terminée et tenue du journal.
+"""Mise en ligne d'une vidéo terminée et tenue du journal, pour les deux séries : « Vrai ou faux ? » (journal.json,
+#vraioufaux) et le mini-reportage INFINIMENT (journal_reportages.json, #infiniment). La série d'un épisode se lit
+dans son episode.json ; pour « etat » et « creneau », --serie infiniment choisit le reportage.
 
   python3 moteur/publier.py heberger episodes/004-sommeil SORTIE/video.mp4
       -> dépose la vidéo dans la branche « videos » du dépôt public et affiche son lien direct
@@ -12,9 +14,10 @@
       -> ajoute ou met à jour l'entrée de l'épisode dans journal.json.
   python3 moteur/publier.py legende episodes/004-sommeil [RAPPORT.json]
       -> légende finale (légende du script + crédits obligatoires des pictogrammes).
-  python3 moteur/publier.py etat [JSON_DES_POSTS_METRICOOL]
+  python3 moteur/publier.py etat [--serie infiniment] [JSON_DES_POSTS_METRICOOL]
       -> point de départ de la routine : pause ?, file pleine ?, épisode à reprendre (statut « fabriqué » ou
          « hébergé » après un run interrompu) ou nouveau numéro, publications Metricool absentes du journal.
+         Chaque série ne compte que ses propres publications (mot-dièse #vraioufaux ou #infiniment).
 """
 import datetime as dt
 import json
@@ -29,6 +32,32 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = json.load(open(os.path.join(ROOT, "config.json"), encoding="utf-8"))
 TZ = ZoneInfo(CONFIG.get("fuseau", "Europe/Paris"))
 JOURS = {"lundi": 0, "mardi": 1, "mercredi": 2, "jeudi": 3, "vendredi": 4, "samedi": 5, "dimanche": 6}
+_REP = CONFIG.get("reportage", {})
+SERIES = {
+    "vraioufaux": dict(journal="journal.json", hashtag="#vraioufaux", prefixe="vrai_ou_faux", pauses=("PAUSE",),
+                       jours=CONFIG["jours_publication"], heure=CONFIG.get("heure_defaut", "18:00"),
+                       file_max=CONFIG.get("file_max", 3)),
+    "infiniment": dict(journal=_REP.get("journal", "journal_reportages.json"), hashtag=_REP.get("hashtag", "#infiniment"),
+                       prefixe="infiniment", pauses=("PAUSE", "PAUSE_REPORTAGE"),
+                       jours=_REP.get("jours_publication", ["lundi"]), heure=_REP.get("heure_defaut", "18:00"),
+                       file_max=_REP.get("file_max", 2)),
+}
+
+
+def serie_de(spec):
+    return "infiniment" if str(spec.get("serie", "")).upper() == "INFINIMENT" else "vraioufaux"
+
+
+def lire_journal(serie):
+    p = os.path.join(ROOT, SERIES[serie]["journal"])
+    if not os.path.exists(p):
+        return {"episodes": []}
+    return json.load(open(p, encoding="utf-8"))
+
+
+def nom_video(spec):
+    sr = serie_de(spec)
+    return f"{SERIES[sr]['prefixe']}_{int(spec['numero']):02d}_{spec.get('slug', 'episode')}.mp4"
 
 
 def sh(*cmd, check=True):
@@ -67,7 +96,7 @@ def heberger(ep_dir, mp4):
     import shutil
     spec, num, slug = episode_info(ep_dir)
     repo = CONFIG["depot"]
-    name = f"vrai_ou_faux_{num:02d}_{slug}.mp4"
+    name = nom_video(spec)
     if not os.path.isdir(os.path.join(VIDEOS_DIR, ".git")):
         shutil.rmtree(VIDEOS_DIR, ignore_errors=True)
         r = sh("git", "clone", "--depth", "1", "--branch", "videos", "--single-branch",
@@ -84,15 +113,15 @@ def heberger(ep_dir, mp4):
                 f.write("Vidéos en transit vers Metricool (qui en garde sa propre copie). Branche jetable.\n")
     else:
         sh("git", "-C", VIDEOS_DIR, "pull", "--ff-only")
-    # ménage : retirer les vidéos d'épisodes dont la date de publication est passée
-    J = json.load(open(os.path.join(ROOT, "journal.json"), encoding="utf-8"))
+    # ménage : retirer les vidéos d'épisodes (des deux séries) dont la date de publication est passée
     now = dt.datetime.now(TZ)
-    for e in J.get("episodes", []):
-        f = f"vrai_ou_faux_{int(e['numero']):02d}_{e.get('slug', '')}.mp4"
-        pub = e.get("publication")
-        if pub and os.path.exists(os.path.join(VIDEOS_DIR, f)) and f != name:
-            if dt.datetime.fromisoformat(pub) < now:
-                sh("git", "-C", VIDEOS_DIR, "rm", "-q", f)
+    for sr in SERIES:
+        for e in lire_journal(sr).get("episodes", []):
+            f = f"{SERIES[sr]['prefixe']}_{int(e['numero']):02d}_{e.get('slug', '')}.mp4"
+            pub = e.get("publication")
+            if pub and os.path.exists(os.path.join(VIDEOS_DIR, f)) and f != name:
+                if dt.datetime.fromisoformat(pub) < now:
+                    sh("git", "-C", VIDEOS_DIR, "rm", "-q", f)
     for f in os.listdir(VIDEOS_DIR):
         if f.startswith("essai") and f.endswith(".mp4"):
             sh("git", "-C", VIDEOS_DIR, "rm", "-q", f)
@@ -127,16 +156,23 @@ def heberger(ep_dir, mp4):
 TAILLE_ALERTE_KIO = 2 * 1024 * 1024        # 2 Gio : GitHub recommande de rester sous 5 Gio par dépôt
 
 
-def etat(posts_json=None):
+def etat(posts_json=None, serie="vraioufaux"):
     """Point de départ de la routine : pause, file d'attente, épisode à reprendre ou nouvel épisode, publications
-    Metricool absentes du journal (run précédent interrompu après la programmation)."""
-    J = json.load(open(os.path.join(ROOT, "journal.json"), encoding="utf-8"))
-    eps = J.get("episodes", [])
-    out = dict(pause=os.path.exists(os.path.join(ROOT, "PAUSE")))
-    last = eps[-1] if eps else None
-    if last and last.get("statut") in ("fabriqué", "hébergé"):
-        out.update(action="reprendre", numero=last["numero"], statut=last["statut"],
-                   dossier=f"episodes/{int(last['numero']):03d}-{last.get('slug', '')}", video=last.get("video"))
+    Metricool absentes du journal (run précédent interrompu après la programmation). Seules les publications de la
+    série (son mot-dièse) comptent."""
+    cfg = SERIES[serie]
+    J = lire_journal(serie)
+    eps = sorted(J.get("episodes", []), key=lambda e: e["numero"])
+    out = dict(serie=serie, pause=any(os.path.exists(os.path.join(ROOT, f)) for f in cfg["pauses"]))
+    reprises = ("fabriqué", "hébergé") + (("en attente de voix", "voix faite") if serie == "infiniment" else ())
+    en_cours = [e for e in eps if e.get("statut") in reprises]
+    if en_cours:
+        e = en_cours[0]
+        dossier = e.get("dossier") or f"episodes/{int(e['numero']):03d}-{e.get('slug', '')}"
+        out.update(action="reprendre", numero=e["numero"], statut=e["statut"], dossier=dossier, video=e.get("video"))
+    elif serie == "infiniment":
+        out.update(action="nouveau", numero=int(J.get("dernier_numero", 0)) + 1,
+                   sujet_impose=J.get("prochain_sujet"))
     else:
         out.update(action="nouveau", numero=int(J.get("dernier_numero", 0)) + 1,
                    idee_1_imposee=J.get("prochaine_affirmation"))
@@ -144,15 +180,16 @@ def etat(posts_json=None):
         data = json.load(open(posts_json, encoding="utf-8"))
         posts = data.get("data", data) if isinstance(data, dict) else data
         tk = [p for p in posts if any((pr or {}).get("network") == "tiktok" for pr in p.get("providers") or [])]
-        a_venir = [p for p in tk if not p.get("draft")]
+        mien = [p for p in tk if cfg["hashtag"] in (p.get("text") or "")]
+        a_venir = [p for p in mien if not p.get("draft")]
         out["file_attente"] = len(a_venir)
-        out["file_max"] = CONFIG.get("file_max", 3)
+        out["file_max"] = cfg["file_max"]
         out["file_pleine"] = len(a_venir) >= out["file_max"]
         dates = {str(e.get("publication", ""))[:16] for e in eps}
         orph = []
-        for p in tk:
+        for p in mien:
             d = (p.get("publicationDate") or {}).get("dateTime", "")[:16]
-            if "#vraioufaux" in (p.get("text") or "") and d not in dates:
+            if d not in dates:
                 orph.append(dict(id=p.get("id"), uuid=p.get("uuid"), date=d, brouillon=bool(p.get("draft")),
                                  debut=(p.get("text") or "")[:90]))
         out["orphelins"] = orph
@@ -160,12 +197,14 @@ def etat(posts_json=None):
     return out
 
 
-def creneau(posts_json=None, now=None):
-    """Premier créneau libre parmi les jours de publication, au moins delai_veto_h heures plus tard."""
+def creneau(posts_json=None, now=None, serie="vraioufaux"):
+    """Premier créneau libre parmi les jours de publication de la série, au moins delai_veto_h heures plus tard ;
+    un jour qui a déjà une publication (n'importe quelle série) est pris."""
+    cfg = SERIES[serie]
     now = now or dt.datetime.now(TZ)
-    jours = [JOURS[j] for j in CONFIG["jours_publication"]]
+    jours = [JOURS[j] for j in cfg["jours"]]
     delai = dt.timedelta(hours=CONFIG.get("delai_veto_h", 48))
-    h0 = CONFIG.get("heure_defaut", "18:00")
+    h0 = cfg["heure"]
     pris = set()
     if posts_json:
         data = json.load(open(posts_json, encoding="utf-8"))
@@ -173,9 +212,10 @@ def creneau(posts_json=None, now=None):
             d = (p.get("publicationDate") or {}).get("dateTime", "")[:10]
             if d:
                 pris.add(d)
-    for e in json.load(open(os.path.join(ROOT, "journal.json"), encoding="utf-8")).get("episodes", []):
-        if e.get("publication"):
-            pris.add(e["publication"][:10])
+    for sr in SERIES:
+        for e in lire_journal(sr).get("episodes", []):
+            if e.get("publication"):
+                pris.add(e["publication"][:10])
     d = now.date()
     for _ in range(60):
         hh, mm = map(int, h0.split(":"))
@@ -187,18 +227,23 @@ def creneau(posts_json=None, now=None):
 
 
 def journal(ep_dir, kv):
-    path = os.path.join(ROOT, "journal.json")
-    J = json.load(open(path, encoding="utf-8"))
     spec, num, slug = episode_info(ep_dir)
+    serie = serie_de(spec)
+    path = os.path.join(ROOT, SERIES[serie]["journal"])
+    J = lire_journal(serie)
     eps = J.setdefault("episodes", [])
     e = next((x for x in eps if x.get("numero") == num), None)
     if e is None:
         e = dict(numero=num, slug=slug)
         eps.append(e)
-    e.update(dict(titre=" ".join(spec["titre"]), theme=spec.get("theme", slug),
-                  idees=[dict(affirmation=i["affirmation"], verdict=i["verdict"],
-                              sources=[s.get("url") for s in i.get("sources", [])]) for i in spec["idees"]],
-                  prochain=spec["prochain"]["affirmation"]))
+    if serie == "infiniment":
+        e.update(dict(titre=spec.get("titre", slug), dossier=os.path.relpath(os.path.abspath(ep_dir), ROOT),
+                      sources=[x.get("url") for x in spec.get("sources", [])], prochain=spec.get("prochain")))
+    else:
+        e.update(dict(titre=" ".join(spec["titre"]), theme=spec.get("theme", slug),
+                      idees=[dict(affirmation=i["affirmation"], verdict=i["verdict"],
+                                  sources=[x.get("url") for x in i.get("sources", [])]) for i in spec["idees"]],
+                      prochain=spec["prochain"]["affirmation"]))
     if kv.get("publication"):
         # « 2026-10-21T18:00:00 » (heure de Paris, telle que Metricool la donne) -> avec le bon décalage été/hiver
         d = dt.datetime.fromisoformat(kv["publication"])
@@ -206,7 +251,10 @@ def journal(ep_dir, kv):
     e.update(kv)
     eps.sort(key=lambda x: x["numero"])
     J["dernier_numero"] = max(x["numero"] for x in eps)
-    J["prochaine_affirmation"] = eps[-1].get("prochain")
+    if serie == "infiniment":
+        J["prochain_sujet"] = eps[-1].get("prochain")
+    else:
+        J["prochaine_affirmation"] = eps[-1].get("prochain")
     json.dump(J, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(json.dumps(e, ensure_ascii=False, indent=1))
 
@@ -217,32 +265,67 @@ def legende(ep_dir, rapport=None):
     credits = []
     if rapport and os.path.exists(rapport):
         credits = json.load(open(rapport, encoding="utf-8")).get("credits_pictogrammes", [])
+    if serie_de(spec) == "infiniment":                 # pictogrammes utilisés dans les scènes du reportage
+        noms = []
+
+        def chercher(x):
+            if isinstance(x, dict):
+                if x.get("type") == "icone" and x.get("nom"):
+                    noms.append(x["nom"])
+                for v in x.values():
+                    chercher(v)
+            elif isinstance(x, list):
+                for v in x:
+                    chercher(v)
+        chercher(spec.get("scenes", {}))
+        if noms:
+            sys.path.insert(0, os.path.join(ROOT, "moteur"))
+            from vf import icons as IC
+            credits += IC.credits(noms)
+    v = spec.get("voix") or {}
+    if str(v.get("fournisseur", "")).lower().startswith("kyutai"):
+        credits.append("Voix de synthèse : Kyutai TTS (CC BY 4.0)")        # attribution exigée par la licence
     for c in credits:
-        if c not in txt:
+        if c in txt or (c.startswith("Voix de synthèse") and "Kyutai TTS (CC BY 4.0)" in txt):
+            continue
+        lignes = txt.split("\n")
+        if c.startswith("Voix de synthèse") and lignes and lignes[-1].lstrip().startswith("#"):
+            lignes.insert(len(lignes) - 1, c)                     # avant la ligne des mots-dièse
+            txt = "\n".join(lignes)
+        else:
             txt += "\n" + c
     print(txt)
     return txt
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    serie = "vraioufaux"
+    if "--serie" in args:
+        k = args.index("--serie")
+        serie = args[k + 1]
+        del args[k:k + 2]
+        if serie not in SERIES:
+            print(f"série inconnue : {serie} (vraioufaux, infiniment)")
+            sys.exit(1)
+    if not args:
         print(__doc__)
         sys.exit(1)
-    c = sys.argv[1]
+    c = args[0]
     if c == "heberger":
-        sys.exit(0 if heberger(sys.argv[2], sys.argv[3]) else 2)
+        sys.exit(0 if heberger(args[1], args[2]) else 2)
     elif c == "creneau":
-        print(creneau(sys.argv[2] if len(sys.argv) > 2 else None))
+        print(creneau(args[1] if len(args) > 1 else None, serie=serie))
     elif c == "journal":
-        args = sys.argv[3:]
+        rest = args[2:]
         kv = {}
-        for k, v in zip(args[0::2], args[1::2]):
+        for k, v in zip(rest[0::2], rest[1::2]):
             kv[k.lstrip("-")] = v
-        journal(sys.argv[2], kv)
+        journal(args[1], kv)
     elif c == "legende":
-        legende(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)
+        legende(args[1], args[2] if len(args) > 2 else None)
     elif c == "etat":
-        etat(sys.argv[2] if len(sys.argv) > 2 else None)
+        etat(args[1] if len(args) > 1 else None, serie=serie)
     else:
         print(__doc__)
         sys.exit(1)

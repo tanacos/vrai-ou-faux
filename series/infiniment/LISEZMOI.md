@@ -1,67 +1,85 @@
 # INFINIMENT — de l'infiniment petit à l'infiniment grand
 
-Série TikTok narrée (voix ElevenLabs), format reportage : une question qui intrigue, une descente ou une montée dans
-les échelles, une révélation chiffrée et sourcée, une chute, l'annonce du prochain épisode. 80 à 95 s.
+Série TikTok narrée (voix de synthèse « Estelle »), format mini-reportage, **un épisode par semaine** (routine
+automatique : `ROUTINE_REPORTAGE.md` à la racine du dépôt). Une question qui intrigue, un voyage dans les échelles,
+une révélation chiffrée et sourcée, une chute, l'annonce du prochain épisode. 80 à 90 s.
 
 ## La promesse
 
 Un seul fait étonnant par épisode, démontré pas à pas, avec des chiffres qu'on peut vérifier (sources en
 description). On montre l'échelle à chaque instant : la **règle des puissances de dix** en haut de l'écran est la
-signature visuelle de la série (curseur de 10⁻¹⁵ m à 10²⁶ m).
+signature visuelle de la série (curseur de 10⁻¹⁵ m à 10²⁷ m).
 
-## Structure d'un épisode (blocs de narration = scènes)
+## Structure d'un épisode (un paragraphe de narration = un bloc = une scène)
 
-1. **Accroche** (≤ 3 s avant la première image forte) : la conclusion paradoxale, au conditionnel si c'est une
-   expérience de pensée (« Toute l'humanité… pourrait tenir dans un morceau de sucre »).
+1. **Accroche** (≤ 3 s avant la première image forte, titre de couverture visible dès la 1re image) : la conclusion
+   paradoxale, au conditionnel si c'est une expérience de pensée.
 2. **Voyage d'échelle** : on descend (ou on monte) par paliers concrets, un mot = un palier = une image.
-3. **Première surprise**, puis **la comparaison qui fait image** (stade / moustique).
+3. **Première surprise**, puis **la comparaison qui fait image** (stade / moustique, fourmi / élastique).
 4. **Le chiffre clé** en très grand, avec sa source.
-5. **L'expérience** : le raisonnement en 3 ou 4 étapes, le calcul affiché (≈, ≤ : jamais de fausse précision).
-6. **La preuve que ça existe** (objet réel), puis **le retournement** (« Mais alors, pourquoi… ? »).
+5. **L'explication** en 3 ou 4 étapes, le calcul affiché (≈, ≤ : jamais de fausse précision).
+6. **Le retournement** (« Mais alors, pourquoi… ? »).
 7. **Prochain épisode** dans l'autre sens d'échelle + « Les sources sont en description ».
 
 ## Ton
 
-Tutoiement, phrases courtes, verbes d'action, une seule idée par phrase. Balises eleven_v4 avec parcimonie
-(`[curious]` à l'ouverture, `[dramatically]` pour la révélation, `[pause]` avant la chute). Pas d'emphase qui
-dépasse les sources : leçons de la contre-vérification de l'épisode 1 :
+Tutoiement, phrases courtes, verbes d'action, une seule idée par phrase. 230 à 245 mots (≈ 85 s avec Estelle).
+Nombres en chiffres dans la narration (les sous-titres les montrent ; la voix les lit en lettres). Ni points de
+suspension ni balises (la voix Kyutai les rend mal) : une virgule, un deux-points. Pas d'emphase qui dépasse les
+sources (leçons des contre-vérifications) :
 - pas de « la physique est formelle » pour un ordre de grandeur : « un vrai calcul de physique » ;
 - conditionnel pour une expérience de pensée ; « environ », « au moins », « presque » quand la source le dit ;
 - pas de formule choc qui contredit ce qu'on vient d'expliquer (« tu n'as jamais touché ta chaise ») ;
-- citer la NASA mot pour mot : « matière d'étoile à neutrons », « pèserait environ ».
-- les images aussi sont des affirmations : deux volumes comparés sont dessinés à l'échelle (la v1 montrait
-  l'humanité 11 à 16 fois trop petite dans le sucre), et un compteur n'affiche sa source qu'une fois arrivé au
-  vrai chiffre.
+- citer une agence mot pour mot : « matière d'étoile à neutrons », « pèserait environ » ;
+- « l'étoile la plus proche » est le Soleil : dire « la plus proche après lui » ;
+- les images aussi sont des affirmations : deux tailles comparées sont dessinées à l'échelle (la v1 de l'épisode 1
+  montrait l'humanité 11 à 16 fois trop petite dans le sucre), un compteur n'affiche sa source qu'une fois arrivé au
+  vrai chiffre, une analogie est présentée comme une image (« imagine… »).
 
-## Rigueur (comme la série « Vrai ou faux ? »)
+## Rigueur (comme « Vrai ou faux ? »)
 
-- Chaque nombre dit ou affiché figure dans l'extrait d'une source (`episode.json` → `sources`), au moins deux éditeurs
-  différents pour le fait central, calcul écrit dans `calcul`.
-- Contre-vérification par un agent indépendant avant publication : zéro écart exigé (voir `verification` dans
-  `ep01/episode.json`).
-- Une phrase fausse dans une prise déjà générée se retire sans régénérer (`voix.retraits`) ; une phrase à reformuler
-  impose une nouvelle prise (`narration_vN.txt`).
+- Chaque nombre dit ou affiché figure dans l'extrait d'une source (`episode.json` → `sources`), au moins deux
+  éditeurs différents pour le fait central, calcul écrit dans `calcul`, ce que montrent les images dans `images`.
+- Contre-vérification par un agent indépendant avant la voix (`python3 moteur/rp/dossier.py`) : zéro écart exigé.
+- Une phrase fausse dans une prise déjà générée se retire sans régénérer (`voix.retraits`) ; une phrase à
+  reformuler impose une nouvelle prise.
 
 ## Fabrication
 
+Moteur générique (`moteur/rp`, format : `moteur/rp/FORMAT_REPORTAGE.md`) : les scènes sont décrites dans
+`episode.json` (types `heros`, `zoom`, `anneaux`, `trajet`, `fin` ; objets dessinés : astres, galaxies, toile
+cosmique, atome, molécule, cellule, verre d'eau…), la musique et les bruitages sont synthétisés d'après l'ambiance
+de chaque scène. L'épisode 1, antérieur au moteur, garde son `rendu.py` et son `son.py` sur mesure.
 ```bash
-python3 series/infiniment/fabriquer.py voix   series/infiniment/epNN   # chronologie calée sur la voix
-python3 series/infiniment/fabriquer.py apercu series/infiniment/epNN   # planche + audit des zones sûres
-python3 series/infiniment/fabriquer.py tout   series/infiniment/epNN   # vidéo + 15 contrôles (≈ 20 min)
+python3 series/infiniment/fabriquer.py provisoire epNN   # scènes réglées avant la voix
+python3 series/infiniment/fabriquer.py apercu     epNN
+python3 moteur/voix_libre.py generer series/infiniment/epNN --declarer
+python3 series/infiniment/fabriquer.py tout       epNN   # vidéo + contrôles (« conforme »)
 ```
-Voix : voir `moteur/VOIX.md` (génération ElevenLabs, relais GitHub, horodatage). Chaque épisode a son `rendu.py`
-(scènes) et son `son.py` (musique et bruitages), pilotés par les repères « bloc:mot » de `chrono.json`.
 
-## Pistes d'épisodes (à vérifier avant écriture)
+## Voix
 
-- Ép. 2 (annoncé) : le bord de l'univers observable.
-- Combien d'atomes dans un verre d'eau, comparé au nombre de verres d'eau dans les océans ?
+Estelle (Kyutai TTS 1.6B, poids CC BY 4.0, voix cédée en CC0) : mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) »
+dans la légende. Voir `moteur/VOIX.md` (prérequis réseau de l'environnement de la tâche).
+
+## Épisodes
+
+| N° | Dossier | Sujet | Statut |
+|---|---|---|---|
+| 1 | `ep01_estelle16` | L'humanité dans un sucre (vers le petit) | voir `journal_reportages.json` |
+| 2 | `ep02` | Le bord de l'univers observable (vers le grand) | voir `journal_reportages.json` |
+| 3 | à écrire | Au cœur d'un verre d'eau (annoncé à la fin de l'épisode 2) | — |
+
+(`ep01` : version ElevenLabs, non commerciale ; `ep01_charles`, `ep01_estelle` : essais de voix.)
+
+## Pistes d'épisodes (à vérifier avant écriture ; alterner petit / grand)
+
+- Ép. 3 (annoncé) : un verre d'eau. Piste : y a-t-il plus d'atomes dans un verre d'eau que de verres d'eau dans
+  tous les océans ? (nombre d'Avogadro, volume des océans : NOAA, USGS).
 - Si le Soleil était une bille, où serait l'étoile la plus proche ?
 - Un neutrino peut-il traverser la Terre sans rien toucher ?
-- La lumière que tu vois du Soleil est-elle « en retard » ?
-- Un virus, une bactérie, une cellule : la même descente d'échelle qu'à l'épisode 1, en biologie.
-
-## Licence de la voix
-
-Prises générées avec l'offre gratuite d'ElevenLabs : usage non commercial, « elevenlabs.io » dans le titre. Pour un
-compte rémunéré : abonnement payant et **nouvelle prise** (voir `moteur/VOIX.md`).
+- La lumière du Soleil que tu vois est-elle « en retard » ? (8 min pour venir de la surface, bien plus pour sortir
+  du cœur).
+- Un virus, une bactérie, une cellule : la même descente d'échelle, en biologie.
+- Combien de Terres dans le Soleil, combien de Soleils dans la plus grosse étoile connue ?
+- Le plus petit objet jamais photographié, la plus grande structure connue de l'univers.

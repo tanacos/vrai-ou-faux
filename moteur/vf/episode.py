@@ -24,6 +24,7 @@ from .base import (C3, W, H, FPS, f32, sat, sstep, smoother, finalize, text_widt
 from .ui import T, PARA, BIG, PILL, ain, section, fr, CYAN, WHITE, LIGHT, CORAL, DARK
 
 MIN_DUR, MAX_DUR = 61.0, 90.0
+MAX_DUR_VOIX = 96.0           # avec une voix, chaque phrase doit pouvoir se finir : quelques secondes de plus
 
 
 def sources_block(src, sizes, max_w, max_lines, path=F_SEMI):
@@ -300,10 +301,12 @@ class Episode:
 
     def _validate_timing(self):
         d = self.TL.DUR
+        mx = MAX_DUR_VOIX if getattr(self, "voix", None) is not None else MAX_DUR
         if d < MIN_DUR:
             self.errors.append(f"durée {d:.1f} s < {MIN_DUR} s : ajouter un panneau (la rémunération exige > 1 min)")
-        if d > MAX_DUR:
-            self.errors.append(f"durée {d:.1f} s > {MAX_DUR} s : raccourcir les panneaux")
+        if d > mx:
+            self.errors.append(f"durée {d:.1f} s > {mx} s : raccourcir les panneaux"
+                               + (" ou leur texte lu (« voix »)" if mx == MAX_DUR_VOIX else ""))
 
     def _busy_fn(self, i):
         """Opacité des panneaux qui occupent la zone visuelle (barres) : les étiquettes de la scène s'effacent."""

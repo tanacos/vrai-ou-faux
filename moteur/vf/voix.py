@@ -62,6 +62,11 @@ class Narration:
                 if tok in ("?", "!", ":", ";", "%", "»") and self.mots and self.mots[-1]["bloc"] == i:
                     self.mots[-1]["texte"] += " " + tok if tok != "%" else " %"
                     continue
+                if (re.fullmatch(r"\d{3}[.,;:!?…»]*", tok) and self.mots and self.mots[-1]["bloc"] == i
+                        and re.fullmatch(r"[≈~<>]?\d{1,3}(?:\xa0\d{3})*", self.mots[-1]["texte"])):
+                    # « 380 000 » : un seul mot (espace insécable), pour les sous-titres comme pour les repères
+                    self.mots[-1]["texte"] += "\xa0" + tok
+                    continue
                 self.mots.append(dict(texte=tok, bloc=i, pause_avant=pause))
                 pause = 0.0
         for k, w in enumerate(self.mots):
@@ -191,6 +196,14 @@ class Montage:
         self.tempo = float(tempo)
         x = lire_audio(prise_mp3)
         mots_s = charger_mots_scribe(mots_json)
+        # prise générée bloc par bloc (voix libre Kyutai) : bornes exactes de chaque bloc dans la prise
+        self.bornes_prise = None
+        try:
+            bp = json.load(open(mots_json, encoding="utf-8")).get("blocs")
+            if isinstance(bp, list) and [b.get("bloc") for b in bp] == list(narr.ids):
+                self.bornes_prise = [(float(b["debut"]), float(b["fin"])) for b in bp]
+        except (AttributeError, KeyError, TypeError, ValueError):
+            self.bornes_prise = None
         times, self.taux = aligner(narr, mots_s)
         env = enveloppe_db(x)
         thr = seuil_silence(env)
@@ -729,6 +742,19 @@ class Clips:
         thr = seuil_silence(env)
         cuts = [0.0]
         self.niveaux_coupe = {}                      # niveau de la voix (dBFS) à chaque coupe, pour le contrôle
+        if M.bornes_prise and order == list(ids):
+            # prise générée bloc par bloc : on coupe au milieu du silence inséré entre deux blocs (bornes exactes,
+            # sans dépendre des horodatages de la transcription)
+            bp = M.bornes_prise
+            for i, (k0, k1) in enumerate(zip(order, order[1:])):
+                c = M.vers_monte((bp[i][1] + bp[i + 1][0]) / 2)
+                j = min(int(c / hop), len(env) - 1)
+                cuts.append(c)
+                self.niveaux_coupe[f"{k0}|{k1}"] = round(float(env[max(j - 1, 0):j + 2].max()), 1)
+            self.seuil_silence = round(thr, 1)
+            cuts.append(M.duree)
+            self._decouper(M, order, b, cuts)
+            return
         for k0, k1 in zip(order, order[1:]):
             lo, hi = b[k0][1] - 0.06, b[k1][0] + 0.04
             if hi - lo < 0.03:
@@ -747,6 +773,9 @@ class Clips:
             self.niveaux_coupe[f"{k0}|{k1}"] = round(float(env[min(j, len(env) - 1)]), 1)
         self.seuil_silence = round(thr, 1)
         cuts.append(M.duree)
+        self._decouper(M, order, b, cuts)
+
+    def _decouper(self, M, order, b, cuts):
         fade = int(0.010 * SR)
         self.clips = {}
         for k, c0, c1 in zip(order, cuts[:-1], cuts[1:]):

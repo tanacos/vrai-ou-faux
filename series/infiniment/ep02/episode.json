@@ -1,0 +1,513 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 2,
+ "slug": "bord-univers",
+ "narration": "narration.txt",
+ "blocs": [
+  "hook",
+  "voyage",
+  "passe",
+  "limite",
+  "paradoxe",
+  "horizon",
+  "outro"
+ ],
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ },
+ "titre": "Le bord de l'univers observable",
+ "scenes": {
+  "hook": {
+   "type": "anneaux",
+   "ambiance": "mystere",
+   "expo": 26.64,
+   "couverture": [
+    "LE BORD DE",
+    "L'*UNIVERS* OBSERVABLE"
+   ],
+   "titres": [
+    {
+     "quand": "138",
+     "lignes": [
+      "13,8 MILLIARDS",
+      "D'*ANNÉES*"
+     ]
+    },
+    {
+     "quand": "46",
+     "lignes": [
+      "46 MILLIARDS",
+      "D'*ANNÉES-LUMIÈRE*"
+     ]
+    },
+    {
+     "quand": "trois",
+     "lignes": [
+      "PLUS DE *3 FOIS*",
+      "PLUS LOIN"
+     ]
+    },
+    {
+     "quand": "erreur",
+     "lignes": [
+      "CE N'EST PAS",
+      "UNE *ERREUR*"
+     ]
+    }
+   ],
+   "centre": {
+    "texte": "NOUS",
+    "quand": "debut"
+   },
+   "anneaux": [
+    {
+     "quand": "46",
+     "rayon": 46,
+     "texte": "46 MILLIARDS D'AL",
+     "couleur": "ambre"
+    },
+    {
+     "quand": "trois",
+     "rayon": 13.8,
+     "texte": "13,8 MILLIARDS D'AL",
+     "couleur": "cyan"
+    }
+   ],
+   "remplissage": {
+    "type": "univers"
+   },
+   "remplissage_quand": "debut",
+   "impacts": [
+    "erreur"
+   ]
+  },
+  "voyage": {
+   "type": "zoom",
+   "sens": "sortie",
+   "ambiance": "emerveillement",
+   "titre": [
+    "ON *MONTE*"
+   ],
+   "objet": {
+    "type": "terre"
+   },
+   "expo_depart": 7.1,
+   "paliers": [
+    {
+     "quand": "soleil",
+     "objet": {
+      "type": "soleil"
+     },
+     "titre": [
+      "LE *SOLEIL*"
+     ],
+     "info": "SA LUMIÈRE : ≈ 8 MIN",
+     "expo": 11.2
+    },
+    {
+     "quand": "etoile",
+     "objet": {
+      "type": "etoile",
+      "couleur": "corail"
+     },
+     "titre": [
+      "L'ÉTOILE LA",
+      "PLUS *PROCHE*"
+     ],
+     "info": "SA LUMIÈRE : PLUS DE 4 ANS",
+     "expo": 16.6
+    },
+    {
+     "quand": "galaxie",
+     "objet": {
+      "type": "galaxie",
+      "inclinaison": 0.2
+     },
+     "titre": [
+      "LA *VOIE LACTÉE*"
+     ],
+     "info": "≈ 100 000 ANNÉES-LUMIÈRE",
+     "expo": 21.0
+    }
+   ]
+  },
+  "passe": {
+   "type": "heros",
+   "ambiance": "calme",
+   "expo": 22.37,
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "REGARDER LOIN,",
+      "C'EST VOIR *LE PASSÉ*"
+     ]
+    },
+    {
+     "quand": "andromede",
+     "lignes": [
+      "*ANDROMÈDE*"
+     ]
+    },
+    {
+     "quand": "25",
+     "lignes": [
+      "À 2,5 MILLIONS",
+      "D'*ANNÉES-LUMIÈRE*"
+     ]
+    },
+    {
+     "quand": "telle",
+     "lignes": [
+      "VUE TELLE QU'IL Y A",
+      "*2,5 MILLIONS* D'ANNÉES"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "galaxie",
+    "inclinaison": 0.75,
+    "angle": -0.6
+   },
+   "objet_quand": "debut"
+  },
+  "limite": {
+   "type": "heros",
+   "ambiance": "mystere",
+   "expo": 26.64,
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "TOUT AU *BOUT*"
+     ]
+    },
+    {
+     "quand": "vieille",
+     "lignes": [
+      "LA PLUS VIEILLE",
+      "*LUMIÈRE*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "cmb"
+   },
+   "objet_quand": "vieille",
+   "chiffres": [
+    {
+     "quand": "380000",
+     "valeur": 380000,
+     "prefixe": "≈ ",
+     "unite": "ANS APRÈS LE *BIG BANG*",
+     "source": "NASA, ESA"
+    },
+    {
+     "quand": "voyage",
+     "valeur": 13.8,
+     "decimales": 1,
+     "prefixe": "≈ ",
+     "unite": "MILLIARDS D'ANNÉES DE *VOYAGE*",
+     "compter": false
+    }
+   ]
+  },
+  "paradoxe": [
+   {
+    "type": "heros",
+    "ambiance": "tension",
+    "expo": 26.64,
+    "titres": [
+     {
+      "quand": "debut",
+      "lignes": [
+       "POURQUOI *46*",
+       "ET PAS 13,8 ?"
+      ]
+     },
+     {
+      "quand": "espace",
+      "lignes": [
+       "L'ESPACE LUI-MÊME",
+       "A *GRANDI*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "univers"
+    },
+    "echelle": [
+     0.55,
+     1.05
+    ]
+   },
+   {
+    "type": "trajet",
+    "a_partir_de": "imagine",
+    "ambiance": "tension",
+    "titres": [
+     {
+      "quand": "imagine",
+      "lignes": [
+       "IMAGINE UNE *FOURMI*",
+       "SUR UN *ÉLASTIQUE*"
+      ]
+     },
+     {
+      "quand": "arrive",
+      "lignes": [
+       "SON POINT DE DÉPART",
+       "EST *BIEN PLUS LOIN*"
+      ]
+     }
+    ],
+    "depart": {
+     "objet": {
+      "type": "point",
+      "couleur": "corail"
+     },
+     "texte": "DÉPART"
+    },
+    "arrivee": {
+     "objet": {
+      "type": "point",
+      "couleur": "ambre"
+     },
+     "texte": "ARRIVÉE"
+    },
+    "mobile": {
+     "type": "fourmi"
+    },
+    "debut": "imagine",
+    "fin": "arrive",
+    "etirement": 4,
+    "mesures": {
+     "quand": "loin",
+     "aujourdhui": "DISTANCE AUJOURD'HUI",
+     "parcouru": "CHEMIN PARCOURU"
+    }
+   }
+  ],
+  "horizon": {
+   "type": "anneaux",
+   "ambiance": "emerveillement",
+   "expo": 26.64,
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "PAS UN *MUR*"
+     ]
+    },
+    {
+     "quand": "limite",
+     "lignes": [
+      "LA LIMITE DE",
+      "CE QU'ON PEUT *VOIR*"
+     ]
+    },
+    {
+     "quand": "infini",
+     "lignes": [
+      "PEUT-ÊTRE",
+      "*INFINI*"
+     ]
+    }
+   ],
+   "centre": {
+    "texte": "NOUS",
+    "quand": "debut"
+   },
+   "anneaux": [
+    {
+     "quand": "debut",
+     "rayon": 1,
+     "texte": "UNIVERS OBSERVABLE",
+     "couleur": "cyan"
+    }
+   ],
+   "remplissage": {
+    "type": "univers"
+   },
+   "remplissage_quand": "debut",
+   "au_dela": {
+    "quand": "audela"
+   },
+   "impacts": [
+    "infini"
+   ]
+  },
+  "outro": {
+   "type": "fin",
+   "ambiance": "triomphe",
+   "prochain": [
+    "AU CŒUR",
+    "D'UN *VERRE D'EAU*"
+   ],
+   "quand": "verre",
+   "sources_quand": "sources",
+   "objet": {
+    "type": "verre"
+   }
+  }
+ },
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0",
+  "respirations": {
+   "hook": 0.8,
+   "paradoxe": 0.9,
+   "horizon": 1.3
+  },
+  "pauses": 1.0,
+  "avance_image_s": 0.3,
+  "reglages": "Kyutai TTS 1.6B sur processeur, température 0,6, un paragraphe par appel, vérifié par transcription indépendante ; « micro studio » (aigus rehaussés, air recréé, dé-esseur)"
+ },
+ "sources": [
+  {
+   "editeur": "Encyclopædia Britannica",
+   "titre": "Observable universe",
+   "url": "https://www.britannica.com/science/observable-universe",
+   "extraits": [
+    "The observable universe is approximately 93 billion light-years in diameter.",
+    "The estimated age of the universe since the big bang is 13.8 billion years.",
+    "Unlike the observable universe, the universe is possibly infinite and without spatial edges.",
+    "At the farthest limits of the observable universe is the cosmic microwave background"
+   ],
+   "sert_a": "âge 13,8 milliards d'années ; rayon ≈ 46 milliards d'années-lumière (moitié de 93) ; expansion pendant le trajet de la lumière ; limite = fond diffus ; univers peut-être infini"
+  },
+  {
+   "editeur": "Astronomy (magazine), Southworth Planetarium, Université du Southern Maine",
+   "titre": "How big is the universe? (numéro de juin 2024)",
+   "url": "https://www.astronomy.com/science/size-of-the-universe/",
+   "extraits": [
+    "Astronomers widely accept that the universe formed in the Big Bang approximately 13.8 billion years ago.",
+    "during that period, the amount of space separating us from that object has increased substantially.",
+    "Calculations show that this expansion would cause the current radius of the universe to be about 46 billion light-years."
+   ],
+   "sert_a": "46 milliards d'années-lumière ; l'espace a grandi pendant le trajet"
+  },
+  {
+   "editeur": "ESA",
+   "titre": "Planck science highlights",
+   "url": "https://www.esa.int/Science_Exploration/Space_Science/Planck/Planck_science_highlights",
+   "extraits": [
+    "Planck data provided a new value for the age of the Universe, 13.8 billion years.",
+    "the Universe as it was about 380 000 years after the Big Bang"
+   ],
+   "sert_a": "13,8 milliards d'années ; lumière émise ≈ 380 000 ans après le Big Bang"
+  },
+  {
+   "editeur": "NASA (Goddard)",
+   "titre": "NASA's WMAP Project Completes Satellite Operations",
+   "url": "https://www.nasa.gov/centers-and-facilities/goddard/nasas-wmap-project-completes-satellite-operations",
+   "extraits": [
+    "the cosmic microwave background, the oldest light in the universe",
+    "a pattern frozen in place when the cosmos was only 380,000 years old"
+   ],
+   "sert_a": "la plus vieille lumière de l'univers ; 380 000 ans"
+  },
+  {
+   "editeur": "NASA",
+   "titre": "What Is a Light-Year?",
+   "url": "https://science.nasa.gov/exoplanets/what-is-a-light-year/",
+   "extraits": [
+    "the distance light travels in one year",
+    "Earth is about eight light minutes from the Sun",
+    "A little more than four light-years away",
+    "about 100,000 light-years across"
+   ],
+   "sert_a": "définition de l'année-lumière ; ≈ 8 minutes ; plus de 4 ans (Proxima) ; Voie lactée ≈ 100 000 années-lumière"
+  },
+  {
+   "editeur": "Smithsonian National Air and Space Museum",
+   "titre": "How long does it take light from the Sun to get to Earth?",
+   "url": "https://howthingsfly.si.edu/ask-an-explainer/how-long-does-it-take-light-sun-get-earth",
+   "extraits": [
+    "it takes a photon of light about 8 minutes and 20 seconds to travel from the Sun to Earth.",
+    "On average, the Sun is 150 million kilometers (93 million miles) away from Earth."
+   ],
+   "sert_a": "≈ 8 minutes ; distance Terre-Soleil (règle : 10¹¹ m)"
+  },
+  {
+   "editeur": "Encyclopædia Britannica",
+   "titre": "Alpha Centauri",
+   "url": "https://www.britannica.com/place/Alpha-Centauri",
+   "extraits": [
+    "the closest star to the Sun, about 4.2 light-years distant"
+   ],
+   "sert_a": "étoile la plus proche après le Soleil : plus de 4 ans de trajet pour sa lumière (règle : 10¹⁶ m)"
+  },
+  {
+   "editeur": "ESA (Gaia)",
+   "titre": "Anatomy of the Milky Way",
+   "url": "https://sci.esa.int/web/gaia/-/58206-anatomy-of-the-milky-way",
+   "extraits": [
+    "The disc measures about 100 000 light-years across."
+   ],
+   "sert_a": "Voie lactée ≈ 100 000 années-lumière (règle : 10²¹ m)"
+  },
+  {
+   "editeur": "NASA (Webb)",
+   "titre": "How Does Webb See Back in Time?",
+   "url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time",
+   "extraits": [
+    "Looking out in space is like looking back in time.",
+    "Our nearest large neighbor galaxy, Andromeda, is about 2.5 million light-years away."
+   ],
+   "sert_a": "regarder loin, c'est regarder dans le passé ; Andromède à 2,5 millions d'années-lumière"
+  },
+  {
+   "editeur": "ESA/Hubble",
+   "titre": "Hubble's panoramic view of the Andromeda Galaxy",
+   "url": "https://esahubble.org/images/heic2501a/",
+   "extraits": [
+    "the neighboring Andromeda galaxy, located 2.5 million light-years away"
+   ],
+   "sert_a": "Andromède à 2,5 millions d'années-lumière (règle : 10²² m)"
+  },
+  {
+   "editeur": "StarDate (Observatoire McDonald, Université du Texas)",
+   "titre": "Andromeda Galaxy",
+   "url": "https://legacy.stardate.org/radio/program/2019-10-26",
+   "extraits": [
+    "about two-and-a-half million years"
+   ],
+   "sert_a": "on voit Andromède telle qu'elle était il y a ≈ 2,5 millions d'années"
+  },
+  {
+   "editeur": "NASA",
+   "titre": "Earth: Facts",
+   "url": "https://science.nasa.gov/earth/facts/",
+   "extraits": [
+    "With an equatorial diameter of 7,926 miles (12,756 kilometers)"
+   ],
+   "sert_a": "taille de la Terre (règle : 10⁷ m)"
+  }
+ ],
+ "calcul": "46 / 13,8 ≈ 3,3 : « plus de trois fois ». En 13,8 milliards d'années, la lumière parcourt 13,8 milliards d'années-lumière (définition de l'année-lumière, NASA) : c'est la « distance parcourue par la lumière depuis le Big Bang » ; le bord est aujourd'hui à ≈ 46 milliards d'années-lumière (Britannica : 93 de diamètre ; Astronomy : rayon ≈ 46) parce que l'espace a grandi pendant le trajet. Voie lactée ≈ 100 000 années-lumière de large, donc ≈ 100 000 ans de trajet pour la lumière (définition). Andromède à 2,5 millions d'années-lumière, donc vue telle qu'il y a ≈ 2,5 millions d'années. La plus vieille lumière, émise ≈ 380 000 ans après le Big Bang, voyage depuis 13,8 milliards d'années moins 380 000 ans : « presque 13,8 milliards ». Règle des puissances de dix (ordre de grandeur, en mètres) : Terre 1,3 × 10⁷ ; Terre-Soleil 1,5 × 10¹¹ ; Proxima 4,2 × 9,46 × 10¹⁵ ≈ 4,0 × 10¹⁶ ; Voie lactée 10⁵ × 9,46 × 10¹⁵ ≈ 9,5 × 10²⁰ ; Andromède 2,5 × 10⁶ × 9,46 × 10¹⁵ ≈ 2,4 × 10²² ; univers observable (rayon) 46 × 10⁹ × 9,46 × 10¹⁵ ≈ 4,4 × 10²⁶ (affiché 10²⁷ : puissance de dix la plus proche).",
+ "images": "Les deux anneaux de l'ouverture sont à l'échelle (rayons 13,8 et 46). L'élastique est une image de l'expansion (étirement ×4, chemin parcouru et distance finale à l'échelle de ce modèle), pas un calcul cosmologique. Proxima du Centaure est une naine rouge (couleur corail). Le fond diffus est une carte marbrée illustrative (bleu froid, orange chaud), pas la vraie carte de Planck.",
+ "publication": {
+  "titre": "Le bord de l'univers observable",
+  "legende": "L'univers a 13,8 milliards d'années… mais le bord de ce qu'on peut voir est à 46 milliards d'années-lumière. Comment est-ce possible ? INFINIMENT, épisode 2 : de l'infiniment petit à l'infiniment grand.\nEn bref : pendant que la plus vieille lumière voyageait vers nous, l'espace lui-même a grandi.\nSources : Britannica, Astronomy (Southworth Planetarium, Univ. of Southern Maine), ESA (Planck, Gaia), NASA (WMAP, Webb, What is a light-year?), ESA/Hubble, Smithsonian, StarDate (McDonald Observatory).\nVoix de synthèse : Kyutai TTS (CC BY 4.0)\n#infiniment #science #espace #univers #astronomie #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#infiniment",
+   "#science",
+   "#espace",
+   "#univers",
+   "#astronomie",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ],
+  "contenu_ia": true
+ },
+ "prochain": "Au cœur d'un verre d'eau (épisode 3 : plus d'atomes dans un verre d'eau que de verres d'eau dans les océans ?)"
+}

@@ -147,6 +147,17 @@ def diagnostic(afficher=True):
 
 
 # ------------------------------------------------------------------ génération
+def memoire_gio():
+    """Mémoire résidente actuelle du processus (Gio)."""
+    try:
+        for ligne in open("/proc/self/status"):
+            if ligne.startswith("VmRSS:"):
+                return int(ligne.split()[1]) / 2 ** 20
+    except OSError:
+        pass
+    return 0.0
+
+
 def generer(ep_dir, declarer=False):
     import resource
 
@@ -166,7 +177,6 @@ def generer(ep_dir, declarer=False):
         torch.set_num_threads(os.cpu_count() or 4)
     except ImportError:
         torch = None
-    asr = WhisperModel(r["asr"], device="cpu", compute_type="int8", cpu_threads=os.cpu_count() or 4)
     if r["moteur"] == "kyutai-1.6b":
         from moshi.models.loaders import CheckpointInfo
         from moshi.models.tts import DEFAULT_DSM_TTS_REPO, TTSModel as DSM
@@ -191,7 +201,12 @@ def generer(ep_dir, declarer=False):
 
         def produire(texte):
             return tts.generate_audio(etat, texte, max_tokens=r["max_tokens"]).numpy().astype(np.float32)
-    print(f"modèle {r['moteur']} chargé en {time.time() - t0:.0f} s ({dtype}, {os.cpu_count()} cœurs)", flush=True)
+    import gc
+    gc.collect()
+    # la transcription se charge APRÈS le modèle de voix : le pic de mémoire du chargement ne s'additionne pas
+    asr = WhisperModel(r["asr"], device="cpu", compute_type="int8", cpu_threads=os.cpu_count() or 4)
+    print(f"modèle {r['moteur']} chargé en {time.time() - t0:.0f} s ({dtype}, {os.cpu_count()} cœurs, "
+          f"mémoire {memoire_gio():.1f} Gio)", flush=True)
 
     def transcrire(a16):
         segs, _ = asr.transcribe(a16, language="fr", beam_size=5, vad_filter=False)

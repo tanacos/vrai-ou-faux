@@ -1,111 +1,88 @@
-# Couche voix (ElevenLabs)
+# Couche voix
 
-Une voix de synthèse ElevenLabs lit l'épisode ; tout le reste (montage, sous-titres, mixage, contrôles) se fait ici,
-de façon reproductible. **Désactivée par défaut** dans la routine (`"voix_active": false` dans `config.json`) : voir
-« Licence » avant de l'activer.
+Deux voix possibles ; tout le reste (montage, sous-titres, mixage, contrôles) se fait ici, de façon reproductible.
 
-## Pourquoi un relais
+| | **Estelle (Kyutai TTS 1.6B)**, par défaut | Célian (ElevenLabs), facultative |
+|---|---|---|
+| Licence | poids CC BY 4.0 : usage commercial permis, mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » (ajoutée seule par `publier.py legende`) ; voix Estelle cédée en CC0 | offre gratuite : **aucun usage commercial** ; offre payante requise pour un compte rémunéré |
+| Où elle tourne | dans la session de la routine (processeur), 20 à 40 min par épisode | serveurs ElevenLabs, via le connecteur + relais GitHub |
+| Prérequis | accès réseau à PyPI, download.pytorch.org et Hugging Face (voir plus bas) | crédits (1 par caractère) |
 
-Les sessions Claude ne joignent ni ElevenLabs ni son stockage (`storage.googleapis.com`) : la prise générée ne peut pas
-être téléchargée directement. `moteur/relais.py` passe par GitHub, joignable des deux côtés : la session dépose l'URL
-dans la branche jetable `relais`, un runner GitHub Actions télécharge le fichier et le dépose dans la même branche, la
-session le récupère par git (10 à 40 s). **Le dépôt est public : les prises relayées le sont aussi.**
-Les liens ElevenLabs sont signés pour **2 heures** ; un nouvel appel à `creative_get_flow_run_status` en redonne un.
+`config.json` : `"voix_active": true`, `"voix_moteur": "kyutai-1.6b"`.
 
-## Procédure (épisode « Vrai ou faux ? »)
+## Estelle : `moteur/voix_libre.py`
 
-Le script final doit être prêt (étapes 1 à 5 de la routine) : la voix lit ce que l'écran montre.
+```bash
+python3 moteur/voix_libre.py diagnostic                          # {"ok": true} si tout est prêt, sinon ce qui manque
+python3 moteur/voix_libre.py generer DOSSIER_DE_L_EPISODE --declarer
+```
+- Texte lu : épisode « Vrai ou faux ? » → les blocs de `vf.voix.narration_quiz` (ouverture, affirmations,
+  verdicts, panneaux, score, annonce ; clés `voix_*` du script pour corriger une lecture) ; reportage → le fichier
+  `narration` (un paragraphe par bloc). Les nombres, unités et sigles sont écrits en lettres pour la voix
+  seulement (`vf/nombres.py` : « 380 000 » → « trois cent quatre-vingt mille », « ADN » → « A-D-N ») ; l'écran et
+  les sous-titres gardent les chiffres.
+- Chaque bloc est généré séparément (0,5 s de silence entre deux blocs, bornes exactes notées dans
+  `prise_mots.json` → `blocs` : le découpage du quiz se fait sur ces bornes, pas sur la transcription), puis relu
+  par une transcription indépendante (faster-whisper medium) et refait (4 essais) s'il manque 3 mots ou plus, s'il
+  s'en ajoute, ou s'il y a une syllabe parasite au début. Code de sortie 0 seulement si tout est vérifié ;
+  `--declarer` écrit alors le champ `voix` dans `episode.json` (`"eclaircir": true` : étape « micro studio »).
+- Mots horodatés : transcription indépendante de la prise entière (`voix/prise_mots.json`), alignée ensuite sur le
+  script (`vf.voix.aligner`, ≥ 90 % exigé).
 
-1. **Texte à faire lire** (un paragraphe par bloc : ouverture, affirmation, verdict, chaque panneau, score, annonce) :
-   ```bash
-   cd moteur && python3 -m vf.voix texte ../episodes/NNN-slug/episode.json > /tmp/epNNN/narration.txt
-   ```
-   Le nombre de caractères s'affiche : c'est le coût en crédits d'**une** prise (≈ 1 100 pour un épisode).
-   Pour corriger une lecture (nombre, sigle, liaison), ajoute dans le script `voix_intro`, `voix_score`,
-   `voix_prochain`, idée.`voix_affirmation` / `voix_verdict`, ou panneau.`voix` (`""` = panneau muet), jamais en
-   changeant le texte affiché. Exemple : `"voix": "En moyenne, moins de cinq pour cent."`.
-2. **Génération** (connecteur ElevenLabs) : `creative_create_flow` (un flow par épisode), puis
-   `creative_generate_speech` avec ce flow, `model_id: "eleven_v4"`, `voice_id: "DGTOOUoGpoP6UZ9uSWfA"` (Célian,
-   voix française posée), le texte de l'étape 1, `generations_count: 1` (2 si les crédits le permettent, pour pouvoir
-   écarter une prise ratée). Interroge `creative_get_flow_run_status` jusqu'à `all_completed`.
-3. **Rapatriement de la prise** :
-   ```bash
-   python3 moteur/relais.py recuperer episodes/NNN-slug/voix "prise.mp3=<content_url>"
-   ```
-4. **Horodatage mot à mot** : `creative_add_flow_asset_node` (`modality: "audio"`, `generation_id` de la prise retenue)
-   → `creative_transcribe_audio` (`eleven_scribe_v1`, `connect_from: [node_id]`, 0 crédit constaté) → statut →
-   `python3 moteur/relais.py recuperer episodes/NNN-slug/voix "prise_mots.json=<words_download_url>"`.
-5. **Déclaration dans le script** (`episode.json`) :
-   ```json
-   "voix": {"fournisseur": "ElevenLabs", "modele": "eleven_v4", "voice_id": "DGTOOUoGpoP6UZ9uSWfA", "nom": "Célian",
-            "tempo": 1.03, "prise": "voix/prise.mp3", "mots": "voix/prise_mots.json"}
-   ```
-   `tempo` accélère sans changer la hauteur (1,00 à 1,06).
-6. **Contrôle de la prise**, puis aperçu et fabrication habituels :
-   ```bash
-   cd moteur && python3 -m vf.voix verifier ../episodes/NNN-slug/episode.json    # "ok": true exigé
-   ```
-   La chronologie s'allonge seule pour laisser chaque phrase se finir (épisode de 4 idées : ≈ 85 s au lieu de 74).
-   Si `valider` signale un dépassement de 90 s, raccourcis des panneaux ou leur texte lu (`voix`).
+Mesures (GitHub Actions, 4 cœurs, 16 Go, 20/10/2026) : quiz « sommeil » (20 blocs, 81 s de voix) en 22 min, mémoire
+maximale 7,2 Gio ; reportage INFINIMENT 2 (7 blocs, 88 s) en 19 min, 6,4 Gio ; tous les blocs vérifiés au premier
+essai. Sur 2 cœurs, compter environ le double. Une session à 8 Go de mémoire est juste : si la génération est tuée
+faute de mémoire, l'épisode sort sans voix (quiz) ou attend (reportage).
 
-Le contrôle qualité de `fabriquer.py tout` ajoute alors quatre vérifications : « synchro voix » (décalage ≤ 40 ms
-entre la piste voix attendue et la vidéo finale), « voix alignée sur le script » (≥ 90 % des mots),
-« phrases découpées dans les silences », « phrases sans chevauchement ».
+### Ce que l'environnement de la tâche planifiée doit autoriser
 
-## Série INFINIMENT (reportage narré)
+L'environnement par défaut des tâches planifiées refuse ces adresses (constaté le 20/10/2026 : `pip` et
+Hugging Face bloqués, GitHub autorisé). Dans claude.ai/code, ouvrir les réglages de l'environnement utilisé par les
+tâches « Vrai ou faux ? » et « INFINIMENT » → **Network access** → **Custom**, cocher « Also include default list of
+common package managers », et ajouter :
+```
+download.pytorch.org
+huggingface.co
+*.huggingface.co
+*.hf.co
+```
+(PyPI fait partie de la liste par défaut ; `*.hf.co` couvre les serveurs de fichiers de Hugging Face.)
+Facultatif, pour gagner 2 à 3 minutes par run (installation mise en cache), dans **Setup script** :
+```bash
+#!/bin/bash
+pip install --break-system-packages -q "moshi==0.2.11" sphn faster-whisper --extra-index-url https://download.pytorch.org/whl/cpu || true
+command -v ffmpeg >/dev/null || (apt-get update -qq && apt-get install -y -qq ffmpeg) || true
+```
+Les poids (≈ 4 Go pour la voix, 1,5 Go pour la transcription) se téléchargent au premier usage de chaque session.
 
-Voir `series/infiniment/fabriquer.py` : la narration est un fichier texte (balises d'interprétation eleven_v4 entre
-crochets, `[curious]`, `[pause]`…), la voix pilote toute la chronologie (`chrono.json` : blocs, repères au mot près,
-sous-titres), puis `fabriquer.py tout` rend, mixe et contrôle.
+GitHub Actions (branche `essai-voix`, workflows `voix-episode` et `controle-ecoute`) sert aux **essais** du moteur
+seulement : les conditions de GitHub réservent ses machines à la construction et aux tests du logiciel, pas à la
+production de chaque épisode.
 
-## Voix libre et gratuite : modèles Kyutai (`moteur/voix_libre.py`)
+## Contrôles
 
-Alternative sans abonnement, utilisable commercialement : poids des modèles sous CC BY 4.0 (mention « Voix :
-Kyutai TTS (CC BY 4.0) » dans la légende), voix « estelle » (enregistrement de Kyutai cédé en CC0). Moteur conseillé :
-**Kyutai TTS 1.6B** (essai du 20/10/2026 : nettement moins robotique que Pocket TTS, débit naturel d'environ 2,8 mots/s,
-98 % des mots retrouvés par une transcription indépendante ; environ 18 min de calcul pour 90 s sur 4 cœurs).
-Pocket TTS (100 M de paramètres) reste plus rapide mais plus robotique. Chaque
-paragraphe est relu par une transcription indépendante (faster-whisper) et refait s'il manque un passage : lors des
-essais du 19/10/2026, sans cette vérification, une prise sur trois commençait par une syllabe parasite, et des
-morceaux trop longs (120 jetons) ont fait sauter une phrase entière dans trois prises sur trois. Réglages retenus
-pour un ton « reportage » : paragraphes entiers (80 jetons au plus), température 0,4, ponctuation sans points de
-suspension (`narration_v5_tv.txt`), débit posé au montage (`"tempo": 0.92`, `"pauses": 1.4` dans `voix`).
+`python3 -m vf.voix verifier episodes/NNN-slug/episode.json` (quiz) : alignement ≥ 90 %, aucune coupe entre deux
+blocs tombée dans la parole. La fabrication ajoute ensuite « synchro voix » (≤ 40 ms), « voix alignée sur le
+script », « phrases découpées dans les silences », « phrases sans chevauchement ».
 
-Où la faire tourner : le modèle doit être installé (PyPI, index PyTorch CPU) et ses poids téléchargés (Hugging Face),
-ce que l'environnement par défaut de la routine bloque. Il faut donc élargir l'accès réseau de l'environnement
-(niveau « Custom » avec ces domaines, ou « Full ») et installer les paquets par un script de démarrage. Les essais
-ont tourné sur GitHub Actions (branche `essai-voix`), ce qui convient pour tester mais pas pour produire chaque
-semaine : les conditions de GitHub réservent ses machines à la construction et aux tests du logiciel.
+Ce que les contrôles ne garantissent pas : la prononciation exacte d'un nombre ou d'un nom propre. La
+transcription de contrôle se trompe elle-même sur certains nombres français (« trois cent quatre-vingt mille »
+transcrit « 300-420 000 » par Whisper medium et large-v3) : un écart de chiffres n'est pas compté comme un trou.
+Pour un doute, le workflow d'essai `controle-ecoute` (Whisper large-v3) ou une écoute humaine tranchent.
 
 ## Corriger après coup sans régénérer
 
-Une phrase à **supprimer** d'une prise déjà générée (fait contesté découvert après coup) se retire sans dépenser de
-crédits : dans `episode.json` (série INFINIMENT), `voix.narration_prise` = texte lu dans la prise,
+Une phrase à **supprimer** d'une prise déjà générée (fait contesté découvert après coup) se retire sans
+régénérer : dans `episode.json` (série INFINIMENT), `voix.narration_prise` = texte lu dans la prise,
 `voix.retraits` = `[{"bloc": "…", "phrase": "…"}]`, et `narration` = ce texte moins ces phrases. La fabrication coupe
 la prise au milieu des silences qui encadrent la phrase (`vf.voix.retirer_phrase`) et refuse une coupe tombée dans la
 parole. Une phrase à **reformuler** impose une nouvelle prise.
 
-## Ce que les contrôles ne garantissent pas
+## ElevenLabs (facultatif, offre payante)
 
-- La « transcription » d'une prise générée renvoie le texte demandé (balises comprises) avec des horodatages : c'est un
-  **alignement forcé**, pas une reconnaissance indépendante. Un mot sauté ou mal prononcé n'abaisse donc pas le taux
-  d'alignement. `verifier` liste les mots dont l'intervalle ne contient presque pas de voix (`mots_a_ecouter`), mais
-  **seule une écoute garantit la prononciation** (chiffres, noms propres, liaisons).
-- Le traitement de la voix (égalisation, compression, -16,5 LUFS) et le mixage (-14,5 LUFS, crête ≤ -3 dBTP) sont
-  mesurés, pas écoutés.
-
-## Licence et coûts (vérifié le 19/10/2026)
-
-- **Offre gratuite** : **aucun usage commercial**, et un contenu créé hors abonnement payant ne devient jamais
-  commercial (« before or after ») ; mention `elevenlabs.io` obligatoire dans le titre. Source : ElevenLabs, « Can I
-  publish the content I generate on the platform? »
-  (https://elevenlabs.io/docs/help-center/legal/can-i-publish-the-content-i-generate-on-the-platform).
-  10 000 crédits par mois (comparatif cité plus bas) ; coût mesuré : 1 crédit par caractère (prise de 1 061
-  caractères facturée 1 061 crédits).
-- **Offres payantes** : licence commerciale incluse, sauf « Beta Services » (même page). Starter : 30 000 crédits pour
-  5 $/mois d'après un comparatif de mars 2026 (https://bigvu.tv/blog/elevenlabs-pricing-2026-plans-credits-commercial-rights-api-costs/),
-  à confirmer sur https://elevenlabs.io/pricing.
-- Un compte TikTok rémunéré (programme Creator Rewards, d'où la durée minimale de 61 s) est à traiter comme un usage
-  commercial (déduction : la page d'ElevenLabs ne cite pas TikTok) : n'active pas la voix sur la routine avant un
-  abonnement payant, et **régénère** alors les prises (celles de l'offre gratuite restent non commerciales).
-- La routine déclare déjà le contenu comme généré par IA (`isAigc: true`).
+Procédure conservée pour mémoire (épisodes de démonstration `demos/004-sommeil-voix`, `series/infiniment/ep01`) :
+`python3 -m vf.voix texte …` (texte à faire lire), `creative_generate_speech` (`eleven_v4`, voix Célian
+`DGTOOUoGpoP6UZ9uSWfA`), rapatriement par `moteur/relais.py` (les sessions ne joignent pas le stockage
+d'ElevenLabs ; le relais passe par une branche jetable du dépôt public, donc les prises relayées sont publiques),
+horodatage par `creative_transcribe_audio`, champ `voix` du script. Offre gratuite : aucun usage commercial, même
+après un abonnement (« before or after », https://elevenlabs.io/docs/help-center/legal/can-i-publish-the-content-i-generate-on-the-platform).
