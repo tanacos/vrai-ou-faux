@@ -183,7 +183,7 @@ class Montage:
     """Prise resserrée : silences trop longs raccourcis, voix traitée, mots replacés sur la nouvelle chronologie."""
 
     def __init__(self, narr, prise_mp3, mots_json, debut=0.12, fin=0.35, garder_pauses=1.0, tempo=1.0,
-                 respirations=None):
+                 respirations=None, eclaircir=False):
         """tempo > 1 accélère légèrement la voix sans changer sa hauteur (ffmpeg atempo, 1,03 à 1,08 conseillé).
         respirations = {id de bloc: secondes} : silence minimal APRÈS ce bloc (laisser « atterrir » une révélation,
         le temps d'une image forte et de la musique), obtenu en insérant du silence."""
@@ -299,7 +299,7 @@ class Montage:
         # bornes des mots : jamais au-delà du début du mot suivant
         for i in range(len(self.mots) - 1):
             self.mots[i]["e"] = min(self.mots[i]["e"], self.mots[i + 1]["s"])
-        self.voix = traiter(self.brut)
+        self.voix = traiter(self.brut, eclaircir_voix=eclaircir)
 
     def vers_monte(self, t):
         pts = self.map_pts
@@ -456,11 +456,45 @@ def _lufs_mono(y):
     return LN.integrated_lufs(np.stack([y, y], 1))
 
 
-def traiter(x, cible_lufs=-16.5, plafond_db=-1.5):
+def _deesseur(x, seuil_db=-28.0, ratio=4.0, sr=SR):
+    """Réduit les sifflantes : la bande au-dessus de 5 kHz est compressée vite (2 ms / 60 ms) quand elle dépasse."""
+    hi = signal.sosfiltfilt(signal.butter(4, 5000, "highpass", fs=sr, output="sos"), x)
+    lo = x - hi
+    a, r = np.exp(-1 / (0.002 * sr)), np.exp(-1 / (0.060 * sr))
+    env = signal.lfilter([1 - a], [1, -a], np.abs(hi))
+    gr = np.maximum(0.0, 20 * np.log10(env + 1e-9) - seuil_db) * (1 - 1 / ratio)
+    g = np.empty_like(gr)
+    p = 0.0
+    for i, v in enumerate(gr.tolist()):
+        k = a if v > p else r
+        p = k * p + (1 - k) * v
+        g[i] = p
+    return lo + hi * 10 ** (-g / 20)
+
+
+def eclaircir(x, air_db=-16.0, sr=SR):
+    """« Micro studio » pour une voix de synthèse sombre (codec à 24 kHz, rien au-delà de ~10,5 kHz) : aigus
+    rehaussés vers le spectre d'une voix studio (+2 dB à 2,5 kHz jusqu'à +10 dB vers 9 kHz, mesuré contre une voix
+    ElevenLabs le 20/10/2026), air recréé au-delà de 10 kHz par un exciteur (harmoniques paires de la bande 4,5-9,5 kHz),
+    puis dé-esseur."""
+    f = [0, 1500, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 9500, 10500, 11500, sr / 2]
+    db = [0, 0, 0.5, 2.0, 4.0, 5.5, 7.0, 8.5, 10.0, 10.5, 9.0, 0.0, 0.0]
+    y = signal.fftconvolve(x, signal.firwin2(2047, f, 10 ** (np.array(db) / 20), fs=sr), mode="same")
+    bp = signal.butter(4, [4500, 9500], "bandpass", fs=sr, output="sos")
+    b = signal.sosfilt(bp, y)
+    g = 4.0 / (np.percentile(np.abs(b), 99.5) + 1e-9)
+    air = signal.sosfiltfilt(signal.butter(6, [10000, 17000], "bandpass", fs=sr, output="sos"), np.abs(np.tanh(g * b)) / g)
+    air *= (np.sqrt(np.mean(b ** 2)) * 10 ** (air_db / 20)) / (np.sqrt(np.mean(air ** 2)) + 1e-12)
+    return _deesseur(y + air)
+
+
+def traiter(x, cible_lufs=-16.5, plafond_db=-1.5, eclaircir_voix=False):
     """Voix « radio documentaire » : passe-haut 75 Hz, chaleur légère, présence, air doux, compression 3:1 sur un
     niveau de référence, puis limiteur de crête vraie : la voix arrive au mixage avec un écart crête/sonie maîtrisé
     (sinon le limiteur final écraserait les consonnes)."""
     y = signal.sosfilt(signal.butter(2, 75, "highpass", fs=SR, output="sos"), x)
+    if eclaircir_voix:
+        y = eclaircir(y)
     for kind, f, q, g in (("lowshelf", 180, 0.7, 1.0), ("peak", 320, 1.0, -1.5), ("peak", 3200, 0.9, 1.8),
                           ("highshelf", 9500, 0.7, -1.0)):
         b, a = _biquad(kind, f, q, g)

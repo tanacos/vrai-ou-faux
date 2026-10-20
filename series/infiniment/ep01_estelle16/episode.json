@@ -30,8 +30,9 @@
     },
     "avance_image_s": 0.3,
     "licence": "usage commercial autorisé avec attribution : « Voix : Kyutai TTS (CC BY 4.0) »",
-    "reglages": "Kyutai TTS 1.6B sur processeur, température 0,6, un paragraphe par appel",
-    "pauses": 1.0
+    "reglages": "Kyutai TTS 1.6B sur processeur, température 0,6, un paragraphe par appel ; « micro studio » (aigus rehaussés, air recréé, dé-esseur)",
+    "pauses": 1.0,
+    "eclaircir": true
   },
   "sources": [
     {

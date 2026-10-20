@@ -90,7 +90,7 @@ def cmd_voix(ep_dir):
     prise, mots = appliquer_retraits(ep_dir, c)
     narr = V.Narration(open(os.path.join(ep_dir, c["narration"]), encoding="utf-8").read(), ids=c["blocs"])
     M = V.Montage(narr, prise, mots, tempo=v.get("tempo", 1.0), respirations=v.get("respirations"),
-                  garder_pauses=v.get("pauses", 1.0))
+                  garder_pauses=v.get("pauses", 1.0), eclaircir=v.get("eclaircir", False))
     ch = M.chrono()
     json.dump(ch, open(os.path.join(ep_dir, "chrono.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     np.save(os.path.join(sortie(ep_dir), "voix.npy"), M.voix.astype(np.float32))
