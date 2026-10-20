@@ -1,0 +1,45 @@
+modèle kyutai-1.6b chargé en 24 s (torch.bfloat16, 4 cœurs)
+bloc 1/20 intro : vérifié en 1 essai(s), 5.3 s d'audio, 77 s
+bloc 2/20 i1_affirmation : vérifié en 1 essai(s), 3.2 s d'audio, 54 s
+bloc 3/20 i1_verdict : vérifié en 1 essai(s), 1.8 s d'audio, 39 s
+bloc 4/20 i1_p1 : vérifié en 1 essai(s), 4.1 s d'audio, 65 s
+bloc 5/20 i1_p2 : vérifié en 1 essai(s), 4.1 s d'audio, 64 s
+bloc 6/20 i1_p3 : vérifié en 1 essai(s), 4.4 s d'audio, 67 s
+bloc 7/20 i2_affirmation : vérifié en 1 essai(s), 3.0 s d'audio, 52 s
+bloc 8/20 i2_verdict : vérifié en 1 essai(s), 1.4 s d'audio, 35 s
+bloc 9/20 i2_p1 : vérifié en 1 essai(s), 3.5 s d'audio, 57 s
+bloc 10/20 i2_p2 : vérifié en 1 essai(s), 4.6 s d'audio, 69 s
+bloc 11/20 i3_affirmation : vérifié en 1 essai(s), 4.0 s d'audio, 62 s
+bloc 12/20 i3_verdict : vérifié en 1 essai(s), 1.4 s d'audio, 0 s
+bloc 13/20 i3_p1 : vérifié en 1 essai(s), 4.3 s d'audio, 66 s
+bloc 14/20 i3_p2 : vérifié en 1 essai(s), 4.1 s d'audio, 63 s
+bloc 15/20 i4_affirmation : vérifié en 1 essai(s), 2.5 s d'audio, 47 s
+bloc 16/20 i4_verdict : vérifié en 1 essai(s), 1.8 s d'audio, 0 s
+bloc 17/20 i4_p1 : vérifié en 1 essai(s), 4.4 s d'audio, 66 s
+bloc 18/20 i4_p2 : vérifié en 1 essai(s), 4.3 s d'audio, 66 s
+bloc 19/20 score : vérifié en 1 essai(s), 4.2 s d'audio, 63 s
+bloc 20/20 prochain : vérifié en 1 essai(s), 4.6 s d'audio, 69 s
+{"duree_s": 80.8, "calcul_s": 1320, "memoire_max_gio": 7.2, "tout_verifie": true, "non_verifies": [], "declare": false}
+	Command being timed: "python /home/runner/work/_temp/src/moteur/voix_libre.py generer episodes_voix/quiz004/"
+	User time (seconds): 4492.39
+	System time (seconds): 31.03
+	Percent of CPU this job got: 342%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 22:01.48
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 7540296
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 59
+	Minor (reclaiming a frame) page faults: 800133
+	Voluntary context switches: 8384482
+	Involuntary context switches: 492207
+	Swaps: 0
+	File system inputs: 15160
+	File system outputs: 10948728
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
