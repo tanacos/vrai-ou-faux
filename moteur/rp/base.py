@@ -148,6 +148,7 @@ F_CAP = os.path.join(MOTEUR, "assets", "polices", "Anton-Regular.ttf")   # OFL, 
 @functools.lru_cache(maxsize=1024)
 def _cap_patch(word, size, rgb):
     """Mot de sous-titre : lettres pleines avec contour noir (lisible sur tout fond), en RGBA float."""
+    word = word.replace("⁻", "-")                 # Anton n'a pas le signe moins en exposant
     f = ImageFont.truetype(F_CAP, size)
     st = max(4, size // 11)
     w = int(f.getlength(word)) + 2 * st + 8

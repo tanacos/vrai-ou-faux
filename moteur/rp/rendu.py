@@ -269,8 +269,37 @@ def valider():
     from vf import icons as IC
     err = list(ERREURS)
     warn = []
+    communs = {"type", "titre", "titres", "titre_quand", "couverture", "infos", "chiffre", "chiffres", "expo",
+               "ambiance", "impacts", "a_partir_de", "note"}
+    propres = {"heros": {"objet", "objet_quand", "objet_jusqua", "objets", "echelle", "zoom_lent"},
+               "zoom": {"sens", "objet", "expo_depart", "paliers"},
+               "anneaux": {"centre", "anneaux", "remplissage", "remplissage_quand", "au_dela"},
+               "trajet": {"depart", "arrivee", "mobile", "debut", "fin", "etirement", "support", "couleur_support",
+                          "mesures", "compteur"},
+               "fin": {"prochain", "quand", "sources_quand", "objet", "sens"}}
     for bl, sc in SCENES:
         sp = sc.spec
+        k = {"objet": "heros", "titre": "heros", "chiffre": "heros"}.get(sp.get("type", "heros"), sp.get("type", "heros"))
+        inconnus = set(sp) - communs - propres.get(k, set())
+        if inconnus:
+            warn.append(f"bloc {bl} : clés ignorées par une scène « {k} » : {', '.join(sorted(inconnus))}")
+        for t in sp.get("titres", []):
+            if not isinstance(t, dict) or not isinstance(t.get("lignes"), list):
+                err.append(f"bloc {bl} : « titres » attend des objets {{\"quand\", \"lignes\": [...]}}")
+        for c in sp.get("chiffres", []) + ([sp["chiffre"]] if sp.get("chiffre") else []):
+            if "valeur" not in c:
+                err.append(f"bloc {bl} : chiffre sans « valeur »")
+        for p in sp.get("paliers", []):
+            if not p.get("objet") or "quand" not in p:
+                err.append(f"bloc {bl} : palier sans « objet » ou sans « quand »")
+        for a in sp.get("anneaux", []):
+            if "rayon" not in a:
+                err.append(f"bloc {bl} : anneau sans « rayon »")
+        for lignes in [sp.get("titre"), sp.get("couverture"), sp.get("prochain")] + \
+                [t.get("lignes") for t in sp.get("titres", []) if isinstance(t, dict)] + \
+                [p.get("titre") for p in sp.get("paliers", [])]:
+            if lignes and len(lignes) > (3 if k == "fin" else 2):
+                err.append(f"bloc {bl} : titre de {len(lignes)} lignes (2 au plus)")
         objs = [sp.get("objet"), sp.get("remplissage"), sp.get("mobile")]
         objs += [o.get("objet") for o in sp.get("objets", [])] + [p.get("objet") for p in sp.get("paliers", [])]
         objs += [(sp.get(k) or {}).get("objet") for k in ("centre", "depart", "arrivee")]

@@ -7,10 +7,12 @@ refait s'il manque ou s'il s'ajoute un passage.
     python3 moteur/voix_libre.py diagnostic
         -> {"ok": true} si le modèle peut tourner ici (paquets installés, Hugging Face joignable), sinon ce qui manque.
            Code de sortie 0 (prêt) ou 3 (pas prêt : l'épisode se fait sans voix).
-    python3 moteur/voix_libre.py generer <dossier de l'épisode> [--declarer]
+    python3 moteur/voix_libre.py generer <dossier de l'épisode> [--declarer] [--refaire bloc1,bloc2]
         -> voix/prise.mp3 et voix/prise_mots.json (mots horodatés au format attendu par moteur/vf/voix.py).
            --declarer écrit aussi le champ « voix » dans episode.json. Code 0 : tous les paragraphes vérifiés ;
            2 : au moins un paragraphe non vérifié (ne pas utiliser la prise).
+           --refaire : ne régénère que ces blocs (phrase corrigée) et reprend les autres de la prise existante,
+           à condition que leur texte n'ait pas changé (≈ 3 min par bloc au lieu de toute la prise).
     (ancienne forme, toujours acceptée : python3 moteur/voix_libre.py <dossier>)
 
 Texte lu :
@@ -147,6 +149,23 @@ def diagnostic(afficher=True):
 
 
 # ------------------------------------------------------------------ génération
+def niveau_parole(a, sr):
+    """Niveau efficace de la parole d'un bloc (trames à moins de 30 dB du maximum), pour égaliser les blocs."""
+    hop = max(int(sr * 0.02), 1)
+    n = len(a) // hop
+    if n == 0:
+        return 1e-3
+    rms = np.sqrt((a[:n * hop].reshape(n, hop).astype(np.float64) ** 2).mean(1) + 1e-12)
+    act = rms[rms > rms.max() * 10 ** (-30 / 20)]
+    return float(np.sqrt((act ** 2).mean())) if len(act) else float(rms.mean())
+
+
+def lire_prise(path, sr):
+    pcm = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", str(sr), "-f", "f32le", "-"],
+                         capture_output=True, check=True).stdout
+    return np.frombuffer(pcm, np.float32).copy()
+
+
 def memoire_gio():
     """Mémoire résidente actuelle du processus (Gio)."""
     try:
@@ -158,7 +177,7 @@ def memoire_gio():
     return 0.0
 
 
-def generer(ep_dir, declarer=False):
+def generer(ep_dir, declarer=False, refaire=None):
     import resource
 
     import scipy.io.wavfile
@@ -212,11 +231,28 @@ def generer(ep_dir, declarer=False):
         segs, _ = asr.transcribe(a16, language="fr", beam_size=5, vad_filter=False)
         return " ".join(s.text for s in segs).strip()
 
+    anciens = {}                                           # --refaire : blocs repris de la prise existante
+    if refaire is not None:
+        mj = json.load(open(os.path.join(ep_dir, "voix", "prise_mots.json"), encoding="utf-8"))
+        vieux = lire_prise(os.path.join(ep_dir, "voix", "prise.mp3"), sr)
+        verif = {v["bloc"]: v for v in mj.get("verification", [])}
+        for b in mj.get("blocs", []):
+            v = verif.get(b["bloc"], {})
+            anciens[b["bloc"]] = (v.get("texte_lu"), v, vieux[int(b["debut"] * sr):int(b["fin"] * sr)])
+        for bid, _ecran, lu in blocs:
+            if bid not in refaire and (bid not in anciens or anciens[bid][0] != lu):
+                raise SystemExit(f"bloc {bid} : texte changé ou absent de la prise existante, à mettre dans --refaire")
+
     parts, rapport, bornes, deja = [], [], [], {}
     t_cur = 0.0
     for k, (bid, _ecran, lu) in enumerate(blocs):
         t1 = time.time()
-        if lu in deja:                                     # même phrase (« Vrai ! ») : même prise vérifiée
+        if refaire is not None and bid not in refaire:     # repris tel quel (déjà vérifié)
+            _, v, a = anciens[bid]
+            ok, n_essais = bool(v.get("verifie")), 0
+            det = dict(trous=v.get("trous", []), ajouts=v.get("ajouts", []), ajout_debut=v.get("ajout_debut", False),
+                       entendu=v.get("entendu", ""))
+        elif lu in deja:                                   # même phrase (« Vrai ! ») : même prise vérifiée
             ok, det, a, n_essais = deja[lu]
         else:
             essais = []
@@ -231,15 +267,17 @@ def generer(ep_dir, declarer=False):
             deja[lu] = (ok, det, a, n_essais)
         rapport.append(dict(bloc=bid, texte_lu=lu, essais=n_essais, verifie=ok, trous=det["trous"],
                             ajouts=det.get("ajouts", []), ajout_debut=det["ajout_debut"], entendu=det["entendu"]))
+        a = (a * (0.1 / max(niveau_parole(a, sr), 1e-4))).astype(np.float32)    # blocs au même niveau
         d = len(a) / sr
         bornes.append(dict(bloc=bid, debut=round(t_cur, 3), fin=round(t_cur + d, 3)))
-        print(f"bloc {k + 1}/{len(blocs)} {bid} : {'vérifié' if ok else 'NON VÉRIFIÉ'} en {n_essais} essai(s), "
-              f"{d:.1f} s d'audio, {time.time() - t1:.0f} s", flush=True)
+        print(f"bloc {k + 1}/{len(blocs)} {bid} : {'vérifié' if ok else 'NON VÉRIFIÉ'} en {n_essais} essai(s)"
+              f"{' (repris)' if refaire is not None and bid not in refaire else ''}, {d:.1f} s d'audio, "
+              f"{time.time() - t1:.0f} s", flush=True)
         sil = np.zeros(int(r["silence_entre_blocs"] * sr), np.float32)
         parts += [a, sil]
         t_cur += d + len(sil) / sr
     y = np.concatenate(parts)
-    y = y / max(1e-6, float(np.abs(y).max())) * 0.89
+    y = y * min(1.0, 0.89 / max(1e-6, float(np.abs(y).max())))
     os.makedirs(os.path.join(ep_dir, "voix"), exist_ok=True)
     wav = os.path.join(ep_dir, "voix", "prise.wav")
     scipy.io.wavfile.write(wav, sr, (y * 32767).astype(np.int16))
@@ -284,4 +322,7 @@ if __name__ == "__main__":
     if not a or not os.path.isdir(a[0]):
         print(__doc__)
         sys.exit(1)
-    sys.exit(generer(a[0], declarer="--declarer" in a))
+    ref = None
+    if "--refaire" in a:
+        ref = set(a[a.index("--refaire") + 1].split(","))
+    sys.exit(generer(a[0], declarer="--declarer" in a, refaire=ref))

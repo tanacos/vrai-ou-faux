@@ -50,7 +50,8 @@ mets-y `"couverture"` (titre de la miniature) et un objet dès `"debut"`.
 - `infos` : `[{"quand": "mot", "texte": "SA LUMIÈRE : ≈ 8 MIN"}]` (une ligne sous le titre, y ≈ 690).
 - `chiffres` : `[{"quand": "380000", "valeur": 380000, "decimales": 0, "prefixe": "≈ ", "unite": "ANS APRÈS LE *BIG BANG*",
   "source": "NASA, ESA", "compter": true}]` : grand nombre à la place du titre (le titre s'efface avant) ; le
-  compteur part de `de` (0) ; la source n'apparaît qu'une fois le vrai chiffre atteint.
+  compteur part de `de` (0) ; la source n'apparaît qu'une fois le vrai chiffre atteint. Pour un très grand nombre,
+  `"affichage": "≈ 2,5 × 10²⁵"` (texte fixe, sans compteur) ; `"valeur"` reste obligatoire (pour le dossier).
 - `expo` : puissance de dix (en mètres) montrée par la règle en haut, ex. `26.64` pour 4,4 × 10²⁶ m, ou une liste
   `[["mot", 11.2], ["mot2", 16.6]]` ; absent = règle masquée (scène hors échelle, analogie).
 - `ambiance` : `mystere` | `emerveillement` | `calme` | `tension` | `resolution` | `triomphe` (musique).

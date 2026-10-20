@@ -17,7 +17,22 @@ lundi et jeudi, 6 h 07 (Paris) ── routine Claude planifiée
    6. programme la publication TikTok dans Metricool, mercredi ou samedi vers 18 h, au moins 48 h plus tard
    7. met à jour journal.json et envoie un rapport
 ```
-La procédure complète suivie par la routine est dans [`ROUTINE.md`](ROUTINE.md).
+La procédure complète suivie par la routine est dans [`ROUTINE.md`](ROUTINE.md). Les épisodes sont lus par la voix
+de synthèse « Estelle » (modèle libre Kyutai TTS) quand l'environnement de la tâche le permet, sans voix sinon
+(voir [`moteur/VOIX.md`](moteur/VOIX.md)).
+
+## INFINIMENT : un mini-reportage par semaine
+
+```
+samedi, 5 h 54 (Paris) ── seconde routine Claude planifiée
+   1. reprend l'épisode prêt, ou écrit le suivant (sujet annoncé à la fin du précédent, 2 sources minimum)
+   2. narration + scènes décrites dans series/infiniment/epNN/episode.json (moteur générique moteur/rp)
+   3. contre-vérification par un agent indépendant, voix Estelle vérifiée, vidéo + contrôles qualité
+   4. programmation TikTok le lundi vers 18 h (au moins 48 h plus tard), mot-dièse #infiniment
+```
+Procédure : [`ROUTINE_REPORTAGE.md`](ROUTINE_REPORTAGE.md) ; bible de la série :
+[`series/infiniment/LISEZMOI.md`](series/infiniment/LISEZMOI.md). Pause de cette seule série : fichier
+`PAUSE_REPORTAGE` à la racine (le fichier `PAUSE` arrête les deux séries). Au plus 2 reportages en attente.
 
 ## Garder la main
 
@@ -45,6 +60,9 @@ La procédure complète suivie par la routine est dans [`ROUTINE.md`](ROUTINE.md
 | `archives/` | scripts sur mesure des épisodes 1 (foudre) et 2 (cerveau) |
 | branche `videos` | vidéos en attente de publication (MP4 1080 × 1920, 30 i/s, H.264 + AAC, −14,5 LUFS) ; retirées une fois publiées |
 | `journal_des_runs.md` | une ligne par déclenchement de la tâche planifiée : résultat, ou raison de l'arrêt |
+| `series/infiniment/`, `journal_reportages.json`, `journal_des_runs_reportage.md` | série INFINIMENT : épisodes, journal, déclenchements |
+| `moteur/rp/` | moteur générique des reportages (scènes, objets dessinés, sous-titres, bande-son) |
+| `moteur/voix_libre.py`, `moteur/vf/nombres.py` | voix Estelle (Kyutai TTS), vérifiée par une transcription indépendante |
 
 ## Fabriquer un épisode à la main
 

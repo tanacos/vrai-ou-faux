@@ -122,8 +122,11 @@ class Scene:
             dur = float(c.get("duree", 0.9))
             prog = (t - c["t"] + 0.25) / dur
             v0 = float(c.get("de", 0.0))
-            v = lerp(v0, float(c["valeur"]), eout(prog)) if c.get("compter", True) else float(c["valeur"])
-            s = (c.get("prefixe", "") + format_nombre(v, int(c.get("decimales", 0))) + c.get("suffixe", "")).strip()
+            if c.get("affichage"):                 # texte libre, ex. « ≈ 2,5 × 10²⁵ » (pas de compteur)
+                s = c["affichage"]
+            else:
+                v = lerp(v0, float(c["valeur"]), eout(prog)) if c.get("compter", True) else float(c["valeur"])
+                s = (c.get("prefixe", "") + format_nombre(v, int(c.get("decimales", 0))) + c.get("suffixe", "")).strip()
             sz = _ajuste(s, F_DBLACK, int(c.get("taille", 150)), 860)
             txt(cv, s, 540, Y_CHIFFRE, sz, F_DBLACK, couleur(c.get("couleur"), "blanc"), a)
             u = c.get("unite")
@@ -161,7 +164,7 @@ class Scene:
     def evenements(self):
         ev = [dict(t=x, type="impact") for x in self.impacts]
         for c in self.chiffres:
-            if c.get("compter", True):
+            if c.get("compter", True) and not c.get("affichage"):
                 ev.append(dict(t=c["t"] - 0.25, type="compte", duree=float(c.get("duree", 0.9))))
             ev.append(dict(t=c["t"] + float(c.get("duree", 0.9)) - 0.25, type="pop"))
         for i in self.infos:

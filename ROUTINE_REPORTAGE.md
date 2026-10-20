@@ -157,7 +157,7 @@ python3 moteur/publier.py legende  series/infiniment/epNN
 - `createScheduledPost` (`blogId` 7381054), champ `info` comme pour « Vrai ou faux ? » (ROUTINE.md, étape 7) :
   `autoPublish: true`, `draft: false` (true en MODE ESSAI), `providers: [{"network": "tiktok"}]`, `media: [lien
   direct]`, `text: légende`, `publicationDate: {dateTime, timezone: "Europe/Paris"}`, `tiktokData: {privacyOption:
-  "PUBLIC_TO_EVERYONE", title: titre de publication (publication.titre), isAigc: true, disableComment: false,
+  "PUBLIC_TO_EVERYONE", title: légende, isAigc: true, disableComment: false,
   disableDuet: false, disableStitch: false, autoAddMusic: false, commercialContentThirdParty: false,
   commercialContentOwnBrand: false}`, plus `descendants: []`, `firstCommentText: ""`, `hasNotReadNotes: false`,
   `mediaAltText: []`, `shortener: false`, `smartLinkData: {ids: []}`.
