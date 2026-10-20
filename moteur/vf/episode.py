@@ -229,8 +229,9 @@ class Episode:
 
     # ------------------------------------------------------------------ voix (facultative)
     def _charger_voix(self):
-        """Si le script décrit une voix (« voix » : {"prise", "mots", "tempo"}), la prise ElevenLabs est alignée,
-        resserrée et découpée par blocs ; renvoie {id de bloc: durée de parole} pour la chronologie."""
+        """Si le script décrit une voix (« voix » : {"prise", "mots", "tempo", "eclaircir"}), la prise (ElevenLabs ou
+        Kyutai, voir moteur/VOIX.md) est alignée, resserrée et découpée par blocs ; « eclaircir » applique l'étape
+        « micro studio » (voix de synthèse sombre). Renvoie {id de bloc: durée de parole} pour la chronologie."""
         import os
         vc = self.spec.get("voix") or {}
         if not (vc.get("prise") and vc.get("mots")):
@@ -244,7 +245,7 @@ class Episode:
                 return None
         blocs = VX.narration_quiz(self.spec)
         narr = VX.Narration("\n\n".join(t for _, t in blocs), ids=[k for k, _ in blocs])
-        M = VX.Montage(narr, prise, mots, tempo=float(vc.get("tempo", 1.0)))
+        M = VX.Montage(narr, prise, mots, tempo=float(vc.get("tempo", 1.0)), eclaircir=bool(vc.get("eclaircir")))
         if M.taux < 0.90:
             self.errors.append(f"voix : seulement {M.taux * 100:.0f} % des mots du script retrouvés dans la prise "
                                "(texte de la voix différent du script ? refaire la voix)")

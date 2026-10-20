@@ -807,7 +807,7 @@ def _main(argv):
                          ensure_ascii=False))
         return 2
     narr = Narration("\n\n".join(t for _, t in blocs), ids=[k for k, _ in blocs])
-    M = Montage(narr, prise, mots, tempo=float(vc.get("tempo", 1.0)))
+    M = Montage(narr, prise, mots, tempo=float(vc.get("tempo", 1.0)), eclaircir=bool(vc.get("eclaircir")))
     C = Clips(M)
     rep = dict(alignement=round(M.taux, 3), duree_prise=round(M.duree_prise, 2), duree_montee=round(M.duree, 2),
                coupes_douteuses=C.coupes_douteuses(), mots_a_ecouter=mots_a_ecouter(prise, mots))
