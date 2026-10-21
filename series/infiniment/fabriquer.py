@@ -261,6 +261,16 @@ if __name__ == "__main__":
             err.append(f"durée {ch.get('duree')} s hors de 61 à 96 s")
         if float(ch.get("taux_alignement", 0)) < 0.9:
             err.append(f"alignement de la voix {ch.get('taux_alignement')} < 0,90")
+        # repères utilisés SANS valeur par défaut par rendu.py / son.py : chacun doit exister dans la narration
+        # (21/10/2026 : « hook:pourrait » disparu avec la narration v6 faisait planter la bande-son)
+        import re
+        rep = ch.get("reperes", {})
+        for nom in ("rendu.py", "son.py"):
+            if sur_mesure(ep, nom):
+                src = open(os.path.join(ep, nom), encoding="utf-8").read()
+                for cle, n in re.findall(r'cue\("([a-z_]+:[^"]+)"(?:,\s*(\d+))?\)', src):
+                    if len(rep.get(cle, [])) <= int(n or 0):
+                        err.append(f"{nom} : repère « {cle} » (n° {int(n or 0)}) absent de la narration")
         r = dict(ok=not err, erreurs=err, avertissements=["épisode sur mesure : scènes contrôlées par l'aperçu et "
                                                           "l'audit des zones sûres, pas par ce validateur"],
                  duree=ch.get("duree"), scenes=len(conf(ep).get("blocs", [])))

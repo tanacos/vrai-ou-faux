@@ -167,7 +167,9 @@ def build(chrono):
     for k in range(18):
         tk = t_huit - 0.3 + 1.3 * (1 - (1 - (k + 1) / 18) ** 0.5)
         sfx(tk, S.tick(1500 + 40 * k, 0.03), 0.045, rev=0.15)
-    sfx(cue("hook:pourrait") - 0.1, S.riser(cue("hook:sucre") - cue("hook:pourrait") + 0.1, 300, 5000), 0.05)
+    # narration v6 : « tiendrait » (v5 : « pourrait tenir »)
+    t_tenir = cue("hook:tiendrait", 0, cue("hook:pourrait", 0, cue("hook:sucre") - 1.2))
+    sfx(t_tenir - 0.1, S.riser(cue("hook:sucre") - t_tenir + 0.1, 300, 5000), 0.05)
     sfx(cue("hook:sucre"), S.sub_hit(1.0, 1.3, 40, 100), 0.55, rev=0.0)
     sfx(cue("hook:sucre") + 0.01, S.chime((86, 90, 93), 2.4), 0.05, rev=0.5)
     # transitions entre blocs : souffle
