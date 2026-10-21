@@ -499,7 +499,8 @@ def sc_hook(t):
     t_huit = cue("hook:huit", 0, 2.1)
     t_tenir = cue("hook:tiendrait", 0, cue("hook:pourrait", 0, 3.9))
     t_sucre = cue("hook:sucre", 0, 5.6)
-    t_phys = cue("hook:physique", 0, 6.8)
+    # « C'est un vrai calcul de physique » : titre dès « vrai » (sur « physique », il ne restait que 0,9 s à l'écran)
+    t_phys = cue("hook:vrai", 0, cue("hook:physique", 0, 6.8))
     t_cond = cue("hook:retirait", 0, None)            # narration v6 : la condition est dite dès l'accroche
     # l'essaim des humains jaillit du sucre, puis y retourne
     expand = eout((t - t_hum + 0.15) / 1.3) * (1 - eout((t - t_tenir) / max(t_sucre - t_tenir + 0.2, 0.4)))
