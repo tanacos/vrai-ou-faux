@@ -497,9 +497,10 @@ def sc_hook(t):
     cv, gl = new_frame(t)
     t_hum = cue("hook:lhumanite", 0, 0.6)
     t_huit = cue("hook:huit", 0, 2.1)
-    t_tenir = cue("hook:pourrait", 0, 3.9)
+    t_tenir = cue("hook:tiendrait", 0, cue("hook:pourrait", 0, 3.9))
     t_sucre = cue("hook:sucre", 0, 5.6)
     t_phys = cue("hook:physique", 0, 6.8)
+    t_cond = cue("hook:retirait", 0, None)            # narration v6 : la condition est dite dès l'accroche
     # l'essaim des humains jaillit du sucre, puis y retourne
     expand = eout((t - t_hum + 0.15) / 1.3) * (1 - eout((t - t_tenir) / max(t_sucre - t_tenir + 0.2, 0.4)))
     spin = 0.16 * t + (1 - expand) * 1.6
@@ -529,8 +530,12 @@ def sc_hook(t):
         # la source n'apparaît qu'une fois le compte arrivé à 8,2 (une capture en cours de comptage ne doit pas
         # attribuer « 7,8 » à l'ONU)
         txt(cv, "ONU, 2024", 540, 662, 28, F_SEMI, LIGHT, 0.8 * a_cnt * sstep(1.0, 1.25, prog), 0, 4.0)
-    a_q = sstep(t_tenir - 0.02, t_tenir + 0.25, t) * (1 - sstep(t_phys - 0.45, t_phys - 0.2, t))
+    fin_q = t_cond if t_cond is not None else t_phys
+    a_q = sstep(t_tenir - 0.02, t_tenir + 0.25, t) * (1 - sstep(fin_q - 0.45, fin_q - 0.2, t))
     label(cv, ["DANS UN SUCRE ?"], a_q, y0=520, size=92, cols=[AMBER])
+    if t_cond is not None:
+        a_c = sstep(t_cond - 0.1, t_cond + 0.2, t) * (1 - sstep(t_phys - 0.45, t_phys - 0.2, t))
+        label(cv, ["SI ON RETIRAIT", "LE VIDE DES ATOMES"], a_c, y0=505, size=80, cols=[WHITE, CYAN])
     a_ph = sstep(t_phys - 0.1, t_phys + 0.2, t)
     label(cv, ["UN VRAI CALCUL", "DE PHYSIQUE"], a_ph, y0=500, size=86, cols=[WHITE, CYAN])
     return cv
@@ -668,15 +673,21 @@ def expo_at(t):
     if t < SC["experience"][0]:
         return -15.0
     if t < SC["etoile"][0]:
-        tr = cue("experience:tasse", 0, SC["experience"][0] + 5)
-        tn = cue("experience:nasa", 0, SC["experience"][0] + 11)
-        if t < tr:
-            return float(np.interp(t, [SC["experience"][0], tr], [-15, 7]))
-        return float(np.interp(t, [tr, tr + 2.0, tn], [7, -2, -2]))
+        # (v3, contre-vérification du 20/10) la Terre (1,3 × 10⁷ m) est à 10⁷ tant qu'elle est à l'écran ; on
+        # redescend au sucre (10⁻² m) une fois les noyaux tassés
+        s0 = SC["experience"][0]
+        tp = cue("experience:prend", 0, s0 + 1.8)
+        tr = cue("experience:tasse", 0, s0 + 5)
+        if t < tp:
+            return float(np.interp(t, [s0, max(tp, s0 + 0.3)], [-15, 7]))
+        return float(np.interp(t, [tr, tr + 2.0], [7, -2]))
     if t < SC["chaise"][0]:
         return 4.3
     if t < SC["outro"][0]:
-        return -10.0
+        # l'étoile (≈ 2 × 10⁴ m) garde 10⁴ pendant le fondu ; la chaise (≈ 1 m) 10⁰ ; les électrons 10⁻¹⁰
+        c0 = SC["chaise"][0]
+        te = cue("chaise:electrons", 0, cue("chaise:repoussent", 0, c0 + 4.1))
+        return float(np.interp(t, [c0, c0 + XF, c0 + XF + 0.5, te - 0.2, te + 0.4], [4.3, 4.3, 0.0, 0.0, -10.0]))
     tb = cue("outro:bord", 0, SC["outro"][0] + 3)
     return float(np.interp(t, [SC["outro"][0], tb + 0.8], [-10, 26.64]))   # bord : rayon ≈ 4,4 × 10²⁶ m
 
@@ -948,7 +959,7 @@ def sc_experience(t):
     hx = lerp(lerp(CX, 320, side), sug_x, nest)
     cy_c = CY - 5                                # (v2) plus haut : un sous-titre sur 2 lignes ne touche pas les cubes
     hy = cy_c + 10 * nest
-    # (v2) proportions honnêtes : à la même densité, l'humanité (≤ 0,5 milliard de t) fait au moins la moitié du
+    # (v2) proportions honnêtes : à la même densité, l'humanité (≈ 0,5 milliard de t) fait environ la moitié du
     # volume d'un sucre de matière d'étoile à neutrons (≈ 1 milliard de t) : arête ≈ 0,8 fois celle du sucre
     hs = lerp(lerp(90 + 25 * ca, 0.80 * S_SUC, side), 0.78 * S_SUC, nest)
     sa = sstep(t_nasa - 0.3, t_nasa + 0.3, t)
@@ -972,7 +983,7 @@ def sc_experience(t):
     a5 = sstep(t_nasa - 0.2, t_nasa + 0.2, t) * (1 - sstep(t_hum - 0.35, t_hum - 0.1, t))
     label(cv, ["1 SUCRE D'ÉTOILE À NEUTRONS", "≈\u202f1 MILLIARD DE TONNES"], a5, y0=510, size=66, cols=[WHITE, AMBER])
     a6 = sstep(t_hum - 0.2, t_hum + 0.2, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.15, t))
-    label(cv, ["L'HUMANITÉ PÈSE", "BIEN MOINS QUE ÇA"], a6, y0=505, size=80, cols=[WHITE, CYAN])
+    label(cv, ["L'HUMANITÉ PÈSE", "ENVIRON 2 FOIS MOINS"], a6, y0=505, size=80, cols=[WHITE, CYAN])
     a7 = sstep(t_tiend - 0.2, t_tiend + 0.2, t) * (1 - sstep(t_sucre2 - 0.35, t_sucre2 - 0.1, t))
     label(cv, ["ELLE TIENDRAIT DONC…"], a7, y0=540, size=80)
     a8 = sstep(t_sucre2 - 0.25, t_sucre2 + 0.15, t)
@@ -985,7 +996,7 @@ def sc_experience(t):
     a_l = sstep(t_hum - 0.2, t_hum + 0.3, t) * (1 - sstep(t_tiend - 0.4, t_tiend - 0.1, t))
     if a_l > 0:
         txt(cv, "toute l'humanité", 320, CY - 248, 30, F_SEMI, LIGHT, a_l)
-        txt(cv, "≤\u202f0,5 milliard de t", 320, CY - 201, 44, F_DBLACK, AMBER, a_l)
+        txt(cv, "≈\u202f0,5 milliard de t", 320, CY - 201, 44, F_DBLACK, AMBER, a_l)
     return cv
 
 
@@ -1285,7 +1296,8 @@ def audit(step=2):
 
 
 def key_times():
-    ts = [0.0, cue("hook:huit") + 0.6, cue("hook:sucre") + 0.4, cue("hook:dit") + 0.3,
+    ts = [0.0, cue("hook:huit") + 0.6, cue("hook:sucre") + 0.4, cue("hook:retirait", 0, cue("hook:sucre") + 1.2) + 0.6,
+          cue("hook:physique") + 0.6,
           cue("descente:peau") + 0.3, cue("descente:cellules") + 0.3, cue("descente:adn") + 0.3,
           cue("descente:atomes") + 0.6, cue("atome:vide") + 0.5, cue("atome:cent") + 0.8,
           cue("stade:stade") + 0.6, cue("stade:moustique") + 1.0, cue("stade:nuage") + 0.9,

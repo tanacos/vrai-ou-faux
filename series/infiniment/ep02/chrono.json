@@ -1,7 +1,7 @@
 {
  "duree": 83.24,
  "duree_prise": 88.62,
- "taux_alignement": 0.95,
+ "taux_alignement": 0.934,
  "respirations": [
   [
    13.84,
@@ -480,14 +480,17 @@
   "limite:lumiere": [
    42.22
   ],
-  "limite:de": [
+  "limite:quon": [
    42.56
   ],
-  "limite:lunivers": [
-   42.78
+  "limite:puisse": [
+   42.84
   ],
-  "limite:emise": [
-   43.58
+  "limite:voir": [
+   43.18
+  ],
+  "limite:liberee": [
+   43.48
   ],
   "limite:environ": [
    43.86
@@ -1774,38 +1777,43 @@
   },
   {
    "debut": 42.22,
-   "fin": 42.56,
+   "fin": 42.84,
    "mots": [
     {
      "t": "LUMIÈRE",
      "s": 42.22,
      "e": 42.56
-    }
-   ]
-  },
-  {
-   "debut": 42.56,
-   "fin": 43.58,
-   "mots": [
-    {
-     "t": "DE",
-     "s": 42.56,
-     "e": 42.78
     },
     {
-     "t": "L'UNIVERS",
-     "s": 42.78,
-     "e": 43.34
+     "t": "QU'ON",
+     "s": 42.56,
+     "e": 42.84
     }
    ]
   },
   {
-   "debut": 43.58,
+   "debut": 42.84,
+   "fin": 43.48,
+   "mots": [
+    {
+     "t": "PUISSE",
+     "s": 42.84,
+     "e": 43.18
+    },
+    {
+     "t": "VOIR",
+     "s": 43.18,
+     "e": 43.48
+    }
+   ]
+  },
+  {
+   "debut": 43.48,
    "fin": 44.36,
    "mots": [
     {
-     "t": "ÉMISE",
-     "s": 43.58,
+     "t": "LIBÉRÉE",
+     "s": 43.48,
      "e": 43.86
     },
     {
@@ -3425,21 +3433,27 @@
    "e": 42.56
   },
   {
-   "t": "de",
+   "t": "qu'on",
    "b": "limite",
    "s": 42.56,
-   "e": 42.78
+   "e": 42.84
   },
   {
-   "t": "l'univers,",
+   "t": "puisse",
    "b": "limite",
-   "s": 42.78,
-   "e": 43.34
+   "s": 42.84,
+   "e": 43.18
   },
   {
-   "t": "émise",
+   "t": "voir,",
    "b": "limite",
-   "s": 43.58,
+   "s": 43.18,
+   "e": 43.48
+  },
+  {
+   "t": "libérée",
+   "b": "limite",
+   "s": 43.48,
    "e": 43.86
   },
   {

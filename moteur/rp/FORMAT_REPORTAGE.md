@@ -86,7 +86,11 @@ illustrative), `galaxie` (`inclinaison` 0 face … 0,8 tranche, `angle`, `eclat`
 `trou_noir`, `atome` (noyau pas à l'échelle : le dire), `molecule` (H₂O), `cellule`, `virus`, `goutte`, `verre`,
 `sucre`, `fourmi`, `lumiere`, `point`, `icone` (`nom` : pictogramme de `moteur/vf/icons.py`, vérifier avec
 `python3 -m vf.icons chercher …`). Options : `taille` (1 = 185 px de rayon), `couleur` (cyan, ambre, blanc, vert,
-corail, violet, clair, bleu, or, rouge, rose, gris).
+corail, violet, clair, bleu, or, rouge, rose, gris), `mention` (petit texte sous l'objet : `"ILLUSTRATION"` pour une
+carte ou une texture inventée, `"PAS À L'ÉCHELLE"`, `"AGRANDI"`).
+
+La règle affiche l'ordre de grandeur à la française : a × 10ⁿ avec a ≤ 5 → 10ⁿ, sinon 10ⁿ⁺¹ (`expo` 26,64, soit
+4,4 × 10²⁶ m → « 10²⁶ m ») ; `dossier.py` donne la valeur affichée de chaque `expo` pour la contre-vérification.
 
 **Une image est une affirmation** : deux tailles comparées sont dessinées à l'échelle (scène `anneaux`, ou deux
 objets de `taille` proportionnelle) ; si l'échelle réelle rend un objet invisible, l'écrire (« agrandi »,

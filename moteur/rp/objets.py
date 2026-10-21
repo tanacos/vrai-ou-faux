@@ -527,7 +527,10 @@ def dessiner(cv, gl, spec, cx, cy, R, a, t):
     if spec.get("mention"):
         # « ILLUSTRATION », « PAS À L'ÉCHELLE »… : ce que l'image n'affirme pas, écrit sous l'objet (audité comme
         # tout texte : zones sûres, chevauchements)
-        txt(cv, str(spec["mention"]).upper(), x, y + R + 28, 24, F_DBOLD, LIGHT, 0.85 * a, 0, 4.0)
+        # « dedans » : sur le bas de l'objet (quand un sous-titre sur deux lignes monterait jusqu'à la mention)
+        ym = y + 0.62 * R if spec.get("mention_position") == "dedans" else y + R + 28
+        txt(cv, str(spec["mention"]).upper(), x, ym, 24, F_DBOLD, WHITE if spec.get("mention_position") == "dedans"
+            else LIGHT, 0.9 * a, 0, 4.0)
 
 
 R_SCALE = [1.0]               # les décalages dx/dy sont en pixels de référence

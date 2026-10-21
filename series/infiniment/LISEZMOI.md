@@ -35,6 +35,12 @@ sources (leçons des contre-vérifications) :
 - les images aussi sont des affirmations : deux tailles comparées sont dessinées à l'échelle (la v1 de l'épisode 1
   montrait l'humanité 11 à 16 fois trop petite dans le sucre), un compteur n'affiche sa source qu'une fois arrivé au
   vrai chiffre, une analogie est présentée comme une image (« imagine… »).
+- contre-vérifications du 20/10/2026 (épisodes 1 et 2) : la condition d'une expérience de pensée se dit dès
+  l'accroche (« si on retirait le vide de ses atomes ») ; « au moins » seulement si le calcul le prouve
+  (1 / 0,508 = 1,97 : « environ deux fois moins ») ; l'écran garde les nuances de la voix (« ≈ 46 », « la plus proche
+  DU SOLEIL ») ; le fond diffus est la plus vieille lumière « qu'on puisse voir », « libérée » (pas émise) ; une
+  carte inventée porte « ILLUSTRATION » (option `mention` des objets) ; la règle des puissances de dix suit la
+  règle française de l'ordre de grandeur (a ≤ 5 → 10ⁿ : 4,4 × 10²⁶ m → 10²⁶) et suit l'objet à l'écran.
 
 ## Rigueur (comme « Vrai ou faux ? »)
 

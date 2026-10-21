@@ -49,23 +49,22 @@ fichier d'échange de 6 à 7 Go ; si la génération est tout de même tuée, l'
 
 ### Ce que l'environnement de la tâche planifiée doit autoriser
 
-L'environnement par défaut des tâches planifiées refuse ces adresses (constaté le 20/10/2026 : `pip` et
-Hugging Face bloqués, GitHub autorisé). Dans claude.ai/code, ouvrir les réglages de l'environnement utilisé par les
-tâches « Vrai ou faux ? » et « INFINIMENT » → **Network access** → **Custom**, cocher « Also include default list of
-common package managers », et ajouter :
+Constaté le 20/10/2026 : les sessions des tâches planifiées (créées depuis l'application Claude) refusent PyPI et
+Hugging Face ; seul GitHub passe. Pour ces sessions, le proxy l'indique lui-même : les domaines autorisés se règlent
+sur **claude.ai, depuis un navigateur** → **Paramètres → Capacités** → « Exécution de code et création de fichiers »
+→ **Autoriser l'accès réseau sortant**, liste des domaines : gestionnaires de paquets + domaines supplémentaires :
 ```
-download.pytorch.org
 huggingface.co
 *.huggingface.co
 *.hf.co
+download.pytorch.org
 ```
-(PyPI fait partie de la liste par défaut ; `*.hf.co` couvre les serveurs de fichiers de Hugging Face.)
-Facultatif, pour gagner 2 à 3 minutes par run (installation mise en cache), dans **Setup script** :
-```bash
-#!/bin/bash
-pip install --break-system-packages -q "moshi==0.2.11" sphn faster-whisper --extra-index-url https://download.pytorch.org/whl/cpu || true
-command -v ffmpeg >/dev/null || (apt-get update -qq && apt-get install -y -qq ffmpeg) || true
-```
+(`*.hf.co` couvre les serveurs de fichiers de Hugging Face ; si les « *. » ne sont pas acceptés : « Tous les
+domaines ».) Une tâche planifiée de type Claude Code (dépôt et environnement choisis dans claude.ai/code/routines)
+prend au contraire ses droits dans son environnement : **Network access** → **Custom**, « Also include default list
+of common package managers », mêmes domaines. Le diagnostic (`voix_libre.py diagnostic`) dit en une seconde si la
+session en cours peut joindre Hugging Face.
+
 Les poids (≈ 4 Go pour la voix, 1,5 Go pour la transcription) se téléchargent au premier usage de chaque session.
 
 GitHub Actions (branche `essai-voix`, workflows `voix-episode` et `controle-ecoute`) sert aux **essais** du moteur

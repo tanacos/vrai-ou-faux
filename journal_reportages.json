@@ -7,21 +7,23 @@
    "titre": "L'humanité dans un sucre",
    "dossier": "series/infiniment/ep01_estelle16",
    "sources": [
-    "https://www.ined.fr/fr/tout-savoir-population/memos-demo/focus/2024-les-nations-unies-publient-de-nouvelles-projections-de-population-mondiale",
+    "https://ined.fr/fichier/s_rubrique/35128/cp_pop.soc_626_oct_2024_vweb.en.pdf",
     "https://www.cea.fr/multimedia/Documents/publications/livrets-thematiques/livret-atome.pdf",
     "https://muller.lbl.gov/teaching/Physics10/PffP_textbook/PffP-04-radioactivity-5-27.pdf",
     "https://www.energy.gov/science/doe-explainsnuclei",
     "https://www.nasa.gov/feature/goddard/2021/nasa-s-nicer-probes-the-squeezability-of-neutron-stars",
-    "https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html",
+    "https://imagine.gsfc.nasa.gov/science/objects/pulsars1.html",
     "https://www.britannica.com/topic/neutron-star",
     "https://link.springer.com/article/10.1186/1471-2458-12-439",
     "https://livescience.com/physics-mathematics/why-cant-we-walk-through-walls-if-atoms-are-mostly-empty-space",
     "https://van.physics.illinois.edu/ask/listing/20935",
     "https://apod.nasa.gov/apod/lib/ns.html",
-    "https://warwick.ac.uk/fac/sci/physics/outreach/journalclub/weeksevenanswers"
+    "https://warwick.ac.uk/fac/sci/physics/outreach/journalclub/weeksevenanswers",
+    "https://www.astronomy.com/science/the-cubic-centimeter-a-cosmic-measuring-cup/",
+    "https://hyperphysics.gsu.edu/hbase/Nuclear/nucuni.html"
    ],
    "prochain": "Le bord de l'univers observable",
-   "statut": "voix faite"
+   "statut": "en attente de voix"
   },
   {
    "numero": 2,

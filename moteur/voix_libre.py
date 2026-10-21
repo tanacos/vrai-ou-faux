@@ -165,7 +165,8 @@ def diagnostic(afficher=True):
             reseau = r.status == 200
     except Exception as e:  # noqa: BLE001
         reseau = False
-        manque.append(f"accès à huggingface.co ({type(e).__name__})")
+        manque.append(f"accès à huggingface.co refusé ({type(e).__name__}) : à autoriser sur claude.ai → Paramètres → "
+                      "Capacités → accès réseau sortant (voir moteur/VOIX.md)")
     out = dict(ok=not manque, manque=manque, huggingface=reseau, coeurs=os.cpu_count())
     try:
         out["memoire_gio"] = round(os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / 2 ** 30, 1)
