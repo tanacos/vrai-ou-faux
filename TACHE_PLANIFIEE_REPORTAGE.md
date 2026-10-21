@@ -1,5 +1,8 @@
 # Tâche planifiée Claude « INFINIMENT » (texte exact envoyé à chaque déclenchement)
 
+Tâche créée le 21/10/2026 dans le compte Claude de Nathan : « INFINIMENT — mini-reportage hebdomadaire »
+(approbations automatiques, notifications par push et e-mail ; premier déclenchement le samedi 24/10/2026).
+
 Planification : le samedi à 5 h 54, heure de Paris (`CRON_TZ=Europe/Paris 54 5 * * 6`) ; publication le lundi
 suivant à 18 h (au moins 48 h plus tard). Chaque déclenchement ouvre une session neuve, sans mémoire des
 précédentes : tout l'état est dans ce dépôt (`journal_reportages.json`) et dans Metricool.
