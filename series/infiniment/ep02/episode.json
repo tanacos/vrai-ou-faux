@@ -371,8 +371,7 @@
    "horizon": 1.3
   },
   "pauses": 1.0,
-  "avance_image_s": 0.3,
-  "reglages": "Kyutai TTS 1.6B sur processeur, température 0,6, un paragraphe par appel, vérifié par transcription indépendante ; « micro studio » (aigus rehaussés, air recréé, dé-esseur)"
+  "avance_image_s": 0.3
  },
  "sources": [
   {
@@ -409,11 +408,22 @@
    "sert_a": "13,8 milliards d'années ; lumière émise ≈ 380 000 ans après le Big Bang"
   },
   {
+   "editeur": "ESA (Planck)",
+   "titre": "Planck : Science objectives",
+   "url": "https://www.esa.int/Science_Exploration/Space_Science/Planck/Science_objectives",
+   "extraits": [
+    "Planck data provided a new value for the age of the Universe, 13.8 billion years.",
+    "the relic radiation from the Big Bang that was imprinted on the sky when the Universe was only 380 000 years old."
+   ],
+   "sert_a": "secours de la page « Planck science highlights » : âge de 13,8 milliards d'années ; fond diffus à 380 000 ans"
+  },
+  {
    "editeur": "ESA",
    "titre": "Cosmic Microwave Background (CMB) radiation",
    "url": "https://esa.int/Science_Exploration/Space_Science/Cosmic_Microwave_Background_CMB_radiation",
    "extraits": [
     "The CMB is the farthest and oldest light any telescope can detect.",
+    "This 'fossil' radiation, the furthest that any telescope can see, was released soon after the Big Bang.",
     "It is impossible to see further beyond the time of its release because then the Universe was completely 'opaque'."
    ],
    "sert_a": "« la plus vieille lumière qu'on puisse voir », « libérée » (avant, l'univers était opaque) ; la valeur 380 000 ans vient de l'ESA (Planck) et de la NASA (WMAP), cette page donnant un arrondi plus ancien (« about 300 000 years »)"
@@ -522,5 +532,13 @@
   ],
   "contenu_ia": true
  },
- "prochain": "Au cœur d'un verre d'eau (épisode 3 : plus d'atomes dans un verre d'eau que de verres d'eau dans les océans ?)"
+ "prochain": "Au cœur d'un verre d'eau (épisode 3 : plus d'atomes dans un verre d'eau que de verres d'eau dans les océans ?)",
+ "verification": {
+  "date": "2026-10-20/21",
+  "methode": "contre-vérification indépendante (agents sans accès à la recherche), 3 tours",
+  "tour_1": "7 écarts mineurs : légende sans « aujourd'hui à environ », « ≈ » manquant sur 46, « l'étoile la plus proche » sans « du Soleil », « la plus vieille lumière de l'univers, émise » (→ « qu'on puisse voir, libérée »), règle 10²⁷ (→ 10²⁶, règle française), carte du fond diffus à côté de « NASA, ESA », source NASA Earth: Facts absente de la légende — tous corrigés",
+  "tour_2": "1 bloquant introduit par la correction (« LUMIÈRE VISIBLE » : le fond diffus est en micro-ondes → « OBSERVABLE »), 1 mineur (crédit ambigu → « SOURCE DU CHIFFRE : NASA, ESA », carte réduite marquée ILLUSTRATION) — corrigés",
+  "tour_3": "aucun écart",
+  "reste_a_faire": "voix : paragraphe « limite » à relire avec la narration v3 (--refaire auto)"
+ }
 }

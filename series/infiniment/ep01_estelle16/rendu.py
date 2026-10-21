@@ -800,7 +800,9 @@ def sc_stade(t):
         txt(cv, "NOYAU", xr, sy_ - 172, 50, F_DBLACK, AMBER, ma, 1)
         txt(cv, "= un moustique", xr, sy_ - 122, 36, F_SEMI, WHITE, ma, 1)
         # sous l'étiquette, hors de la zone des sous-titres (qui peuvent passer sur 2 lignes)
-        txt(cv, "(agrandi pour être visible)", SAFE_LEFT + 14, sy_ - 86, 24, F_MEDI, LIGHT, ma * 0.9 * (1 - ha), -1)
+        # (v3, contre-vérification du 21/10) la mention reste tant que l'étiquette NOYAU est là : quand l'image
+        # recule, le moustique dessiné grossit par rapport au terrain
+        txt(cv, "(agrandi pour être visible)", SAFE_LEFT + 14, sy_ - 86, 24, F_MEDI, LIGHT, ma * 0.9, -1)
     la = sstep(t_stade - 0.3, t_stade + 0.3, t) * (1 - sstep(t_nuage - 0.4, t_nuage, t))
     label(cv, ["SI L'ATOME", "ÉTAIT UN STADE"], la, y0=500, size=86, cols=[WHITE, CYAN])
     label(cv, ["TOUT AUTOUR :", "DES ÉLECTRONS"], ha, y0=500, size=80, cols=[WHITE, CYAN])

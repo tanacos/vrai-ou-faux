@@ -16,23 +16,23 @@
   "outro"
  ],
  "voix": {
-  "fournisseur": "Kyutai TTS 1.6B en/fr (modèle libre, poids CC BY 4.0)",
+  "fournisseur": "Kyutai",
   "modele": "kyutai/tts-1.6b-en_fr",
-  "nom": "estelle (unmute-prod-website/developpeuse-3, enregistrement Kyutai cédé en CC0)",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
   "prise": "voix/prise.mp3",
   "mots": "voix/prise_mots.json",
-  "horodatage": "faster-whisper medium (transcription indépendante, sans le script)",
-  "tempo": 1.0,
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0",
   "respirations": {
    "hook": 0.75,
    "experience": 1.35,
    "chaise": 1.7
   },
-  "avance_image_s": 0.3,
-  "licence": "usage commercial autorisé avec attribution : « Voix : Kyutai TTS (CC BY 4.0) »",
-  "reglages": "Kyutai TTS 1.6B sur processeur, température 0,6, un paragraphe par appel ; « micro studio » (aigus rehaussés, air recréé, dé-esseur)",
   "pauses": 1.0,
-  "eclaircir": true
+  "avance_image_s": 0.3
  },
  "sources": [
   {
@@ -130,7 +130,7 @@
    "sert_a": "densité de la matière nucléaire : 5,08 × 10¹¹ kg / 2 × 10¹⁷ kg/m³ ≈ 2,5 cm³, moins qu'un sucre (≥ 3,15 cm³)"
   }
  ],
- "calcul": "Masse de l'humanité ≤ 8,2 milliards × 62 kg ≈ 0,51 milliard de tonnes (majorant : 62 kg est la masse moyenne d'un adulte en 2005, les enfants pèsent moins). Tassée à la densité de la matière nucléaire (≈ 2 × 10^17 kg/m³, HyperPhysics), elle occuperait 5,08 × 10¹¹ / 2 × 10¹⁷ ≈ 2,5 × 10⁻⁶ m³ ≈ 2,5 cm³ (2,2 cm³ avec 2,3 × 10¹⁷) ; un morceau de sucre de 5 g fait au moins 3,15 cm³, même s'il était du saccharose plein (1,587 g/cm³). « Environ deux fois moins » : 1 milliard de t / 0,508 ≈ 1,97. Recoupements : un sucre de matière d'étoile à neutrons ≈ 1 milliard de tonnes (NASA) ; « pèserait autant que toute l'humanité » (NASA APOD). Marge : un facteur 1,5 à 2, ce qui reste un ordre de grandeur.",
+ "calcul": "Masse de l'humanité ≤ 8,2 milliards × 62 kg ≈ 0,51 milliard de tonnes (majorant : 62 kg est la masse moyenne d'un adulte en 2005, les enfants pèsent moins). Tassée à la densité de la matière nucléaire (≈ 2 × 10^17 kg/m³, HyperPhysics), elle occuperait 5,08 × 10¹¹ / 2 × 10¹⁷ ≈ 2,5 × 10⁻⁶ m³ ≈ 2,5 cm³ (2,2 cm³ avec 2,3 × 10¹⁷) ; un morceau de sucre de 5 g fait au moins 3,15 cm³, même s'il était du saccharose plein (1,587 g/cm³). « Environ deux fois moins » : 1 milliard de t / 0,508 ≈ 1,97. Recoupements : un sucre de matière d'étoile à neutrons ≈ 1 milliard de tonnes (NASA) ; « pèserait autant que toute l'humanité » (NASA APOD). Marge : le sucre de 5 g (≥ 3,15 cm³) dépasse le volume de l'humanité tassée d'un facteur 1,2 à 1,4 (3,15 / 2,54 et 3,15 / 2,21) ; avec un vrai sucre poreux (3,2 à 4,8 cm³), davantage.",
  "publication": {
   "titre": "L'humanité tiendrait dans un sucre",
   "legende": "Toute l'humanité tiendrait dans un morceau de sucre, si l'on retirait le vide de ses atomes. Et c'est un vrai calcul de physique. INFINIMENT, épisode 1 : de l'infiniment petit à l'infiniment grand.\nLe calcul : 8,2 milliards d'humains × 62 kg (masse moyenne d'un adulte en 2005, donc un maximum : les enfants pèsent moins) ≈ 0,5 milliard de tonnes ; un sucre de matière d'étoile à neutrons pèserait ≈ 1 milliard de tonnes (NASA).\nSources : CEA, U.S. Department of Energy, R. Muller (UC Berkeley), NASA (Imagine the Universe, NICER, APOD), Astronomy (mars 2023), HyperPhysics (Georgia State University), Britannica, INED/ONU, Walpole et al. (BMC Public Health, 2012), Live Science, universités de l'Illinois et de Warwick.\nVoix de synthèse : Kyutai TTS (CC BY 4.0)\n#infiniment #science #physique #atome #espace #culturegenerale #apprendresurtiktok",
@@ -147,27 +147,12 @@
  },
  "prochain": "Le bord de l'univers observable",
  "verification": {
-  "date": "2026-10-19",
-  "methode": "contre-vérification indépendante (agent sans accès à la recherche)",
-  "resultat": "aucun écart bloquant ; 3 à corriger, 8 mineurs",
-  "corrige_dans_la_video": [
-   "« LA PHYSIQUE EST FORMELLE » -> « UN VRAI CALCUL DE PHYSIQUE »",
-   "densité : « UNE DENSITÉ D'ÉTOILE À NEUTRONS » à l'écran",
-   "phrase finale sur la chaise retirée de la voix et de l'écran",
-   "≈ 100 000 ×, ≤ 0,5 milliard de t, 1 sucre d'étoile à neutrons, compteur ≈ 8,2 milliards",
-   "titre au conditionnel, légende, sources NICER / APOD / Warwick",
-   "proportions des cubes : à la même densité, l'humanité occupe environ la moitié à deux tiers d'un sucre (2,2 cm³ pour 3,2 à 4,8 cm³), dessinée à ≈ 48 % ; la v1 la montrait à ≈ 4 % (11 à 16 fois trop petite)",
-   "cubes remontés : un sous-titre sur deux lignes ne les touche plus"
-  ],
-  "reste_dans_la_voix": [
-   "« aussi dense que le cœur d'une étoile à neutrons » (cœur jusqu'à 2 fois plus dense)",
-   "« pèse un milliard de tonnes » (NASA : « environ », pour de la matière d'étoile à neutrons)",
-   "« bien moins que ça » (au moins 2 fois moins)",
-   "« cent mille fois » (environ)",
-   "« Tout autour… rien » (presque rien)",
-   "« occuper la même place » (le même état)"
-  ],
-  "a_regenerer": "narration_v5.txt corrige tout ce qui reste dans la voix (prochaine prise, offre payante)"
+  "date": "2026-10-19 à 2026-10-21",
+  "methode": "contre-vérification indépendante (agents sans accès à la recherche), 3 tours",
+  "tour_1_2026-10-19": "sur la narration v4/v5 : 3 écarts à corriger et 8 mineurs (« la physique est formelle », densité, chute sur la chaise, cubes 11 à 16 fois trop petits…) — corrigés en v2 de la vidéo et en narration v5",
+  "tour_2_2026-10-20": "sur la narration v5_tv : 6 écarts mineurs — accroche sans la condition de l'expérience de pensée, « au moins deux fois moins » (1,97), « BIEN MOINS QUE ÇA » et « ≤ 0,5 », légende sans condition ni année, un seul éditeur pour le fait central, règle des puissances de dix en retard sur l'image — corrigés (narration v6, écran, légende, sources Astronomy et HyperPhysics)",
+  "tour_3_2026-10-21": "1 écart mineur — « (agrandi pour être visible) » disparaissait pendant que l'étiquette NOYAU restait : corrigé ; licence de la voix vérifiée (unmute-prod-website/developpeuse-3 : enregistrement Kyutai cédé en CC0)",
+  "reste_a_faire": "voix : paragraphes accroche, atome (« à » possible après « surprise ») et expérience à relire avec la narration v6 (--refaire auto)"
  },
  "variante": "ép. 1 avec Estelle sur le grand modèle Kyutai TTS 1.6B (moins robotique), narration v5 « reportage » ; essai du 20/10/2026",
  "voix_libre": {

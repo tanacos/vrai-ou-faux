@@ -158,15 +158,29 @@ def diagnostic(afficher=True):
             manque.append(paquet)
     if subprocess.run(["which", "ffmpeg"], capture_output=True).returncode != 0:
         manque.append("ffmpeg")
+    import urllib.parse
+    import urllib.request
     reseau = None
+    # 16 premiers octets d'un vrai fichier du modèle (la voix Estelle) : huggingface.co répond par une redirection vers
+    # son réseau de diffusion (us.aws.cdn.hf.co le 21/10/2026), qui doit être autorisé lui aussi
+    url = "https://huggingface.co/kyutai/tts-voices/resolve/main/" + urllib.parse.quote(VOIX_16B + ".1e68beda@240.safetensors")
+    hote = "huggingface.co"
     try:
-        import urllib.request
         with urllib.request.urlopen("https://huggingface.co/api/models/kyutai/tts-1.6b-en_fr", timeout=20) as r:
             reseau = r.status == 200
+
+        class _Note(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, req, fp, code, msg, hdrs, newurl):
+                nonlocal hote
+                hote = urllib.parse.urlparse(newurl).hostname or hote
+                return super().redirect_request(req, fp, code, msg, hdrs, newurl)
+        op = urllib.request.build_opener(_Note)
+        with op.open(urllib.request.Request(url, headers={"Range": "bytes=0-15"}), timeout=30) as r:
+            reseau = reseau and len(r.read()) > 0
     except Exception as e:  # noqa: BLE001
         reseau = False
-        manque.append(f"accès à huggingface.co refusé ({type(e).__name__}) : à autoriser sur claude.ai → Paramètres → "
-                      "Capacités → accès réseau sortant (voir moteur/VOIX.md)")
+        manque.append(f"téléchargement depuis {hote} refusé ({type(e).__name__}) : à autoriser sur claude.ai → "
+                      "Paramètres → Capacités → accès réseau sortant (voir moteur/VOIX.md)")
     out = dict(ok=not manque, manque=manque, huggingface=reseau, coeurs=os.cpu_count())
     try:
         out["memoire_gio"] = round(os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / 2 ** 30, 1)
@@ -425,18 +439,59 @@ def horodater(ep_dir):
     return 0
 
 
+def env_reseau():
+    """Environnement des téléchargements : PyPI passe par le proxy de la session (la liste « no_proxy » des sessions
+    Claude envoie pypi.org en direct, où le nom ne se résout pas : constaté le 21/10/2026), et Hugging Face sert les
+    fichiers en HTTPS simple (son protocole Xet passe par d'autres serveurs, *.xethub.hf.co)."""
+    env = dict(os.environ)
+    for k in ("no_proxy", "NO_PROXY"):
+        if k in env:
+            env[k] = ",".join(h for h in env[k].split(",") if h.strip() not in ("pypi.org", "files.pythonhosted.org"))
+    env.setdefault("HF_HUB_DISABLE_XET", "1")
+    return env
+
+
+VENV = "/opt/voix-kyutai"            # environnement Python à part : moshi impose numpy < 2.3, le moteur vidéo en a un récent
+
+
+def py_venv():
+    return os.path.join(VENV, "bin", "python")
+
+
 def installer():
-    """Installe les paquets de la voix (PyPI + index CPU de PyTorch) et ffmpeg si besoin, puis refait le diagnostic.
-    Code 0 : prêt ; 3 : pas prêt (accès réseau refusé par l'environnement de la tâche, voir moteur/VOIX.md)."""
+    """Installe la voix dans un environnement Python séparé (VENV) et ffmpeg si besoin, puis refait le diagnostic.
+
+    Constaté le 21/10/2026 (Python 3.13 des sessions) : moshi 0.2.11 exige sentencepiece == 0.2.0, sans paquet
+    compilé pour Python 3.13 (sa compilation échoue) ; on installe donc moshi sans ses dépendances, puis ses
+    dépendances une à une avec sentencepiece ≥ 0.2.1. PyTorch vient de l'index CPU (≈ 200 Mo ; download.pytorch.org
+    renvoie vers download-r2.pytorch.org), sinon de PyPI (version CUDA, ≈ 3 Go de plus, même résultat sur processeur).
+    Code 0 : prêt ; 3 : pas prêt (accès réseau refusé par l'environnement, voir moteur/VOIX.md)."""
+    t0 = time.time()
     if subprocess.run(["which", "ffmpeg"], capture_output=True).returncode != 0:
         subprocess.run("apt-get update -qq && apt-get install -y -qq ffmpeg", shell=True, capture_output=True)
-    r = subprocess.run([sys.executable, "-m", "pip", "install", "--break-system-packages", "-q",
-                        "--root-user-action=ignore", "moshi==0.2.11", "sphn", "faster-whisper", "scipy",
-                        "--extra-index-url", "https://download.pytorch.org/whl/cpu"],
-                       capture_output=True, text=True, timeout=1500)
-    if r.returncode != 0:
-        print(json.dumps(dict(pip="échec", detail=(r.stderr or r.stdout)[-600:]), ensure_ascii=False), flush=True)
-    return 0 if diagnostic()["ok"] else 3
+    env = env_reseau()
+    if not os.path.exists(py_venv()):
+        subprocess.run([sys.executable, "-m", "venv", VENV], check=True, capture_output=True)
+    pip = [py_venv(), "-m", "pip", "install", "-q", "--disable-pip-version-check", "--retries", "2", "--timeout", "60"]
+    torch_req = "torch>=2.2,<2.8"
+    etapes = [("torch (index CPU)", pip + [torch_req, "--index-url", "https://download.pytorch.org/whl/cpu"]),
+              ("torch (PyPI)", pip + [torch_req]),
+              ("dépendances", pip + ["numpy>=1.26,<2.3", "safetensors>=0.4.0,<0.6", "huggingface-hub>=0.24,<0.34",
+                                     "einops>=0.7,<0.9", "sphn>=0.1.4,<0.2", "aiohttp>=3.10.5,<3.12",
+                                     "sentencepiece>=0.2.1", "faster-whisper", "scipy"]),
+              ("moshi", pip + ["--no-deps", "moshi==0.2.11"])]
+    torch_ok = False
+    for nom, cmd in etapes:
+        if nom == "torch (PyPI)" and torch_ok:
+            continue
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=2400, env=env)
+        if nom.startswith("torch"):
+            torch_ok = torch_ok or r.returncode == 0
+        print(json.dumps(dict(etape=nom, ok=r.returncode == 0, secondes=round(time.time() - t0),
+                              detail=None if r.returncode == 0 else (r.stderr or r.stdout)[-300:]),
+                         ensure_ascii=False), flush=True)
+    r = subprocess.run([py_venv(), os.path.abspath(__file__), "diagnostic"], env=env)
+    return r.returncode
 
 
 if __name__ == "__main__":
@@ -444,14 +499,17 @@ if __name__ == "__main__":
     if not a:
         print(__doc__)
         sys.exit(1)
-    if a[0] == "diagnostic":
-        sys.exit(0 if diagnostic()["ok"] else 3)
     if a[0] == "installer":
         sys.exit(installer())
-    if a[0] in ("generer", "horodater") and os.environ.get("MALLOC_ARENA_MAX") is None:
-        # moins de mémoire « réservée » par les fils de calcul (glibc) : relance du même processus avec ce réglage
-        os.environ["MALLOC_ARENA_MAX"] = "2"
-        os.execv(sys.executable, [sys.executable] + sys.argv)
+    dans_venv = os.path.realpath(sys.prefix) == os.path.realpath(VENV)
+    if a[0] in ("diagnostic", "generer", "horodater") and os.path.exists(py_venv()) and not dans_venv:
+        # relance dans l'environnement de la voix, avec les réglages réseau (env_reseau) et moins de mémoire
+        # « réservée » par les fils de calcul (glibc)
+        env = env_reseau()
+        env["MALLOC_ARENA_MAX"] = "2"
+        os.execve(py_venv(), [py_venv(), os.path.abspath(__file__)] + a, env)
+    if a[0] == "diagnostic":
+        sys.exit(0 if diagnostic()["ok"] else 3)
     if a[0] == "horodater":
         sys.exit(horodater(a[1]))
     if a[0] == "generer":

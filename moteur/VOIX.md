@@ -5,7 +5,7 @@ Deux voix possibles ; tout le reste (montage, sous-titres, mixage, contrôles) s
 | | **Estelle (Kyutai TTS 1.6B)**, par défaut | Célian (ElevenLabs), facultative |
 |---|---|---|
 | Licence | poids CC BY 4.0 : usage commercial permis, mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » (ajoutée seule par `publier.py legende`) ; voix Estelle cédée en CC0 | offre gratuite : **aucun usage commercial** ; offre payante requise pour un compte rémunéré |
-| Où elle tourne | dans la session de la routine (processeur), 20 à 40 min par épisode | serveurs ElevenLabs, via le connecteur + relais GitHub |
+| Où elle tourne | dans la session de la routine (processeur), ≈ 20 min par épisode (5 min pour un paragraphe à refaire) | serveurs ElevenLabs, via le connecteur + relais GitHub |
 | Prérequis | accès réseau à PyPI, download.pytorch.org et Hugging Face (voir plus bas) | crédits (1 par caractère) |
 
 `config.json` : `"voix_active": true`, `"voix_moteur": "kyutai-1.6b"`.
@@ -17,8 +17,13 @@ python3 moteur/voix_libre.py diagnostic                          # {"ok": true} 
 python3 moteur/voix_libre.py installer                           # paquets + ffmpeg, puis diagnostic (code 0 = prêt)
 python3 moteur/voix_libre.py generer DOSSIER_DE_L_EPISODE --declarer
 python3 moteur/voix_libre.py generer DOSSIER --declarer --refaire bloc1,bloc2   # ne refait que ces paragraphes
+python3 moteur/voix_libre.py generer DOSSIER --declarer --refaire auto          # ceux dont le texte a changé
 python3 moteur/voix_libre.py horodater DOSSIER                   # refait les mots horodatés d'une prise, bloc par bloc
 ```
+- Environnement : `installer` crée un Python à part dans `/opt/voix-kyutai` (moshi impose numpy < 2.3, le moteur
+  vidéo utilise un numpy récent) ; `diagnostic`, `generer` et `horodater` s'y relancent tout seuls. moshi 0.2.11 est
+  installé sans ses dépendances puis complété une à une, avec sentencepiece ≥ 0.2.1 : la version 0.2.0 qu'il exige
+  n'existe pas compilée pour Python 3.13 et sa compilation échoue (constaté le 21/10/2026).
 - Texte lu : épisode « Vrai ou faux ? » → les blocs de `vf.voix.narration_quiz` (ouverture, affirmations,
   verdicts, panneaux, score, annonce ; clés `voix_*` du script pour corriger une lecture) ; reportage → le fichier
   `narration` (un paragraphe par bloc). Les nombres, unités et sigles sont écrits en lettres pour la voix
@@ -49,21 +54,26 @@ fichier d'échange de 6 à 7 Go ; si la génération est tout de même tuée, l'
 
 ### Ce que l'environnement de la tâche planifiée doit autoriser
 
-Constaté le 20/10/2026 : les sessions des tâches planifiées (créées depuis l'application Claude) refusent PyPI et
-Hugging Face ; seul GitHub passe. Pour ces sessions, le proxy l'indique lui-même : les domaines autorisés se règlent
-sur **claude.ai, depuis un navigateur** → **Paramètres → Capacités** → « Exécution de code et création de fichiers »
-→ **Autoriser l'accès réseau sortant**, liste des domaines : gestionnaires de paquets + domaines supplémentaires :
+Les sessions des tâches planifiées créées depuis l'application Claude prennent leurs droits réseau dans **claude.ai →
+Paramètres → Capacités** → « Exécution de code et création de fichiers » → accès réseau sortant (le proxy de la
+session l'indique lui-même). Liste réglée par Nathan le 21/10/2026 (les « *. » ne sont pas pris en compte : chaque
+nom exact compte) :
 ```
-huggingface.co
-*.huggingface.co
-*.hf.co
-download.pytorch.org
+pypi.org, files.pythonhosted.org      (gestionnaires de paquets)
+huggingface.co                        (adresses des fichiers du modèle)
+us.aws.cdn.hf.co                      (serveur qui les envoie réellement)
+download.pytorch.org                  (PyTorch pour processeur, ≈ 200 Mo…)
+download-r2.pytorch.org               (… dont les fichiers sont servis ici)
 ```
-(`*.hf.co` couvre les serveurs de fichiers de Hugging Face ; si les « *. » ne sont pas acceptés : « Tous les
-domaines ».) Une tâche planifiée de type Claude Code (dépôt et environnement choisis dans claude.ai/code/routines)
-prend au contraire ses droits dans son environnement : **Network access** → **Custom**, « Also include default list
-of common package managers », mêmes domaines. Le diagnostic (`voix_libre.py diagnostic`) dit en une seconde si la
-session en cours peut joindre Hugging Face.
+Une tâche planifiée de type Claude Code (dépôt et environnement choisis dans claude.ai/code/routines) prend au
+contraire ses droits dans son environnement : **Network access** → **Custom**, mêmes domaines. `voix_libre.py
+diagnostic` télécharge 16 octets d'un vrai fichier du modèle : il dit en quelques secondes si tout passe, et sinon
+quel serveur est refusé.
+
+Mesures dans une session de tâche planifiée (2 cœurs Xeon avec AMX, 8 Go, 21/10/2026) : installation 47 s ;
+téléchargement et chargement du modèle 284 s (5,3 Go, bfloat16, 3,4 Gio en mémoire) ; un paragraphe de 11,9 s
+d'audio généré et vérifié en 115 s (≈ 10 fois le temps réel) ; mémoire maximale 5,7 Gio (fichier d'échange de
+7 Go ajouté, inutilisé). Un épisode complet (≈ 85 s de voix) : ≈ 15 à 20 min de génération.
 
 Les poids (≈ 4 Go pour la voix, 1,5 Go pour la transcription) se téléchargent au premier usage de chaque session.
 
