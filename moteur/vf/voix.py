@@ -697,9 +697,11 @@ def narration_quiz(spec):
         n = i + 1
         blocs.append((f"i{n}_affirmation", idee.get("voix_affirmation")
                       or f"{NUMEROS[i]}. {_sans_guillemets(idee['affirmation'])}"))
-        # « C'est faux ! » plutôt que « Faux ! » seul : un mot isolé sortait étiré de Kyutai (« Fouuuu… », 1,1 s)
+        # « Eh non, c'est faux ! » / « Eh oui, c'est vrai ! » (essais Kyutai du 21/10/2026, 6 prises chacune) : « Faux ! »
+        # seul sortait étiré (« Fouuuu… ») ou entendu « fou » (4 sur 4), « C'est faux ! » entendu « c'est fou » 4 fois
+        # sur 6 ; avec « Eh non » : 6 sur 6 justes
         blocs.append((f"i{n}_verdict", idee.get("voix_verdict")
-                      or ("C'est vrai !" if idee["verdict"].upper() == "VRAI" else "C'est faux !")))
+                      or ("Eh oui, c'est vrai !" if idee["verdict"].upper() == "VRAI" else "Eh non, c'est faux !")))
         for k, p in enumerate(idee.get("panneaux", [])):
             t = p.get("voix")
             if t is None:

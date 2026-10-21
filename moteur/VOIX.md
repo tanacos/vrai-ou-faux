@@ -33,10 +33,12 @@ python3 moteur/voix_libre.py horodater DOSSIER                   # refait les mo
   `prise_mots.json` → `blocs` : le découpage du quiz se fait sur ces bornes, pas sur la transcription), puis relu
   par une transcription indépendante (faster-whisper medium) et refait (4 essais) s'il manque 3 mots ou plus, s'il
   s'en ajoute, ou s'il y a une syllabe parasite au début. Un bloc de 3 mots ou moins doit en plus être entendu mot
-  pour mot et ne pas s'étirer (parole ≤ 0,32 s par mot + 0,4 s) : le 20/10/2026, un « Faux ! » isolé était sorti en
-  « Fouuuu… » de 1,1 s ; le verdict se dit donc désormais « C'est faux ! » / « C'est vrai ! ». Code de sortie 0
-  seulement si tout est vérifié ; `--declarer` écrit alors le champ `voix` dans `episode.json` (`"eclaircir": true` :
-  étape « micro studio »).
+  pour mot ; un bloc de 6 mots ou moins ne doit pas s'étirer (parole ≤ 0,3 s par syllabe + 0,35 s), et le mot
+  « faux » ou « vrai » qu'il contient doit être entendu tel quel. Constaté le 20 et le 21/10/2026 : « Faux ! » isolé
+  sortait en « Fouuuu… » (1,1 s) ou entendu « fou », « C'est faux ! » entendu « c'est fou » 4 fois sur 6 ; le verdict
+  se dit donc « Eh non, c'est faux ! » / « Eh oui, c'est vrai ! » (6 prises justes sur 6 chacune), et un bloc court a
+  8 essais au lieu de 4. Code de sortie 0 seulement si tout est vérifié ; `--declarer` écrit alors le champ `voix`
+  dans `episode.json` (`"eclaircir": true` : étape « micro studio »).
 - Mots horodatés : la transcription indépendante de **chaque bloc** (celle de la vérification), placée sur la prise
   (`voix/prise_mots.json`) ; un bloc repris par `--refaire` garde ses mots d'origine. Ils sont ensuite alignés sur le
   script **à l'intérieur de leur bloc** (`vf.voix.aligner_dans_blocs`, ≥ 90 % exigé) : un mot retrouvé hors de son

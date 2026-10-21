@@ -113,8 +113,12 @@ def verifier(transcrire, audio16, attendu):
     if len(e) <= 3:
         chiffres_h = any(ch.isdigit() for w in h for ch in w)
         deforme = [w for w in e if w not in h and not (chiffres_h and w in NOMBRES_LETTRES)]
+    if len(e) <= 6:
+        # mot du verdict entendu tel quel (21/10/2026 : « faux » sortait souvent entendu « fou ») ; parole pas étirée
+        # (≤ 0,3 s par syllabe + 0,35 s : un « C'est faux ! » de 1,1 s ou un « Eh non, c'est faux ! » de 1,9 s)
+        deforme += [w for w in ("faux", "vrai") if w in e and w not in h and w not in deforme]
         p = duree_parole(audio16)
-        if p > 0.32 * len(e) + 0.4:
+        if p > 0.3 * syllabes(attendu) + 0.35:
             etire = round(p, 2)
     ok = not trous and not ajouts and not ajout_debut and not court and not deforme and etire is None
     return ok, {"entendu": entendu, "trous": trous + deforme, "ajouts": ajouts, "ajout_debut": ajout_debut,
@@ -122,6 +126,18 @@ def verifier(transcrire, audio16, attendu):
 
 
 NOMBRES_LETTRES = {"un", "une", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix"}
+
+
+def syllabes(texte):
+    """Nombre approximatif de syllabes (groupes de voyelles, e muet final non compté) : « Eh non, c'est faux ! » → 4."""
+    n = 0
+    for w in mots(texte):
+        g = re.findall(r"[aeiouy]+", w)
+        k = len(g)
+        if k > 1 and w.endswith("e") and g[-1] == "e":
+            k -= 1                                          # « tasse », « vide » : e muet
+        n += k                                              # « c' », « l' » : 0
+    return n
 
 
 def duree_parole(a, sr=16000):
@@ -337,7 +353,10 @@ def generer(ep_dir, declarer=False, refaire=None):
             ok, det, a, n_essais = deja[lu]
         else:
             essais = []
-            for _ in range(r["tentatives"]):
+            # bloc très court (« C'est faux ! ») : 2 fois plus d'essais, chacun ne coûte que 20 à 30 s (21/10/2026 :
+            # 2 rejets sur 3 pour « C'est faux ! », la vérification stricte des blocs courts fait son travail)
+            n_max = r["tentatives"] * (2 if len(mots(lu)) <= 3 else 1)
+            for _ in range(n_max):
                 a = produire(lu)
                 ok, det = verifier(transcrire, resample_poly(a, 2, 3).astype(np.float32), lu)
                 essais.append((ok, det, a))
