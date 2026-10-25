@@ -161,10 +161,12 @@ python3 moteur/publier.py legende  series/infiniment/epNN
 - `createScheduledPost` (`blogId` 7381054), champ `info` comme pour « Vrai ou faux ? » (ROUTINE.md, étape 7) :
   `autoPublish: true`, `draft: false` (true en MODE ESSAI), `providers: [{"network": "tiktok"}]`, `media: [lien
   direct]`, `text: légende`, `publicationDate: {dateTime, timezone: "Europe/Paris"}`, `tiktokData: {privacyOption:
-  "PUBLIC_TO_EVERYONE", title: légende, isAigc: true, disableComment: false,
+  "PUBLIC_TO_EVERYONE", title: légende, isAigc: false, disableComment: false,
   disableDuet: false, disableStitch: false, autoAddMusic: false, commercialContentThirdParty: false,
   commercialContentOwnBrand: false}`, plus `descendants: []`, `firstCommentText: ""`, `hasNotReadNotes: false`,
   `mediaAltText: []`, `shortener: false`, `smartLinkData: {ids: []}`.
+- `isAigc` reste à `false` : Nathan a demandé le 25/10/2026 de ne plus activer l'étiquette TikTok « contenu généré par
+  IA ». Ne la réactive pas. La mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » reste obligatoire dans la légende.
 - Vérifie avec `getScheduledPosts` que la publication existe et que son `media` pointe vers `static.metricool.com`.
 
 ## 9. Journal et sauvegarde

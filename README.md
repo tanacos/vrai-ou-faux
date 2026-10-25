@@ -78,4 +78,5 @@ python3 fabriquer.py tout    ../episodes/003-espace/episode.json /tmp/ep3
 Pictogrammes extraits du paquet react-icons 5.7.0 : Phosphor (MIT), Material Design (Apache 2.0), Ionicons 5 (MIT),
 Remix Icon (Apache 2.0), Bootstrap Icons (MIT), Game Icons (CC BY 3.0 — le crédit « game-icons.net » est ajouté
 automatiquement à la légende quand l'un d'eux est utilisé). Police : Inter (SIL OFL), fournie par le système.
-Les vidéos sont étiquetées « contenu généré par IA » sur TikTok.
+Les vidéos ne portent plus l'étiquette TikTok « contenu généré par IA » (depuis le 25/10/2026) ; la légende indique
+« Voix de synthèse : Kyutai TTS (CC BY 4.0) ».
