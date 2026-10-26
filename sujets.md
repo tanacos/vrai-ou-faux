@@ -6,8 +6,14 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 5 — les animaux** : idée 1 imposée « Le poisson rouge a une mémoire de 3 secondes. » (faux présumé ;
-  pistes de sources : BBC Discover Wildlife, The Naked Scientists). Voir les autres pistes « Les animaux » ci-dessous.
+- **Épisode 6 — le corps humain** : idée 1 imposée « On perd la plupart de sa chaleur par la tête. » (faux présumé ;
+  pistes de sources : Indiana University School of Medicine 2008 / BMJ « Medical myths », Live Science). Voir les
+  autres pistes « Le corps humain » ci-dessous.
+
+## Déjà traité (épisode 5, les animaux)
+
+- ~~poisson rouge et mémoire de 3 secondes~~ (FAUX), ~~pieuvre à trois cœurs~~ (VRAI), ~~chauves-souris
+  aveugles~~ (FAUX), ~~flamants roses et nourriture~~ (VRAI). Restent possibles : autruche et sable, taureaux et rouge.
 
 ## Déjà traité (épisode 4, le sommeil)
 
@@ -19,7 +25,7 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 - **Les animaux** : ~~poisson rouge et mémoire de 3 secondes~~ (annoncé pour l'épisode 5) ; chauves-souris aveugles (faux) ; autruche qui
   cache sa tête dans le sable (faux) ; la pieuvre a trois cœurs (vrai) ; flamants roses à cause de leur nourriture
   (vrai) ; le rouge rend les taureaux furieux (faux).
-- **Le corps humain** : on perd la plupart de sa chaleur par la tête (faux) ; ongles et cheveux poussent après la
+- **Le corps humain** : ~~on perd la plupart de sa chaleur par la tête~~ (annoncé pour l'épisode 6) ; ongles et cheveux poussent après la
   mort (faux) ; on n'a que 5 sens (faux) ; craquer ses doigts donne de l'arthrose (faux présumé).
 - **À table** : l'alcool s'évapore entièrement à la cuisson (faux) ; le sucre rend les enfants surexcités (faux
   présumé) ; les carottes font voir dans le noir (faux, propagande de 1940) ; le miel ne se périme pas (vrai présumé).
