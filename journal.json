@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 4,
- "prochaine_affirmation": "« Le poisson rouge a une mémoire de 3 secondes. »",
+ "dernier_numero": 5,
+ "prochaine_affirmation": "« On perd la plupart de sa chaleur par la tête. »",
  "episodes": [
   {
    "numero": 1,
@@ -161,6 +161,50 @@
    "metricool_id": "399628161",
    "metricool_uuid": "-2960338805566193440",
    "fabrication": "moteur générique, 15/15 contrôles conformes ; contre-vérification : tour 1 = 1 écart (œil ouvert, source ajoutée), tour 2 = 1 écart (15 jours de vigilance : panneau retiré)"
+  },
+  {
+   "numero": 5,
+   "slug": "animaux",
+   "titre": "4 IDÉES REÇUES SUR LES ANIMAUX",
+   "theme": "les animaux",
+   "idees": [
+    {
+     "affirmation": "« Le poisson rouge a une mémoire de 3 secondes. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.discoverwildlife.com/animal-facts/fish/goldfish-memory",
+      "https://www.thenakedscientists.com/node/174167",
+      "https://livescience.com/goldfish-memory.html"
+     ]
+    },
+    {
+     "affirmation": "« La pieuvre a trois cœurs. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.livescience.com/how-many-hearts-does-an-octopus-have",
+      "https://www.smithsonianmag.com/science-nature/ten-wild-facts-about-octopuses-they-have-three-hearts-big-brains-and-blue-blood-7625828/"
+     ]
+    },
+    {
+     "affirmation": "« Les chauves-souris sont aveugles. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.usgs.gov/faqs/are-bats-blind",
+      "https://www.ucdavis.edu/magazine/debunking-myths-about-bats",
+      "https://www.nationalgeographic.com/animals/article/141031-bats-myths-vampires-animals-science-halloween"
+     ]
+    },
+    {
+     "affirmation": "« Les flamants roses sont roses à cause de ce qu'ils mangent. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://nationalzoo.si.edu/animals/news/why-are-flamingos-pink-and-other-flamingo-facts",
+      "https://livescience.com/32968-why-are-flamingos-pink.html"
+     ]
+    }
+   ],
+   "prochain": "« On perd la plupart de sa chaleur par la tête. »",
+   "statut": "fabriqué"
   }
  ]
 }

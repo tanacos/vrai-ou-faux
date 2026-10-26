@@ -1,0 +1,124 @@
+{
+ "script": "/home/claude/vrai-ou-faux/episodes/005-animaux/episode.json",
+ "debut": "2026-10-26 05:37:07",
+ "statut": "conforme",
+ "controles": [
+  {
+   "controle": "format vidéo",
+   "ok": true,
+   "detail": "h264 High 1080x1920 yuv420p 30.00 i/s"
+  },
+  {
+   "controle": "format audio",
+   "ok": true,
+   "detail": "aac 48000 Hz 2 canaux"
+  },
+  {
+   "controle": "durée",
+   "ok": true,
+   "detail": "90.23 s (prévu 90.23 s, minimum 61 s)"
+  },
+  {
+   "controle": "poids",
+   "ok": true,
+   "detail": "37.8 Mio"
+  },
+  {
+   "controle": "lecture immédiate (faststart)",
+   "ok": true,
+   "detail": "atome moov en tête de fichier"
+  },
+  {
+   "controle": "sonie intégrée",
+   "ok": true,
+   "detail": "-14.7 LUFS (cible -14,5 ± 1)"
+  },
+  {
+   "controle": "crête vraie",
+   "ok": true,
+   "detail": "-2.8 dBTP (maximum -1)"
+  },
+  {
+   "controle": "nombre d'images",
+   "ok": true,
+   "detail": "2707 images (prévu 2707)"
+  },
+  {
+   "controle": "miniature (1re image)",
+   "ok": true,
+   "detail": "luminosité moyenne de la 1re image : 46/255 (TikTok s'en sert de miniature : ni noire ni délavée)"
+  },
+  {
+   "controle": "pas d'image noire",
+   "ok": true,
+   "detail": "0 image(s) noire(s)"
+  },
+  {
+   "controle": "pas d'image figée",
+   "ok": true,
+   "detail": "plus longue séquence immobile : 0.00 s"
+  },
+  {
+   "controle": "pas de silence",
+   "ok": true,
+   "detail": "aucun trou de 2 s sous -60 dBFS"
+  },
+  {
+   "controle": "synchro son/image",
+   "ok": true,
+   "detail": "écarts aux transitions : +27 ms, +12 ms, +29 ms, +6 ms"
+  },
+  {
+   "controle": "synchro voix",
+   "ok": true,
+   "detail": "décalage +0 ms, corrélation 0.82"
+  },
+  {
+   "controle": "voix alignée sur le script",
+   "ok": true,
+   "detail": "93 % des mots retrouvés"
+  },
+  {
+   "controle": "phrases découpées dans les silences",
+   "ok": true,
+   "detail": "aucune coupe dans la parole"
+  },
+  {
+   "controle": "phrases sans chevauchement",
+   "ok": true,
+   "detail": "au moins 0,15 s entre deux phrases"
+  },
+  {
+   "controle": "zones sûres TikTok",
+   "ok": true,
+   "detail": "aucun texte hors zone"
+  },
+  {
+   "controle": "textes sans chevauchement",
+   "ok": true,
+   "detail": "aucun texte superposé à un autre"
+  }
+ ],
+ "duree_video": 90.23333333333333,
+ "bande_son": {
+  "lufs": -14.639118963067526,
+  "true_peak": -3.049999999999928,
+  "gain_db": 2.640977983926245,
+  "max_gr_db": 3.7321723684887704,
+  "ducking_db": -7.0,
+  "voix": true,
+  "duree": 90.23333333333333
+ },
+ "credits_pictogrammes": [
+  "Pictogrammes : game-icons.net (CC BY 3.0)"
+ ],
+ "fin": "2026-10-26 05:53:52",
+ "duree_fabrication_s": 1051,
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "alignement": 0.929,
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0"
+ }
+}
