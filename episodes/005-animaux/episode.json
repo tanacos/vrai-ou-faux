@@ -1,0 +1,205 @@
+{
+  "numero": 5,
+  "slug": "animaux",
+  "theme": "les animaux",
+  "titre": [
+    "4 IDÉES REÇUES",
+    "SUR LES ANIMAUX"
+  ],
+  "fond": "nature",
+  "ambiance": "nature",
+  "idees": [
+    {
+      "affirmation": "« Le poisson rouge a une mémoire de 3 secondes. »",
+      "verdict": "FAUX",
+      "scene": {
+        "type": "pictogramme",
+        "icone": "pi:fish",
+        "satellites": [
+          "pi:brain",
+          "pi:clock"
+        ],
+        "marque": "barre",
+        "fond": "ocean"
+      },
+      "panneaux": [
+        {
+          "type": "chiffre",
+          "titre": "Un poisson rouge peut garder un souvenir pendant au moins",
+          "valeur": 3,
+          "suffixe": " mois",
+          "legende": "Pas 3 secondes !"
+        },
+        {
+          "type": "texte",
+          "titre": "La preuve",
+          "texte": "Ils ont appris à appuyer sur un levier pour avoir à manger.",
+          "sous_texte": "Et même à le faire à la bonne heure."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "BBC Discover Wildlife (Debbie Graham, janvier 2026)",
+          "titre": "Do goldfish really only have a 3 second memory?",
+          "url": "https://www.discoverwildlife.com/animal-facts/fish/goldfish-memory",
+          "extrait": "The prevalent myth that goldfish only have a three-second memory does goldfish a great disservice […] In fact, goldfish can retain memories for at least three months, can be trained, and can also tell the time."
+        },
+        {
+          "editeur": "The Naked Scientists (30 novembre 2015)",
+          "titre": "Do fish really have a 3 second memory?",
+          "url": "https://www.thenakedscientists.com/node/174167",
+          "extrait": "In fact, most fish - including goldfish - are more than capable of performing pretty good feats of learning and memory […] And these memories last for months, not minutes. […] According to a study by animal psychologists at Plymouth University, goldfish can even tell the time."
+        },
+        {
+          "editeur": "Live Science (Harry Baker, mai 2021)",
+          "titre": "Do goldfish really have a 3-second memory?",
+          "url": "https://livescience.com/goldfish-memory.html",
+          "extrait": "However, this is a complete myth that, despite its lack of scientific backing, has spread widely […] In reality, goldfish (Carassius auratus) have much longer memories — spanning weeks, months and even years, Brown said."
+        }
+      ]
+    },
+    {
+      "affirmation": "« La pieuvre a trois cœurs. »",
+      "verdict": "VRAI",
+      "scene": {
+        "type": "pictogramme",
+        "icone": "gi:octopus",
+        "satellites": [
+          "pi:heart",
+          "pi:heart",
+          "pi:heart"
+        ],
+        "marque": "coche",
+        "fond": "ocean"
+      },
+      "panneaux": [
+        {
+          "type": "texte",
+          "titre": "Deux cœurs…",
+          "texte": "Deux cœurs poussent le sang dans les branchies, où il se charge en oxygène."
+        },
+        {
+          "type": "texte",
+          "titre": "… plus un",
+          "texte": "Le troisième envoie ce sang riche en oxygène vers le reste du corps.",
+          "sous_texte": "Et son sang est bleu, à cause du cuivre."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "Live Science (Charles Q. Choi, mars 2023)",
+          "titre": "How many hearts does an octopus have?",
+          "url": "https://www.livescience.com/how-many-hearts-does-an-octopus-have",
+          "extrait": "It turns out that an octopus has three hearts […] It pumps oxygenated blood around the body, but not to the gills. […] Each branchial heart's job is to pump blood through the gill it is attached to."
+        },
+        {
+          "editeur": "Smithsonian Magazine (Rachel Nuwer, mis à jour en mars 2024)",
+          "titre": "Ten Wild Facts About Octopuses",
+          "url": "https://www.smithsonianmag.com/science-nature/ten-wild-facts-about-octopuses-they-have-three-hearts-big-brains-and-blue-blood-7625828/",
+          "extrait": "Two of the hearts work exclusively to move blood past the animal’s gills, where it releases carbon dioxide and gains oxygen. Then, the third heart circulates that oxygen-rich blood to the organs and muscles […] the copper in octopus blood makes it appear blue."
+        }
+      ]
+    },
+    {
+      "affirmation": "« Les chauves-souris sont aveugles. »",
+      "verdict": "FAUX",
+      "scene": {
+        "type": "pictogramme",
+        "icone": "gi:bat",
+        "satellites": [
+          "pi:eye"
+        ],
+        "marque": "barre",
+        "fond": "nuit"
+      },
+      "panneaux": [
+        {
+          "type": "texte",
+          "texte": "Les chauves-souris ont de petits yeux… mais une vue très sensible.",
+          "sous_texte": "Elles voient même quand il nous semble faire tout noir."
+        },
+        {
+          "type": "texte",
+          "titre": "Et l'écholocation ?",
+          "texte": "Elle ne marche que de près. Pour le reste, leurs yeux prennent le relais."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "USGS (Institut d'études géologiques des États-Unis)",
+          "titre": "Are bats blind?",
+          "url": "https://www.usgs.gov/faqs/are-bats-blind",
+          "extrait": "No, bats are not blind. Bats have small eyes with very sensitive vision, which helps them see in conditions we might consider pitch black."
+        },
+        {
+          "editeur": "UC Davis Magazine (Josephine Thornton, octobre 2019)",
+          "titre": "Debunking Myths About Bats",
+          "url": "https://www.ucdavis.edu/magazine/debunking-myths-about-bats",
+          "extrait": "Bats are not blind. […] Echolocation only works close up because high frequency sound doesn't travel very far. […] They use that to catch their prey, but bats use their eyes for big-scale things."
+        },
+        {
+          "editeur": "National Geographic (Liz Langley, novembre 2014)",
+          "titre": "6 Bat Myths Busted: Are They Really Blind?",
+          "url": "https://www.nationalgeographic.com/animals/article/141031-bats-myths-vampires-animals-science-halloween",
+          "extrait": "This one is particularly untrue"
+        }
+      ]
+    },
+    {
+      "affirmation": "« Les flamants roses sont roses à cause de ce qu'ils mangent. »",
+      "verdict": "VRAI",
+      "scene": {
+        "type": "pictogramme",
+        "icone": "gi:flamingo",
+        "satellites": [
+          "gi:shrimp"
+        ],
+        "marque": "coche",
+        "fond": "chaud"
+      },
+      "panneaux": [
+        {
+          "type": "texte",
+          "titre": "Leur secret",
+          "texte": "Les algues et petites crevettes qu'ils avalent sont pleines de pigments.",
+          "sous_texte": "Leur corps les dépose dans leurs plumes."
+        },
+        {
+          "type": "texte",
+          "titre": "La preuve",
+          "texte": "Les poussins naissent gris-blanc. Ils mettent des années à devenir roses.",
+          "sous_texte": "Sans ces pigments, les nouvelles plumes poussent pâles."
+        }
+      ],
+      "sources": [
+        {
+          "editeur": "Smithsonian's National Zoo (29 juin 2021)",
+          "titre": "Why Are Flamingos Pink? And Other Flamingo Facts",
+          "url": "https://nationalzoo.si.edu/animals/news/why-are-flamingos-pink-and-other-flamingo-facts",
+          "extrait": "Flamingos really are what they eat. Many plants produce natural red, yellow or orange pigments, called carotenoids. As a flamingo dines on algae and brine shrimp, its body metabolizes the pigments — turning its feathers pink. […] Flamingo chicks hatch with white-gray, downy feathers and straight bills. It takes several years for them to acquire their signature pink color"
+        },
+        {
+          "editeur": "Live Science (Remy Melina, janvier 2011)",
+          "titre": "Why Are Flamingos Pink?",
+          "url": "https://livescience.com/32968-why-are-flamingos-pink.html",
+          "extrait": "The bird's digestive system extracts pigment from carotenoid-containing food and it eventually dissolves in fats. The fats are then deposited in new feathers as they grow, and the flamingo's color slowly shifts to pink. […] its new feathers would begin grow in with a much more pale shade."
+        }
+      ]
+    }
+  ],
+  "sources_ecran": "Discover Wildlife · Naked Scientists · Live Science · Smithsonian · USGS · UC Davis · National Geographic",
+  "prochain": {
+    "affirmation": "« On perd la plupart de sa chaleur par la tête. »"
+  },
+  "publication": {
+    "legende": "Vrai ou faux ? 🐙 4 idées reçues sur les animaux. Compte tes bonnes réponses et dis ton score en commentaire 👇\nSources : BBC Discover Wildlife, The Naked Scientists, Live Science, Smithsonian Magazine, USGS, UC Davis, National Geographic, Smithsonian's National Zoo\n#vraioufaux #animaux #nature #science #culturegenerale #apprendresurtiktok",
+    "hashtags": [
+      "#vraioufaux",
+      "#animaux",
+      "#nature",
+      "#science",
+      "#culturegenerale",
+      "#apprendresurtiktok"
+    ]
+  }
+}
