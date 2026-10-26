@@ -204,7 +204,8 @@
     }
    ],
    "prochain": "« On perd la plupart de sa chaleur par la tête. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/426a0462169e342f5322e1e2d4e424832c793b34/vrai_ou_faux_05_animaux.mp4"
   }
  ]
 }
