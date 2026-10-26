@@ -5,6 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
+| 2026-10-26 06:08 | normal | démarré |
 | 2026-10-22 06:09 | normal | démarré |
 | 2026-10-19 06:08 | normal | programmé : épisode 4 (le sommeil), mercredi 21/10 à 18:00, Metricool 399628161 |
 | 2026-10-12 21:23 | essai | refusé par Anthropic en 7 s : limite d'utilisation du compte atteinte (USAGE_LIMIT_REACHED) |
