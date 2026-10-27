@@ -254,7 +254,8 @@
     }
    ],
    "prochain": "« Les carottes font voir dans le noir. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/611d83660dbc5300c6fc4f552d34ecaff2e5093f/vrai_ou_faux_06_corps.mp4"
   }
  ]
 }
