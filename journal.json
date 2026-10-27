@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 5,
- "prochaine_affirmation": "« On perd la plupart de sa chaleur par la tête. »",
+ "dernier_numero": 6,
+ "prochaine_affirmation": "« Les carottes font voir dans le noir. »",
  "episodes": [
   {
    "numero": 1,
@@ -209,6 +209,52 @@
    "publication": "2026-10-28T18:00:00+01:00",
    "metricool_id": "406252451",
    "metricool_uuid": "-1660009297078695015"
+  },
+  {
+   "numero": 6,
+   "slug": "corps",
+   "titre": "4 IDÉES REÇUES SUR LE CORPS HUMAIN",
+   "theme": "le corps humain",
+   "idees": [
+    {
+     "affirmation": "« On perd la plupart de sa chaleur par la tête. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.livescience.com/34411-body-heat-loss-head.html",
+      "https://www.scientificamerican.com/blog/news-blog/dont-be-fooled-six-holiday-health-m-2008-12-18/",
+      "https://www.npr.org/transcripts/98453682"
+     ]
+    },
+    {
+     "affirmation": "« Un bébé a plus d'os qu'un adulte. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://health.clevelandclinic.org/how-many-bones-does-a-baby-have",
+      "https://www.teachengineering.org/content/wpi_/lessons/wpi_bones/wpi_bones_lesson01_howbonesgrow_article_v2_tedl_dwc.pdf",
+      "https://www.popsci.com/story/health/bones-human-skeleton/"
+     ]
+    },
+    {
+     "affirmation": "« Le plus petit os du corps se trouve dans l'oreille. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.livescience.com/longest-bone-shortest-bone",
+      "https://my.clevelandclinic.org/health/body/ossicles",
+      "https://www.guinnessworldrecords.com/world-records/smallest-bone/"
+     ]
+    },
+    {
+     "affirmation": "« Les ongles et les cheveux continuent de pousser après la mort. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://livescience.com/32174-do-hair-and-nails-keep-growing-after-death.html",
+      "https://snopes.com/science/nailgrow.asp",
+      "https://uamshealth.com/medical-myths/do-a-persons-hair-and-fingernails-continue-to-grow-after-death"
+     ]
+    }
+   ],
+   "prochain": "« Les carottes font voir dans le noir. »",
+   "statut": "fabriqué"
   }
  ]
 }

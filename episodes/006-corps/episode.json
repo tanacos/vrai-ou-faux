@@ -1,0 +1,236 @@
+{
+ "numero": 6,
+ "slug": "corps",
+ "theme": "le corps humain",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LE CORPS HUMAIN"
+ ],
+ "fond": "labo",
+ "ambiance": "labo",
+ "idees": [
+  {
+   "affirmation": "« On perd la plupart de sa chaleur par la tête. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:beanie",
+    "satellites": [
+     "pi:snowflake",
+     "pi:thermometer-cold"
+    ],
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "chiffre",
+     "titre": "Par la tête, on perd au plus",
+     "valeur": 10,
+     "suffixe": " %",
+     "legende": "de sa chaleur (7 à 10 %)"
+    },
+    {
+     "type": "texte",
+     "titre": "Rien de spécial",
+     "texte": "Toute partie du corps laissée nue perd de la chaleur, pas seulement la tête.",
+     "sous_texte": "Bras, jambes et torse aussi !"
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Live Science",
+     "titre": "Do We Really Lose Half our Body Heat From our Heads?",
+     "url": "https://www.livescience.com/34411-body-heat-loss-head.html",
+     "extrait": "At most, according to a 2008 report in BMJ, a person loses 7 percent to 10 percent of their body heat through their head."
+    },
+    {
+     "editeur": "Scientific American (décembre 2008)",
+     "titre": "Don't be fooled: six holiday health myths verified or debunked",
+     "url": "https://www.scientificamerican.com/blog/news-blog/dont-be-fooled-six-holiday-health-m-2008-12-18/",
+     "extrait": "Some heat does escape through the head but certainly not the bulk of it, according to the researchers. […] Heat loss is proportional to the body's surface area that is exposed. Your head has a decent amount of surface area, […] but notes that the arms, legs and torso do, too."
+    },
+    {
+     "editeur": "NPR (décembre 2008)",
+     "titre": "Scientists Shed Light On Festive Medical Myths",
+     "url": "https://www.npr.org/transcripts/98453682",
+     "extrait": "But recent studies have debunked this old soldier's tale. […] Any uncovered part of the body loses heat and will drop the core body temperature proportionately."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Un bébé a plus d'os qu'un adulte. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:baby",
+    "satellites": [
+     "pi:bone",
+     "pi:bone"
+    ],
+    "marque": "coche",
+    "fond": "aurore"
+   },
+   "panneaux": [
+    {
+     "type": "duo",
+     "titre": "Nombre d'os",
+     "gauche": {
+      "valeur": "≈ 300",
+      "legende": "à la naissance",
+      "couleur": "cyan"
+     },
+     "droite": {
+      "valeur": "206",
+      "legende": "chez l'adulte",
+      "couleur": "or"
+     },
+     "voix": "Environ 300 os à la naissance, et 206 chez l'adulte."
+    },
+    {
+     "type": "texte",
+     "titre": "Pourquoi ?",
+     "texte": "En grandissant, de petits os se soudent entre eux pour en former de plus grands."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Cleveland Clinic",
+     "titre": "How Many Bones Does a Baby Have?",
+     "url": "https://health.clevelandclinic.org/how-many-bones-does-a-baby-have",
+     "extrait": "A newborn has 275 to 300 bones, while most adults have 206. […] As a baby grows, their smaller bones join together to create larger bones."
+    },
+    {
+     "editeur": "Nemours KidsHealth (via TeachEngineering)",
+     "titre": "How Bones Grow",
+     "url": "https://www.teachengineering.org/content/wpi_/lessons/wpi_bones/wpi_bones_lesson01_howbonesgrow_article_v2_tedl_dwc.pdf",
+     "extrait": "At birth, a baby's body has about 300 bones. These eventually fuse (grow together) to form the 206 bones that adults have."
+    },
+    {
+     "editeur": "Popular Science",
+     "titre": "You'll never have as many bones as you did at birth (and other strange skeleton facts)",
+     "url": "https://www.popsci.com/story/health/bones-human-skeleton/",
+     "extrait": "Newborns can have more than 300 distinct bones."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Le plus petit os du corps se trouve dans l'oreille. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:ear",
+    "satellites": [
+     "pi:bone",
+     "pi:magnifying-glass"
+    ],
+    "marque": "coche",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Son nom : l'étrier",
+     "texte": "C'est l'un des trois osselets de l'oreille, et le plus petit."
+    },
+    {
+     "type": "texte",
+     "titre": "Minuscule",
+     "texte": "Il mesure de 2,6 à 3,4 mm de long."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Live Science",
+     "titre": "What's the largest bone in the human body? (What about the smallest?)",
+     "url": "https://www.livescience.com/longest-bone-shortest-bone",
+     "extrait": "But no matter the age of an individual, the smallest bones in the human body are found in the ear. […] The smallest of the ossicles is the stapes. […] It measures about 0.1 to 0.13 inches (2.6 to 3.4 millimeters) in length."
+    },
+    {
+     "editeur": "Cleveland Clinic",
+     "titre": "Ossicles",
+     "url": "https://my.clevelandclinic.org/health/body/ossicles",
+     "extrait": "It's the smallest bone in the human body, measuring only a few millimeters in both width and height."
+    },
+    {
+     "editeur": "Guinness World Records",
+     "titre": "Smallest bone",
+     "url": "https://www.guinnessworldrecords.com/world-records/smallest-bone/",
+     "extrait": "measures 2.6-3.4 mm (0.1-0.13 in) in length and weighs from 2 to 4.3 mg (0.03- 0.066 grains)."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Les ongles et les cheveux continuent de pousser après la mort. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:fingernail",
+    "satellites": [
+     "pi:magnifying-glass"
+    ],
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Ce qui se passe",
+     "texte": "Après la mort, le corps se déshydrate et la peau se rétracte.",
+     "sous_texte": "Elle découvre une partie des ongles et des cheveux."
+    },
+    {
+     "type": "texte",
+     "titre": "Une illusion",
+     "texte": "Ongles et cheveux semblent plus longs… mais ils ne poussent plus."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Live Science",
+     "titre": "Do Hair and Nails Keep Growing After Death?",
+     "url": "https://livescience.com/32174-do-hair-and-nails-keep-growing-after-death.html",
+     "extrait": "The short answer is no, though it may not seem that way to the casual observer. […] That's because after death, the human body dehydrates, causing the skin to shrink. […] This shrinking exposes the parts of the nails and hair that were once under the skin, causing them to appear longer"
+    },
+    {
+     "editeur": "Snopes",
+     "titre": "Do Hair and Nails Continue to Grow After Death?",
+     "url": "https://snopes.com/science/nailgrow.asp",
+     "extrait": "your hair and nails do not continue to grow after you die. […] Our flesh dries and, in so doing, pulls away from nails and hair."
+    },
+    {
+     "editeur": "UAMS Health (Université de l'Arkansas pour les sciences médicales)",
+     "titre": "Do a person's hair and fingernails continue to grow after death?",
+     "url": "https://uamshealth.com/medical-myths/do-a-persons-hair-and-fingernails-continue-to-grow-after-death",
+     "extrait": "Hair and fingernails may appear longer after death, but not because they are still growing. […] After death, dehydration causes the skin and other soft tissues to shrink."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "Live Science · Scientific American · NPR · Cleveland Clinic · KidsHealth · Popular Science · Guinness · Snopes · UAMS",
+ "prochain": {
+  "affirmation": "« Les carottes font voir dans le noir. »"
+ },
+ "publication": {
+  "legende": "Vrai ou faux ? 🦴 4 idées reçues sur le corps humain. Compte tes bonnes réponses et dis ton score en commentaire 👇\nSources : Live Science, Scientific American, NPR, Cleveland Clinic, Nemours KidsHealth, Popular Science, Guinness World Records, Snopes, UAMS Health\n#vraioufaux #corpshumain #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#corpshumain",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ },
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0"
+ }
+}
