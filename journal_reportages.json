@@ -51,8 +51,11 @@
     "https://science.nasa.gov/earth/facts/"
    ],
    "prochain": "Au cœur d'un verre d'eau (épisode 3 : plus d'atomes dans un verre d'eau que de verres d'eau dans les océans ?)",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/114cfe928b27a1ee4bebdc4e2afb2fc418c8eef3/infiniment_02_bord-univers.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/114cfe928b27a1ee4bebdc4e2afb2fc418c8eef3/infiniment_02_bord-univers.mp4",
+   "publication": "2026-11-09T18:00:00+01:00",
+   "metricool_id": "408229587",
+   "metricool_uuid": "6879983285843871114"
   }
  ],
  "dernier_numero": 2,
