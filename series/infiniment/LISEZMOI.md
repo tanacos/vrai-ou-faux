@@ -72,7 +72,7 @@ dans la légende. Voir `moteur/VOIX.md` (prérequis réseau de l'environnement d
 
 | N° | Dossier | Sujet | Statut |
 |---|---|---|---|
-| 1 | `ep01_estelle16` | L'humanité dans un sucre (vers le petit) | prêt (3 tours de contre-vérification, voix refaite le 21/10/2026) : fabriqué et programmé par la routine du samedi 24/10, pour le lundi 26/10 |
+| 1 | `ep01_estelle16` | L'humanité dans un sucre (vers le petit) | prêt (3 tours de contre-vérification, voix refaite le 21/10/2026) : non programmé le 24/10 ; fabriqué (conforme) et programmé par la routine du 27/10 pour le lundi 02/11/2026 18:00 |
 | 2 | `ep02` | Le bord de l'univers observable (vers le grand) | prêt (3 tours, aucun écart au dernier ; voix refaite le 21/10/2026) : routine du samedi 31/10 |
 | 3 | à écrire | Au cœur d'un verre d'eau (annoncé à la fin de l'épisode 2) | — |
 

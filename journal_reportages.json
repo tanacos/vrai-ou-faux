@@ -23,8 +23,11 @@
     "https://hyperphysics.gsu.edu/hbase/Nuclear/nucuni.html"
    ],
    "prochain": "Le bord de l'univers observable",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/8983323519737bcb504637353ede32f3bd915984/infiniment_01_sucre.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/8983323519737bcb504637353ede32f3bd915984/infiniment_01_sucre.mp4",
+   "publication": "2026-11-02T18:00:00+01:00",
+   "metricool_id": "408205767",
+   "metricool_uuid": "4928500723871139349"
   },
   {
    "numero": 2,
