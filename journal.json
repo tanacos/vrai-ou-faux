@@ -254,8 +254,11 @@
     }
    ],
    "prochain": "« Les carottes font voir dans le noir. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/611d83660dbc5300c6fc4f552d34ecaff2e5093f/vrai_ou_faux_06_corps.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/611d83660dbc5300c6fc4f552d34ecaff2e5093f/vrai_ou_faux_06_corps.mp4",
+   "publication": "2026-10-31T18:00:00+01:00",
+   "metricool_id": "408282494",
+   "metricool_uuid": "6658323634995216655"
   }
  ]
 }

@@ -6,9 +6,13 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 6 — le corps humain** : idée 1 imposée « On perd la plupart de sa chaleur par la tête. » (faux présumé ;
-  pistes de sources : Indiana University School of Medicine 2008 / BMJ « Medical myths », Live Science). Voir les
-  autres pistes « Le corps humain » ci-dessous.
+- **Épisode 7 — à table** : idée 1 imposée « Les carottes font voir dans le noir. » (faux présumé ; pistes de
+  sources : Smithsonian Magazine, Live Science, ScienceNorway). Voir les autres pistes « À table » ci-dessous.
+
+## Déjà traité (épisode 6, le corps humain)
+
+- ~~chaleur perdue par la tête~~ (FAUX), ~~bébé et nombre d'os~~ (VRAI), ~~étrier, plus petit os~~ (VRAI),
+  ~~ongles et cheveux après la mort~~ (FAUX). Restent possibles : 5 sens (à formuler avec soin), craquer ses doigts.
 
 ## Déjà traité (épisode 5, les animaux)
 
@@ -25,10 +29,10 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 - **Les animaux** : ~~poisson rouge et mémoire de 3 secondes~~ (annoncé pour l'épisode 5) ; chauves-souris aveugles (faux) ; autruche qui
   cache sa tête dans le sable (faux) ; la pieuvre a trois cœurs (vrai) ; flamants roses à cause de leur nourriture
   (vrai) ; le rouge rend les taureaux furieux (faux).
-- **Le corps humain** : ~~on perd la plupart de sa chaleur par la tête~~ (annoncé pour l'épisode 6) ; ongles et cheveux poussent après la
-  mort (faux) ; on n'a que 5 sens (faux) ; craquer ses doigts donne de l'arthrose (faux présumé).
+- **Le corps humain** : ~~on perd la plupart de sa chaleur par la tête~~ (annoncé pour l'épisode 6) ; ~~ongles et cheveux poussent après la
+  mort~~ (fait) ; on n'a que 5 sens (faux) ; craquer ses doigts donne de l'arthrose (faux présumé).
 - **À table** : l'alcool s'évapore entièrement à la cuisson (faux) ; le sucre rend les enfants surexcités (faux
-  présumé) ; les carottes font voir dans le noir (faux, propagande de 1940) ; le miel ne se périme pas (vrai présumé).
+  présumé) ; ~~les carottes font voir dans le noir~~ (annoncé pour l'épisode 7) ; le miel ne se périme pas (vrai présumé).
 - **L'histoire** : Napoléon était petit (faux) ; les Vikings portaient des casques à cornes (faux) ; au Moyen Âge on
   croyait la Terre plate (faux) ; Einstein était nul en maths (faux).
 - **La mer** : on connaît mieux la surface de la Lune que les fonds marins (vrai présumé, à formuler avec soin) ;
