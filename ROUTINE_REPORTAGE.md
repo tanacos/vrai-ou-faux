@@ -68,9 +68,12 @@ Crée `series/infiniment/epNN/` (NN sur 2 chiffres) en suivant `moteur/rp/FORMAT
   explication, retournement, « Prochain épisode : … Les sources sont en description. »). Nombres en chiffres, sans
   points de suspension ni balises.
 - `episode.json` : `blocs`, `scenes` (une scène ou une liste de plans par bloc), `voix_libre`, `sources`, `calcul`,
-  `images`, `publication` (légende : accroche + « INFINIMENT, épisode N : de l'infiniment petit à l'infiniment
-  grand. » + l'explication en une phrase + « Sources : … » + « Voix de synthèse : Kyutai TTS (CC BY 4.0) » + mots-dièse
-  dont `#infiniment`), `prochain`.
+  `images`, `publication` (légende **simple**, décision de Nathan du 28/10/2026 ; modèle : `ep02` : accroche +
+  « INFINIMENT, épisode N. », puis « Sources : … » — la vidéo dit et affiche « Sources en description » —, puis
+  les mots-dièse dont `#infiniment`, indispensable au comptage de la file. Ni explication en plus, ni mention de la
+  voix, ni crédit), `prochain`.
+- Pictogrammes : pas de `gi:` (game-icons), leur licence exige un crédit que le reportage n'affiche pas ; `valider`
+  les refuse.
 - Les images sont des affirmations : tailles comparées à l'échelle, couleurs fidèles quand elles sont connues,
   « pas à l'échelle » écrit quand c'est le cas.
 
@@ -166,7 +169,8 @@ python3 moteur/publier.py legende  series/infiniment/epNN
   commercialContentOwnBrand: false}`, plus `descendants: []`, `firstCommentText: ""`, `hasNotReadNotes: false`,
   `mediaAltText: []`, `shortener: false`, `smartLinkData: {ids: []}`.
 - `isAigc` reste à `false` : Nathan a demandé le 25/10/2026 de ne plus activer l'étiquette TikTok « contenu généré par
-  IA ». Ne la réactive pas. La mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » reste obligatoire dans la légende.
+  IA ». Ne la réactive pas. Depuis le 28/10/2026, la légende ne mentionne plus non plus la voix de synthèse (décision
+  de Nathan, prise en connaissant le risque côté TikTok) : n'ajoute ni l'une ni l'autre sans qu'il le demande.
 - Vérifie avec `getScheduledPosts` que la publication existe et que son `media` pointe vers `static.metricool.com`.
 
 ## 9. Journal et sauvegarde

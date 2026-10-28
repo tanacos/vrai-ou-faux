@@ -76,7 +76,8 @@ python3 fabriquer.py tout    ../episodes/003-espace/episode.json /tmp/ep3
 ## Licences des éléments embarqués
 
 Pictogrammes extraits du paquet react-icons 5.7.0 : Phosphor (MIT), Material Design (Apache 2.0), Ionicons 5 (MIT),
-Remix Icon (Apache 2.0), Bootstrap Icons (MIT), Game Icons (CC BY 3.0 — le crédit « game-icons.net » est ajouté
-automatiquement à la légende quand l'un d'eux est utilisé). Police : Inter (SIL OFL), fournie par le système.
-Les vidéos ne portent plus l'étiquette TikTok « contenu généré par IA » (depuis le 25/10/2026) ; la légende indique
-« Voix de synthèse : Kyutai TTS (CC BY 4.0) ».
+Remix Icon (Apache 2.0), Bootstrap Icons (MIT), Game Icons (CC BY 3.0 — crédit obligatoire : le quiz l'affiche
+seul à l'écran, sous les sources de fin ; INFINIMENT ne les utilise pas). Police : Inter (SIL OFL), fournie par le
+système. Légendes simples depuis le 28/10/2026 (décision de Nathan) : ni liste de sources pour le quiz (elles sont à
+l'écran), ni mention de la voix de synthèse, ni crédit ; pas d'étiquette TikTok « contenu généré par IA » non plus
+(depuis le 25/10/2026). Nathan connaît le risque : TikTok demande de signaler un son IA réaliste.

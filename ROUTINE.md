@@ -74,8 +74,12 @@ Pour chacune des 4 idées :
   donne une icône d'image ; préfère `md:satellite-alt`). Vérifie-les :
   `cd moteur && python3 -m vf.icons chercher <mots>` puis `python3 -m vf.icons planche /tmp/picto.png <noms…>` et
   **regarde l'image** (outil Read).
-- Légende : modèle de l'épisode 3 (accroche + « Compte tes bonnes réponses et dis ton score en commentaire 👇 »,
-  ligne « Sources : … », hashtags dont `#vraioufaux`).
+- Légende **simple** (décision de Nathan du 28/10/2026), modèle de l'épisode 6 : accroche + « Dis ton score en
+  commentaire 👇 », puis la ligne des mots-dièse dont `#vraioufaux` (indispensable : la routine compte la file
+  d'attente avec). **Pas** de ligne « Sources : » (les sources sont à l'écran, `sources_ecran`), ni de mention de la
+  voix, ni de crédit : `valider` refuse ces lignes.
+- Pictogrammes game-icons (`gi:`) : permis, mais leur licence exige un crédit ; le moteur l'affiche seul à l'écran,
+  sous les sources de fin. Préfère un autre jeu quand il illustre aussi bien.
 
 ## 4. Aperçu et corrections
 
@@ -124,8 +128,8 @@ Voix « Estelle » (Kyutai TTS 1.6B, modèle libre, usage commercial autorisé a
    `"ok": true` exigé ; sinon retire le champ `voix` (épisode sans voix).
 4. Refais `valider` et `apercu` (la chronologie s'allonge pour laisser chaque phrase se finir ; jusqu'à 96 s avec
    la voix). Au-delà, raccourcis le texte lu d'un panneau (clé `voix`) ou le panneau lui-même.
-5. Légende : `publier.py legende` ajoute seul la mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » exigée par
-   la licence (avant la ligne des mots-dièse).
+5. Légende : aucune mention de la voix (décision de Nathan du 28/10/2026, prise en connaissant le risque côté
+   TikTok : voir plus bas, étape 7).
 
 ## 6. Fabrication complète (≈ 15 à 25 min)
 
@@ -178,7 +182,9 @@ python3 moteur/publier.py legende  episodes/NNN-slug episodes/NNN-slug/rapport_q
   commercialContentOwnBrand: false}`, plus `descendants: []`, `firstCommentText: ""`, `hasNotReadNotes: false`,
   `mediaAltText: []`, `shortener: false`, `smartLinkData: {ids: []}`.
 - `isAigc` reste à `false` : Nathan a demandé le 25/10/2026 de ne plus activer l'étiquette TikTok « contenu généré par
-  IA ». Ne la réactive pas. La mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » reste obligatoire dans la légende.
+  IA ». Ne la réactive pas. Depuis le 28/10/2026, la légende ne mentionne plus non plus la voix de synthèse : Nathan
+  l'a décidé après qu'on lui a expliqué que TikTok demande de signaler un son IA réaliste (risque : étiquette imposée,
+  vidéo limitée ou retirée). Ne remets ni l'étiquette ni la mention sans qu'il le demande.
 - Vérifie avec `getScheduledPosts` que la publication existe et que son `media` pointe vers `static.metricool.com`
   (Metricool a bien copié la vidéo). Sinon, ne recrée pas de doublon : signale le problème.
 

@@ -4,7 +4,7 @@ Deux voix possibles ; tout le reste (montage, sous-titres, mixage, contrôles) s
 
 | | **Estelle (Kyutai TTS 1.6B)**, par défaut | Célian (ElevenLabs), facultative |
 |---|---|---|
-| Licence | poids CC BY 4.0 : usage commercial permis, mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) » (ajoutée seule par `publier.py legende`) ; voix Estelle cédée en CC0 | offre gratuite : **aucun usage commercial** ; offre payante requise pour un compte rémunéré |
+| Licence | poids CC BY 4.0 : usage commercial permis, licence des poids du modèle ; depuis le 28/10/2026, aucune mention dans la légende (décision de Nathan) ; voix Estelle cédée en CC0 | offre gratuite : **aucun usage commercial** ; offre payante requise pour un compte rémunéré |
 | Où elle tourne | dans la session de la routine (processeur), ≈ 20 min par épisode (5 min pour un paragraphe à refaire) | serveurs ElevenLabs, via le connecteur + relais GitHub |
 | Prérequis | accès réseau à PyPI, download.pytorch.org et Hugging Face (voir plus bas) | crédits (1 par caractère) |
 

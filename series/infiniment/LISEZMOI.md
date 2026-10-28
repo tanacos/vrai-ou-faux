@@ -65,8 +65,8 @@ python3 series/infiniment/fabriquer.py tout       epNN   # vidéo + contrôles (
 
 ## Voix
 
-Estelle (Kyutai TTS 1.6B, poids CC BY 4.0, voix cédée en CC0) : mention « Voix de synthèse : Kyutai TTS (CC BY 4.0) »
-dans la légende. Voir `moteur/VOIX.md` (prérequis réseau de l'environnement de la tâche).
+Estelle (Kyutai TTS 1.6B, poids CC BY 4.0, voix cédée en CC0). Depuis le 28/10/2026, la légende ne la mentionne
+plus (décision de Nathan). Voir `moteur/VOIX.md` (prérequis réseau de l'environnement de la tâche).
 
 ## Épisodes
 

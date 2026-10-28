@@ -2,7 +2,7 @@
 """Pictogrammes vectoriels embarqués, 14 118 au total (extraits du paquet react-icons 5.7.0) :
   pi: Phosphor (MIT)            md: Material Design (Apache 2.0)   io: Ionicons 5 (MIT)
   ri: Remix Icon (Apache 2.0)   bs: Bootstrap Icons (MIT)          gi: Game Icons (CC BY 3.0 -> crédit obligatoire,
-                                                                       ajouté automatiquement à la légende)
+                                                                       affiché à l'écran par le quiz)
 Noms acceptés : « globe », « pi:globe », « globe-hemisphere-west », « md:castle », « gi:shark-fin », « io:telescope »,
 « ri:planet », « PiRocketLaunchFill »… Sans préfixe : Phosphor plein, puis Material, Remix, Ionicons, Bootstrap, Game Icons.
 « :duotone » ou « :bold » en suffixe pour les autres graisses Phosphor.

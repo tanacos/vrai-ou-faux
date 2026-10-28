@@ -310,6 +310,10 @@ def valider():
                 err.append(f"bloc {bl} : objet inconnu {o!r}")
             elif o["type"] == "icone" and not IC.exists(o.get("nom", "")):
                 err.append(f"bloc {bl} : pictogramme inconnu {o.get('nom')!r}")
+            elif o["type"] == "icone" and IC.credits([o.get("nom", "")]):
+                # la légende ne porte plus de crédit (décision du 28/10/2026) et le reportage n'en affiche pas
+                err.append(f"bloc {bl} : pictogramme {o.get('nom')!r} refusé : sa licence (game-icons, CC BY 3.0) "
+                           "exige un crédit ; prends-en un d'un autre jeu (pi:, md:, ri:, io:, bs:)")
     if not 61 <= DUR <= 95:
         warn.append(f"durée {DUR:.1f} s hors de 61-95 s")
     return dict(ok=not err, erreurs=err, avertissements=warn, duree=round(DUR, 2), scenes=len(SCENES))

@@ -13,7 +13,8 @@ dans son episode.json ; pour « etat » et « creneau », --serie infiniment cho
   python3 moteur/publier.py journal episodes/004-sommeil --cle valeur [--cle valeur…]
       -> ajoute ou met à jour l'entrée de l'épisode dans journal.json.
   python3 moteur/publier.py legende episodes/004-sommeil [RAPPORT.json]
-      -> légende finale (légende du script + crédits obligatoires des pictogrammes).
+      -> légende finale = légende du script, sans rien y ajouter (légende simple depuis le 28/10/2026 : ni
+         mention de la voix, ni crédit ; le crédit des pictogrammes sous licence est affiché dans la vidéo).
   python3 moteur/publier.py etat [--serie infiniment] [JSON_DES_POSTS_METRICOOL]
       -> point de départ de la routine : pause ?, file pleine ?, épisode à reprendre (statut « fabriqué » ou
          « hébergé » après un run interrompu) ou nouveau numéro, publications Metricool absentes du journal.
@@ -260,41 +261,16 @@ def journal(ep_dir, kv):
 
 
 def legende(ep_dir, rapport=None):
+    """Légende publiée = légende du script. Décision de Nathan du 28/10/2026 : légende simple, sans mention de la
+    voix de synthèse ni ligne de crédit (et sans étiquette IA TikTok, `isAigc: false`). Le crédit qu'exige la
+    licence des pictogrammes game-icons est affiché dans la vidéo (fin du quiz, `vf/episode.py`) ; INFINIMENT
+    refuse ces pictogrammes (`rp/rendu.py valider`). Une ancienne ligne « Voix de synthèse » ou « Pictogrammes »
+    restée dans un script est retirée ici. `rapport` n'est plus utilisé (gardé pour les appels existants)."""
     spec, num, slug = episode_info(ep_dir)
-    txt = spec["publication"]["legende"].strip()
-    credits = []
-    if rapport and os.path.exists(rapport):
-        credits = json.load(open(rapport, encoding="utf-8")).get("credits_pictogrammes", [])
-    if serie_de(spec) == "infiniment":                 # pictogrammes utilisés dans les scènes du reportage
-        noms = []
-
-        def chercher(x):
-            if isinstance(x, dict):
-                if x.get("type") == "icone" and x.get("nom"):
-                    noms.append(x["nom"])
-                for v in x.values():
-                    chercher(v)
-            elif isinstance(x, list):
-                for v in x:
-                    chercher(v)
-        chercher(spec.get("scenes", {}))
-        if noms:
-            sys.path.insert(0, os.path.join(ROOT, "moteur"))
-            from vf import icons as IC
-            credits += IC.credits(noms)
-    v = spec.get("voix") or {}
-    if str(v.get("fournisseur", "")).lower().startswith("kyutai"):
-        credits.append("Voix de synthèse : Kyutai TTS (CC BY 4.0)")        # attribution exigée par la licence
-    for c in credits:
-        if c in txt or (c.startswith("Voix de synthèse") and "Kyutai TTS (CC BY 4.0)" in txt):
-            continue
-        lignes = txt.split("\n")
-        k_hash = max((k for k, l_ in enumerate(lignes) if l_.lstrip().startswith("#")), default=None)
-        if c.startswith("Voix de synthèse") and k_hash is not None:
-            lignes.insert(k_hash, c)                              # avant la ligne des mots-dièse
-            txt = "\n".join(lignes)
-        else:
-            txt += "\n" + c
+    lignes = spec["publication"]["legende"].strip().split("\n")
+    lignes = [l_ for l_ in lignes if not l_.strip().lower().startswith(("voix de synthèse", "pictogrammes :",
+                                                                        "pictogramme :"))]
+    txt = "\n".join(lignes).strip()
     print(txt)
     return txt
 

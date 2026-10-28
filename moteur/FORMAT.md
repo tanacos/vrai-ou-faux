@@ -15,7 +15,8 @@ script qui déborde. Exemple complet : `episodes/003-espace/episode.json`.
   "idees": [ { …idée… } × 4 ],
   "sources_ecran": "Inserm · Scientific American · …",    // 4 lignes maximum à l'écran
   "prochain": {"affirmation": "« … »"},     // annonce de l'épisode suivant (devient l'idée 1 du suivant)
-  "publication": {"legende": "… Sources : … #vraioufaux …", "hashtags": ["#vraioufaux", …]}
+  "publication": {"legende": "Vrai ou faux ? … Dis ton score en commentaire 👇\n#vraioufaux …",   // simple : ni
+                  "hashtags": ["#vraioufaux", …]}                    // « Sources : », ni voix, ni crédit
 }
 ```
 
@@ -75,7 +76,7 @@ Champs communs : `couleur` (`cyan`, `corail`, `vert`, `or`, `violet`) et `fond` 
 ## Pictogrammes
 
 14 118 pictogrammes embarqués : Phosphor (MIT), Material (Apache 2.0), Remix (Apache 2.0), Ionicons (MIT), Bootstrap
-(MIT), Game Icons (CC BY 3.0 : crédit ajouté automatiquement à la légende par `publier.py legende`).
+(MIT), Game Icons (CC BY 3.0 : crédit obligatoire, affiché automatiquement à l'écran sous les sources de fin).
 
 ```bash
 cd moteur

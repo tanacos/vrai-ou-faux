@@ -27,6 +27,24 @@ MIN_DUR, MAX_DUR = 61.0, 90.0
 MAX_DUR_VOIX = 96.0           # avec une voix, chaque phrase doit pouvoir se finir : quelques secondes de plus
 
 
+def _icon_names(spec):
+    """Pictogrammes utilisés par les scènes (même relevé que fabriquer.icon_names, pour les crédits à l'écran)."""
+    out = []
+    for idee in spec.get("idees", []):
+        sc = idee.get("scene") or {}
+        for k in ("icone", "objet"):
+            if sc.get(k):
+                out.append(sc[k])
+        out += sc.get("satellites") or []
+        for side in ("gauche", "droite"):
+            if (sc.get(side) or {}).get("icone"):
+                out.append(sc[side]["icone"])
+        for e in sc.get("elements") or []:
+            if e.get("icone"):
+                out.append(e["icone"])
+    return out
+
+
 def sources_block(src, sizes, max_w, max_lines, path=F_SEMI):
     """Lignes des sources de fin : on ne coupe qu'entre deux éditeurs (« ESA · NASA » / « Scientific American »),
     jamais au milieu d'un nom ; un nom plus large qu'une ligne est coupé entre ses mots en dernier recours."""
@@ -294,8 +312,11 @@ class Episode:
         leg = pub.get("legende", "")
         if not leg:
             self.errors.append("« publication.legende » manquante")
-        elif "Sources" not in leg and "sources" not in leg:
-            self.errors.append("la légende doit citer les sources (« Sources : … »)")
+        elif re.search(r"(?im)^\s*(sources|voix de synth[eè]se|pictogrammes?)\s*:", leg):
+            # décision de Nathan du 28/10/2026 : légende simple. Les sources sont à l'écran (« sources_ecran ») et
+            # le crédit des pictogrammes sous licence aussi (voir _layout_outro) ; la voix n'est pas mentionnée.
+            self.errors.append("légende : plus de ligne « Sources : », « Voix de synthèse : » ni « Pictogrammes : » "
+                               "(légende simple depuis le 28/10/2026 : accroche, appel au score, mots-dièse)")
         if len(leg) > 2000:
             self.errors.append("légende trop longue (> 2000 caractères)")
 
@@ -333,6 +354,16 @@ class Episode:
             r = (26, wrap(src, F_SEMI, 26, 800)[:3])
         self.src_sz, self.src_ln = r
         y = 556 + (len(self.src_ln) - 1) * self.src_sz * 1.18
+        # crédit des pictogrammes dont la licence l'exige (game-icons.net, CC BY 3.0) : dans la vidéo, sous les
+        # sources, puisque la légende n'en porte plus depuis le 28/10/2026
+        from . import icons as IC
+        cred = IC.credits(_icon_names(s))
+        self.cred_txt, self.cred_sz = (fr(" · ".join(cred)) if cred else ""), 24
+        if self.cred_txt:
+            self.y_cred = y + 0.5 * self.src_sz + 30
+            if text_width(self.cred_txt, F_SEMI, self.cred_sz) > 800:
+                self.errors.append(f"crédit des pictogrammes trop long pour l'écran : {self.cred_txt!r}")
+            y = self.y_cred
         self.y_nlab = max(722.0, y + 70)
         self.y_nx = self.y_nlab + 68
         nxt = fr(s["prochain"]["affirmation"])
@@ -408,6 +439,8 @@ class Episode:
         if a > 0:
             T(img, "SOURCES", F_DBOLD, 30, 540, 500, LIGHT, a * 0.85, 0, 6.0)
             PARA(img, self.src_ln, F_SEMI, self.src_sz, 540, 556, WHITE, a, 0, 1.18)
+            if self.cred_txt:
+                T(img, self.cred_txt, F_SEMI, self.cred_sz, 540, self.y_cred, LIGHT, a * 0.8)
             a2 = a * ain(t, TL.P5B[0] + 0.5, 0.4)
             T(img, "PROCHAIN ÉPISODE", F_DBOLD, 30, 540, self.y_nlab, CYAN, a2, 0, 6.0)
             PARA(img, self.nx_ln, F_DXB, self.nx_sz, 540, self.y_nx, WHITE, a2, 0, 1.10)

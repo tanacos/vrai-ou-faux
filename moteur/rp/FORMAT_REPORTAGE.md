@@ -23,8 +23,8 @@ Un épisode = un dossier `series/infiniment/epNN/` avec :
  "sources": [{"editeur", "titre", "url", "extraits": ["phrase exacte", …], "sert_a": "…"}],
  "calcul": "chaque nombre dérivé, calcul écrit",
  "images": "ce que les dessins affirment (échelles, couleurs) et ce qui est seulement illustratif",
- "publication": {"titre": "…", "legende": "… Sources : … \nVoix de synthèse : Kyutai TTS (CC BY 4.0)\n#infiniment …",
-                 "hashtags": […], "contenu_ia": true},
+ "publication": {"titre": "…", "legende": "Accroche. INFINIMENT, épisode N.\nSources : …\n#infiniment …",
+                 "hashtags": […], "contenu_ia": false},   // légende simple depuis le 28/10/2026
  "prochain": "sujet annoncé à la fin (il engage l'épisode suivant)"
 }
 ```
