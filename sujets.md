@@ -6,8 +6,15 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 7 — à table** : idée 1 imposée « Les carottes font voir dans le noir. » (faux présumé ; pistes de
-  sources : Smithsonian Magazine, Live Science, ScienceNorway). Voir les autres pistes « À table » ci-dessous.
+- **Épisode 8 — l'histoire** : idée 1 imposée « Les Vikings portaient des casques à cornes. » (faux présumé ; pistes
+  de sources : Smithsonian Magazine « iconic viking horned helmets actually 3000 years old », Discover Magazine,
+  Snopes). Voir les pistes « L'histoire » ci-dessous.
+
+## Déjà traité (épisode 7, à table)
+
+- ~~carottes et vision nocturne~~ (FAUX), ~~l'alcool s'évapore à la cuisson~~ (FAUX), ~~bananes radioactives~~
+  (VRAI), ~~la tomate est un fruit pour les botanistes~~ (VRAI). Écarté : le miel ne se périme pas (« ça dépend » :
+  il peut fermenter s'il prend l'humidité). Restent possibles : sucre et enfants surexcités (sujet santé).
 
 ## Déjà traité (épisode 6, le corps humain)
 
@@ -33,7 +40,7 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
   mort~~ (fait) ; on n'a que 5 sens (faux) ; craquer ses doigts donne de l'arthrose (faux présumé).
 - **À table** : l'alcool s'évapore entièrement à la cuisson (faux) ; le sucre rend les enfants surexcités (faux
   présumé) ; ~~les carottes font voir dans le noir~~ (annoncé pour l'épisode 7) ; le miel ne se périme pas (vrai présumé).
-- **L'histoire** : Napoléon était petit (faux) ; les Vikings portaient des casques à cornes (faux) ; au Moyen Âge on
+- **L'histoire** : Napoléon était petit (faux) ; ~~les Vikings portaient des casques à cornes~~ (annoncé pour l'épisode 8) ; au Moyen Âge on
   croyait la Terre plate (faux) ; Einstein était nul en maths (faux).
 - **La mer** : on connaît mieux la surface de la Lune que les fonds marins (vrai présumé, à formuler avec soin) ;
   les requins doivent nager pour respirer (nuance selon les espèces) ; l'eau de mer est salée à cause des rivières
