@@ -5,6 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
+| 2026-10-29 06:09 | normal | démarré |
 | 2026-10-27 20:55 | normal | programmé : épisode 6 (le corps humain), samedi 31/10 à 18:00, Metricool 408282494 |
 | 2026-10-26 06:08 | normal | programmé : épisode 5 (les animaux), mercredi 28/10 à 18:00, Metricool 406252451 |
 | 2026-10-22 06:09 | normal | démarré, jamais complété (aucun épisode produit ; constaté le 26/10) |
