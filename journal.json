@@ -302,7 +302,8 @@
     }
    ],
    "prochain": "« Les Vikings portaient des casques à cornes. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/646bed49e2af37550a6ae0cd1932a51929eca910/vrai_ou_faux_07_table.mp4"
   }
  ]
 }
