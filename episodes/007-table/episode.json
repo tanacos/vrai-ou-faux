@@ -1,0 +1,238 @@
+{
+ "numero": 7,
+ "slug": "table",
+ "theme": "à table",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "À TABLE"
+ ],
+ "fond": "chaud",
+ "ambiance": "feu",
+ "idees": [
+  {
+   "affirmation": "« Les carottes font voir dans le noir. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:carrot",
+    "satellites": [
+     "pi:eye",
+     "pi:moon-stars"
+    ],
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "D'où ça vient ?",
+     "texte": "Une ruse britannique de la Seconde Guerre mondiale.",
+     "sous_texte": "But : garder secret le radar embarqué de la RAF."
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "Un manque de vitamine A gêne la vue dans le noir…",
+     "sous_texte": "… mais en manger plus ne l'améliore pas."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Smithsonian Magazine",
+     "titre": "A WWII Propaganda Campaign Popularized the Myth That Carrots Help You See in the Dark",
+     "url": "https://www.smithsonianmag.com/arts-culture/a-wwii-propaganda-campaign-popularized-the-myth-that-carrots-help-you-see-in-the-dark-28812484/",
+     "extrait": "Contrary to World War II propaganda, eating carrots doesn't lend humans catlike night vision […] the onboard aircraft interception radar (also known as A.I. radar) could pinpoint enemy bombers […] To keep that information under wraps, however, the ministry provided another reason for the RAF's success: carrots. […] taking vitamin A can reverse poor vision caused by a deficiency, it will not strengthen eyesight"
+    },
+    {
+     "editeur": "ScienceNorway",
+     "titre": "Where the carrot myth comes from",
+     "url": "https://www.sciencenorway.no/culture-food-and-health-war/where-the-carrot-myth-comes-from/2665915",
+     "extrait": "Eating large amounts of carrots will therefore not improve night vision […] A lack of vitamin A can cause poorer night vision."
+    }
+   ]
+  },
+  {
+   "affirmation": "« À la cuisson, l'alcool s'évapore entièrement. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:cooking-pot",
+    "satellites": [
+     "pi:wine",
+     "pi:flame"
+    ],
+    "marque": "barre",
+    "fond": "chaud"
+   },
+   "panneaux": [
+    {
+     "type": "barres",
+     "titre": "Part d'alcool qui reste",
+     "lignes": [
+      {
+       "libelle": "Flambé",
+       "valeur": 75,
+       "affichage": "75 %"
+      },
+      {
+       "libelle": "Four ou mijoté 15 min",
+       "valeur": 40,
+       "affichage": "40 %"
+      },
+      {
+       "libelle": "Four ou mijoté 1 h",
+       "valeur": 25,
+       "affichage": "25 %"
+      },
+      {
+       "libelle": "Four ou mijoté 2 h 30",
+       "valeur": 5,
+       "affichage": "5 %"
+      }
+     ],
+     "max": 100,
+     "source": "Source : USDA, via Wine Spectator",
+     "voix": "Flambé, il en reste environ 75%. Après 15 minutes au four ou à mijoter, 40%. Et même après 2 heures et demie, encore 5%."
+    },
+    {
+     "type": "texte",
+     "titre": "À retenir",
+     "texte": "Plus la cuisson est longue, moins il en reste… mais même après des heures, il en reste un peu."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Wine Spectator",
+     "titre": "If I'm watching my alcohol intake, should I be concerned about foods that are prepared with wine?",
+     "url": "https://www.winespectator.com/webfeature/show/id/52878",
+     "extrait": "15 minutes: 40% alcohol retained […] 1 hour: 25% alcohol retained […] 2.5 hours: 5% alcohol retained […] Flambée: 75% alcohol retained"
+    },
+    {
+     "editeur": "Dr Andrew Weil (citant le laboratoire de l'USDA)",
+     "titre": "Does Alcohol Really Cook Out of Food?",
+     "url": "https://www.drweil.com/diet-nutrition/cooking-cookware/does-alcohol-really-cook-out-of-food/",
+     "extrait": "approximately 75 percent of the alcohol remains after the flames have died down. […] After being added to food that then is baked or simmered for 15 minutes, 40 percent of the alcohol will be retained. After cooking for an hour, only about 25 percent will remain […] even after 2.5 hours of cooking, five percent of the alcohol will still be there."
+    },
+    {
+     "editeur": "USDA, Agricultural Research Service",
+     "titre": "USDA Table of Nutrient Retention Factors, Release 6 (2007)",
+     "url": "https://www.ars.usda.gov/Services/docs.htm?docid=9448",
+     "extrait": "The data set contains the factors for calculating retention of 26 vitamins, minerals and alcohol during food preparation."
+    },
+    {
+     "editeur": "The Naked Scientists (Université de Cambridge)",
+     "titre": "How much alcohol does cooking remove?",
+     "url": "https://www.thenakedscientists.com/node/190964",
+     "extrait": "a significant amount of alcohol could actually remain at the end of the cooking process."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Les bananes sont radioactives. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:banana",
+    "satellites": [
+     "pi:radioactive"
+    ],
+    "marque": "coche",
+    "fond": "labo"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Pourquoi ?",
+     "texte": "Elles sont une bonne source de potassium, dont une infime partie est radioactive."
+    },
+    {
+     "type": "texte",
+     "titre": "Aucun danger",
+     "texte": "La dose est bien trop faible pour présenter un risque."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Université McGill (Office for Science and Society)",
+     "titre": "Is it true that a banana is radioactive?",
+     "url": "https://www.mcgill.ca/oss/article/you-asked/it-true-banana-radioactive",
+     "extrait": "So, while bananas are indeed radioactive, the dose of radioactivity they deliver does not pose a risk. […] Potassium (K) is a widely encountered element with a very small fraction of its atoms, about 0.012%, being radioactive."
+    },
+    {
+     "editeur": "EPA (Agence américaine de protection de l'environnement)",
+     "titre": "Natural Radioactivity in Food",
+     "url": "https://epa.gov/radtown/natural-radioactivity-food",
+     "extrait": "Bananas and Brazil nuts are the most well known examples of foods that contain radioactivity. […] Bananas are a good source of potassium in your diet and a small fraction of all potassium is radioactive. […] Because the amount of radiation is very small, these foods do not pose a radiation risk."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Pour un botaniste, la tomate est un fruit. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:tomato",
+    "satellites": [
+     "pi:flower",
+     "pi:plant"
+    ],
+    "marque": "coche",
+    "fond": "nature"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "La définition",
+     "texte": "Un fruit vient de la fleur et contient des graines. La tomate aussi !"
+    },
+    {
+     "type": "texte",
+     "titre": "En cuisine",
+     "texte": "On la range avec les légumes, car on la mange pendant le repas principal."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Britannica",
+     "titre": "Is a Tomato a Fruit or a Vegetable?",
+     "url": "https://www.britannica.com/story/is-a-tomato-a-fruit-or-a-vegetable",
+     "extrait": "Tomatoes are fruits that are considered vegetables by nutritionists. […] Botanically, a fruit is a ripened flower ovary and contains seeds."
+    },
+    {
+     "editeur": "Iowa State University Extension",
+     "titre": "Is a tomato a fruit or a vegetable?",
+     "url": "https://yardandgarden.extension.iastate.edu/faq/tomato-fruit-or-vegetable",
+     "extrait": "By this definition, the edible tomato is a fruit since it developed from a flower and has seeds inside it. […] the tomato is a vegetable because it is usually consumed during the main meal."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "Smithsonian · ScienceNorway · USDA · Wine Spectator · Dr Weil · Naked Scientists · Univ. McGill · EPA · Britannica · Iowa State Univ.",
+ "prochain": {
+  "affirmation": "« Les Vikings portaient des casques à cornes. »"
+ },
+ "publication": {
+  "legende": "Vrai ou faux ? 🥕 4 idées reçues à table. Dis ton score en commentaire 👇\n#vraioufaux #alimentation #cuisine #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#alimentation",
+   "#cuisine",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ },
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0"
+ },
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues à table. Compte tes bonnes réponses !"
+}

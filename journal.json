@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 6,
- "prochaine_affirmation": "« Les carottes font voir dans le noir. »",
+ "dernier_numero": 7,
+ "prochaine_affirmation": "« Les Vikings portaient des casques à cornes. »",
  "episodes": [
   {
    "numero": 1,
@@ -259,6 +259,50 @@
    "publication": "2026-10-31T18:00:00+01:00",
    "metricool_id": "409426680",
    "metricool_uuid": "6658323634995216655"
+  },
+  {
+   "numero": 7,
+   "slug": "table",
+   "titre": "4 IDÉES REÇUES À TABLE",
+   "theme": "à table",
+   "idees": [
+    {
+     "affirmation": "« Les carottes font voir dans le noir. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.smithsonianmag.com/arts-culture/a-wwii-propaganda-campaign-popularized-the-myth-that-carrots-help-you-see-in-the-dark-28812484/",
+      "https://www.sciencenorway.no/culture-food-and-health-war/where-the-carrot-myth-comes-from/2665915"
+     ]
+    },
+    {
+     "affirmation": "« À la cuisson, l'alcool s'évapore entièrement. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.winespectator.com/webfeature/show/id/52878",
+      "https://www.drweil.com/diet-nutrition/cooking-cookware/does-alcohol-really-cook-out-of-food/",
+      "https://www.ars.usda.gov/Services/docs.htm?docid=9448",
+      "https://www.thenakedscientists.com/node/190964"
+     ]
+    },
+    {
+     "affirmation": "« Les bananes sont radioactives. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.mcgill.ca/oss/article/you-asked/it-true-banana-radioactive",
+      "https://epa.gov/radtown/natural-radioactivity-food"
+     ]
+    },
+    {
+     "affirmation": "« Pour un botaniste, la tomate est un fruit. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.britannica.com/story/is-a-tomato-a-fruit-or-a-vegetable",
+      "https://yardandgarden.extension.iastate.edu/faq/tomato-fruit-or-vegetable"
+     ]
+    }
+   ],
+   "prochain": "« Les Vikings portaient des casques à cornes. »",
+   "statut": "fabriqué"
   }
  ]
 }
