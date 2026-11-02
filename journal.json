@@ -352,8 +352,11 @@
     }
    ],
    "prochain": "« Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/40909266cf9347c36661836bed4ca5e064f6dbf9/vrai_ou_faux_08_histoire.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/40909266cf9347c36661836bed4ca5e064f6dbf9/vrai_ou_faux_08_histoire.mp4",
+   "publication": "2026-11-07T18:00:00+01:00",
+   "metricool_id": "413591489",
+   "metricool_uuid=-7372784540523151360": "--video"
   }
  ]
 }
