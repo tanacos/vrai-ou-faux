@@ -6,9 +6,15 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 8 — l'histoire** : idée 1 imposée « Les Vikings portaient des casques à cornes. » (faux présumé ; pistes
-  de sources : Smithsonian Magazine « iconic viking horned helmets actually 3000 years old », Discover Magazine,
-  Snopes). Voir les pistes « L'histoire » ci-dessous.
+- **Épisode 9 — la Terre** : idée 1 imposée « Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »
+  (faux présumé ; sources repérées : NASA Space Place « What Causes the Seasons? », National Geographic « What is
+  perihelion? » ; le texte NOAA/NESDIS reprend mot pour mot celui de la NASA, il ne compte pas comme source
+  indépendante). Voir les pistes « La Terre » ci-dessous.
+
+## Déjà traité (épisode 8, l'histoire)
+
+- ~~Vikings et casques à cornes~~ (FAUX), ~~mammouths et pyramides de Gizeh~~ (VRAI), ~~Napoléon tout petit~~ (FAUX),
+  ~~tour Eiffel à démonter après 20 ans~~ (VRAI). Restent possibles : Terre plate au Moyen Âge, Einstein et les maths.
 
 ## Déjà traité (épisode 7, à table)
 
@@ -40,7 +46,7 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
   mort~~ (fait) ; on n'a que 5 sens (faux) ; craquer ses doigts donne de l'arthrose (faux présumé).
 - **À table** : l'alcool s'évapore entièrement à la cuisson (faux) ; le sucre rend les enfants surexcités (faux
   présumé) ; ~~les carottes font voir dans le noir~~ (annoncé pour l'épisode 7) ; le miel ne se périme pas (vrai présumé).
-- **L'histoire** : Napoléon était petit (faux) ; ~~les Vikings portaient des casques à cornes~~ (annoncé pour l'épisode 8) ; au Moyen Âge on
+- **L'histoire** : ~~Napoléon était petit~~ (fait) ; ~~les Vikings portaient des casques à cornes~~ (fait) ; au Moyen Âge on
   croyait la Terre plate (faux) ; Einstein était nul en maths (faux).
 - **La mer** : on connaît mieux la surface de la Lune que les fonds marins (vrai présumé, à formuler avec soin) ;
   les requins doivent nager pour respirer (nuance selon les espèces) ; l'eau de mer est salée à cause des rivières

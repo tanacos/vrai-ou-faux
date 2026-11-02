@@ -1,0 +1,241 @@
+{
+ "numero": 8,
+ "slug": "histoire",
+ "theme": "l'histoire",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR L'HISTOIRE"
+ ],
+ "fond": "aurore",
+ "ambiance": "nature",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur l'histoire. Compte tes bonnes réponses !",
+ "idees": [
+  {
+   "affirmation": "« Les Vikings portaient des casques à cornes. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:viking-helmet",
+    "marque": "barre",
+    "fond": "ocean"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Côté archéologie",
+     "texte": "Aucun casque viking à cornes n'a été retrouvé.",
+     "sous_texte": "Le seul casque viking complet n'en a pas."
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "Une tapisserie d'époque montre bien des cornes…",
+     "sous_texte": "… sans doute pas portées au combat.",
+     "voix": "Une tapisserie d'époque montre bien des cornes, sans doute pas portées au combat."
+    },
+    {
+     "type": "texte",
+     "titre": "D'où ça vient ?",
+     "texte": "Un opéra de Wagner l'a popularisée en 1876.",
+     "voix": "Un opéra de Wagner l'a popularisée en 1876."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "History.com",
+     "titre": "Did Vikings really wear horned helmets?",
+     "url": "https://www.history.com/articles/did-vikings-really-wear-horned-helmets",
+     "extrait": "And despite years of searching, archaeologists have yet to uncover a Viking-era helmet embellished with horns. […] the 10th-century artifact has a rounded iron cap, a guard around the eyes and nose, and no horns to speak of."
+    },
+    {
+     "editeur": "Smithsonian Magazine",
+     "titre": "Iconic Viking Horned Helmets Are Actually 3,000 Years Old",
+     "url": "https://www.smithsonianmag.com/smart-news/iconic-viking-horned-helmets-actually-3000-years-old-180979339/",
+     "extrait": "Viking society only developed in the 9th century C.E., and there is no sign that Vikings really wore horned helmets."
+    },
+    {
+     "editeur": "Live Science",
+     "titre": "Horned 'Viking' helmets were actually from a different civilization, archaeologists say",
+     "url": "https://www.livescience.com/horned-viking-helmets-from-different-civilization",
+     "extrait": "[…] Vikings wore bulls' horns on their helmets, although there is no evidence they ever did."
+    },
+    {
+     "editeur": "Snopes",
+     "titre": "Did Vikings Actually Have Horns on Their Helmets?",
+     "url": "https://www.snopes.com/articles/459569/vikings-horns-helmets",
+     "extrait": "It is likely that Vikings did not wear horns on their helmets, particularly for battle and non-ceremonial purposes. […] There is only one preserved helmet from the Viking Age and this does not have horns. […] a tapestry was found on which horned helmets are also depicted. […] The image of Vikings with horned helmets first gained popularity in 1876 […] costume designer Carl Emil Doepler included them in the costumes for Wagner's opera"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Des mammouths vivaient encore quand on a bâti les pyramides de Gizeh. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:mammoth",
+    "satellites": [
+     "gi:egyptian-pyramids"
+    ],
+    "marque": "coche",
+    "fond": "nature"
+   },
+   "panneaux": [
+    {
+     "type": "duo",
+     "titre": "Il y a environ…",
+     "gauche": {
+      "valeur": "4 500 ans",
+      "legende": "les pyramides",
+      "couleur": "or"
+     },
+     "droite": {
+      "valeur": "4 000 ans",
+      "legende": "les derniers mammouths",
+      "couleur": "cyan"
+     },
+     "voix": "Les pyramides ont environ 4 500 ans, les derniers mammouths 4 000."
+    },
+    {
+     "type": "texte",
+     "titre": "Où ça ?",
+     "texte": "Sur l'île Wrangel, au large de la Sibérie."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Université de Stockholm",
+     "titre": "New genetic study reveals the woolly mammoths' journey towards extinction",
+     "url": "https://su.se/english/news/new-genetic-study-reveals-the-woolly-mammoths-journey-towards-extinction-1.746552",
+     "extrait": "What eventually caused the extinction of the Wrangel population some 4,000 years ago remains a mystery."
+    },
+    {
+     "editeur": "Science News Explores",
+     "titre": "The last woolly mammoths offer new clues to why this species died out",
+     "url": "https://www.snexplores.org/article/why-woolly-mammoths-died-out",
+     "extrait": "Four thousand years ago, the world's last woolly mammoth took its final breath. […] The last of this species lived on Wrangel Island. That's off the coast of what is now Siberia."
+    },
+    {
+     "editeur": "National Geographic",
+     "titre": "Pyramids of Giza",
+     "url": "https://www.nationalgeographic.com/history/archaeology/giza-pyramids/",
+     "extrait": "The monumental tombs are relics of Egypt's Old Kingdom era and were constructed some 4,500 years ago."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Napoléon était tout petit. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:laurel-crown",
+    "satellites": [
+     "pi:ruler"
+    ],
+    "marque": "barre",
+    "fond": "chaud"
+   },
+   "panneaux": [
+    {
+     "type": "chiffre",
+     "titre": "Napoléon mesurait environ",
+     "valeur": 1.68,
+     "decimales": 2,
+     "suffixe": " m",
+     "legende": "Français d'alors : surtout 1,58 à 1,68 m",
+     "voix": "Napoléon mesurait environ un mètre soixante-huit : dans la moyenne de l'époque."
+    },
+    {
+     "type": "texte",
+     "titre": "D'où ça vient ?",
+     "texte": "Des caricatures anglaises, qui le dessinaient minuscule.",
+     "sous_texte": "Surnom resté : « Little Boney »."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Britannica",
+     "titre": "Was Napoleon Short?",
+     "url": "https://www.britannica.com/story/was-napoleon-short",
+     "extrait": "Sources consequently estimate that Napoleon was probably closer to 5'6\" or 5'7\" (1.68 or 1.7 meters) than to 5'2\". […] most Frenchmen stood between 5'2\" and 5'6\" (1.58 and 1.68 meters) tall […] Napoleon was thus average or taller, no matter the interpretation."
+    },
+    {
+     "editeur": "Fondation Napoléon",
+     "titre": "La taille de Napoléon",
+     "url": "https://www.napoleon.org/histoire-des-2-empires/articles/la-taille-de-napoleon",
+     "extrait": "la taille de Napoléon n'était pas inférieure à 1m.686"
+    },
+    {
+     "editeur": "History.com",
+     "titre": "Why Do We Think Napoleon Was Short?",
+     "url": "https://www.history.com/articles/napoleon-complex-short",
+     "extrait": "In fact, he was probably of average height. […] that equals around 1.67 meters, or just under 5'6\" […] which is a little above average for a French man in the early 1800s. […] Gillray's cartoon depicts a tiny Napoleon wearing boots that dwarf him, tearing his hair out in rage. […] The name \"Little Boney\" would stick"
+    }
+   ]
+  },
+  {
+   "affirmation": "« La tour Eiffel devait être démontée après 20 ans. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:radio-tower",
+    "marque": "coche",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Un permis limité",
+     "texte": "Gustave Eiffel n'avait un permis que pour 20 ans.",
+     "sous_texte": "Ensuite, la Ville pouvait la démolir.",
+     "voix": "Son permis ne durait que 20 ans. Ensuite, la Ville pouvait la démolir."
+    },
+    {
+     "type": "texte",
+     "titre": "Sauvée par la radio",
+     "texte": "Antenne géante : 70 ans de plus dès 1910.",
+     "voix": "Devenue antenne géante, elle obtient 70 ans de plus."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Tour Eiffel (site officiel)",
+     "titre": "Why was the Eiffel Tower kept?",
+     "url": "https://www.toureiffel.paris/en/news/130-years/how-did-radio-save-tower",
+     "extrait": "The Eiffel Tower was supposed to be dismantled after 20 years. […] In 1910, the Eiffel Tower could have been demolished! […] Gustave Eiffel had only been given a 20-year permit to use the land. […] But its use as a giant radio antenna saved it from destruction! […] Gustave Eiffel was granted an extension to his concession for another 70 years, starting on 1st January 1910."
+    },
+    {
+     "editeur": "Science News Explores",
+     "titre": "How science saved the Eiffel Tower",
+     "url": "https://www.snexplores.org/article/how-science-saved-eiffel-tower",
+     "extrait": "Eiffel's four-legged iron archway was supposed to last only 20 years. […] the city could choose to tear it down […] it was another area of research — radio — that ensured Eiffel's Tower would not be torn down. […] In 1910, the city of Paris renewed the structure's permit for another 70 years."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "History · Smithsonian · Snopes · Live Science · Univ. de Stockholm · Science News Explores · Nat Geo · Britannica · Fondation Napoléon · Tour Eiffel",
+ "prochain": {
+  "affirmation": "« Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »"
+ },
+ "publication": {
+  "legende": "Vrai ou faux ? ⚔️ 4 idées reçues sur l'histoire. Dis ton score en commentaire 👇\n#vraioufaux #histoire #culturegenerale #science #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#histoire",
+   "#culturegenerale",
+   "#science",
+   "#apprendresurtiktok"
+  ]
+ },
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0"
+ }
+}

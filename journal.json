@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 7,
- "prochaine_affirmation": "« Les Vikings portaient des casques à cornes. »",
+ "dernier_numero": 8,
+ "prochaine_affirmation": "« Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »",
  "episodes": [
   {
    "numero": 1,
@@ -307,6 +307,52 @@
    "publication": "2026-11-04T18:00:00+01:00",
    "metricool_id": "409725343",
    "metricool_uuid": "-2309051710365545419"
+  },
+  {
+   "numero": 8,
+   "slug": "histoire",
+   "titre": "4 IDÉES REÇUES SUR L'HISTOIRE",
+   "theme": "l'histoire",
+   "idees": [
+    {
+     "affirmation": "« Les Vikings portaient des casques à cornes. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.history.com/articles/did-vikings-really-wear-horned-helmets",
+      "https://www.smithsonianmag.com/smart-news/iconic-viking-horned-helmets-actually-3000-years-old-180979339/",
+      "https://www.livescience.com/horned-viking-helmets-from-different-civilization",
+      "https://www.snopes.com/articles/459569/vikings-horns-helmets"
+     ]
+    },
+    {
+     "affirmation": "« Des mammouths vivaient encore quand on a bâti les pyramides de Gizeh. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://su.se/english/news/new-genetic-study-reveals-the-woolly-mammoths-journey-towards-extinction-1.746552",
+      "https://www.snexplores.org/article/why-woolly-mammoths-died-out",
+      "https://www.nationalgeographic.com/history/archaeology/giza-pyramids/"
+     ]
+    },
+    {
+     "affirmation": "« Napoléon était tout petit. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.britannica.com/story/was-napoleon-short",
+      "https://www.napoleon.org/histoire-des-2-empires/articles/la-taille-de-napoleon",
+      "https://www.history.com/articles/napoleon-complex-short"
+     ]
+    },
+    {
+     "affirmation": "« La tour Eiffel devait être démontée après 20 ans. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.toureiffel.paris/en/news/130-years/how-did-radio-save-tower",
+      "https://www.snexplores.org/article/how-science-saved-eiffel-tower"
+     ]
+    }
+   ],
+   "prochain": "« Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »",
+   "statut": "fabriqué"
   }
  ]
 }
