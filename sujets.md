@@ -6,10 +6,15 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 9 — la Terre** : idée 1 imposée « Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »
-  (faux présumé ; sources repérées : NASA Space Place « What Causes the Seasons? », National Geographic « What is
-  perihelion? » ; le texte NOAA/NESDIS reprend mot pour mot celui de la NASA, il ne compte pas comme source
-  indépendante). Voir les pistes « La Terre » ci-dessous.
+- **Épisode 10 — la météo** : idée 1 imposée « Il peut faire trop froid pour neiger. » (faux présumé, avec nuance :
+  c'est le manque d'humidité qui empêche la neige, pas le froid lui-même ; sources repérées : NOAA/NSSL FAQ hiver,
+  Popular Science citant Mark Serreze, NSIDC). Voir les pistes « La météo » ci-dessous.
+
+## Déjà traité (épisode 9, la Terre)
+
+- ~~Terre plus proche du Soleil en été~~ (FAUX), ~~centre de la Terre aussi chaud que la surface du Soleil~~ (VRAI),
+  ~~journées plus courtes au temps des dinosaures~~ (VRAI), ~~le Sahara, plus grand désert~~ (FAUX). Restent
+  possibles : Everest et Chimborazo (point le plus éloigné du centre de la Terre), la Lune n'a qu'une face (nuance).
 
 ## Déjà traité (épisode 8, l'histoire)
 

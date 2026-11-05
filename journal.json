@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 8,
- "prochaine_affirmation": "« Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »",
+ "dernier_numero": 9,
+ "prochaine_affirmation": "« Il peut faire trop froid pour neiger. »",
  "episodes": [
   {
    "numero": 1,
@@ -357,6 +357,50 @@
    "publication": "2026-11-07T18:00:00+01:00",
    "metricool_id": "413591489",
    "metricool_uuid": "-7372784540523151360"
+  },
+  {
+   "numero": 9,
+   "slug": "terre",
+   "titre": "4 IDÉES REÇUES SUR LA TERRE",
+   "theme": "la Terre",
+   "idees": [
+    {
+     "affirmation": "« Il fait plus chaud l'été parce que la Terre est plus proche du Soleil. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://spaceplace.nasa.gov/seasons/en",
+      "https://www.livescience.com/17762-earth-closest-approach-sun-perihelion.html",
+      "https://www.nationalgeographic.com/science/article/what-is-perihelion-earth-orbit"
+     ]
+    },
+    {
+     "affirmation": "« Près du centre de la Terre, il fait aussi chaud qu'à la surface du Soleil. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.esrf.fr/news/general/Earth-Center-Hotter",
+      "https://livescience.com/29054-earth-core-hotter.html",
+      "https://science.nasa.gov/sun/facts/"
+     ]
+    },
+    {
+     "affirmation": "« Au temps des dinosaures, les journées étaient plus courtes. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.vub.be/en/news/days-were-shorter-in-past",
+      "https://www.space.com/ancient-clam-fossil-reveals-earth-shorter-day.html"
+     ]
+    },
+    {
+     "affirmation": "« Le plus grand désert du monde, c'est le Sahara. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.livescience.com/largest-desert-on-earth",
+      "https://britannica.com/topic/worlds-largest-deserts-2225895"
+     ]
+    }
+   ],
+   "prochain": "« Il peut faire trop froid pour neiger. »",
+   "statut": "fabriqué"
   }
  ]
 }
