@@ -400,8 +400,11 @@
     }
    ],
    "prochain": "« Il peut faire trop froid pour neiger. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/bfa1c560d40bb2fd04b162efbd54660dbefb46b6/vrai_ou_faux_09_terre.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/bfa1c560d40bb2fd04b162efbd54660dbefb46b6/vrai_ou_faux_09_terre.mp4",
+   "publication": "2026-11-11T18:00:00+01:00",
+   "metricool_id": "417381123",
+   "metricool_uuid=-5587593926789084302": "--video"
   }
  ]
 }
