@@ -5,6 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
+| 2026-11-05 06:09 | normal | démarré |
 | 2026-11-02 06:09 | normal | programmé : épisode 8 (l'histoire), samedi 07/11 à 18:00, Metricool 413591489 |
 | 2026-10-29 06:09 | normal | programmé : épisode 7 (à table), mercredi 04/11 à 18:00, Metricool 409725343 |
 | 2026-10-27 20:55 | normal | programmé : épisode 6 (le corps humain), samedi 31/10 à 18:00, Metricool 408282494 |
