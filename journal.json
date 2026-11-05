@@ -400,7 +400,8 @@
     }
    ],
    "prochain": "« Il peut faire trop froid pour neiger. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/bfa1c560d40bb2fd04b162efbd54660dbefb46b6/vrai_ou_faux_09_terre.mp4"
   }
  ]
 }
