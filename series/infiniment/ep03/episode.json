@@ -285,8 +285,8 @@
     {
      "quand": "melangeait",
      "lignes": [
-      "MÉLANGÉ À TOUS",
-      "*LES OCÉANS*"
+      "MÉLANGÉ AUX",
+      "*OCÉANS*"
      ]
     }
    ],
@@ -306,7 +306,7 @@
      "quand": "1500",
      "valeur": 1565,
      "affichage": "> 1 500",
-     "unite": "DE TES MOLÉCULES *PAR VERRE*"
+     "unite": "DE TES MOLÉCULES *EN MOYENNE*"
     }
    ],
    "impacts": [
@@ -336,7 +336,7 @@
    "titre": "How much water is in the ocean?",
    "url": "https://oceanservice.noaa.gov/facts/oceanwater.html",
    "extraits": [
-    "About 97 percent of the Earth's water can be found in our ocean.",
+    "about 97 percent of the Earth's water can be found in our ocean.",
     "1,335,000,000 cubic kilometers (321,003,271 cubic miles) is in the ocean."
    ],
    "sert_a": "volume des océans ≈ 1,335 milliard de km³ (fait central)"
@@ -378,7 +378,7 @@
     "Formula: H2O",
     "Molecular weight: 18.0153"
    ],
-   "sert_a": "formule H₂O (3 atomes : 2 H, 1 O) ; masse molaire ≈ 18 g/mol"
+   "sert_a": "formule H₂O : 3 atomes, 2 d'hydrogène et 1 d'oxygène (source principale de la composition) ; masse molaire ≈ 18 g/mol"
   },
   {
    "editeur": "Encyclopædia Britannica",
@@ -390,7 +390,7 @@
     "0.99701 grams per cubic centimetre",
     "two hydrogen atoms bonding to one oxygen atom to form H2O"
    ],
-   "sert_a": "masse molaire ≈ 18 g/mol ; densité ≈ 1 g/cm³ ; 2 hydrogènes + 1 oxygène"
+   "sert_a": "masse molaire ≈ 18 g/mol ; densité ≈ 1 g/cm³ (tableau des propriétés) ; composition 2 H + 1 O : en appui de NIST (« Formula: H2O »), l'extrait Britannica vient de la légende d'un schéma"
   },
   {
    "editeur": "USGS (Water Science School)",
@@ -402,20 +402,21 @@
    "sert_a": "25 cl d'eau ≈ 250 grammes"
   },
   {
-   "editeur": "NASA",
-   "titre": "Earth: Facts",
-   "url": "https://science.nasa.gov/earth/facts/",
+   "editeur": "NASA (NSSDC, Goddard)",
+   "titre": "Earth Fact Sheet",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1",
    "extraits": [
-    "With an equatorial diameter of 7,926 miles (12,756 kilometers)"
+    "Equatorial radius (km)",
+    "6378.137"
    ],
-   "sert_a": "règle des puissances de dix pour la Terre (1,3 × 10⁷ m → 10⁷)"
+   "sert_a": "règle des puissances de dix pour la Terre : diamètre 2 × 6 378 km ≈ 1,28 × 10⁷ m → 10⁷"
   }
  ],
- "calcul": "Verre : 25 cl = 250 mL ; densité ≈ 1 g/mL (USGS, Britannica) → ≈ 250 g. Masse molaire de l'eau 18,0153 g/mol (NIST ; Britannica 18,0151) : « environ 18 grammes = 1 mole ». Moles dans le verre : 250 / 18,0153 = 13,877. Molécules : 13,877 × 6,02214076 × 10²³ = 8,357 × 10²⁴ (« plus de 8 millions de milliards de milliards », affiché « > 8 × 10²⁴ »). 6,02214076 × 10²³ = 602 214 milliards de milliards → « plus de 602 000 milliards de milliards » (affiché « 6,02 × 10²³ »). Atomes : H₂O = 3 atomes → 3 × 8,357 × 10²⁴ = 2,507 × 10²⁵ (« environ 25 millions de milliards de milliards », « un 25 suivi de 24 zéros » = 25 × 10²⁴, affiché « ≈ 2,5 × 10²⁵ »). Océans : 1,335 × 10⁹ km³ (NOAA ; USGS 1,338 × 10⁹) → « environ 1,3 milliard de km³ ». 1 km³ = 10⁹ m³ = 10¹² L = 4 × 10¹² verres de 0,25 L (« 4 000 milliards de verres »). Verres dans les océans : 1,335 × 10⁹ × 4 × 10¹² = 5,34 × 10²¹ (USGS : 5,35 × 10²¹) → « environ 5 000 milliards de milliards », affiché « ≈ 5 × 10²¹ ». Rapport atomes / verres : 2,507 × 10²⁵ / 5,34 × 10²¹ = 4 695 (USGS : 4 684) → « presque 5 000 fois », « des milliers de fois plus ». Rapport molécules / verres : 8,357 × 10²⁴ / 5,34 × 10²¹ = 1 565 (USGS : 1 561) → « plus de 1 500 fois ». Mélange parfait (expérience de pensée) : les 8,357 × 10²⁴ molécules du verre réparties dans 5,34 × 10²¹ verres d'océan → ≈ 1 565 par verre (« plus de 1 500 de tes molécules »). Le résultat ne dépend pas de la salinité : un verre d'eau de mer contient une fraction 1 / (nombre de verres) des molécules d'eau des océans, donc 1 / 5,34 × 10²¹ des molécules versées. Le verre versé ajoute un verre aux 5,34 × 10²¹ : négligeable. Taille d'une molécule : volume occupé par molécule dans l'eau liquide = 18,0153 g/mol / (1 g/cm³ × 6,02214076 × 10²³ /mol) = 2,99 × 10⁻²³ cm³ = 2,99 × 10⁻²⁹ m³ ; côté du cube = 3,1 × 10⁻¹⁰ m → « un cube d'environ 0,3 milliardième de mètre de côté » (règle : 10⁻¹⁰ m, expo -9,51). Règle des puissances de dix : verre de 250 cm³ (ordre de grandeur : un cylindre de 3,5 cm de rayon fait 6,5 cm de haut, 6,5 × 10⁻² m → 10⁻¹ m, expo -1,19) ; Terre 12 756 km = 1,28 × 10⁷ m → 10⁷ m (expo 7,1). Prochain épisode (vérifié, 2 sources) : rayon du Soleil 695 700 km (Observatoire de Paris, dictionnaire d'astronomie : https://dictionary.obspm.fr/terms/solar-radius/), « 1.4 million kilometres wide » (RAL Space, Solar Vital Statistics : https://solar.bnsc.rl.ac.uk/sb99/fact/wide.html) ; Proxima « the closest star to the Sun, about 4.2 light-years distant » (Britannica, Alpha Centauri) et « A little more than four light-years away » (NASA, What is a light-year?).",
- "images": "Le verre est un dessin (contenance illustrative). La molécule d'eau montre un oxygène (rouge, convention des modèles moléculaires) et deux hydrogènes (blancs) : couleurs conventionnelles, pas réelles. La Terre et le verre côte à côte dans la scène « face à face » ne sont pas à l'échelle (mention « PAS À L'ÉCHELLE »). La scène du mélange est une expérience de pensée (« IMAGINE »).",
+ "calcul": "Verre : 25 cl = 250 mL ; densité ≈ 1 g/mL (USGS, Britannica) → ≈ 250 g. Masse molaire de l'eau 18,0153 g/mol (NIST ; Britannica 18,0151) : « environ 18 grammes = 1 mole ». Moles dans le verre : 250 / 18,0153 = 13,877. Molécules : 13,877 × 6,02214076 × 10²³ = 8,357 × 10²⁴ (« plus de 8 millions de milliards de milliards », affiché « > 8 × 10²⁴ »). 6,02214076 × 10²³ = 602 214 milliards de milliards → « plus de 602 000 milliards de milliards » (affiché « 6,02 × 10²³ »). Atomes : H₂O = 3 atomes → 3 × 8,357 × 10²⁴ = 2,507 × 10²⁵ (« environ 25 millions de milliards de milliards », « un 25 suivi de 24 zéros » = 25 × 10²⁴, affiché « ≈ 2,5 × 10²⁵ »). Océans : 1,335 × 10⁹ km³ (NOAA ; USGS 1,338 × 10⁹) → « environ 1,3 milliard de km³ ». 1 km³ = 10⁹ m³ = 10¹² L = 4 × 10¹² verres de 0,25 L (« 4 000 milliards de verres »). Verres dans les océans : 1,335 × 10⁹ × 4 × 10¹² = 5,34 × 10²¹ (USGS : 5,35 × 10²¹) → « environ 5 000 milliards de milliards », affiché « ≈ 5 × 10²¹ ». Rapport atomes / verres : 2,507 × 10²⁵ / 5,34 × 10²¹ = 4 695 (USGS : 4 684) → « presque 5 000 fois », « des milliers de fois plus ». Rapport molécules / verres : 8,357 × 10²⁴ / 5,34 × 10²¹ = 1 565 (USGS : 1 561) → « plus de 1 500 fois ». Mélange parfait (expérience de pensée) : les 8,357 × 10²⁴ molécules du verre réparties dans 5,34 × 10²¹ verres d'océan → ≈ 1 565 par verre en moyenne (« en moyenne plus de 1 500 de tes molécules » ; le nombre dans un verre donné fluctue, loi de Poisson d'écart-type ≈ 40). Le résultat ne dépend pas de la salinité : un verre d'eau de mer contient une fraction 1 / (nombre de verres) des molécules d'eau des océans, donc 1 / 5,34 × 10²¹ des molécules versées. Le verre versé ajoute un verre aux 5,34 × 10²¹ : négligeable. Taille d'une molécule : volume occupé par molécule dans l'eau liquide = 18,0153 g/mol / (1 g/cm³ × 6,02214076 × 10²³ /mol) = 2,99 × 10⁻²³ cm³ = 2,99 × 10⁻²⁹ m³ ; côté du cube = 3,1 × 10⁻¹⁰ m → « un cube d'environ 0,3 milliardième de mètre de côté » (règle : 10⁻¹⁰ m, expo -9,51). Règle des puissances de dix : verre de 250 cm³ (ordre de grandeur : un cylindre de 3,5 cm de rayon fait 6,5 cm de haut, 6,5 × 10⁻² m → 10⁻¹ m, expo -1,19) ; Terre : diamètre 2 × 6 378,137 km = 12 756 km = 1,28 × 10⁷ m (NSSDC) → 10⁷ m (expo 7,1). Prochain épisode (vérifié, 2 sources) : rayon du Soleil 695 700 km (Observatoire de Paris, dictionnaire d'astronomie : https://dictionary.obspm.fr/terms/solar-radius/), « 1.4 million kilometres wide » (RAL Space, Solar Vital Statistics : https://solar.bnsc.rl.ac.uk/sb99/fact/wide.html) ; Proxima « the closest star to the Sun, about 4.2 light-years distant » (Britannica, Alpha Centauri) et « A little more than four light-years away » (NASA, What is a light-year?).",
+ "images": "Le verre est un dessin (contenance illustrative). La molécule d'eau montre un oxygène (rouge, convention des modèles moléculaires) et deux hydrogènes (blancs) : couleurs conventionnelles, pas réelles. La Terre et le verre côte à côte dans la scène « face à face » ne sont pas à l'échelle (mention « PAS À L'ÉCHELLE »). La scène du mélange est une expérience de pensée (« IMAGINE »). Les nombres « ≈ 5 000 × » et « > 1 500 × » de la scène « face à face » sont des rapports (fois plus), arrondis ; « > 1 500 » de la scène du mélange est une moyenne.",
  "publication": {
   "titre": "Au cœur d'un verre d'eau",
-  "legende": "Il y a plus d'atomes dans un seul verre d'eau que de verres d'eau dans tous les océans. Des milliers de fois plus. INFINIMENT, épisode 3.\nSources : NOAA, USGS (volume des océans, densité de l'eau), IUPAC et MSL Nouvelle-Zélande (la mole), NIST Chemistry WebBook, Britannica (l'eau), NASA (Terre).\n#infiniment #science #chimie #atomes #ocean #culturegenerale #apprendresurtiktok",
+  "legende": "Il y a plus d'atomes dans un seul verre d'eau que de verres d'eau dans tous les océans. Des milliers de fois plus. INFINIMENT, épisode 3.\nSources : NOAA, USGS (volume des océans, densité de l'eau), IUPAC et MSL Nouvelle-Zélande (la mole), NIST Chemistry WebBook, Britannica (l'eau), NASA NSSDC (Terre).\n#infiniment #science #chimie #atomes #ocean #culturegenerale #apprendresurtiktok",
   "hashtags": [
    "#infiniment",
    "#science",
