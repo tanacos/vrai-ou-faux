@@ -73,8 +73,11 @@
     "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1"
    ],
    "prochain": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/6a5cab1a334166f277c0c45a19fe69f68a6f43b0/infiniment_03_verre-eau.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/6a5cab1a334166f277c0c45a19fe69f68a6f43b0/infiniment_03_verre-eau.mp4",
+   "publication": "2026-11-16T18:00:00+01:00",
+   "metricool_id": "419712956",
+   "metricool_uuid=-8961907349531573121": "--video"
   }
  ],
  "dernier_numero": 3,

@@ -35,6 +35,7 @@ sources (leçons des contre-vérifications) :
 - les images aussi sont des affirmations : deux tailles comparées sont dessinées à l'échelle (la v1 de l'épisode 1
   montrait l'humanité 11 à 16 fois trop petite dans le sucre), un compteur n'affiche sa source qu'une fois arrivé au
   vrai chiffre, une analogie est présentée comme une image (« imagine… »).
+- contre-vérification du 07/11/2026 (épisode 3) : un rapport s'affiche avec « × » ; une moyenne se dit « en moyenne » ; parler d'« atomes d'oxygène » plutôt que de « tes molécules » quand l'identité des molécules compte (les hydrogènes s'échangent) ; un sigle (NOAA) se lit mal : le laisser à l'écran et en description.
 - contre-vérifications du 20/10/2026 (épisodes 1 et 2) : la condition d'une expérience de pensée se dit dès
   l'accroche (« si on retirait le vide de ses atomes ») ; « au moins » seulement si le calcul le prouve
   (1 / 0,508 = 1,97 : « environ deux fois moins ») ; l'écran garde les nuances de la voix (« ≈ 46 », « la plus proche
@@ -74,7 +75,8 @@ plus (décision de Nathan). Voir `moteur/VOIX.md` (prérequis réseau de l'envir
 |---|---|---|---|
 | 1 | `ep01_estelle16` | L'humanité dans un sucre (vers le petit) | prêt (3 tours de contre-vérification, voix refaite le 21/10/2026) : non programmé le 24/10 ; fabriqué (conforme) et programmé par la routine du 27/10 pour le lundi 02/11/2026 18:00 |
 | 2 | `ep02` | Le bord de l'univers observable (vers le grand) | prêt (3 tours, aucun écart au dernier ; voix refaite le 21/10/2026) : fabriqué (conforme) et programmé le 27/10 pour le lundi 09/11/2026 18:00 |
-| 3 | à écrire | Au cœur d'un verre d'eau (annoncé à la fin de l'épisode 2) | — |
+| 3 | `ep03` | Au cœur d'un verre d'eau (vers le petit) | programmé par la routine du 07/11/2026 pour le lundi 16/11/2026 18:00 |
+| 4 | à écrire | Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (vers le grand ; sources repérées : Observatoire de Paris rayon solaire 695 700 km, RAL Space, Britannica Alpha Centauri 4,2 al, NASA « a little more than four light-years ») | — |
 
 (`ep01` : version ElevenLabs, non commerciale ; `ep01_charles`, `ep01_estelle` : essais de voix.)
 
