@@ -1,0 +1,431 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 3,
+ "slug": "verre-eau",
+ "titre": "Au cœur d'un verre d'eau",
+ "narration": "narration.txt",
+ "blocs": [
+  "hook",
+  "descente",
+  "mole",
+  "atomes",
+  "oceans",
+  "duel",
+  "melange",
+  "outro"
+ ],
+ "scenes": {
+  "hook": {
+   "type": "heros",
+   "ambiance": "mystere",
+   "expo": -1.19,
+   "couverture": [
+    "UN VERRE D'EAU",
+    "CONTRE *LES OCÉANS*"
+   ],
+   "titres": [
+    {
+     "quand": "atomes",
+     "lignes": [
+      "PLUS D'*ATOMES*",
+      "DANS UN VERRE"
+     ]
+    },
+    {
+     "quand": "oceans",
+     "lignes": [
+      "QUE DE VERRES D'EAU",
+      "DANS *LES OCÉANS*"
+     ]
+    },
+    {
+     "quand": "milliers",
+     "lignes": [
+      "DES *MILLIERS*",
+      "DE FOIS PLUS"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "verre"
+   },
+   "objet_quand": "debut",
+   "impacts": [
+    "milliers"
+   ]
+  },
+  "descente": {
+   "type": "zoom",
+   "sens": "entree",
+   "ambiance": "emerveillement",
+   "titre": [
+    "TON VERRE :",
+    "*25 CL*"
+   ],
+   "objet": {
+    "type": "verre"
+   },
+   "expo_depart": -1.19,
+   "paliers": [
+    {
+     "quand": "molecule",
+     "objet": {
+      "type": "molecule"
+     },
+     "titre": [
+      "UNE *MOLÉCULE*",
+      "D'EAU"
+     ],
+     "info": "≈ 0,3 MILLIARDIÈME DE MÈTRE",
+     "expo": -9.51
+    },
+    {
+     "quand": "atomes",
+     "objet": {
+      "type": "molecule"
+     },
+     "titre": [
+      "*3 ATOMES*"
+     ],
+     "info": "2 HYDROGÈNE + 1 OXYGÈNE",
+     "expo": -9.51
+    }
+   ]
+  },
+  "mole": {
+   "type": "heros",
+   "ambiance": "calme",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "COMBIEN",
+      "DE *MOLÉCULES* ?"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "molecule",
+    "taille": 0.6
+   },
+   "objet_quand": "debut",
+   "objet_jusqua": "18",
+   "chiffres": [
+    {
+     "quand": "18",
+     "valeur": 18,
+     "prefixe": "≈ ",
+     "unite": "GRAMMES D'EAU = *1 MOLE*",
+     "compter": false
+    },
+    {
+     "quand": "602000",
+     "valeur": 6.02214076e+23,
+     "affichage": "6,02 × 10²³",
+     "unite": "MOLÉCULES DANS *1 MOLE*",
+     "source": "SOURCE : IUPAC"
+    },
+    {
+     "quand": "250",
+     "valeur": 250,
+     "unite": "GRAMMES : *TON VERRE*",
+     "compter": false
+    },
+    {
+     "quand": "8",
+     "valeur": 8.357e+24,
+     "affichage": "> 8 × 10²⁴",
+     "unite": "MOLÉCULES DANS *TON VERRE*"
+    }
+   ]
+  },
+  "atomes": {
+   "type": "heros",
+   "ambiance": "tension",
+   "impacts": [
+    "25"
+   ],
+   "chiffres": [
+    {
+     "quand": "25",
+     "valeur": 2.507e+25,
+     "affichage": "≈ 2,5 × 10²⁵",
+     "unite": "ATOMES DANS *TON VERRE*"
+    },
+    {
+     "quand": "zeros",
+     "valeur": 2.5e+25,
+     "affichage": "25 × 10²⁴",
+     "unite": "UN 25 SUIVI DE *24 ZÉROS*",
+     "compter": false
+    }
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "*3 ATOMES*",
+      "PAR MOLÉCULE"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "molecule",
+    "taille": 0.75
+   },
+   "objet_quand": "debut"
+  },
+  "oceans": {
+   "type": "heros",
+   "ambiance": "calme",
+   "expo": 7.1,
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "LES *OCÉANS*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "terre",
+    "taille": 0.75
+   },
+   "objet_quand": "debut",
+   "chiffres": [
+    {
+     "quand": "13",
+     "valeur": 1.3,
+     "decimales": 1,
+     "prefixe": "≈ ",
+     "unite": "MILLIARD DE KM³ D'EAU",
+     "source": "SOURCE : NOAA, USGS",
+     "compter": false
+    },
+    {
+     "quand": "4000",
+     "valeur": 4000,
+     "decimales": 0,
+     "unite": "MILLIARDS DE VERRES PAR *KM³*",
+     "compter": false
+    },
+    {
+     "quand": "5000",
+     "valeur": 5.34e+21,
+     "affichage": "≈ 5 × 10²¹",
+     "unite": "VERRES DANS *LES OCÉANS*"
+    }
+   ],
+   "objets": []
+  },
+  "duel": {
+   "type": "heros",
+   "ambiance": "triomphe",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "FACE À *FACE*"
+     ]
+    }
+   ],
+   "objets": [
+    {
+     "objet": {
+      "type": "verre",
+      "taille": 0.5
+     },
+     "quand": "debut",
+     "dx": -200
+    },
+    {
+     "objet": {
+      "type": "terre",
+      "taille": 0.5
+     },
+     "quand": "debut",
+     "dx": 200
+    }
+   ],
+   "chiffres": [
+    {
+     "quand": "5000",
+     "valeur": 4695,
+     "affichage": "≈ 5 000 ×",
+     "unite": "PLUS D'ATOMES QUE DE *VERRES*"
+    },
+    {
+     "quand": "1500",
+     "valeur": 1565,
+     "affichage": "> 1 500 ×",
+     "unite": "EN *MOLÉCULES*"
+    }
+   ],
+   "impacts": [
+    "gagne"
+   ],
+   "infos": [
+    {
+     "quand": "debut",
+     "texte": "PAS À L'ÉCHELLE"
+    }
+   ]
+  },
+  "melange": {
+   "type": "heros",
+   "ambiance": "emerveillement",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "IMAGINE : TON VERRE",
+      "VERSÉ DANS *LA MER*"
+     ]
+    },
+    {
+     "quand": "melangeait",
+     "lignes": [
+      "MÉLANGÉ À TOUS",
+      "*LES OCÉANS*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "terre",
+    "taille": 0.8
+   },
+   "objet_quand": "debut",
+   "infos": [
+    {
+     "quand": "debut",
+     "texte": "EXPÉRIENCE DE PENSÉE"
+    }
+   ],
+   "chiffres": [
+    {
+     "quand": "1500",
+     "valeur": 1565,
+     "affichage": "> 1 500",
+     "unite": "DE TES MOLÉCULES *PAR VERRE*"
+    }
+   ],
+   "impacts": [
+    "1500"
+   ]
+  },
+  "outro": {
+   "type": "fin",
+   "ambiance": "triomphe",
+   "prochain": [
+    "SI LE SOLEIL",
+    "ÉTAIT UNE *BILLE*"
+   ],
+   "quand": "soleil",
+   "sources_quand": "sources",
+   "objet": {
+    "type": "soleil"
+   }
+  }
+ },
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ },
+ "sources": [
+  {
+   "editeur": "NOAA (National Ocean Service)",
+   "titre": "How much water is in the ocean?",
+   "url": "https://oceanservice.noaa.gov/facts/oceanwater.html",
+   "extraits": [
+    "About 97 percent of the Earth's water can be found in our ocean.",
+    "1,335,000,000 cubic kilometers (321,003,271 cubic miles) is in the ocean."
+   ],
+   "sert_a": "volume des océans ≈ 1,335 milliard de km³ (fait central)"
+  },
+  {
+   "editeur": "USGS (Water Science School)",
+   "titre": "How much natural water is there?",
+   "url": "https://usgs.gov/faqs/how-much-natural-water-there",
+   "extraits": [
+    "Earth is estimated to hold about 1,386,000,000 cubic kilometers of water.",
+    "Oceans (saline) 1,338,000,000 cubic kilometers"
+   ],
+   "sert_a": "volume des océans ≈ 1,338 milliard de km³ (fait central, second éditeur)"
+  },
+  {
+   "editeur": "IUPAC",
+   "titre": "A new definition of the mole has arrived",
+   "url": "https://iupac.org/new-definition-mole-arrived",
+   "extraits": [
+    "One mole contains exactly 6.022 140 76 × 1023 elementary entities."
+   ],
+   "sert_a": "1 mole = 6,022 140 76 × 10²³ entités (« plus de 602 000 milliards de milliards ») ; l'exposant 23 est rendu « 1023 » par la page (exposant perdu)"
+  },
+  {
+   "editeur": "Measurement Standards Laboratory of New Zealand (MSL)",
+   "titre": "Mole",
+   "url": "https://www.measurement.govt.nz/metrology/si-units/mole",
+   "extraits": [
+    "The mole, symbol mol, is the SI unit of amount of substance.",
+    "One mole contains exactly 6.022 140 76 x 1023 elementary entities."
+   ],
+   "sert_a": "définition de la mole, nombre d'Avogadro (second éditeur)"
+  },
+  {
+   "editeur": "NIST Chemistry WebBook",
+   "titre": "Water",
+   "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=7732-18-5",
+   "extraits": [
+    "Formula: H2O",
+    "Molecular weight: 18.0153"
+   ],
+   "sert_a": "formule H₂O (3 atomes : 2 H, 1 O) ; masse molaire ≈ 18 g/mol"
+  },
+  {
+   "editeur": "Encyclopædia Britannica",
+   "titre": "Water: Physical properties",
+   "url": "https://www.britannica.com/science/water/Physical-properties",
+   "extraits": [
+    "18.0151 grams per mole",
+    "1.0000 grams per cubic centimetre",
+    "0.99701 grams per cubic centimetre",
+    "two hydrogen atoms bonding to one oxygen atom to form H2O"
+   ],
+   "sert_a": "masse molaire ≈ 18 g/mol ; densité ≈ 1 g/cm³ ; 2 hydrogènes + 1 oxygène"
+  },
+  {
+   "editeur": "USGS (Water Science School)",
+   "titre": "Water Density",
+   "url": "https://www.usgs.gov/water-science-school/science/water-density",
+   "extraits": [
+    "The density of water is roughly 1 gram per milliliter"
+   ],
+   "sert_a": "25 cl d'eau ≈ 250 grammes"
+  },
+  {
+   "editeur": "NASA",
+   "titre": "Earth: Facts",
+   "url": "https://science.nasa.gov/earth/facts/",
+   "extraits": [
+    "With an equatorial diameter of 7,926 miles (12,756 kilometers)"
+   ],
+   "sert_a": "règle des puissances de dix pour la Terre (1,3 × 10⁷ m → 10⁷)"
+  }
+ ],
+ "calcul": "Verre : 25 cl = 250 mL ; densité ≈ 1 g/mL (USGS, Britannica) → ≈ 250 g. Masse molaire de l'eau 18,0153 g/mol (NIST ; Britannica 18,0151) : « environ 18 grammes = 1 mole ». Moles dans le verre : 250 / 18,0153 = 13,877. Molécules : 13,877 × 6,02214076 × 10²³ = 8,357 × 10²⁴ (« plus de 8 millions de milliards de milliards », affiché « > 8 × 10²⁴ »). 6,02214076 × 10²³ = 602 214 milliards de milliards → « plus de 602 000 milliards de milliards » (affiché « 6,02 × 10²³ »). Atomes : H₂O = 3 atomes → 3 × 8,357 × 10²⁴ = 2,507 × 10²⁵ (« environ 25 millions de milliards de milliards », « un 25 suivi de 24 zéros » = 25 × 10²⁴, affiché « ≈ 2,5 × 10²⁵ »). Océans : 1,335 × 10⁹ km³ (NOAA ; USGS 1,338 × 10⁹) → « environ 1,3 milliard de km³ ». 1 km³ = 10⁹ m³ = 10¹² L = 4 × 10¹² verres de 0,25 L (« 4 000 milliards de verres »). Verres dans les océans : 1,335 × 10⁹ × 4 × 10¹² = 5,34 × 10²¹ (USGS : 5,35 × 10²¹) → « environ 5 000 milliards de milliards », affiché « ≈ 5 × 10²¹ ». Rapport atomes / verres : 2,507 × 10²⁵ / 5,34 × 10²¹ = 4 695 (USGS : 4 684) → « presque 5 000 fois », « des milliers de fois plus ». Rapport molécules / verres : 8,357 × 10²⁴ / 5,34 × 10²¹ = 1 565 (USGS : 1 561) → « plus de 1 500 fois ». Mélange parfait (expérience de pensée) : les 8,357 × 10²⁴ molécules du verre réparties dans 5,34 × 10²¹ verres d'océan → ≈ 1 565 par verre (« plus de 1 500 de tes molécules »). Le résultat ne dépend pas de la salinité : un verre d'eau de mer contient une fraction 1 / (nombre de verres) des molécules d'eau des océans, donc 1 / 5,34 × 10²¹ des molécules versées. Le verre versé ajoute un verre aux 5,34 × 10²¹ : négligeable. Taille d'une molécule : volume occupé par molécule dans l'eau liquide = 18,0153 g/mol / (1 g/cm³ × 6,02214076 × 10²³ /mol) = 2,99 × 10⁻²³ cm³ = 2,99 × 10⁻²⁹ m³ ; côté du cube = 3,1 × 10⁻¹⁰ m → « un cube d'environ 0,3 milliardième de mètre de côté » (règle : 10⁻¹⁰ m, expo -9,51). Règle des puissances de dix : verre de 250 cm³ (ordre de grandeur : un cylindre de 3,5 cm de rayon fait 6,5 cm de haut, 6,5 × 10⁻² m → 10⁻¹ m, expo -1,19) ; Terre 12 756 km = 1,28 × 10⁷ m → 10⁷ m (expo 7,1). Prochain épisode (vérifié, 2 sources) : rayon du Soleil 695 700 km (Observatoire de Paris, dictionnaire d'astronomie : https://dictionary.obspm.fr/terms/solar-radius/), « 1.4 million kilometres wide » (RAL Space, Solar Vital Statistics : https://solar.bnsc.rl.ac.uk/sb99/fact/wide.html) ; Proxima « the closest star to the Sun, about 4.2 light-years distant » (Britannica, Alpha Centauri) et « A little more than four light-years away » (NASA, What is a light-year?).",
+ "images": "Le verre est un dessin (contenance illustrative). La molécule d'eau montre un oxygène (rouge, convention des modèles moléculaires) et deux hydrogènes (blancs) : couleurs conventionnelles, pas réelles. La Terre et le verre côte à côte dans la scène « face à face » ne sont pas à l'échelle (mention « PAS À L'ÉCHELLE »). La scène du mélange est une expérience de pensée (« IMAGINE »).",
+ "publication": {
+  "titre": "Au cœur d'un verre d'eau",
+  "legende": "Il y a plus d'atomes dans un seul verre d'eau que de verres d'eau dans tous les océans. Des milliers de fois plus. INFINIMENT, épisode 3.\nSources : NOAA, USGS (volume des océans, densité de l'eau), IUPAC et MSL Nouvelle-Zélande (la mole), NIST Chemistry WebBook, Britannica (l'eau), NASA (Terre).\n#infiniment #science #chimie #atomes #ocean #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#infiniment",
+   "#science",
+   "#chimie",
+   "#atomes",
+   "#ocean",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ],
+  "contenu_ia": false
+ },
+ "prochain": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)"
+}
