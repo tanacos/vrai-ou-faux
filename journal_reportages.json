@@ -56,8 +56,26 @@
    "publication": "2026-11-09T18:00:00+01:00",
    "metricool_id": "409397908",
    "metricool_uuid": "6879983285843871114"
+  },
+  {
+   "numero": 3,
+   "slug": "verre-eau",
+   "titre": "Au cœur d'un verre d'eau",
+   "dossier": "series/infiniment/ep03",
+   "sources": [
+    "https://oceanservice.noaa.gov/facts/oceanwater.html",
+    "https://usgs.gov/faqs/how-much-natural-water-there",
+    "https://iupac.org/new-definition-mole-arrived",
+    "https://www.measurement.govt.nz/metrology/si-units/mole",
+    "https://webbook.nist.gov/cgi/cbook.cgi?ID=7732-18-5",
+    "https://www.britannica.com/science/water/Physical-properties",
+    "https://www.usgs.gov/water-science-school/science/water-density",
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1"
+   ],
+   "prochain": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)",
+   "statut": "en attente de voix"
   }
  ],
- "dernier_numero": 2,
- "prochain_sujet": "Au cœur d'un verre d'eau (épisode 3 : plus d'atomes dans un verre d'eau que de verres d'eau dans les océans ?)"
+ "dernier_numero": 3,
+ "prochain_sujet": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)"
 }
