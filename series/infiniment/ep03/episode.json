@@ -428,5 +428,23 @@
   ],
   "contenu_ia": false
  },
- "prochain": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)"
+ "prochain": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)",
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0",
+  "respirations": {
+   "hook": 0.9,
+   "atomes": 0.8,
+   "duel": 1.0,
+   "melange": 1.2
+  }
+ }
 }
