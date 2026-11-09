@@ -448,7 +448,8 @@
     }
    ],
    "prochain": "« Une abeille meurt toujours après avoir piqué. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/fab77020ebadcb62a8e8fee146bea802067b4b35/vrai_ou_faux_10_meteo.mp4"
   }
  ]
 }
