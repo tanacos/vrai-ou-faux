@@ -1,0 +1,219 @@
+{
+ "numero": 10,
+ "slug": "meteo",
+ "theme": "la météo",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LA MÉTÉO"
+ ],
+ "fond": "nuit",
+ "ambiance": "nature",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur la météo.",
+ "idees": [
+  {
+   "affirmation": "« Il peut faire trop froid pour neiger. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:thermometer-cold",
+    "satellites": [
+     "pi:snowflake"
+    ],
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Le froid n'empêche pas la neige",
+     "texte": "Il manque de l'humidité et de l'air qui monte."
+    },
+    {
+     "type": "texte",
+     "titre": "Pourquoi l'humidité ?",
+     "texte": "Un air très froid contient très peu d'eau."
+    },
+    {
+     "type": "texte",
+     "titre": "Aucune limite de froid",
+     "texte": "Un cristal de glace peut se former même par un froid extrême."
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "Par grand froid, les grosses chutes de neige sont rares… mais possibles."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "NOAA (NSSL)",
+     "titre": "Severe Weather 101 : Winter Weather FAQ",
+     "url": "https://www.nssl.noaa.gov/education/svrwx101/winter/faq/",
+     "extrait": "It rarely snows when the temperature drops below zero degrees Fahrenheit because the atmosphere is too stable. One of the ingredients for snow is enough lifting of saturated air that snow can develop aloft and fall to reach the surface. When it is said, \"it is too cold to snow,\" in reality it means there is not enough lifting of air to cause snow to reach the surface. Even at very cold surface temperatures, significant snowfall can occur."
+    },
+    {
+     "editeur": "Scientific American",
+     "titre": "What is the meaning of the phrase, \"It is too cold to snow\"?",
+     "url": "https://www.scientificamerican.com/article/what-is-the-meaning-of-th/",
+     "extrait": "the atmosphere must contain moisture to generate snow--and very cold air contains very little moisture. Therefore, significant snowfall at such very low temperatures is rare. […] There actually is no such thing as too low a temperature for some sort of ice crystal to form."
+    },
+    {
+     "editeur": "NSIDC",
+     "titre": "Snow",
+     "url": "https://nsidc.org/learn/snow",
+     "extrait": "Snow requires two specific weather conditions: low temperatures and moisture in the atmosphere."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Un simple nuage pèse des centaines de tonnes. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "duel",
+    "gauche": {
+     "icone": "pi:cloud",
+     "libelle": "1 nuage"
+    },
+    "droite": {
+     "icone": "gi:elephant",
+     "libelle": "100 éléphants"
+    },
+    "signe": "=",
+    "gagnant": "aucun",
+    "fond": "aurore"
+   },
+   "panneaux": [
+    {
+     "type": "chiffre",
+     "titre": "Un cumulus d'environ 1 km de côté pèse",
+     "valeur": 500000,
+     "suffixe": " kg",
+     "legende": "À peu près le poids de 100 éléphants",
+     "voix": "Un cumulus d'environ un kilomètre de côté pèse à peu près 500 000 kilos. Autant que 100 éléphants."
+    },
+    {
+     "type": "texte",
+     "titre": "Pourquoi il ne tombe pas ?",
+     "texte": "Ses gouttelettes sont si fines que le moindre courant d'air les porte."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Library of Congress",
+     "titre": "How much does a cloud weigh?",
+     "url": "https://www.loc.gov/everyday-mysteries/meteorology-climatology/item/how-much-does-a-cloud-weigh/",
+     "extrait": "about 1,000 meters long and about equal in height and width […] (1,000 meters for each dimension) […] Thus, the cloud weighs about 500,000 kilograms! […] the individual liquid water droplets and solid ice crystals are small enough to float on even the slightest breeze."
+    },
+    {
+     "editeur": "EarthDate (Université du Texas à Austin)",
+     "titre": "Puffy Clouds Weigh In",
+     "url": "https://www.earthdate.org/episodes/puffy-clouds-weigh-in",
+     "extrait": "a typical cloud weighs 500 million grams...or 1.1 million pounds! That's equivalent to 100 average-sized elephants"
+    }
+   ]
+  },
+  {
+   "affirmation": "« La neige, c'est de la pluie gelée. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:snowflake",
+    "satellites": [
+     "pi:cloud",
+     "pi:drop"
+    ],
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Elle naît dans le nuage",
+     "texte": "La vapeur d'eau s'y change directement en glace, sans passer par l'état liquide."
+    },
+    {
+     "type": "texte",
+     "titre": "La pluie gelée, ça existe",
+     "texte": "Ce sont des granules de glace : des gouttes qui gèlent en tombant."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "NSIDC",
+     "titre": "Snow",
+     "url": "https://nsidc.org/learn/snow",
+     "extrait": "is not frozen rain, but a crystallization of ice that typically forms in clouds. […] condenses directly into ice without going through the liquid stage. […] Sleet: drops of rain or drizzle that freeze into ice as they fall"
+    },
+    {
+     "editeur": "University of Illinois Extension",
+     "titre": "Snow",
+     "url": "https://extension.illinois.edu/weather/snow",
+     "extrait": "Snow forms when water vapor, the gas form of water, changes from gas directly to a solid"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Un arc-en-ciel est en fait un cercle. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:rainbow",
+    "satellites": [
+     "pi:airplane"
+    ],
+    "marque": "coche",
+    "fond": "aurore"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Le sol en cache une partie",
+     "texte": "Sans paysage pour gêner, l'arc-en-ciel forme un cercle complet."
+    },
+    {
+     "type": "texte",
+     "titre": "Le voir en entier ?",
+     "texte": "Depuis un avion, c'est possible.",
+     "sous_texte": "Au sol, on n'en voit généralement qu'un arc."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "USGS",
+     "titre": "If there is no landscape to interfere, rainbows are actually circular",
+     "url": "https://www.usgs.gov/media/images/if-there-no-landscape-interfere-rainbows-are-actually-circular",
+     "extrait": "If there is no landscape to interfere, rainbows are actually circular."
+    },
+    {
+     "editeur": "Scientific American",
+     "titre": "Why are rainbows curved?",
+     "url": "https://www.scientificamerican.com/article/why-are-rainbows-curved-i",
+     "extrait": "one that forms a circle around the antisolar point."
+    },
+    {
+     "editeur": "University of Georgia Extension",
+     "titre": "Why rainbows are curved",
+     "url": "https://site.extension.uga.edu/climate/archive/post/why-rainbows-are-curved/",
+     "extrait": "it is possible to see a rainbow as a full circle […] usually on the earth’s surface we only see part of the arc."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "NOAA · Scientific American · NSIDC · Library of Congress · UT Austin · USGS · Univ. of Illinois · Univ. of Georgia",
+ "prochain": {
+  "affirmation": "« Une abeille meurt toujours après avoir piqué. »"
+ },
+ "voix_score": "Alors, ton score ?",
+ "voix_prochain": "Prochain épisode : une abeille meurt toujours après avoir piqué.",
+ "publication": {
+  "legende": "Vrai ou faux ? ❄️ 4 idées reçues sur la météo. Dis ton score en commentaire 👇\n#vraioufaux #meteo #neige #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#meteo",
+   "#neige",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ }
+}
