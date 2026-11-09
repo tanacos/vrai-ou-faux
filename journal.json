@@ -448,8 +448,11 @@
     }
    ],
    "prochain": "« Une abeille meurt toujours après avoir piqué. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/fab77020ebadcb62a8e8fee146bea802067b4b35/vrai_ou_faux_10_meteo.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/fab77020ebadcb62a8e8fee146bea802067b4b35/vrai_ou_faux_10_meteo.mp4",
+   "publication": "2026-11-14T18:00:00+01:00",
+   "metricool_id": "421394214",
+   "metricool_uuid": "1088161990064687478"
   }
  ]
 }

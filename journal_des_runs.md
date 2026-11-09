@@ -5,7 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
-| 2026-11-09 06:09 | normal | démarré |
+| 2026-11-09 06:09 | normal | programmé : épisode 10 (la météo), samedi 14/11 à 18:00, Metricool 421394214 |
 | 2026-11-05 06:09 | normal | programmé : épisode 9 (la Terre), mercredi 11/11 à 18:00, Metricool 417381123 |
 | 2026-11-02 06:09 | normal | programmé : épisode 8 (l'histoire), samedi 07/11 à 18:00, Metricool 413591489 |
 | 2026-10-29 06:09 | normal | programmé : épisode 7 (à table), mercredi 04/11 à 18:00, Metricool 409725343 |

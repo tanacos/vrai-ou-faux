@@ -6,9 +6,15 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 10 — la météo** : idée 1 imposée « Il peut faire trop froid pour neiger. » (faux présumé, avec nuance :
-  c'est le manque d'humidité qui empêche la neige, pas le froid lui-même ; sources repérées : NOAA/NSSL FAQ hiver,
-  Popular Science citant Mark Serreze, NSIDC). Voir les pistes « La météo » ci-dessous.
+- **Épisode 11 — les petites bêtes** : idée 1 imposée « Une abeille meurt toujours après avoir piqué. » (faux présumé :
+  seule l'abeille ouvrière à miel, et surtout quand elle pique un mammifère ; sources repérées : Britannica, Live
+  Science). Voir les pistes « Les petites bêtes » ci-dessous.
+
+## Déjà traité (épisode 10, la météo)
+
+- ~~trop froid pour neiger~~ (FAUX, avec nuance), ~~un nuage pèse des centaines de tonnes~~ (VRAI), ~~la neige,
+  c'est de la pluie gelée~~ (FAUX), ~~l'arc-en-ciel est un cercle~~ (VRAI). Restent possibles : le soleil d'hiver ne
+  brûle pas la peau (sujet santé, sources solides exigées).
 
 ## Déjà traité (épisode 9, la Terre)
 
