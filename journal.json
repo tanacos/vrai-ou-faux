@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 9,
- "prochaine_affirmation": "« Il peut faire trop froid pour neiger. »",
+ "dernier_numero": 10,
+ "prochaine_affirmation": "« Une abeille meurt toujours après avoir piqué. »",
  "episodes": [
   {
    "numero": 1,
@@ -405,6 +405,50 @@
    "publication": "2026-11-11T18:00:00+01:00",
    "metricool_id": "417381123",
    "metricool_uuid": "-5587593926789084302"
+  },
+  {
+   "numero": 10,
+   "slug": "meteo",
+   "titre": "4 IDÉES REÇUES SUR LA MÉTÉO",
+   "theme": "la météo",
+   "idees": [
+    {
+     "affirmation": "« Il peut faire trop froid pour neiger. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.nssl.noaa.gov/education/svrwx101/winter/faq/",
+      "https://www.scientificamerican.com/article/what-is-the-meaning-of-th/",
+      "https://nsidc.org/learn/snow"
+     ]
+    },
+    {
+     "affirmation": "« Un simple nuage pèse des centaines de tonnes. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.loc.gov/everyday-mysteries/meteorology-climatology/item/how-much-does-a-cloud-weigh/",
+      "https://www.earthdate.org/episodes/puffy-clouds-weigh-in"
+     ]
+    },
+    {
+     "affirmation": "« La neige, c'est de la pluie gelée. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://nsidc.org/learn/snow",
+      "https://extension.illinois.edu/weather/snow"
+     ]
+    },
+    {
+     "affirmation": "« Un arc-en-ciel est en fait un cercle. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.usgs.gov/media/images/if-there-no-landscape-interfere-rainbows-are-actually-circular",
+      "https://www.scientificamerican.com/article/why-are-rainbows-curved-i",
+      "https://site.extension.uga.edu/climate/archive/post/why-rainbows-are-curved/"
+     ]
+    }
+   ],
+   "prochain": "« Une abeille meurt toujours après avoir piqué. »",
+   "statut": "fabriqué"
   }
  ]
 }
