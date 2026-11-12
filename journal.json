@@ -496,8 +496,11 @@
     }
    ],
    "prochain": "« Le mot oignon peut aussi s'écrire sans i. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/00328d34d5916f2dfc663c19638b93d1e0c0dbae/vrai_ou_faux_11_betes.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/00328d34d5916f2dfc663c19638b93d1e0c0dbae/vrai_ou_faux_11_betes.mp4",
+   "publication": "2026-11-18T18:00:00+01:00",
+   "metricool_id": "425308843",
+   "metricool_uuid": "1414454715735491066"
   }
  ]
 }

@@ -6,9 +6,14 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 11 — les petites bêtes** : idée 1 imposée « Une abeille meurt toujours après avoir piqué. » (faux présumé :
-  seule l'abeille ouvrière à miel, et surtout quand elle pique un mammifère ; sources repérées : Britannica, Live
-  Science). Voir les pistes « Les petites bêtes » ci-dessous.
+- **Épisode 12 — la langue française** : idée 1 imposée « Le mot oignon peut aussi s'écrire sans i. » (vrai présumé :
+  graphie « ognon » des rectifications de 1990 ; sources repérées : OQLF (Vitrine linguistique, fiche « oignon »),
+  ministère de la Culture (DGLFLF, Langues et cité n° 7)). Voir les pistes « La langue française » ci-dessous.
+
+## Déjà traité (épisode 11, les petites bêtes)
+
+- ~~une abeille meurt toujours après avoir piqué~~ (FAUX), ~~une fourmi porte des dizaines de fois son poids~~
+  (VRAI), ~~les moustiques préfèrent certaines personnes~~ (VRAI), ~~l'araignée est un insecte~~ (FAUX).
 
 ## Déjà traité (épisode 10, la météo)
 

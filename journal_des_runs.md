@@ -5,7 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
-| 2026-11-12 06:08 | normal | démarré |
+| 2026-11-12 06:08 | normal | programmé : épisode 11 (les petites bêtes), mercredi 18/11 à 18:00, Metricool 425308843 |
 | 2026-11-09 06:09 | normal | programmé : épisode 10 (la météo), samedi 14/11 à 18:00, Metricool 421394214 |
 | 2026-11-05 06:09 | normal | programmé : épisode 9 (la Terre), mercredi 11/11 à 18:00, Metricool 417381123 |
 | 2026-11-02 06:09 | normal | programmé : épisode 8 (l'histoire), samedi 07/11 à 18:00, Metricool 413591489 |
