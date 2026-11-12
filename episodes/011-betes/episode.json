@@ -28,17 +28,20 @@
     {
      "type": "texte",
      "titre": "Si elle pique un mammifère",
-     "texte": "Elle ne peut pas retirer son dard : son abdomen se déchire."
+     "texte": "Elle ne peut pas retirer son dard : son abdomen se déchire.",
+     "voix": "Si elle pique un mammifère, elle ne peut pas retirer son dard : son abdomen se déchire."
     },
     {
      "type": "texte",
      "titre": "Si elle pique un insecte",
-     "texte": "Elle peut retirer son dard… et survivre."
+     "texte": "Elle peut retirer son dard… et survivre.",
+     "voix": "Si elle pique un insecte, elle peut retirer son dard, et survivre."
     },
     {
      "type": "texte",
      "titre": "Bourdons, guêpes, frelons",
-     "texte": "Leur dard est lisse : ils peuvent piquer plusieurs fois."
+     "texte": "Leur dard est lisse : ils peuvent piquer plusieurs fois.",
+     "voix": "Les bourdons, les guêpes et les frelons ont un dard lisse : ils peuvent piquer plusieurs fois."
     }
    ],
    "sources": [
@@ -83,7 +86,8 @@
     {
      "type": "texte",
      "titre": "Exemple : les coupeuses de feuilles",
-     "texte": "Elles portent des bouts de feuille de presque 50 fois leur poids."
+     "texte": "Elles portent des bouts de feuille de presque 50 fois leur poids.",
+     "voix": "Les fourmis coupeuses de feuilles portent des bouts de feuille de presque 50 fois leur poids."
     }
    ],
    "sources": [
@@ -127,12 +131,8 @@
     {
      "type": "texte",
      "titre": "Dans une étude",
-     "texte": "Une personne attirait 100 fois plus les moustiques qu'une autre."
-    },
-    {
-     "type": "texte",
-     "titre": "Et ça dure",
-     "texte": "Cette préférence reste très stable dans le temps."
+     "texte": "Une personne attirait 100 fois plus les moustiques qu'une autre.",
+     "voix": "Dans une étude, une personne attirait 100 fois plus les moustiques qu'une autre."
     }
    ],
    "sources": [
@@ -171,7 +171,8 @@
     {
      "type": "texte",
      "titre": "C'est un arachnide",
-     "texte": "Comme le scorpion et la tique."
+     "texte": "Comme le scorpion et la tique.",
+     "voix": "C'est un arachnide, comme le scorpion et la tique."
     },
     {
      "type": "duo",
@@ -186,12 +187,7 @@
       "legende": "insecte",
       "couleur": "cyan"
      },
-     "voix": "Compte les pattes : huit pour l'araignée, six pour un insecte."
-    },
-    {
-     "type": "texte",
-     "titre": "Et le corps ?",
-     "texte": "En 2 parties chez l'araignée, en 3 chez l'insecte."
+     "voix": "Compte les pattes : 8 pour l'araignée, 6 pour un insecte."
     }
    ],
    "sources": [
@@ -232,5 +228,17 @@
    "#culturegenerale",
    "#apprendresurtiktok"
   ]
+ },
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0"
  }
 }
