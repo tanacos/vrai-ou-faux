@@ -1,0 +1,236 @@
+{
+ "numero": 11,
+ "slug": "betes",
+ "theme": "les petites bêtes",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LES PETITES BÊTES"
+ ],
+ "fond": "nature",
+ "ambiance": "nature",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur les petites bêtes.",
+ "idees": [
+  {
+   "affirmation": "« Une abeille meurt toujours après avoir piqué. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:bee",
+    "marque": "barre",
+    "fond": "nature"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Un dard en harpon",
+     "texte": "Le dard de l'abeille à miel est barbelé : il reste coincé dans la peau."
+    },
+    {
+     "type": "texte",
+     "titre": "Si elle pique un mammifère",
+     "texte": "Elle ne peut pas retirer son dard : son abdomen se déchire."
+    },
+    {
+     "type": "texte",
+     "titre": "Si elle pique un insecte",
+     "texte": "Elle peut retirer son dard… et survivre."
+    },
+    {
+     "type": "texte",
+     "titre": "Bourdons, guêpes, frelons",
+     "texte": "Leur dard est lisse : ils peuvent piquer plusieurs fois."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Britannica",
+     "titre": "Do Bees Die After Stinging?",
+     "url": "https://britannica.com/science/Do-Bees-Die-After-Stinging",
+     "extrait": "The most familiar bee is the western honeybee, the females of which do indeed die after stinging. […] The stinger of a honeybee is barbed, which means once it pierces human skin, it gets stuck. […] Few, if any, solitary bees (which are the vast majority of the world's bees), die after stinging."
+    },
+    {
+     "editeur": "BBC Science Focus",
+     "titre": "Why do bees die when they sting you?",
+     "url": "https://www.sciencefocus.com/nature/why-do-bees-die-when-they-sting-you/",
+     "extrait": "Honey bee stings have a barbed ratchet mechanism that pulls the stinger into the initial wound. […] mammal skin is too fibrous to release the sting, so the abdomen is torn open. […] honey bees can pull their stings out after stinging other insects."
+    },
+    {
+     "editeur": "Live Science",
+     "titre": "Do bees die after stinging?",
+     "url": "https://www.livescience.com/do-bees-die-after-stinging",
+     "extrait": "In a word, no. While some bees undoubtedly do die, others don't. […] Honeybees […] do not tend to die when stinging other insects or spiders […] smooth stinger, and are therefore able to sting multiple times without dying […] have a similarly smooth stinger, which enables them to attack a target multiple times"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Une fourmi peut porter des dizaines de fois son poids. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:ant",
+    "satellites": [
+     "pi:leaf"
+    ],
+    "marque": "coche",
+    "fond": "nature"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Une vraie haltérophile",
+     "texte": "Une fourmi peut porter de 10 à 50 fois son poids."
+    },
+    {
+     "type": "texte",
+     "titre": "Exemple : les coupeuses de feuilles",
+     "texte": "Elles portent des bouts de feuille de presque 50 fois leur poids."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Arizona State University (Ask a Biologist)",
+     "titre": "Ant Factoids",
+     "url": "https://askabiologist.asu.edu/content/ant-factoids",
+     "extrait": "can carry 10 - 50 times their body weight, or maybe even more!"
+    },
+    {
+     "editeur": "U.S. Fish & Wildlife Service",
+     "titre": "5 Fascinating Facts about Leaf Cutter Ants",
+     "url": "https://www.fws.gov/story/2016-03/5-fascinating-facts-about-leaf-cutter-ants",
+     "extrait": "These ambitious ants appear to bite off more than they can chew, but they can actually carry pieces of leaves almost 50 times their own weight."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Les moustiques préfèrent certaines personnes. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "duel",
+    "gauche": {
+     "icone": "pi:person",
+     "libelle": "Très attirant"
+    },
+    "droite": {
+     "icone": "pi:person",
+     "libelle": "Peu attirant"
+    },
+    "signe": ">",
+    "gagnant": "gauche",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Tout est dans l'odeur",
+     "texte": "Ils préfèrent les peaux riches en acides carboxyliques."
+    },
+    {
+     "type": "texte",
+     "titre": "Dans une étude",
+     "texte": "Une personne attirait 100 fois plus les moustiques qu'une autre."
+    },
+    {
+     "type": "texte",
+     "titre": "Et ça dure",
+     "texte": "Cette préférence reste très stable dans le temps."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Scientific American",
+     "titre": "Some People Really Are Mosquito Magnets, and They're Stuck That Way",
+     "url": "https://www.scientificamerican.com/article/some-people-really-are-mosquito-magnets-and-theyre-stuck-that-way",
+     "extrait": "mosquitoes were most drawn to people whose skin produces high levels of carboxylic acids. […] Subject 33 had the dubious honor of being the biggest mosquito magnet; they had an attractiveness score over 100 times greater than that of the least attractive subjects, 19 and 28"
+    },
+    {
+     "editeur": "Rockefeller University",
+     "titre": "Why some people are mosquito magnets",
+     "url": "https://www.rockefeller.edu/news/33019-why-mosquitoes-bite-some-people-more/",
+     "extrait": "some of us are distinct \"mosquito magnets\" who get more than our fair share of bites. […] mosquito magnets produced carboxylic acids at much higher levels than the less-attractive volunteers. […] an astonishing 100 times more appealing than the least attractive, Subject 19. […] a very stable property of the person"
+    }
+   ]
+  },
+  {
+   "affirmation": "« L'araignée est un insecte. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "duel",
+    "gauche": {
+     "icone": "gi:spider-alt",
+     "libelle": "Araignée"
+    },
+    "droite": {
+     "icone": "pi:bug",
+     "libelle": "Insecte"
+    },
+    "signe": "≠",
+    "gagnant": "aucun",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "C'est un arachnide",
+     "texte": "Comme le scorpion et la tique."
+    },
+    {
+     "type": "duo",
+     "titre": "Compte les pattes",
+     "gauche": {
+      "valeur": "8",
+      "legende": "araignée",
+      "couleur": "corail"
+     },
+     "droite": {
+      "valeur": "6",
+      "legende": "insecte",
+      "couleur": "cyan"
+     },
+     "voix": "Compte les pattes : huit pour l'araignée, six pour un insecte."
+    },
+    {
+     "type": "texte",
+     "titre": "Et le corps ?",
+     "texte": "En 2 parties chez l'araignée, en 3 chez l'insecte."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Australian Museum",
+     "titre": "Spiders and other arachnids",
+     "url": "https://australian.museum/learn/animals/spiders/",
+     "extrait": "Spiders are arachnids, not insects. […] Spiders have four pairs of jointed legs with claws. […] A spider's body is in two sections."
+    },
+    {
+     "editeur": "Britannica",
+     "titre": "Spider",
+     "url": "https://britannica.com/EBchecked/topic/559817/spider",
+     "extrait": "any of more than 46,700 species of arachnids that differ from insects in having eight legs rather than six and in having the body divided into two parts rather than three."
+    },
+    {
+     "editeur": "Burke Museum (University of Washington)",
+     "titre": "Spider Myths: arachnids",
+     "url": "https://www.burkemuseum.org/static/spidermyth/myths/arachnid.html",
+     "extrait": "Scorpions, harvestmen, ticks, and in fact all arachnids - not just spiders - have four pairs of legs. […] Insects have three pairs."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "Britannica · BBC Science Focus · Live Science · Arizona State Univ. · US Fish & Wildlife · Scientific American · Rockefeller Univ. · Australian Museum",
+ "prochain": {
+  "affirmation": "« Le mot oignon peut aussi s'écrire sans i. »"
+ },
+ "voix_score": "Alors, ton score ?",
+ "voix_prochain": "Prochain épisode : le mot oignon peut aussi s'écrire sans i.",
+ "publication": {
+  "legende": "Vrai ou faux ? 🐝 4 idées reçues sur les petites bêtes. Dis ton score en commentaire 👇\n#vraioufaux #insectes #animaux #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#insectes",
+   "#animaux",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ }
+}
