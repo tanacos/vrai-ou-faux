@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 10,
- "prochaine_affirmation": "« Une abeille meurt toujours après avoir piqué. »",
+ "dernier_numero": 11,
+ "prochaine_affirmation": "« Le mot oignon peut aussi s'écrire sans i. »",
  "episodes": [
   {
    "numero": 1,
@@ -453,6 +453,50 @@
    "publication": "2026-11-14T18:00:00+01:00",
    "metricool_id": "421394214",
    "metricool_uuid": "1088161990064687478"
+  },
+  {
+   "numero": 11,
+   "slug": "betes",
+   "titre": "4 IDÉES REÇUES SUR LES PETITES BÊTES",
+   "theme": "les petites bêtes",
+   "idees": [
+    {
+     "affirmation": "« Une abeille meurt toujours après avoir piqué. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://britannica.com/science/Do-Bees-Die-After-Stinging",
+      "https://www.sciencefocus.com/nature/why-do-bees-die-when-they-sting-you/",
+      "https://www.livescience.com/do-bees-die-after-stinging"
+     ]
+    },
+    {
+     "affirmation": "« Une fourmi peut porter des dizaines de fois son poids. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://askabiologist.asu.edu/content/ant-factoids",
+      "https://www.fws.gov/story/2016-03/5-fascinating-facts-about-leaf-cutter-ants"
+     ]
+    },
+    {
+     "affirmation": "« Les moustiques préfèrent certaines personnes. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.scientificamerican.com/article/some-people-really-are-mosquito-magnets-and-theyre-stuck-that-way",
+      "https://www.rockefeller.edu/news/33019-why-mosquitoes-bite-some-people-more/"
+     ]
+    },
+    {
+     "affirmation": "« L'araignée est un insecte. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://australian.museum/learn/animals/spiders/",
+      "https://britannica.com/EBchecked/topic/559817/spider",
+      "https://www.burkemuseum.org/static/spidermyth/myths/arachnid.html"
+     ]
+    }
+   ],
+   "prochain": "« Le mot oignon peut aussi s'écrire sans i. »",
+   "statut": "fabriqué"
   }
  ]
 }
