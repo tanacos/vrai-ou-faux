@@ -281,7 +281,7 @@
       "taille": 0.25
      },
      "quand": "debut",
-     "dx": -250
+     "dx": -220
     },
     {
      "objet": {
@@ -291,7 +291,7 @@
       "mention": "PAS À L'ÉCHELLE"
      },
      "quand": "proxima",
-     "dx": 250
+     "dx": 60
     }
    ],
    "chiffres": [
