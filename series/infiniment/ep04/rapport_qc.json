@@ -1,0 +1,101 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 4,
+ "debut": "2026-11-14 06:05:08",
+ "statut": "conforme",
+ "controles": [
+  {
+   "controle": "format vidéo",
+   "ok": true,
+   "detail": "h264 High 1080x1920 yuv420p 30.00 i/s"
+  },
+  {
+   "controle": "format audio",
+   "ok": true,
+   "detail": "aac 48000 Hz 2 canaux"
+  },
+  {
+   "controle": "durée",
+   "ok": true,
+   "detail": "82.90 s (prévu 82.90 s, minimum 61 s)"
+  },
+  {
+   "controle": "poids",
+   "ok": true,
+   "detail": "34.7 Mio"
+  },
+  {
+   "controle": "lecture immédiate (faststart)",
+   "ok": true,
+   "detail": "atome moov en tête de fichier"
+  },
+  {
+   "controle": "sonie intégrée",
+   "ok": true,
+   "detail": "-14.6 LUFS (cible -14,5 ± 1)"
+  },
+  {
+   "controle": "crête vraie",
+   "ok": true,
+   "detail": "-3.0 dBTP (maximum -1)"
+  },
+  {
+   "controle": "nombre d'images",
+   "ok": true,
+   "detail": "2487 images (prévu 2487)"
+  },
+  {
+   "controle": "miniature (1re image)",
+   "ok": true,
+   "detail": "luminosité moyenne de la 1re image : 13/255"
+  },
+  {
+   "controle": "pas d'image noire",
+   "ok": true,
+   "detail": "0 image(s) noire(s)"
+  },
+  {
+   "controle": "pas d'image figée",
+   "ok": true,
+   "detail": "plus longue séquence immobile : 0.00 s"
+  },
+  {
+   "controle": "pas de silence",
+   "ok": true,
+   "detail": "aucun trou de 2 s sous -60 dBFS"
+  },
+  {
+   "controle": "synchro voix",
+   "ok": true,
+   "detail": "décalage +0 ms, corrélation 0.89 (voix montée / vidéo)"
+  },
+  {
+   "controle": "zones sûres TikTok",
+   "ok": true,
+   "detail": "aucun texte hors zone"
+  },
+  {
+   "controle": "textes sans chevauchement",
+   "ok": true,
+   "detail": "aucun texte superposé à un autre"
+  }
+ ],
+ "duree_video": 82.9,
+ "bande_son": {
+  "lufs": -14.559006238600015,
+  "true_peak": -3.0499999999999265,
+  "gain_db": 1.9727800370779178,
+  "max_gr_db": 2.242815568517455,
+  "ducking_db": -8.0,
+  "lufs_voix_seule": -16.5,
+  "duree": 82.9
+ },
+ "voix": {
+  "duree_prise": 86.42,
+  "duree_montee": 82.35,
+  "alignement": 0.947,
+  "tempo": 1.0
+ },
+ "fin": "2026-11-14 06:20:13",
+ "duree_fabrication_s": 905
+}
