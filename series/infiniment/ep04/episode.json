@@ -1,0 +1,548 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 4,
+ "slug": "soleil-bille",
+ "titre": "Si le Soleil était une bille",
+ "narration": "narration.txt",
+ "blocs": [
+  "hook",
+  "reduction",
+  "terre",
+  "neptune",
+  "proxima",
+  "calcul",
+  "voyager",
+  "retour",
+  "outro"
+ ],
+ "scenes": {
+  "hook": {
+   "type": "heros",
+   "ambiance": "mystere",
+   "couverture": [
+    "SI LE SOLEIL",
+    "ÉTAIT UNE *BILLE*"
+   ],
+   "titres": [
+    {
+     "quand": "etoile",
+     "lignes": [
+      "L'ÉTOILE LA PLUS PROCHE",
+      "*APRÈS LUI*"
+     ]
+    },
+    {
+     "quand": "290",
+     "lignes": [
+      "À ≈ *290 KM*"
+     ]
+    },
+    {
+     "quand": "aucune",
+     "lignes": [
+      "ENTRE LES DEUX :",
+      "*AUCUNE* AUTRE ÉTOILE"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "soleil",
+    "taille": 0.45
+   },
+   "objet_quand": "debut",
+   "infos": [
+    {
+     "quand": "debut",
+     "texte": "EXPÉRIENCE DE PENSÉE"
+    }
+   ],
+   "impacts": [
+    "290"
+   ]
+  },
+  "reduction": {
+   "type": "heros",
+   "ambiance": "emerveillement",
+   "expo": [
+    [
+     "debut",
+     9.14
+    ],
+    [
+     "bille",
+     -2.0
+    ]
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "ON COMMENCE *PETIT*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "soleil",
+    "taille": 0.8
+   },
+   "objet_quand": "debut",
+   "echelle": [
+    1.0,
+    0.45
+   ],
+   "chiffres": [
+    {
+     "quand": "14",
+     "valeur": 1.4,
+     "decimales": 1,
+     "prefixe": "≈ ",
+     "unite": "MILLION DE KM : *LE SOLEIL*",
+     "source": "SOURCE : NASA, OBS. DE PARIS",
+     "compter": false
+    },
+    {
+     "quand": "139",
+     "valeur": 139,
+     "decimales": 0,
+     "prefixe": "÷ ",
+     "unite": "MILLIARDS DE *FOIS*",
+     "compter": false
+    },
+    {
+     "quand": "bille",
+     "valeur": 1,
+     "decimales": 0,
+     "unite": "CM : *UNE BILLE*",
+     "compter": false
+    }
+   ]
+  },
+  "terre": {
+   "type": "heros",
+   "ambiance": "calme",
+   "expo": [
+    [
+     "debut",
+     -4.04
+    ],
+    [
+     "metre",
+     0.03
+    ]
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "LA *TERRE*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "terre",
+    "taille": 0.5,
+    "mention": "AGRANDI"
+   },
+   "objet_quand": "debut",
+   "infos": [
+    {
+     "quand": "debut",
+     "texte": "À L'ÉCHELLE DE LA BILLE"
+    }
+   ],
+   "chiffres": [
+    {
+     "quand": "dixieme",
+     "valeur": 0.0916,
+     "affichage": "< 0,1 MM",
+     "unite": "UN GRAIN DE *POUSSIÈRE*"
+    },
+    {
+     "quand": "metre",
+     "valeur": 1.075,
+     "affichage": "≈ 1 M",
+     "unite": "DE LA *BILLE*"
+    }
+   ]
+  },
+  "neptune": {
+   "type": "anneaux",
+   "ambiance": "emerveillement",
+   "expo": [
+    [
+     "debut",
+     1.51
+    ],
+    [
+     "65",
+     1.81
+    ]
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "ON *MONTE*"
+     ]
+    },
+    {
+     "quand": "toutes",
+     "lignes": [
+      "TOUTES LES PLANÈTES :",
+      "≈ *65 M* DE LARGE"
+     ]
+    }
+   ],
+   "centre": {
+    "texte": "BILLE",
+    "quand": "debut"
+   },
+   "anneaux": [
+    {
+     "quand": "neptune",
+     "rayon": 32.4,
+     "texte": "NEPTUNE ≈ 32 M",
+     "couleur": "bleu"
+    },
+    {
+     "quand": "neptune",
+     "rayon": 1.075,
+     "texte": "TERRE ≈ 1 M",
+     "couleur": "cyan"
+    }
+   ]
+  },
+  "proxima": {
+   "type": "heros",
+   "ambiance": "tension",
+   "expo": 16.6,
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "ET L'ÉTOILE",
+      "*SUIVANTE* ?"
+     ]
+    },
+    {
+     "quand": "proxima",
+     "lignes": [
+      "*PROXIMA*",
+      "DU CENTAURE"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "etoile",
+    "couleur": "corail",
+    "taille": 0.6
+   },
+   "objet_quand": "proxima",
+   "chiffres": [
+    {
+     "quand": "42",
+     "valeur": 4.2,
+     "decimales": 1,
+     "prefixe": "≈ ",
+     "unite": "*ANNÉES-LUMIÈRE*",
+     "source": "SOURCE : NASA, BRITANNICA",
+     "compter": false
+    },
+    {
+     "quand": "40000",
+     "valeur": 40150000000000.0,
+     "affichage": "≈ 40 000",
+     "unite": "MILLIARDS DE *KILOMÈTRES*"
+    }
+   ]
+  },
+  "calcul": {
+   "type": "heros",
+   "ambiance": "triomphe",
+   "expo": [
+    [
+     "290",
+     5.46
+    ]
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "À L'ÉCHELLE",
+      "DE LA *BILLE*"
+     ]
+    }
+   ],
+   "objets": [
+    {
+     "objet": {
+      "type": "soleil",
+      "taille": 0.25
+     },
+     "quand": "debut",
+     "dx": -250
+    },
+    {
+     "objet": {
+      "type": "etoile",
+      "couleur": "corail",
+      "taille": 0.2,
+      "mention": "PAS À L'ÉCHELLE"
+     },
+     "quand": "proxima",
+     "dx": 250
+    }
+   ],
+   "chiffres": [
+    {
+     "quand": "139",
+     "valeur": 139,
+     "decimales": 0,
+     "prefixe": "÷ ",
+     "unite": "MILLIARDS",
+     "compter": false
+    },
+    {
+     "quand": "290",
+     "valeur": 290,
+     "decimales": 0,
+     "prefixe": "≈ ",
+     "unite": "KM ENTRE LA BILLE ET *PROXIMA*",
+     "compter": true
+    }
+   ],
+   "impacts": [
+    "290"
+   ]
+  },
+  "voyager": {
+   "type": "heros",
+   "ambiance": "emerveillement",
+   "expo": [
+    [
+     "voyager",
+     13.41
+    ],
+    [
+     "190",
+     2.27
+    ]
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "JUSQU'OÙ SOMMES-NOUS",
+      "*ALLÉS* ?"
+     ]
+    },
+    {
+     "quand": "voyager",
+     "lignes": [
+      "*VOYAGER 1*",
+      "LANCÉE EN 1977"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "icone",
+    "nom": "MdSatelliteAlt",
+    "taille": 0.5
+   },
+   "objet_quand": "voyager",
+   "chiffres": [
+    {
+     "quand": "jourlumiere",
+     "valeur": 1,
+     "decimales": 0,
+     "unite": "JOUR-LUMIÈRE DE LA TERRE · *NOV. 2026*",
+     "compter": false
+    },
+    {
+     "quand": "26",
+     "valeur": 26,
+     "decimales": 0,
+     "prefixe": "≈ ",
+     "unite": "MILLIARDS DE KM",
+     "source": "SOURCE : NASA",
+     "compter": false
+    },
+    {
+     "quand": "190",
+     "valeur": 186,
+     "affichage": "≈ 190 M",
+     "unite": "À L'ÉCHELLE DE LA *BILLE*"
+    }
+   ]
+  },
+  "retour": {
+   "type": "heros",
+   "ambiance": "tension",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "ET JUSQU'À",
+      "*PROXIMA* ?"
+     ]
+    },
+    {
+     "quand": "cote",
+     "lignes": [
+      "L'ÉTOILE",
+      "*D'À CÔTÉ*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "icone",
+    "nom": "MdSatelliteAlt",
+    "taille": 0.35
+   },
+   "objet_quand": "debut",
+   "chiffres": [
+    {
+     "quand": "61000",
+     "valeur": 61000,
+     "affichage": "≈ 61 000",
+     "unite": "KM/H : VITESSE DE *VOYAGER 1*"
+    },
+    {
+     "quand": "70000",
+     "valeur": 75085,
+     "affichage": "> 70 000",
+     "unite": "ANS POUR LA DISTANCE DE *PROXIMA*"
+    }
+   ],
+   "impacts": [
+    "70000"
+   ]
+  },
+  "outro": {
+   "type": "fin",
+   "ambiance": "triomphe",
+   "prochain": [
+    "UN *NEUTRINO*",
+    "TRAVERSE LA TERRE ?"
+   ],
+   "quand": "neutrino",
+   "sources_quand": "sources",
+   "objet": {
+    "type": "terre"
+   }
+  }
+ },
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ },
+ "sources": [
+  {
+   "editeur": "NASA (NSSDC)",
+   "titre": "Sun Fact Sheet",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html?level=1",
+   "extraits": [
+    "Volumetric mean radius (km) 695,700."
+   ],
+   "sert_a": "rayon du Soleil 695 700 km → diamètre ≈ 1,4 million de km (fait central)"
+  },
+  {
+   "editeur": "Observatoire de Paris (An Etymological Dictionary of Astronomy and Astrophysics)",
+   "titre": "solar radius",
+   "url": "https://dictionary.obspm.fr/terms/solar-radius/",
+   "extraits": [
+    "It is equivalent to: 695,700 km, 0.00465047 astronomical units, 7.35355 × 10-8 light-years, and 2.32061 light-seconds."
+   ],
+   "sert_a": "rayon du Soleil 695 700 km (2e éditeur, fait central)"
+  },
+  {
+   "editeur": "NASA Science",
+   "titre": "Voyager 1: What Is a Light-Day?",
+   "url": "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/",
+   "extraits": [
+    "is about 4.24 light-years away (or, about 24.95 trillion miles, or 40.15 trillion kilometers).",
+    "will soon cross a mile marker reached by no other human-made object — one light-day away from Earth.",
+    "a point that Voyager 1 will reach on Wednesday, Nov. 18, 2026, at 5:16:07 a.m. EST.",
+    "A light-day is the distance that light will travel in 24 hours, or 16,094,799,096 miles (25,902,068,356 kilometers).",
+    "from its launch on Sept. 5, 1977",
+    "is cruising at nearly 38,000 mph (61,000 kph) through the vacuum of space"
+   ],
+   "sert_a": "distance de Proxima 4,24 al = 40,15 × 10¹² km (fait central) ; Voyager 1 : 1 jour-lumière le 18/11/2026, ≈ 25,9 milliards de km, lancée en 1977, ≈ 61 000 km/h, aucun autre objet humain aussi loin"
+  },
+  {
+   "editeur": "Encyclopædia Britannica",
+   "titre": "Alpha Centauri",
+   "url": "https://www.britannica.com/place/Alpha-Centauri",
+   "extraits": [
+    "Proxima Centauri, is the closest star to the Sun, about 4.2 light-years distant."
+   ],
+   "sert_a": "Proxima du Centaure, étoile la plus proche du Soleil, ≈ 4,2 al (2e éditeur, fait central)"
+  },
+  {
+   "editeur": "StarDate (McDonald Observatory, University of Texas)",
+   "titre": "What is the nearest star?",
+   "url": "https://stardate.org/faq/what-is-the-nearest-star",
+   "extraits": [
+    "At a distance of just over four light-years, the three members of Alpha Centauri, including Proxima Centauri, are the nearest stars to Earth."
+   ],
+   "sert_a": "confirmation : Proxima est parmi les étoiles les plus proches, à un peu plus de 4 al (3e éditeur)"
+  },
+  {
+   "editeur": "NASA (NSSDC)",
+   "titre": "Earth Fact Sheet",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1",
+   "extraits": [
+    "Volumetric mean radius (km) 6371.000",
+    "Semimajor axis (10^6 km) 149.598"
+   ],
+   "sert_a": "diamètre de la Terre 12 742 km ; distance Terre-Soleil 149,6 millions de km"
+  },
+  {
+   "editeur": "NASA (NSSDC)",
+   "titre": "Neptune Fact Sheet",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html",
+   "extraits": [
+    "Semimajor axis (10^6 km) 4,514.953",
+    "Aphelion (10^6 km) 4,558.857"
+   ],
+   "sert_a": "distance de Neptune au Soleil ≈ 4,5 milliards de km (32 m à l'échelle ; cercle des orbites ≈ 65 m)"
+  },
+  {
+   "editeur": "EarthSky",
+   "titre": "Voyager 1 reaches 1 light-day from Earth November 17-18, 2026",
+   "url": "https://earthsky.org/space/voyager-1-1-light-day-from-earth-november-17-18-2026/",
+   "extraits": [
+    "at 4:16:07 a.m. CST (10:16:07 UTC) on November 18, 2026, Voyager 1 will reach a major milestone",
+    "equal to about 16.1 billion miles (25.9 billion kilometers)",
+    "It launched into space on September 5, 1977"
+   ],
+   "sert_a": "Voyager 1 à 1 jour-lumière en novembre 2026 (2e éditeur), ≈ 25,9 milliards de km, lancée en 1977"
+  },
+  {
+   "editeur": "NASA Science",
+   "titre": "Voyager 1 Now Most Distant Human-Made Object in Space",
+   "url": "https://science.nasa.gov/missions/voyager-program/voyager-1-now-most-distant-human-made-object-in-space/",
+   "extraits": [
+    "become the most distant human-created object in space at 10.4 billion kilometers (6.5 billion miles.)"
+   ],
+   "sert_a": "Voyager 1 objet humain le plus lointain (depuis 1998)"
+  }
+ ],
+ "calcul": "Diamètre du Soleil : 2 × 695 700 km = 1 391 400 km (« environ 1,4 million de km »). Bille de 1 cm = 10⁻⁵ km : facteur de réduction 1 391 400 / 10⁻⁵ = 1,3914 × 10¹¹ (« 139 milliards de fois »). Proxima : 40,15 × 10¹² km (NASA, 4,24 al) / 1,3914 × 10¹¹ = 288,6 km ; avec 4,2 al × 9,4607 × 10¹² km = 3,974 × 10¹³ km → 285,6 km : dans les deux cas « environ 290 km ». « Environ 40 000 milliards de km » = 4 × 10¹³ (40,15 × 10¹² NASA). Calcul dit : 40 000 milliards / 139 milliards = 287,8 → « environ 290 ». Terre : diamètre 2 × 6 371 = 12 742 km / 1,3914 × 10¹¹ = 9,16 × 10⁻⁸ km = 0,0916 mm (« moins d'un dixième de millimètre »). Distance Terre-Soleil 149,598 × 10⁶ km / 1,3914 × 10¹¹ = 1,075 m (« environ 1 mètre »). Neptune : 4 514,953 × 10⁶ km / 1,3914 × 10¹¹ = 32,4 m (« environ 32 mètres ») ; aphélie 4 558,857 × 10⁶ km → 32,8 m, diamètre du cercle 65,5 m (« environ 65 mètres de large »). Voyager 1 : 1 jour-lumière = 25 902 068 356 km (« environ 26 milliards ») / 1,3914 × 10¹¹ = 186 m (« environ 190 mètres »). Durée : 40,15 × 10¹² km / 61 000 km/h = 6,58 × 10⁸ h = 75 085 ans (à 8 766 h par an) ; « nearly 38,000 mph » = un peu moins de 61 000 km/h → durée un peu plus longue : « plus de 70 000 ans » (la distance restante 40,15 × 10¹² − 0,026 × 10¹² km ne change pas le résultat ; Voyager 1 ne va pas vers Proxima : on parle de parcourir une distance égale). Règle : Soleil 1,39 × 10⁹ m (expo 9,14 → 10⁹) ; bille 10⁻² m (expo -2) ; grain Terre 9,2 × 10⁻⁵ m (expo -4,04 → 10⁻⁴) ; 1,075 m (expo 0,03 → 10⁰) ; 32,4 m (expo 1,51 → 10¹) ; 65 m (expo 1,81 → 10²) ; Proxima réelle 4,015 × 10¹⁶ m (expo 16,6 → 10¹⁶) ; 290 km = 2,9 × 10⁵ m (expo 5,46 → 10⁵) ; Voyager réelle 2,59 × 10¹³ m (expo 13,41 → 10¹³) ; 186 m (expo 2,27 → 10²). Prochain épisode (2 sources) : NASA « They travel at almost the speed of light and rarely interact with other matter. » (https://science.nasa.gov/universe/stories/quick-reads/youre-always-surrounded-by-neutrinos/) ; IceCube « famous for passing through anything and everything, only very rarely interacting with matter » et « the Earth stops very energetic neutrinos—they do not go through everything » (https://icecube.wisc.edu/news/view/546) : la question a une réponse nuancée, à traiter comme telle.",
+ "images": "Le Soleil est dessiné comme une bille (expérience de pensée, mention « EXPÉRIENCE DE PENSÉE »). La Terre de la scène « terre » est agrandie (mention « AGRANDI ») : à l'échelle de la bille elle serait invisible. La scène « neptune » dessine à l'échelle les orbites de la Terre (1,075) et de Neptune (32,4) autour de la bille (orbites représentées comme des cercles). Proxima est dessinée en étoile corail (naine rouge) ; dans la scène « calcul », la bille et Proxima côte à côte ne sont ni à l'échelle des tailles ni des distances (mention « PAS À L'ÉCHELLE » sous Proxima). Voyager 1 est représentée par un pictogramme générique de satellite (pas sa forme réelle). Règle des puissances de dix : scènes « reduction » (fin), « terre », « neptune », « calcul » et « voyager » (fin) montrent les tailles à l'échelle de la bille (mention « À L'ÉCHELLE DE LA BILLE » quand c'est le cas) ; « reduction » (début), « proxima » et « voyager » (début) les tailles réelles.",
+ "publication": {
+  "titre": "Si le Soleil était une bille",
+  "legende": "Si le Soleil était une bille de 1 centimètre, l'étoile la plus proche après lui serait à environ 290 kilomètres. INFINIMENT, épisode 4.\nSources : NASA (fiches Soleil, Terre, Neptune ; Voyager 1), Observatoire de Paris (rayon solaire), Britannica et StarDate (Proxima du Centaure), EarthSky (Voyager 1).\n#infiniment #science #espace #astronomie #soleil #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#infiniment",
+   "#science",
+   "#espace",
+   "#astronomie",
+   "#soleil",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ],
+  "contenu_ia": false
+ },
+ "prochain": "Un neutrino peut-il traverser la Terre sans rien toucher ? (épisode 5, vers le petit)"
+}

@@ -78,8 +78,27 @@
    "publication": "2026-11-16T18:00:00+01:00",
    "metricool_id": "419712956",
    "metricool_uuid": "-8961907349531573121"
+  },
+  {
+   "numero": 4,
+   "slug": "soleil-bille",
+   "titre": "Si le Soleil était une bille",
+   "dossier": "series/infiniment/ep04",
+   "sources": [
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html?level=1",
+    "https://dictionary.obspm.fr/terms/solar-radius/",
+    "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/",
+    "https://www.britannica.com/place/Alpha-Centauri",
+    "https://stardate.org/faq/what-is-the-nearest-star",
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1",
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html",
+    "https://earthsky.org/space/voyager-1-1-light-day-from-earth-november-17-18-2026/",
+    "https://science.nasa.gov/missions/voyager-program/voyager-1-now-most-distant-human-made-object-in-space/"
+   ],
+   "prochain": "Un neutrino peut-il traverser la Terre sans rien toucher ? (épisode 5, vers le petit)",
+   "statut": "en attente de voix"
   }
  ],
- "dernier_numero": 3,
- "prochain_sujet": "Si le Soleil était une bille, où serait l'étoile la plus proche après lui ? (épisode 4, vers le grand)"
+ "dernier_numero": 4,
+ "prochain_sujet": "Un neutrino peut-il traverser la Terre sans rien toucher ? (épisode 5, vers le petit)"
 }

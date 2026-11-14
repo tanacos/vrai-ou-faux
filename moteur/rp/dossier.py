@@ -27,7 +27,13 @@ def lignes_scene(s):
     for i in s.get("infos", []):
         out.append(f"info (sur « {i.get('quand', 'debut')} ») : {i['texte']}")
     for ch in s.get("chiffres", []) + ([s["chiffre"]] if s.get("chiffre") else []):
-        out.append(f"chiffre : {ch.get('prefixe', '')}{ch['valeur']}{ch.get('suffixe', '')} — {ch.get('unite', '')} "
+        if ch.get("affichage"):
+            montre = f"{ch['affichage']} (texte fixe affiché ; valeur exacte du calcul : {ch['valeur']})"
+        else:
+            v = ch["valeur"]
+            d = ch.get("decimales", 0)
+            montre = f"{ch.get('prefixe', '')}{v:,.{d}f}".replace(",", " ").replace(".", ",") + ch.get("suffixe", "")
+        out.append(f"chiffre (sur « {ch.get('quand', 'debut')} ») : {montre} — {ch.get('unite', '')} "
                    f"(source affichée : {ch.get('source', '—')})")
     if s.get("objet"):
         out.append(f"objet dessiné : {json.dumps(s['objet'], ensure_ascii=False)}")
