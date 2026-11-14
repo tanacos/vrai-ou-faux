@@ -77,7 +77,7 @@
     {
      "quand": "debut",
      "lignes": [
-      "ON COMMENCE *PETIT*"
+      "LE *SOLEIL*"
      ]
     }
    ],
@@ -290,7 +290,7 @@
       "taille": 0.2,
       "mention": "PAS À L'ÉCHELLE"
      },
-     "quand": "proxima",
+     "quand": "kilometres",
      "dx": 60
     }
    ],
@@ -385,13 +385,6 @@
      "lignes": [
       "ET JUSQU'À",
       "*PROXIMA* ?"
-     ]
-    },
-    {
-     "quand": "cote",
-     "lignes": [
-      "L'ÉTOILE",
-      "*D'À CÔTÉ*"
      ]
     }
    ],
@@ -544,5 +537,23 @@
   ],
   "contenu_ia": false
  },
- "prochain": "Un neutrino peut-il traverser la Terre sans rien toucher ? (épisode 5, vers le petit)"
+ "prochain": "Un neutrino peut-il traverser la Terre sans rien toucher ? (épisode 5, vers le petit)",
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0",
+  "respirations": {
+   "hook": 0.9,
+   "calcul": 1.0,
+   "voyager": 1.0,
+   "retour": 1.2
+  }
+ }
 }
