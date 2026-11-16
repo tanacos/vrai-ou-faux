@@ -6,9 +6,15 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 12 — la langue française** : idée 1 imposée « Le mot oignon peut aussi s'écrire sans i. » (vrai présumé :
-  graphie « ognon » des rectifications de 1990 ; sources repérées : OQLF (Vitrine linguistique, fiche « oignon »),
-  ministère de la Culture (DGLFLF, Langues et cité n° 7)). Voir les pistes « La langue française » ci-dessous.
+- **Épisode 13 — la mer** : idée 1 imposée « La mer est salée à cause des rivières. » (en grande partie vrai : le sel
+  vient surtout des roches terrestres, apporté par les rivières ; NOAA oceanservice « riversnotsalty » et USGS FAQ
+  « Why is the ocean salty? » repérés ; à formuler avec nuance, ex. sources hydrothermales à vérifier).
+
+## Déjà traité (épisode 12, la langue française)
+
+- ~~ognon sans i~~ (VRAI), ~~« après que » + subjonctif~~ (FAUX), ~~hibou prend un x~~ (VRAI), ~~la réforme de
+  1990 a supprimé l'accent circonflexe~~ (FAUX). Écarté : amour, délice et orgue féminins au pluriel (« souvent »,
+  « généralement » selon l'Académie : pas de verdict net). Reste possible : « au jour d'aujourd'hui » (nuance).
 
 ## Déjà traité (épisode 11, les petites bêtes)
 
