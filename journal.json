@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 11,
- "prochaine_affirmation": "« Le mot oignon peut aussi s'écrire sans i. »",
+ "dernier_numero": 12,
+ "prochaine_affirmation": "« La mer est salée à cause des rivières. »",
  "episodes": [
   {
    "numero": 1,
@@ -501,6 +501,49 @@
    "publication": "2026-11-18T18:00:00+01:00",
    "metricool_id": "425308843",
    "metricool_uuid": "1414454715735491066"
+  },
+  {
+   "numero": 12,
+   "slug": "langue",
+   "titre": "4 IDÉES REÇUES SUR LE FRANÇAIS",
+   "theme": "la langue française",
+   "idees": [
+    {
+     "affirmation": "« Le mot oignon peut aussi s'écrire sans i. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://dictionnaire-academie.fr/article/A9O0302",
+      "https://vitrinelinguistique.oqlf.gouv.qc.ca/23175/lorthographe/rectifications-de-lorthographe/rectifications-liees-aux-anomalies/rectifications-liees-a-la-suppression-danomalies"
+     ]
+    },
+    {
+     "affirmation": "« Après « après que », on met le subjonctif. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://dictionnaire-academie.fr/article/A9A2289",
+      "https://vitrinelinguistique.oqlf.gouv.qc.ca/21132/la-grammaire/le-verbe/modes/concordance-des-temps/mode-verbal-avec-apres-que-et-avant-que"
+     ]
+    },
+    {
+     "affirmation": "« Au pluriel, hibou prend un x. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://vitrinelinguistique.oqlf.gouv.qc.ca/22605/la-grammaire/le-nom/pluriel-des-noms/pluriel-en-x/pluriel-des-noms-en-8209ou",
+      "https://dictionnaire-academie.fr/article/DNP1161"
+     ]
+    },
+    {
+     "affirmation": "« La réforme de 1990 a supprimé l'accent circonflexe. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.dictionnaire-academie.fr/annexes/rectifications-orthographe.html",
+      "https://vitrinelinguistique.oqlf.gouv.qc.ca/index.php?id=23166",
+      "https://www.culture.gouv.fr/content/download/93529/file/lc_7_nouvelle_orthographe_def.pdf"
+     ]
+    }
+   ],
+   "prochain": "« La mer est salée à cause des rivières. »",
+   "statut": "fabriqué"
   }
  ]
 }
