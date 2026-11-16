@@ -1,0 +1,221 @@
+{
+ "numero": 12,
+ "slug": "langue",
+ "theme": "la langue française",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LE FRANÇAIS"
+ ],
+ "fond": "aurore",
+ "ambiance": "ville",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur la langue française.",
+ "idees": [
+  {
+   "affirmation": "« Le mot oignon peut aussi s'écrire sans i. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:book-open-text",
+    "marque": "coche",
+    "fond": "aurore"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Depuis 1990",
+     "texte": "« Ognon » sans i est une orthographe admise.",
+     "voix": "Depuis 1990, ognon, sans i, est une orthographe admise."
+    },
+    {
+     "type": "texte",
+     "titre": "La logique",
+     "texte": "« Ognon » s'écrit comme « pognon ».",
+     "voix": "Ognon s'écrit comme pognon."
+    },
+    {
+     "type": "texte",
+     "titre": "Et « oignon » ?",
+     "texte": "Toujours correct : les deux sont admises.",
+     "voix": "Et oignon ? Toujours correct : les deux orthographes sont admises."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Académie française",
+     "titre": "Dictionnaire de l'Académie française, 9e édition : oignon",
+     "url": "https://dictionnaire-academie.fr/article/A9O0302",
+     "extrait": "Peut s'écrire ognon, selon les rectifications orthographiques de 1990."
+    },
+    {
+     "editeur": "Office québécois de la langue française",
+     "titre": "Rectifications liées à la suppression d'anomalies",
+     "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23175/lorthographe/rectifications-de-lorthographe/rectifications-liees-aux-anomalies/rectifications-liees-a-la-suppression-danomalies",
+     "extrait": "ognon s'écrit comme pognon. […] L'Office québécois de la langue française considère comme correctes les graphies traditionnelles et les graphies rectifiées."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Après « après que », on met le subjonctif. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:chat-text",
+    "marque": "barre",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "La règle",
+     "texte": "« Après que » veut l'indicatif.",
+     "voix": "La règle : après que se construit avec l'indicatif."
+    },
+    {
+     "type": "texte",
+     "titre": "On écrit donc",
+     "texte": "« Après qu'ils sont arrivés »",
+     "voix": "On écrit donc : après qu'ils sont arrivés. Le subjonctif, ici, est critiqué."
+    },
+    {
+     "type": "texte",
+     "titre": "Le piège : « avant que »",
+     "texte": "Lui demande le subjonctif.",
+     "voix": "Le piège : avant que, lui, demande le subjonctif."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Académie française",
+     "titre": "Dictionnaire de l'Académie française, 9e édition : après",
+     "url": "https://dictionnaire-academie.fr/article/A9A2289",
+     "extrait": "Après que, suivi de l'indicatif ou du conditionnel, mais non du subjonctif."
+    },
+    {
+     "editeur": "Office québécois de la langue française",
+     "titre": "Mode verbal avec après que et avant que",
+     "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/21132/la-grammaire/le-verbe/modes/concordance-des-temps/mode-verbal-avec-apres-que-et-avant-que",
+     "extrait": "Après qu'ils sont arrivés, ils vont saluer ma tante. […] La construction d'une phrase comportant le subordonnant après que avec le mode subjonctif est critiquée […] avant que […] qui, elles, demandent le subjonctif"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Au pluriel, hibou prend un x. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:owl",
+    "marque": "coche",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "La règle",
+     "texte": "Les noms en -ou prennent un s : des clous, des voyous.",
+     "voix": "La règle : les noms en o-u prennent un s. Des clous, des voyous."
+    },
+    {
+     "type": "chiffre",
+     "titre": "Mais il y a",
+     "valeur": 7,
+     "suffixe": " exceptions",
+     "legende": "qui prennent un x au pluriel",
+     "voix": "Mais il y a sept exceptions, qui prennent un x au pluriel."
+    },
+    {
+     "type": "texte",
+     "titre": "Les 7 exceptions",
+     "texte": "Bijou, caillou, chou, genou, hibou, joujou et pou.",
+     "voix": "Bijou, caillou, chou, genou, hibou, joujou et pou."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Office québécois de la langue française",
+     "titre": "Pluriel des noms en -ou",
+     "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/22605/la-grammaire/le-nom/pluriel-des-noms/pluriel-en-x/pluriel-des-noms-en-8209ou",
+     "extrait": "Les noms qui se terminent en ‑ou prennent un s au pluriel. […] Sept noms font exception à la règle et forment leur pluriel en -oux plutôt qu'en -ous. Il s'agit de bijou, caillou, chou, genou, hibou, joujou et pou."
+    },
+    {
+     "editeur": "Académie française",
+     "titre": "Dire, ne pas dire : Orignaux et gavials",
+     "url": "https://dictionnaire-academie.fr/article/DNP1161",
+     "extrait": "sept comme les noms en ‑ou qui prennent un x au pluriel (bijou, caillou, chou, genou, hibou, joujou et pou)"
+    }
+   ]
+  },
+  {
+   "affirmation": "« La réforme de 1990 a supprimé l'accent circonflexe. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:text-aa",
+    "marque": "barre",
+    "fond": "aurore"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Sur a, e et o",
+     "texte": "L'accent circonflexe est conservé.",
+     "voix": "Sur a, e et o, l'accent circonflexe est conservé."
+    },
+    {
+     "type": "texte",
+     "titre": "Sur i et u",
+     "texte": "Il n'est plus obligatoire.",
+     "voix": "Sur i et u, il n'est plus obligatoire."
+    },
+    {
+     "type": "texte",
+     "titre": "Sauf exceptions",
+     "texte": "Comme « dû » ou « sûr ».",
+     "voix": "Sauf exceptions, comme dû ou sûr."
+    },
+    {
+     "type": "texte",
+     "titre": "Et l'ancienne orthographe ?",
+     "texte": "Elle reste admise.",
+     "voix": "Et l'ancienne orthographe ? Elle reste admise."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Académie française",
+     "titre": "Les rectifications de l'orthographe",
+     "url": "https://www.dictionnaire-academie.fr/annexes/rectifications-orthographe.html",
+     "extrait": "On conserve l'accent circonflexe sur a, e, et o […] sur i et sur u il n'est plus obligatoire […] Dans les mots où il apporte une distinction de sens utile : dû, jeûne"
+    },
+    {
+     "editeur": "Office québécois de la langue française",
+     "titre": "Rectifications liées aux accents circonflexes",
+     "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/index.php?id=23166",
+     "extrait": "l'accent circonflexe disparait sur les lettres i et u […] sauf lorsqu'il a une fonction distinctive ou dans les terminaisons verbales […] dans les masculins singuliers dû, mûr et sûr"
+    },
+    {
+     "editeur": "Ministère de la Culture (DGLFLF)",
+     "titre": "Langues et cité n° 7 : Les rectifications orthographiques",
+     "url": "https://www.culture.gouv.fr/content/download/93529/file/lc_7_nouvelle_orthographe_def.pdf",
+     "extrait": "Ainsi les anciennes graphies restent admises à côté des nouvelles. […] aucune des deux graphies ne peut être tenue pour fautive"
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "Académie française · Office québécois de la langue française · Ministère de la Culture (DGLFLF)",
+ "prochain": {
+  "affirmation": "« La mer est salée à cause des rivières. »"
+ },
+ "voix_score": "Alors, ton score ?",
+ "voix_prochain": "Prochain épisode : la mer est salée à cause des rivières.",
+ "publication": {
+  "legende": "Vrai ou faux ? 📚 4 idées reçues sur la langue française. Dis ton score en commentaire 👇\n#vraioufaux #francais #orthographe #langagefrancais #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#francais",
+   "#orthographe",
+   "#langagefrancais",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ }
+}
