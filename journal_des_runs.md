@@ -5,7 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
-| 2026-11-19 06:09 | normal | démarré |
+| 2026-11-19 06:09 | normal | programmé : épisode 13 (la mer), mercredi 25/11 à 18:00, Metricool 433801224 (sans voix : alignement de la prise à 89,6 % < 90 %) |
 | 2026-11-16 06:09 | normal | programmé : épisode 12 (la langue française), samedi 21/11 à 18:00, Metricool 429630158 (sans voix : alignement de la prise à 89 % < 90 %) |
 | 2026-11-12 06:08 | normal | programmé : épisode 11 (les petites bêtes), mercredi 18/11 à 18:00, Metricool 425308843 |
 | 2026-11-09 06:09 | normal | programmé : épisode 10 (la météo), samedi 14/11 à 18:00, Metricool 421394214 |

@@ -591,8 +591,11 @@
     }
    ],
    "prochain": "« Il faut vider la batterie de son téléphone avant de la recharger. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/f139eb95235263227fe7a4f6a8ae69dfc6da3834/vrai_ou_faux_13_mer.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/f139eb95235263227fe7a4f6a8ae69dfc6da3834/vrai_ou_faux_13_mer.mp4",
+   "publication": "2026-11-25T18:00:00+01:00",
+   "metricool_id": "433801224",
+   "metricool_uuid=-8841381110956930082": "--video"
   }
  ]
 }

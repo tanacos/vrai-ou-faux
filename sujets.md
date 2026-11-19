@@ -6,9 +6,16 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 13 — la mer** : idée 1 imposée « La mer est salée à cause des rivières. » (en grande partie vrai : le sel
-  vient surtout des roches terrestres, apporté par les rivières ; NOAA oceanservice « riversnotsalty » et USGS FAQ
-  « Why is the ocean salty? » repérés ; à formuler avec nuance, ex. sources hydrothermales à vérifier).
+- **Épisode 14 — la technologie** : idée 1 imposée « Il faut vider la batterie de son téléphone avant de la
+  recharger. » (FAUX présumé ; CSIRO « power up our battery advice » et Popular Science « 4 battery myths » repérés :
+  pas d'effet mémoire sur le lithium-ion, la décharge profonde l'use). Éviter les marques.
+
+## Déjà traité (épisode 13, la mer)
+
+- ~~mer salée à cause des rivières~~ (VRAI, nuance : sources du fond marin), ~~Pacifique plus grand que toutes les
+  terres~~ (VRAI), ~~les requins doivent nager sans arrêt pour respirer~~ (FAUX), ~~l'eau de mer gèle à 0 °C~~
+  (FAUX). Restent possibles : fonds marins moins connus que la Lune (à formuler avec soin), mer bleue parce qu'elle
+  reflète le ciel (nuance).
 
 ## Déjà traité (épisode 12, la langue française)
 
@@ -77,7 +84,7 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
   porte des dizaines de fois son poids (vrai présumé) ; les moustiques préfèrent certaines personnes (vrai présumé).
 - **La météo** : la foudre… déjà faite ; un arc-en-ciel est en fait un cercle (vrai présumé) ; il peut faire trop
   froid pour neiger (faux présumé) ; le soleil d'hiver ne brûle pas la peau (faux).
-- **Le sport** : les abdos font fondre le ventre (faux) ; s'étirer avant le sport évite les blessures (nuance) ;
+- **Le sport** : les abdos font fondre le ventre (écarté le 19/11 : une étude récente conteste le « mythe », pas de verdict net) ; s'étirer avant le sport évite les blessures (nuance) ;
   « on ne se muscle que si on a mal » (faux).
 - **La langue française** : « ognon » s'écrit sans i (vrai, rectifications de 1990) ; « après que » se construit avec
   le subjonctif (faux) ; « au jour d'aujourd'hui » est une faute (nuance).
