@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 12,
- "prochaine_affirmation": "« La mer est salée à cause des rivières. »",
+ "dernier_numero": 13,
+ "prochaine_affirmation": "« Il faut vider la batterie de son téléphone avant de la recharger. »",
  "episodes": [
   {
    "numero": 1,
@@ -548,6 +548,50 @@
    "publication": "2026-11-21T18:00:00+01:00",
    "metricool_id": "429630158",
    "metricool_uuid": "-3307994680349734570"
+  },
+  {
+   "numero": 13,
+   "slug": "mer",
+   "titre": "4 IDÉES REÇUES SUR LA MER",
+   "theme": "la mer",
+   "idees": [
+    {
+     "affirmation": "« La mer est salée à cause des rivières. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.usgs.gov/faqs/why-ocean-salty",
+      "https://oceanservice.noaa.gov/facts/riversnotsalty.html",
+      "https://www.whoi.edu/ocean-learning-hub/ocean-facts/what-makes-the-ocean-salty/"
+     ]
+    },
+    {
+     "affirmation": "« Le Pacifique est plus grand que toutes les terres émergées réunies. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://oceanexplorer.noaa.gov/facts/pacific-size.html",
+      "https://www.britannica.com/summary/Pacific-Ocean"
+     ]
+    },
+    {
+     "affirmation": "« Les requins doivent nager sans arrêt pour respirer. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.britannica.com/story/do-sharks-really-die-if-they-stop-swimming",
+      "https://www.neaq.org/fun-facts-about-nurse-sharks/",
+      "https://www.britannica.com/animal/nurse-shark-family"
+     ]
+    },
+    {
+     "affirmation": "« L'eau de mer gèle à 0 °C. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://oceanservice.noaa.gov/facts/oceanfreeze.html",
+      "https://www.metoffice.gov.uk/research/climate/cryosphere-oceans/sea-ice/overview"
+     ]
+    }
+   ],
+   "prochain": "« Il faut vider la batterie de son téléphone avant de la recharger. »",
+   "statut": "fabriqué"
   }
  ]
 }

@@ -1,0 +1,246 @@
+{
+ "numero": 13,
+ "slug": "mer",
+ "theme": "la mer",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LA MER"
+ ],
+ "fond": "ocean",
+ "ambiance": "ocean",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur la mer.",
+ "idees": [
+  {
+   "affirmation": "« La mer est salée à cause des rivières. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "gi:river",
+    "satellites": [
+     "gi:salt-shaker",
+     "pi:mountains"
+    ],
+    "marque": "coche",
+    "fond": "ocean"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Au départ : les roches",
+     "texte": "La pluie use les roches et dissout leurs sels.",
+     "voix": "Au départ, il y a les roches : la pluie les use et dissout leurs sels."
+    },
+    {
+     "type": "texte",
+     "titre": "Ensuite : les rivières",
+     "texte": "Elles apportent ces sels jusqu'à la mer.",
+     "voix": "Ensuite, les rivières apportent ces sels jusqu'à la mer."
+    },
+    {
+     "type": "chiffre",
+     "titre": "Chaque année, les rivières apportent environ",
+     "valeur": 4,
+     "suffixe": " milliards",
+     "legende": "de tonnes de sels dissous à l'océan",
+     "voix": "Chaque année, les rivières apportent environ quatre milliards de tonnes de sels dissous à l'océan."
+    },
+    {
+     "type": "texte",
+     "titre": "Petite nuance",
+     "texte": "Des sources chaudes au fond de la mer en ajoutent aussi.",
+     "voix": "Petite nuance : des sources chaudes, au fond de la mer, en ajoutent aussi."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "USGS",
+     "titre": "Why is the ocean salty?",
+     "url": "https://www.usgs.gov/faqs/why-ocean-salty",
+     "extrait": "Salt in the ocean comes from rocks on land. […] The rain physically erodes the rock and the acids chemically break down the rocks […] The ions in the runoff are carried to the streams and rivers and then to the ocean."
+    },
+    {
+     "editeur": "NOAA",
+     "titre": "Why is the ocean salty but rivers flowing into it are not?",
+     "url": "https://oceanservice.noaa.gov/facts/riversnotsalty.html",
+     "extrait": "Throughout the world, rivers carry an estimated four billion tons of dissolved salts to the ocean annually."
+    },
+    {
+     "editeur": "Woods Hole Oceanographic Institution",
+     "titre": "What makes the ocean salty?",
+     "url": "https://www.whoi.edu/ocean-learning-hub/ocean-facts/what-makes-the-ocean-salty/",
+     "extrait": "When rain falls onto rock, the acid dissolves tiny bits of salts and minerals. […] When freshwater flows into the ocean, it carries salts and minerals with it. […] More salts and minerals are added from seafloor vents. Hot water dissolves salts and minerals from the rock."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Le Pacifique est plus grand que toutes les terres émergées réunies. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:globe-hemisphere-west",
+    "satellites": [
+     "pi:waves",
+     "pi:mountains"
+    ],
+    "marque": "coche",
+    "fond": "ocean"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Plus de 155 millions de km²",
+     "texte": "C'est le plus grand océan du monde.",
+     "voix": "Plus de cent cinquante-cinq millions de kilomètres carrés : c'est le plus grand océan du monde."
+    },
+    {
+     "type": "texte",
+     "titre": "Soit",
+     "texte": "Plus de 30 % de la surface de la Terre.",
+     "voix": "Soit plus de trente pour cent de la surface de la Terre."
+    },
+    {
+     "type": "texte",
+     "titre": "Verdict",
+     "texte": "Il est plus vaste que tous les continents réunis.",
+     "voix": "Il est donc plus vaste que tous les continents réunis."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "NOAA Ocean Exploration",
+     "titre": "How big is the Pacific Ocean?",
+     "url": "https://oceanexplorer.noaa.gov/facts/pacific-size.html",
+     "extrait": "Covering more than 30 percent of the Earth's surface, the Pacific Ocean is the largest water mass on the planet. […] With a surface area of more than 155 million square kilometers (60 million square miles) […] this ocean basin is larger than the landmass of all the continents combined."
+    },
+    {
+     "editeur": "Britannica",
+     "titre": "Pacific Ocean summary",
+     "url": "https://www.britannica.com/summary/Pacific-Ocean",
+     "extrait": "It occupies about one-third of the surface of the earth and is by far the largest of the world's oceans. […] twice that of the Atlantic Ocean and more than the whole land area of the globe"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Les requins doivent nager sans arrêt pour respirer. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "duel",
+    "gauche": {
+     "icone": "gi:shark-fin",
+     "libelle": "Requin blanc"
+    },
+    "droite": {
+     "icone": "gi:shark-fin",
+     "libelle": "Requin-nourrice"
+    },
+    "signe": "≠",
+    "gagnant": "aucun",
+    "fond": "ocean"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Certains, oui",
+     "texte": "Le grand requin blanc doit nager pour respirer.",
+     "voix": "Certains, oui : le grand requin blanc doit nager pour respirer."
+    },
+    {
+     "type": "texte",
+     "titre": "Mais pas tous",
+     "texte": "Le requin-nourrice pompe l'eau avec les muscles de sa bouche.",
+     "voix": "Mais pas tous : le requin-nourrice pompe l'eau avec les muscles de sa bouche."
+    },
+    {
+     "type": "texte",
+     "titre": "Résultat",
+     "texte": "Il respire immobile, posé sur le fond.",
+     "voix": "Résultat : il respire immobile, posé sur le fond."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Britannica",
+     "titre": "Do Sharks Really Die if They Stop Swimming?",
+     "url": "https://www.britannica.com/story/do-sharks-really-die-if-they-stop-swimming",
+     "extrait": "For example, the great white shark, the whale shark, and the mako shark don't have buccal muscles at all. […] If they stop swimming, they stop receiving oxygen. […] If you look at the nurse shark and the tiger shark, this belief is already proven false […] these, and a few other shark species, can stop swimming whenever they want."
+    },
+    {
+     "editeur": "New England Aquarium",
+     "titre": "Fun Facts About Nurse Sharks",
+     "url": "https://www.neaq.org/fun-facts-about-nurse-sharks/",
+     "extrait": "Many shark species have to keep moving to get water to pass over their gills. […] use a unique system of muscles in their mouth to pump water over their gills […] forces water out over the gills so the shark can breathe while lying in place."
+    },
+    {
+     "editeur": "Britannica",
+     "titre": "Nurse shark",
+     "url": "https://www.britannica.com/animal/nurse-shark-family",
+     "extrait": "nurse sharks have developed a pumping mechanism (“buccal pump”) that allows them to remain motionless on the seafloor while pulling a current of water across the gills in order to breathe."
+    }
+   ]
+  },
+  {
+   "affirmation": "« L'eau de mer gèle à 0 °C. »",
+   "voix_affirmation": "L'eau de mer gèle à zéro degré.",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "duel",
+    "gauche": {
+     "icone": "pi:drop",
+     "libelle": "Eau douce"
+    },
+    "droite": {
+     "icone": "pi:waves",
+     "libelle": "Eau de mer"
+    },
+    "signe": "≠",
+    "gagnant": "aucun",
+    "fond": "nuit"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "À cause du sel",
+     "texte": "L'eau de mer gèle vers -1,9 °C.",
+     "voix": "À cause du sel, l'eau de mer gèle vers moins un virgule neuf degré."
+    },
+    {
+     "type": "texte",
+     "titre": "Et l'eau douce ?",
+     "texte": "Elle gèle bien à 0 °C.",
+     "voix": "Et l'eau douce ? Elle gèle bien à zéro degré."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "NOAA",
+     "titre": "Does the ocean freeze?",
+     "url": "https://oceanservice.noaa.gov/facts/oceanfreeze.html",
+     "extrait": "seawater freezes at about 28.4 degrees Fahrenheit (-1.9 degrees Celsius), because of the salt in it. […] Fresh water freezes at 32 degrees Fahrenheit (0 degrees Celsius)"
+    },
+    {
+     "editeur": "Met Office",
+     "titre": "Sea ice overview",
+     "url": "https://www.metoffice.gov.uk/research/climate/cryosphere-oceans/sea-ice/overview",
+     "extrait": "will have a freezing point of around -1.8° C."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "USGS · NOAA · Woods Hole Oceanographic Institution · Britannica · New England Aquarium · Met Office",
+ "prochain": {
+  "affirmation": "« Il faut vider la batterie de son téléphone avant de la recharger. »"
+ },
+ "voix_score": "Alors, ton score ?",
+ "voix_prochain": "Prochain épisode : il faut vider la batterie de son téléphone avant de la recharger.",
+ "publication": {
+  "legende": "Vrai ou faux ? 🌊 4 idées reçues sur la mer. Dis ton score en commentaire 👇\n#vraioufaux #mer #ocean #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#mer",
+   "#ocean",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ }
+}
