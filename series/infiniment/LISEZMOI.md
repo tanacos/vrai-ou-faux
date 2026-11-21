@@ -35,6 +35,7 @@ sources (leçons des contre-vérifications) :
 - les images aussi sont des affirmations : deux tailles comparées sont dessinées à l'échelle (la v1 de l'épisode 1
   montrait l'humanité 11 à 16 fois trop petite dans le sucre), un compteur n'affiche sa source qu'une fois arrivé au
   vrai chiffre, une analogie est présentée comme une image (« imagine… »).
+- contre-vérification du 21/11/2026 (épisode 5) : une phrase de source secondaire peut être fausse (APS « one or two solar neutrinos per day » contredit par la publication de Super-K, ≈ 13 à 14 par jour) : pour un taux mesuré, préférer la publication de la collaboration ou ne pas chiffrer ; un résultat à 2,7 sigma est « un indice », pas « la preuve » ; « la Terre » et non « toute la Terre » (les neutrinos traversent une corde) ; un seuil « expected » se dit « environ » ; ne pas donner de taille à une particule élémentaire ; dans une scène `heros`, le dernier chiffre reste affiché jusqu'à la fin (le champ `jusqua` ne l'efface pas) : couper le bloc en plans (`a_partir_de`) pour revenir aux titres.
 - contre-vérification du 14/11/2026 (épisode 4) : une étoile n'est pas une « deuxième bille » si sa taille diffère (Proxima ≈ 0,15 rayon solaire) : la nommer ; « 1 jour-lumière DE LA TERRE » (les sources mesurent depuis la Terre) ; les nombres lus en lettres allongent la voix (237 mots → 95 s) : viser ≈ 225 mots quand la narration est chargée en grands nombres.
 - contre-vérification du 07/11/2026 (épisode 3) : un rapport s'affiche avec « × » ; une moyenne se dit « en moyenne » ; parler d'« atomes d'oxygène » plutôt que de « tes molécules » quand l'identité des molécules compte (les hydrogènes s'échangent) ; un sigle (NOAA) se lit mal : le laisser à l'écran et en description.
 - contre-vérifications du 20/10/2026 (épisodes 1 et 2) : la condition d'une expérience de pensée se dit dès
@@ -78,7 +79,8 @@ plus (décision de Nathan). Voir `moteur/VOIX.md` (prérequis réseau de l'envir
 | 2 | `ep02` | Le bord de l'univers observable (vers le grand) | prêt (3 tours, aucun écart au dernier ; voix refaite le 21/10/2026) : fabriqué (conforme) et programmé le 27/10 pour le lundi 09/11/2026 18:00 |
 | 3 | `ep03` | Au cœur d'un verre d'eau (vers le petit) | programmé par la routine du 07/11/2026 pour le lundi 16/11/2026 18:00 |
 | 4 | `ep04` | Si le Soleil était une bille (vers le grand) | programmé par la routine du 14/11/2026 pour le lundi 23/11/2026 18:00 |
-| 5 | à écrire | Un neutrino peut-il traverser la Terre sans rien toucher ? (vers le petit ; sources repérées : NASA « rarely interact with other matter », IceCube « the Earth stops very energetic neutrinos » : réponse nuancée) | — |
+| 5 | `ep05` | Un neutrino traverse-t-il la Terre ? (vers le petit) | programmé par la routine du 21/11/2026 pour le lundi 30/11/2026 18:00 |
+| 6 | à écrire | Combien de Terres faudrait-il pour remplir le Soleil ? (vers le grand ; sources repérées : NASA « 1.3 million Earths to fill the Sun's volume », NSSDC rapport des volumes 1 304 000, BBC Sky at Night ; nuance : le volume, pas un empilement de boules) | — |
 
 (`ep01` : version ElevenLabs, non commerciale ; `ep01_charles`, `ep01_estelle` : essais de voix.)
 
