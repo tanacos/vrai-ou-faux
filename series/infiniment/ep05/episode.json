@@ -1,0 +1,587 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 5,
+ "slug": "neutrino",
+ "titre": "Un neutrino traverse-t-il la Terre ?",
+ "narration": "narration.txt",
+ "blocs": [
+  "hook",
+  "descente",
+  "flux",
+  "pourquoi",
+  "preuve",
+  "reponse",
+  "icecube",
+  "outro"
+ ],
+ "scenes": {
+  "hook": {
+   "type": "heros",
+   "ambiance": "mystere",
+   "couverture": [
+    "UN *NEUTRINO* PEUT-IL",
+    "TRAVERSER LA *TERRE* ?"
+   ],
+   "titres": [
+    {
+     "quand": "dessous",
+     "lignes": [
+      "ILS TE TRAVERSENT",
+      "PAR EN *DESSOUS*"
+     ]
+    },
+    {
+     "quand": "terre",
+     "lignes": [
+      "APRÈS AVOIR TRAVERSÉ",
+      "LA *TERRE*"
+     ]
+    },
+    {
+     "quand": "neutrinos",
+     "lignes": [
+      "DES *NEUTRINOS*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "terre",
+    "taille": 0.75
+   },
+   "objet_quand": "debut",
+   "infos": [
+    {
+     "quand": "nuit",
+     "texte": "LA NUIT : SOLEIL DESSOUS"
+    }
+   ],
+   "impacts": [
+    "neutrinos"
+   ]
+  },
+  "descente": {
+   "type": "zoom",
+   "sens": "entree",
+   "ambiance": "emerveillement",
+   "titre": [
+    "ON *DESCEND*"
+   ],
+   "objet": {
+    "type": "terre"
+   },
+   "expo_depart": 7.11,
+   "paliers": [
+    {
+     "quand": "toi",
+     "objet": {
+      "type": "icone",
+      "nom": "MdPerson"
+     },
+     "titre": [
+      "*TOI*"
+     ]
+    },
+    {
+     "quand": "pouce",
+     "objet": {
+      "type": "icone",
+      "nom": "BsHandThumbsUpFill"
+     },
+     "titre": [
+      "TON *POUCE*"
+     ]
+    },
+    {
+     "quand": "atome",
+     "objet": {
+      "type": "atome",
+      "taille": 0.5,
+      "mention": "PAS À L'ÉCHELLE"
+     },
+     "titre": [
+      "UN *ATOME*"
+     ],
+     "info": "≈ 10⁻¹⁰ MÈTRE",
+     "expo": -9.5
+    },
+    {
+     "quand": "neutrino",
+     "objet": {
+      "type": "point",
+      "couleur": "cyan",
+      "taille": 0.6,
+      "mention": "ILLUSTRATION"
+     },
+     "titre": [
+      "LE *NEUTRINO*"
+     ],
+     "info": "UNE PARTICULE ÉLÉMENTAIRE"
+    }
+   ]
+  },
+  "flux": {
+   "type": "heros",
+   "ambiance": "emerveillement",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "COMBIEN",
+      "SONT-ILS ?"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "icone",
+    "nom": "BsHandThumbsUpFill",
+    "taille": 0.55
+   },
+   "objet_quand": "debut",
+   "chiffres": [
+    {
+     "quand": "100",
+     "valeur": 100,
+     "decimales": 0,
+     "prefixe": "≈ ",
+     "unite": "MILLIARDS PAR SECONDE",
+     "source": "SOURCE : FERMILAB",
+     "compter": true
+    }
+   ],
+   "infos": [
+    {
+     "quand": "ongle",
+     "texte": "À TRAVERS L'ONGLE DE TON POUCE"
+    },
+    {
+     "quand": "jour",
+     "texte": "LE JOUR COMME LA NUIT"
+    }
+   ],
+   "impacts": [
+    "100"
+   ]
+  },
+  "pourquoi": {
+   "type": "heros",
+   "ambiance": "tension",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "POURQUOI RIEN",
+      "NE LES *ARRÊTE* ?"
+     ]
+    },
+    {
+     "quand": "charge",
+     "lignes": [
+      "*AUCUNE* CHARGE",
+      "ÉLECTRIQUE"
+     ]
+    },
+    {
+     "quand": "faible",
+     "lignes": [
+      "SEULEMENT LA",
+      "*FORCE FAIBLE*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "point",
+    "couleur": "cyan",
+    "taille": 0.6,
+    "mention": "ILLUSTRATION"
+   },
+   "objet_quand": "debut",
+   "chiffres": [
+    {
+     "quand": "1",
+     "valeur": 1000000,
+     "affichage": "≥ 1 MILLION",
+     "unite": "DE FOIS PLUS LÉGER QU'UN *ÉLECTRON*",
+     "source": "SOURCE : KIT, DOE (KATRIN)"
+    }
+   ]
+  },
+  "preuve": [
+   {
+    "type": "heros",
+    "ambiance": "calme",
+    "titres": [
+     {
+      "quand": "debut",
+      "lignes": [
+       "LA *PREUVE*"
+      ]
+     },
+     {
+      "quand": "japon",
+      "lignes": [
+       "AU JAPON :",
+       "*SUPER-KAMIOKANDE*"
+      ]
+     },
+     {
+      "quand": "infime",
+      "lignes": [
+       "IL N'EN ATTRAPE QU'UNE",
+       "*INFIME* PARTIE"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "icone",
+     "nom": "MdSensors",
+     "taille": 0.5
+    },
+    "objet_quand": "debut",
+    "infos": [
+     {
+      "quand": "50000",
+      "texte": "50 000 TONNES D'EAU"
+     }
+    ]
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "nuit",
+    "ambiance": "calme",
+    "titres": [
+     {
+      "quand": "nuit",
+      "lignes": [
+       "ET LA *NUIT* ?"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "icone",
+     "nom": "MdSensors",
+     "taille": 0.5
+    },
+    "objet_quand": "nuit",
+    "chiffres": [
+     {
+      "quand": "3%",
+      "valeur": 3.2,
+      "affichage": "≈ +3 %",
+      "unite": "DE PLUS LA *NUIT*",
+      "source": "SOURCE : APS, PHYSICS WORLD",
+      "jusqua": "indice"
+     }
+    ],
+    "impacts": [
+     "3%"
+    ]
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "indice",
+    "ambiance": "calme",
+    "titres": [
+     {
+      "quand": "indice",
+      "lignes": [
+       "LA TERRE LES",
+       "TRANSFORMERAIT *UN PEU*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "terre",
+     "taille": 0.6
+    },
+    "objet_quand": "indice",
+    "infos": [
+     {
+      "quand": "indice",
+      "texte": "UN INDICE, À CONFIRMER"
+     }
+    ]
+   }
+  ],
+  "reponse": {
+   "type": "heros",
+   "ambiance": "resolution",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "TRAVERSER LA TERRE",
+      "SANS RIEN *TOUCHER* ?"
+     ]
+    },
+    {
+     "quand": "oui",
+     "lignes": [
+      "CEUX DU SOLEIL :",
+      "*OUI*, PRESQUE TOUS"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "terre",
+    "taille": 0.7
+   },
+   "objet_quand": "debut",
+   "expo": 7.11,
+   "impacts": [
+    "oui"
+   ]
+  },
+  "icecube": [
+   {
+    "type": "heros",
+    "ambiance": "tension",
+    "titres": [
+     {
+      "quand": "debut",
+      "lignes": [
+       "MAIS PAS LES PLUS",
+       "*ÉNERGÉTIQUES*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "terre",
+     "taille": 0.6
+    },
+    "objet_quand": "debut",
+    "chiffres": [
+     {
+      "quand": "40000",
+      "valeur": 40000000000000.0,
+      "affichage": "> 40 000",
+      "unite": "MILLIARDS D'*ÉLECTRONVOLTS*",
+      "source": "SOURCE : ICECUBE (NATURE, 2017)"
+     },
+     {
+      "quand": "1",
+      "valeur": 1000000,
+      "affichage": "> 1 MILLION",
+      "unite": "× L'ÉNERGIE DE *CEUX DU SOLEIL*",
+      "source": "SOURCE : BERKELEY LAB"
+     }
+    ]
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "absorbe",
+    "ambiance": "tension",
+    "titres": [
+     {
+      "quand": "absorbe",
+      "lignes": [
+       "LA TERRE EN ABSORBE",
+       "*UNE PARTIE*"
+      ]
+     },
+     {
+      "quand": "noyau",
+      "lignes": [
+       "SURTOUT DANS",
+       "LE *NOYAU*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "terre",
+     "taille": 0.6
+    },
+    "objet_quand": "absorbe",
+    "infos": [
+     {
+      "quand": "dense",
+      "texte": "LE NOYAU : TRÈS DENSE"
+     }
+    ],
+    "impacts": [
+     "absorbe"
+    ]
+   }
+  ],
+  "outro": {
+   "type": "fin",
+   "ambiance": "triomphe",
+   "prochain": [
+    "COMBIEN DE *TERRES*",
+    "DANS LE SOLEIL ?"
+   ],
+   "quand": "terres",
+   "sources_quand": "sources",
+   "objet": {
+    "type": "soleil"
+   }
+  }
+ },
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ },
+ "sources": [
+  {
+   "editeur": "Fermilab (U.S. Department of Energy)",
+   "titre": "Solar neutrinos",
+   "url": "https://neutrinos.fnal.gov/sources/solar-neutrinos/",
+   "extraits": [
+    "About 100 billion solar neutrinos pass through your thumbnail every second.",
+    "The sun is the source of most of the neutrinos that are passing through you at any moment."
+   ],
+   "sert_a": "≈ 100 milliards de neutrinos du Soleil par seconde à travers l'ongle du pouce (fait central, flux)"
+  },
+  {
+   "editeur": "Live Science / Space.com",
+   "titre": "Mysterious Particles Shooting Through Earth Shed Light on Sun (2011)",
+   "url": "https://www.livescience.com/17212-neutrinos-particles-sun-borexino.html",
+   "extraits": [
+    "Billions of ethereal particles known as neutrinos pour through us every second from the sun.",
+    "flowing through Earth's surface in numbers as high as 420 billion per square inch",
+    "(65 billion per square centimeter) per second"
+   ],
+   "sert_a": "2e éditeur pour le flux : 65 milliards par cm² et par seconde, cohérent avec ≈ 100 milliards pour un ongle de ≈ 1,5 cm²"
+  },
+  {
+   "editeur": "Physics World (IOP Publishing)",
+   "titre": "SuperKamiokande finds that neutrinos change flavour at night (2014)",
+   "url": "https://physicsworld.com/a/superkamiokande-finds-that-neutrinos-change-flavour-at-night/",
+   "extraits": [
+    "most neutrinos from the Sun travel straight through the Earth without interacting at all.",
+    "Electrically neutral and interacting only via the weak force, neutrinos are fiendishly hard to detect",
+    "the flux of solar neutrinos during the night was about 3.2% greater than that measured during the day.",
+    "the Earth has caused muon and tau neutrinos to change back to electron neutrinos, effectively reversing the change that occurred during their journey from the Sun.",
+    "Buried deep under a mountain about 300 km west of Tokyo, SuperKamiokande detects neutrinos using 50,000 tonnes of water in a cylindrical vessel."
+   ],
+   "sert_a": "fait central (les neutrinos du Soleil traversent la Terre presque tous sans interagir), pas de charge, force faible, +3 % la nuit, la Terre les transforme (changement de saveur), détecteur géant ; au Japon (« about 300 km west of Tokyo »), 50 000 tonnes d'eau ; le +3 % est présenté comme un indice (signification 2,7 sigma, sous le seuil d'une découverte)"
+  },
+  {
+   "editeur": "APS Physics (American Physical Society)",
+   "titre": "Neutrinos Are Brighter at Night (Physics 7, 24, 2014)",
+   "url": "https://physics.aps.org/articles/v7/24",
+   "extraits": [
+    "neutrinos traveling through the Earth behave differently than those that reach us directly from the Sun.",
+    "use the Earth as a neutrino filter that rotates in front of a neutrino detector each night",
+    "the nighttime neutrino detection rate was 3.2% higher than the daytime rate",
+    "the interactions are so rare"
+   ],
+   "sert_a": "2e éditeur du fait central (la nuit, les neutrinos du Soleil arrivent à travers la Terre), +3 % la nuit (« nighttime neutrino detection rate was 3.2% higher »). La phrase d'APS « one or two solar neutrinos per day » n'est PAS utilisée : la contre-vérification l'a jugée contredite par les données publiées de la collaboration (≈ 13 à 14 par jour)."
+  },
+  {
+   "editeur": "KIT (Karlsruher Institut für Technologie)",
+   "titre": "Astroparticle Physics: Neutrinos Weigh Less than 0.45 Electronvolts (communiqué 029/2025)",
+   "url": "https://www.kit.edu/kit/english/pi_2025_029_astroparticle-physics-neutrinos-weigh-less-than-0-45-electronvolts.php",
+   "extraits": [
+    "The latest data establish an upper limit of 0.45 eV/c2 (equivalent to 8 x 10-37 kilograms) for the neutrino mass.",
+    "neutrinos are at least a million times lighter than electrons",
+    "They are omnipresent yet interact extremely rarely with matter."
+   ],
+   "sert_a": "au moins 1 million de fois plus léger qu'un électron ; interagit très rarement"
+  },
+  {
+   "editeur": "U.S. Department of Energy, Office of Science",
+   "titre": "KATRIN Narrows Down the Range of Neutrinos' Mass",
+   "url": "https://www.energy.gov/science/henp/articles/katrin-narrows-down-range-neutrinos-mass",
+   "extraits": [
+    "the mass of a neutrino is more than one million times lighter than an electron",
+    "the neutrino mass is less than 0.45 eV/c2, or 8x10-34 g",
+    "tiny fundamental particles that almost never interact with matter"
+   ],
+   "sert_a": "2e éditeur pour la masse ; « presque jamais »"
+  },
+  {
+   "editeur": "Berkeley Lab (Lawrence Berkeley National Laboratory)",
+   "titre": "How Earth Stops High-Energy Neutrinos (2017)",
+   "url": "https://newscenter.lbl.gov/2017/11/22/how-earth-stops-high-energy-neutrinos/",
+   "extraits": [
+    "Now, scientists have demonstrated that the Earth stops energetic neutrinos—they do not go through everything.",
+    "the probability that neutrinos are absorbed by Earth as a function of their energy",
+    "The Earth's core is particularly dense, so absorption is largest there.",
+    "more than a million times more energetic than the neutrinos produced by more familiar sources",
+    "About 100 trillion neutrinos pass through your body every second."
+   ],
+   "sert_a": "retournement : IceCube a mesuré que la Terre arrête les neutrinos énergétiques, surtout le noyau (très dense) ; plus de 1 million de fois l'énergie de ceux du Soleil (« more familiar sources » : la phrase cite le Soleil et les centrales)"
+  },
+  {
+   "editeur": "IceCube Collaboration (arXiv:1711.08119, publié dans Nature 551, 596, 2017)",
+   "titre": "Measurement of the multi-TeV neutrino cross section with IceCube using Earth absorption",
+   "url": "https://arxiv.org/abs/1711.08119",
+   "extraits": [
+    "at energies above 40 TeV, neutrinos are expected to be absorbed as they pass through the Earth.",
+    "we determine the cross section for neutrino energies between 6.3 TeV and 980 TeV"
+   ],
+   "sert_a": "seuil de 40 TeV = 40 000 milliards d'électronvolts (2e éditeur du retournement)"
+  },
+  {
+   "editeur": "Earthquake Research Institute, Université de Tokyo",
+   "titre": "Measurement of the multi-TeV neutrino interaction cross-section with IceCube using Earth absorption",
+   "url": "https://www.eri.u-tokyo.ac.jp/en/research/1773/",
+   "extraits": [
+    "neutrinos with energies above 40 teraelectronvolts (TeV) are expected to be absorbed as they pass through the Earth."
+   ],
+   "sert_a": "3e éditeur du seuil de 40 TeV"
+  },
+  {
+   "editeur": "Encyclopædia Britannica",
+   "titre": "Atom",
+   "url": "https://www.britannica.com/science/atom",
+   "extraits": [
+    "The radius of an atom measures 1–2 Å.",
+    "A convenient unit of length for measuring atomic sizes is the angstrom (Å), defined as 10−10 metre."
+   ],
+   "sert_a": "taille d'un atome ≈ 10⁻¹⁰ m (palier « atome »)"
+  },
+  {
+   "editeur": "NASA (NSSDC)",
+   "titre": "Earth Fact Sheet",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1",
+   "extraits": [
+    "Volumetric mean radius (km) 6371.000"
+   ],
+   "sert_a": "diamètre de la Terre 12 742 km (règle : 10⁷ m)"
+  },
+  {
+   "editeur": "NASA Science",
+   "titre": "Sun: Facts",
+   "url": "https://science.nasa.gov/sun/facts",
+   "extraits": [
+    "it would take more than 330,000 Earths to match the mass of the Sun, and it would take 1.3 million Earths to fill the Sun's volume."
+   ],
+   "sert_a": "sujet du prochain épisode (combien de Terres pour remplir le Soleil)"
+  },
+  {
+   "editeur": "NASA (NSSDC)",
+   "titre": "Sun Fact Sheet",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html?level=1",
+   "extraits": [
+    "Volume (10^12 km3) 1,412,000. 1.083 1,304,000."
+   ],
+   "sert_a": "prochain épisode : rapport des volumes Soleil / Terre 1 304 000"
+  },
+  {
+   "editeur": "BBC Sky at Night Magazine",
+   "titre": "This is how many Earths could fit in the Sun (2026)",
+   "url": "https://skyatnightmagazine.com/space-science/how-many-earths-can-fit-sun",
+   "extraits": [
+    "so it would take 1.3 million Earths to fill the Sun"
+   ],
+   "sert_a": "prochain épisode, 2e éditeur"
+  }
+ ],
+ "calcul": "Flux : Fermilab « about 100 billion » par ongle de pouce et par seconde → « environ 100 milliards ». Contrôle (2e éditeur) : Live Science 65 milliards par cm² et par seconde (420 milliards par pouce carré / 6,4516 cm² = 65,1) ; un ongle de pouce de ≈ 1,5 cm² recevrait ≈ 98 milliards : cohérent. Masse : KIT « at least a million times lighter than electrons », DOE « more than one million times lighter » → « au moins 1 million de fois plus léger » ; contrôle : électron 511 000 eV / 0,45 eV = 1 135 556. Super-Kamiokande : 50 000 tonnes d'eau (Physics World) ; « n'en attrape qu'une infime partie » : un petit nombre de détections par jour (APS « the interactions are so rare » ; ordre de grandeur ≈ une quinzaine par jour selon la contre-vérification, d'après la publication de la collaboration arXiv hep-ex/9805021 : 4 017 événements en 297,4 jours ; aucun taux dit ni affiché) alors que ≈ 65 milliards de neutrinos du Soleil traversent chaque cm² chaque seconde (Live Science) : aucun taux de détection n'est dit ni affiché ; nuit : « 3.2% higher » → « environ 3 % de plus » (affiché ≈ +3 %). IceCube : 40 TeV = 40 × 10¹² eV = 40 000 milliards d'électronvolts. « Plus de 1 million de fois l'énergie de ceux du Soleil » : Berkeley Lab dit que la plupart des neutrinos sélectionnés (au moins 1 TeV) sont « more than a million times more energetic » que ceux des sources familières (Soleil, centrales) ; ceux au-delà de 40 TeV le sont a fortiori. « Une partie est absorbée » : l'absorption dépend de l'énergie et n'est pas totale (« the probability that neutrinos are absorbed »), d'où « une partie ». Règle : Terre 2 × 6 371 = 12 742 km = 1,27 × 10⁷ m (expo 7,11 → 10⁷) ; atome : rayon 1 à 2 Å, diamètre 2 à 4 × 10⁻¹⁰ m (expo -9,5, soit 3,2 × 10⁻¹⁰ m → 10⁻¹⁰ selon la règle française a ≤ 5), info « ≈ 10⁻¹⁰ mètre » (ordre de grandeur, angström). Les paliers « toi » et « pouce » n'ont pas de valeur propre : la règle défile entre la Terre et l'atome. Le neutrino n'a pas de taille affichée (particule élémentaire). Prochain épisode : NASA « 1.3 million Earths to fill the Sun's volume », NSSDC rapport des volumes 1 304 000 (1 412 000 / 1,083 = 1 303 785), Sky at Night « 1.3 million Earths » : 3 éditeurs. Le +3 % la nuit est un indice (2,7 sigma, Physics World ; APS : signification sous le seuil d'une découverte), dit « un indice que la Terre […] les transforme un peu ». « Au-delà d'environ 40 000 milliards d'électronvolts » : seuil attendu (« expected to be absorbed »), l'absorption mesurée par IceCube entre 6,3 et 980 TeV (« l'a confirmé »). Les neutrinos du Soleil traversent la nuit une corde de la Terre, pas forcément tout son diamètre : on dit « traversé la Terre ».",
+ "images": "Le neutrino est figuré par un point lumineux (mention « ILLUSTRATION ») : une particule élémentaire n'a pas d'image. L'atome est le dessin générique du moteur (mention « PAS À L'ÉCHELLE » : le noyau dessiné est bien trop gros). La personne, le pouce et le détecteur sont des pictogrammes génériques ; Super-Kamiokande n'est pas dessiné tel qu'il est. La Terre est dessinée sans échelle relative à un autre objet. Info « LA NUIT : SOLEIL DESSOUS » : déduction géométrique (la nuit, le Soleil est sous l'horizon, ses neutrinos arrivent à travers la Terre).",
+ "publication": {
+  "titre": "Un neutrino traverse-t-il la Terre ?",
+  "legende": "Chaque seconde, environ 100 milliards de neutrinos du Soleil traversent l'ongle de ton pouce. La nuit, ils ont d'abord traversé la Terre. INFINIMENT, épisode 5.\nSources : Fermilab et Live Science (flux), Physics World et APS Physics (Super-Kamiokande), KIT et DOE (KATRIN, masse), Berkeley Lab, IceCube (arXiv, Nature 2017) et Université de Tokyo (absorption par la Terre), Britannica (atome), NASA (Terre, Soleil), BBC Sky at Night (Terres dans le Soleil).\n#infiniment #science #physique #neutrino #espace #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#infiniment",
+   "#science",
+   "#physique",
+   "#neutrino",
+   "#espace",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ],
+  "contenu_ia": false
+ },
+ "prochain": "Combien de Terres faudrait-il pour remplir le Soleil ? (épisode 6, vers le grand)"
+}

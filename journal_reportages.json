@@ -101,8 +101,32 @@
    "publication": "2026-11-23T18:00:00+01:00",
    "metricool_id": "427770989",
    "metricool_uuid": "8458170916599974318"
+  },
+  {
+   "numero": 5,
+   "slug": "neutrino",
+   "titre": "Un neutrino traverse-t-il la Terre ?",
+   "dossier": "series/infiniment/ep05",
+   "sources": [
+    "https://neutrinos.fnal.gov/sources/solar-neutrinos/",
+    "https://www.livescience.com/17212-neutrinos-particles-sun-borexino.html",
+    "https://physicsworld.com/a/superkamiokande-finds-that-neutrinos-change-flavour-at-night/",
+    "https://physics.aps.org/articles/v7/24",
+    "https://www.kit.edu/kit/english/pi_2025_029_astroparticle-physics-neutrinos-weigh-less-than-0-45-electronvolts.php",
+    "https://www.energy.gov/science/henp/articles/katrin-narrows-down-range-neutrinos-mass",
+    "https://newscenter.lbl.gov/2017/11/22/how-earth-stops-high-energy-neutrinos/",
+    "https://arxiv.org/abs/1711.08119",
+    "https://www.eri.u-tokyo.ac.jp/en/research/1773/",
+    "https://www.britannica.com/science/atom",
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html?level=1",
+    "https://science.nasa.gov/sun/facts",
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html?level=1",
+    "https://skyatnightmagazine.com/space-science/how-many-earths-can-fit-sun"
+   ],
+   "prochain": "Combien de Terres faudrait-il pour remplir le Soleil ? (épisode 6, vers le grand)",
+   "statut": "en attente de voix"
   }
  ],
- "dernier_numero": 4,
- "prochain_sujet": "Un neutrino peut-il traverser la Terre sans rien toucher ? (épisode 5, vers le petit)"
+ "dernier_numero": 5,
+ "prochain_sujet": "Combien de Terres faudrait-il pour remplir le Soleil ? (épisode 6, vers le grand)"
 }
