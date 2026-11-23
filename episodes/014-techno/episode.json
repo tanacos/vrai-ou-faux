@@ -1,0 +1,235 @@
+{
+ "numero": 14,
+ "slug": "techno",
+ "theme": "la technologie",
+ "titre": [
+  "4 IDÉES REÇUES",
+  "SUR LA TECHNOLOGIE"
+ ],
+ "fond": "labo",
+ "ambiance": "labo",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur la technologie.",
+ "idees": [
+  {
+   "affirmation": "« Il faut vider la batterie de son téléphone avant de la recharger. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:battery-empty",
+    "satellites": [
+     "md:smartphone",
+     "pi:battery-warning"
+    ],
+    "marque": "barre",
+    "fond": "labo"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "C'est même l'inverse",
+     "texte": "La vider à fond, à chaque fois, peut finir par l'user.",
+     "voix": "C'est même l'inverse : la vider à fond, à chaque fois, peut finir par l'user."
+    },
+    {
+     "type": "texte",
+     "titre": "Ce qu'elle préfère",
+     "texte": "Des petites recharges, souvent.",
+     "voix": "Ce qu'elle préfère, ce sont des petites recharges, souvent."
+    },
+    {
+     "type": "texte",
+     "titre": "Sa zone la plus stable",
+     "texte": "Entre 50 et 75 % de charge.",
+     "voix": "Sa zone la plus stable : entre cinquante et soixante-quinze pour cent de charge."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "CSIRO",
+     "titre": "Power up: The best battery advice (free of charge)",
+     "url": "https://www.csiro.au/en/news/all/articles/2018/january/power-up-our-battery-advice-free-of-charge",
+     "extrait": "Allowing my lithium-ion battery to go completely flat each cycle is good for it. Answer: False. […] This is what we in the battery industry call a “deep discharge” and it can eventually wear down your battery. […] The battery is at its most stable between 50 – 75 % charged. […] Frequent short charging of my lithium-ion battery should be avoided. Answer: False. […] Batteries love being topped up so this won't cause any harm at all. […] Short top-up charging is best."
+    },
+    {
+     "editeur": "Popular Science",
+     "titre": "4 battery myths (and why they're not true)",
+     "url": "https://www.popsci.com/diy/4-battery-myths-and-why-theyre-not-true/",
+     "extrait": "Myth: You Need to Fully Discharge Batteries Before Charging […] It is particularly bad to store a fully charged or fully depleted battery."
+    }
+   ]
+  },
+  {
+   "affirmation": "« Le tout premier SMS était un message de Noël. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "md:sms",
+    "satellites": [
+     "md:computer",
+     "pi:gift"
+    ],
+    "marque": "coche",
+    "fond": "labo"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Le 3 décembre 1992",
+     "texte": "Un ingénieur britannique envoie « Merry Christmas ».",
+     "voix": "Le trois décembre mille neuf cent quatre-vingt-douze, un ingénieur britannique envoie : Merry Christmas."
+    },
+    {
+     "type": "texte",
+     "titre": "Surprise",
+     "texte": "Il l'a tapé sur un ordinateur, pas sur un téléphone.",
+     "voix": "Surprise : il l'a tapé sur un ordinateur, pas sur un téléphone."
+    },
+    {
+     "type": "texte",
+     "titre": "Et pas de réponse",
+     "texte": "Les téléphones ne savaient pas encore envoyer de SMS.",
+     "voix": "Et pas de réponse possible : les téléphones ne savaient pas encore envoyer de SMS."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "HISTORY",
+     "titre": "First SMS text message is sent",
+     "url": "https://www.history.com/this-day-in-history/december-3/first-sms-text-message-sent",
+     "extrait": "On December 3, 1992, the first SMS text message in history is sent […] uses a personal computer to send the text message \"Merry Christmas\" via the Vodafone network to the phone of a colleague. […] cellphones themselves could not actually send messages in return yet."
+    },
+    {
+     "editeur": "NPR",
+     "titre": "The First Text Message Celebrates 25 Years",
+     "url": "https://www.npr.org/2017/12/04/568393428/the-first-text-messages-celebrates-25-years",
+     "extrait": "The first text message was transmitted Dec. 3, 1992. […] A British engineer named Neil Papworth sat down at his desktop computer and typed out the world's first text message. […] At the time, mobile phones couldn't respond to text messages, so Jarvis didn't return the greeting."
+    },
+    {
+     "editeur": "CBC News",
+     "titre": "World's first SMS text message sent 25 years ago",
+     "url": "https://www.cbc.ca/news/science/text-message-anniversary-1.4430659",
+     "extrait": "British engineer Neil Papworth sent the first SMS (Short Message Service) from a computer to a mobile phone […] The message read simply: \"Merry Christmas.\""
+    }
+   ]
+  },
+  {
+   "affirmation": "« La navigation privée rend anonyme sur Internet. »",
+   "verdict": "FAUX",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "ri:spy",
+    "satellites": [
+     "pi:globe",
+     "pi:eye-slash"
+    ],
+    "marque": "barre",
+    "fond": "labo"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "Ce qu'elle fait",
+     "texte": "Effacer ton historique à la fermeture.",
+     "voix": "Ce qu'elle fait : effacer l'historique et les cookies quand tu la fermes."
+    },
+    {
+     "type": "texte",
+     "titre": "Ce qu'elle ne fait pas",
+     "texte": "Cacher ton adresse IP.",
+     "voix": "Ce qu'elle ne fait pas : cacher ton adresse IP."
+    },
+    {
+     "type": "texte",
+     "titre": "Qui peut encore voir ?",
+     "texte": "Ton fournisseur d'accès ou ton employeur.",
+     "voix": "Qui peut encore voir ce que tu fais ? Ton fournisseur d'accès, ou ton employeur."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Mozilla",
+     "titre": "Common Myths about Private Browsing",
+     "url": "https://support.mozilla.org/en-US/kb/common-myths-about-private-browsing",
+     "extrait": "A Private Window doesn't make you anonymous online. […] It doesn't hide your IP address or your location. […] Some activity in Private Windows may still be viewed by sites, search engines, internet providers, or your employer […] When you close all Private Windows, Firefox deletes the browsing history, cookies, and site data from that session."
+    },
+    {
+     "editeur": "CNIL",
+     "titre": "La navigation privée pour limiter les risques de piratage de vos comptes en ligne",
+     "url": "https://www.cnil.fr/fr/la-navigation-privee-pour-limiter-les-risques-de-piratage-de-vos-comptes-en-ligne",
+     "extrait": "Non. Même avec un navigateur en mode privée, votre navigation n’a pas de secrets : […] pour certains intermédiaires qui pourront aisément accéder à vos données de navigation […] C’est le cas de votre fournisseur d'accès à Internet ou encore de votre employeur"
+    }
+   ]
+  },
+  {
+   "affirmation": "« Le mot « robot » est né dans une pièce de théâtre. »",
+   "verdict": "VRAI",
+   "scene": {
+    "type": "pictogramme",
+    "icone": "pi:robot",
+    "satellites": [
+     "md:theater-comedy",
+     "md:history"
+    ],
+    "marque": "coche",
+    "fond": "labo"
+   },
+   "panneaux": [
+    {
+     "type": "texte",
+     "titre": "En 1920",
+     "texte": "Il apparaît dans R.U.R., pièce publiée par le Tchèque Karel Čapek.",
+     "voix": "En mille neuf cent vingt, il apparaît dans une pièce publiée par l'écrivain tchèque Karel Tchapek."
+    },
+    {
+     "type": "texte",
+     "titre": "D'où vient-il ?",
+     "texte": "Du tchèque « robota » : le travail forcé.",
+     "voix": "Il vient du tchèque robota : le travail forcé."
+    },
+    {
+     "type": "texte",
+     "titre": "Petit secret",
+     "texte": "C'est son frère Josef qui lui a soufflé le mot.",
+     "voix": "Petit secret : c'est son frère Josef qui lui a soufflé le mot."
+    }
+   ],
+   "sources": [
+    {
+     "editeur": "Britannica",
+     "titre": "R.U.R.",
+     "url": "https://www.britannica.com/topic/RUR",
+     "extrait": "drama in three acts by Karel Čapek, published in 1920 and performed in 1921 […] for which Čapek invented the word robot (derived from the Czech word for forced labour)"
+    },
+    {
+     "editeur": "The MIT Press Reader",
+     "titre": "The Czech Play That Gave Us the Word ‘Robot’",
+     "url": "https://thereader.mitpress.mit.edu/origin-word-robot-rur",
+     "extrait": "The word itself derives from the Czech word “robota,” or forced labor, as done by serfs."
+    },
+    {
+     "editeur": "Science Friday",
+     "titre": "The Origin Of The Word 'Robot'",
+     "url": "https://www.sciencefriday.com/segments/the-origin-of-the-word-robot/",
+     "extrait": "who introduced it in his 1920 hit play […] At the suggestion of his brother, Josef, Čapek ultimately opted for roboti, or in English, robots."
+    }
+   ]
+  }
+ ],
+ "sources_ecran": "CSIRO · Popular Science · HISTORY · NPR · CBC News · Mozilla · CNIL · Britannica · MIT Press Reader · Science Friday",
+ "prochain": {
+  "affirmation": "« Einstein était nul en maths. »"
+ },
+ "voix_score": "Alors, ton score ?",
+ "voix_prochain": "Prochain épisode : Einstein était nul en maths.",
+ "publication": {
+  "legende": "Vrai ou faux ? 📱 4 idées reçues sur la technologie. Dis ton score en commentaire 👇\n#vraioufaux #technologie #smartphone #science #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#vraioufaux",
+   "#technologie",
+   "#smartphone",
+   "#science",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ]
+ }
+}
