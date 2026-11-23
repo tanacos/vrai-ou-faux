@@ -14,7 +14,7 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 - ~~vider la batterie avant de recharger~~ (FAUX), ~~premier SMS = message de Noël~~ (VRAI), ~~la navigation privée
   rend anonyme~~ (FAUX), ~~le mot robot né dans une pièce de théâtre~~ (VRAI). Évité : « pas d'effet mémoire sur le
-  lithium-ion » (PSI a publié en 2013 un effet mémoire dans certaines batteries Li-ion). Reste possible : les Mac
+  lithium-ion » (communiqué du PSI « Memory effect now also found in lithium-ion batteries » repéré, non lu). Reste possible : les Mac
   n'ont pas de virus (marque : à éviter).
 
 ## Déjà traité (épisode 13, la mer)
