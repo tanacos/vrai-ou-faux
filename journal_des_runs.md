@@ -5,7 +5,7 @@ démarrage, puis complétée à la fin.
 
 | Date (Paris) | Mode | Résultat |
 |---|---|---|
-| 2026-11-23 06:08 | normal | démarré |
+| 2026-11-23 06:08 | normal | programmé : épisode 14 (la technologie), samedi 28/11 à 18:00, Metricool 438327555 (sans voix : 2 phrases non vérifiées par la transcription, i2_affirmation et i2_p3, toutes deux avec « SMS ») |
 | 2026-11-19 06:09 | normal | programmé : épisode 13 (la mer), mercredi 25/11 à 18:00, Metricool 433801224 (sans voix : alignement de la prise à 89,6 % < 90 %) |
 | 2026-11-16 06:09 | normal | programmé : épisode 12 (la langue française), samedi 21/11 à 18:00, Metricool 429630158 (sans voix : alignement de la prise à 89 % < 90 %) |
 | 2026-11-12 06:08 | normal | programmé : épisode 11 (les petites bêtes), mercredi 18/11 à 18:00, Metricool 425308843 |

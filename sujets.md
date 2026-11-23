@@ -6,9 +6,16 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 14 — la technologie** : idée 1 imposée « Il faut vider la batterie de son téléphone avant de la
-  recharger. » (FAUX présumé ; CSIRO « power up our battery advice » et Popular Science « 4 battery myths » repérés :
-  pas d'effet mémoire sur le lithium-ion, la décharge profonde l'use). Éviter les marques.
+- **Épisode 15 — les grands savants** : idée 1 imposée « Einstein était nul en maths. » (FAUX présumé ; Britannica
+  « One Good Fact », TIME (Isaacson, « Making the Grade ») et Physics Van de l'université de l'Illinois repérés :
+  « I never failed in mathematics »). Rester sur des faits historiques, sans dénigrer personne.
+
+## Déjà traité (épisode 14, la technologie)
+
+- ~~vider la batterie avant de recharger~~ (FAUX), ~~premier SMS = message de Noël~~ (VRAI), ~~la navigation privée
+  rend anonyme~~ (FAUX), ~~le mot robot né dans une pièce de théâtre~~ (VRAI). Évité : « pas d'effet mémoire sur le
+  lithium-ion » (PSI a publié en 2013 un effet mémoire dans certaines batteries Li-ion). Reste possible : les Mac
+  n'ont pas de virus (marque : à éviter).
 
 ## Déjà traité (épisode 13, la mer)
 
