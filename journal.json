@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 13,
- "prochaine_affirmation": "« Il faut vider la batterie de son téléphone avant de la recharger. »",
+ "dernier_numero": 14,
+ "prochaine_affirmation": "« Einstein était nul en maths. »",
  "episodes": [
   {
    "numero": 1,
@@ -596,6 +596,50 @@
    "publication": "2026-11-25T18:00:00+01:00",
    "metricool_id": "433801224",
    "metricool_uuid": "-8841381110956930082"
+  },
+  {
+   "numero": 14,
+   "slug": "techno",
+   "titre": "4 IDÉES REÇUES SUR LA TECHNOLOGIE",
+   "theme": "la technologie",
+   "idees": [
+    {
+     "affirmation": "« Il faut vider la batterie de son téléphone avant de la recharger. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://www.csiro.au/en/news/all/articles/2018/january/power-up-our-battery-advice-free-of-charge",
+      "https://www.popsci.com/diy/4-battery-myths-and-why-theyre-not-true/"
+     ]
+    },
+    {
+     "affirmation": "« Le tout premier SMS était un message de Noël. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.history.com/this-day-in-history/december-3/first-sms-text-message-sent",
+      "https://www.npr.org/2017/12/04/568393428/the-first-text-messages-celebrates-25-years",
+      "https://www.cbc.ca/news/science/text-message-anniversary-1.4430659"
+     ]
+    },
+    {
+     "affirmation": "« La navigation privée rend anonyme sur Internet. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://support.mozilla.org/en-US/kb/common-myths-about-private-browsing",
+      "https://www.cnil.fr/fr/la-navigation-privee-pour-limiter-les-risques-de-piratage-de-vos-comptes-en-ligne"
+     ]
+    },
+    {
+     "affirmation": "« Le mot « robot » est né dans une pièce de théâtre. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.britannica.com/topic/RUR",
+      "https://thereader.mitpress.mit.edu/origin-word-robot-rur",
+      "https://www.sciencefriday.com/segments/the-origin-of-the-word-robot/"
+     ]
+    }
+   ],
+   "prochain": "« Einstein était nul en maths. »",
+   "statut": "fabriqué"
   }
  ]
 }
