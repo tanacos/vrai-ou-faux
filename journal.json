@@ -639,7 +639,8 @@
     }
    ],
    "prochain": "« Einstein était nul en maths. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/989b2b8bce43ec8b06985b46e2a9b84d05ed6073/vrai_ou_faux_14_techno.mp4"
   }
  ]
 }
