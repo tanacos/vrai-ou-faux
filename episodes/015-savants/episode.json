@@ -1,0 +1,103 @@
+{
+ "numero": 15,
+ "slug": "savants",
+ "theme": "les grands savants",
+ "titre": ["4 IDÉES REÇUES", "SUR LES SAVANTS"],
+ "fond": "labo",
+ "ambiance": "labo",
+ "voix_intro": "Vrai ou faux ? Quatre idées reçues sur les grands savants.",
+ "idees": [
+  {
+   "affirmation": "« Einstein était nul en maths. »",
+   "verdict": "FAUX",
+   "scene": {"type": "pictogramme", "icone": "pi:math-operations", "satellites": ["pi:function", "pi:exam"], "marque": "barre", "fond": "labo"},
+   "panneaux": [
+    {"type": "texte", "titre": "Avant ses 15 ans", "texte": "Il maîtrisait déjà le calcul différentiel et intégral.",
+     "voix": "Avant ses quinze ans, il maîtrisait déjà le calcul différentiel et intégral."},
+    {"type": "texte", "titre": "D'où vient la rumeur ?", "texte": "Il a raté un examen d'entrée… mais pas la partie maths.",
+     "voix": "D'où vient la rumeur ? Il a raté un examen d'entrée… mais pas la partie maths."},
+    {"type": "texte", "titre": "Sa réponse, en 1935", "texte": "« Je n'ai jamais échoué en mathématiques. »",
+     "voix": "Sa réponse, en mille neuf cent trente-cinq : je n'ai jamais échoué en mathématiques."}
+   ],
+   "sources": [
+    {"editeur": "TIME", "titre": "Did Einstein flunk math?", "url": "https://content.time.com/time/specials/packages/article/0,28804,1936731_1936743_1936758,00.html",
+     "extrait": "In 1935, a rabbi in Princeton showed him a clipping of the Ripley's column with the headline \"Greatest living mathematician failed in mathematics.\" […] Einstein laughed. \"I never failed in mathematics,\" he replied, correctly. \"Before I was fifteen I had mastered differential and integral calculus.\""},
+    {"editeur": "Britannica", "titre": "Did Einstein ever fail math?", "url": "https://www.britannica.com/one-good-fact/did-einstein-ever-fail-math",
+     "extrait": "A persistent rumor about Albert Einstein is that he once failed a math class. […] Einstein laughed and said, “Before I was fifteen I had mastered differential and integral calculus.”"},
+    {"editeur": "HowStuffWorks", "titre": "Did Einstein really fail math?", "url": "https://history.howstuffworks.com/history-vs-myth/did-einstein-really-fail-math.htm",
+     "extrait": "After Einstein left school in Munich, he tried to enter college in Zurich, but flunked the entrance exam. […] That's where the myth that he failed math seems to most powerfully originate. […] While it's true Einstein failed the exam, he didn't fail the math portion."}
+   ]
+  },
+  {
+   "affirmation": "« Galilée a inventé le télescope. »",
+   "verdict": "FAUX",
+   "scene": {"type": "pictogramme", "icone": "io:telescope", "satellites": ["pi:eyeglasses", "pi:moon"], "marque": "barre", "fond": "espace"},
+   "panneaux": [
+    {"type": "texte", "titre": "Le 2 octobre 1608", "texte": "Un lunetier néerlandais, Hans Lipperhey, demande un brevet.",
+     "voix": "Le deux octobre mille six cent huit, un lunetier néerlandais, Hans Lipperhey, demande un brevet pour cet instrument."},
+    {"type": "texte", "titre": "Galilée, lui", "texte": "Fabrique ses propres lunettes, puis les tourne vers le ciel.",
+     "voix": "Galilée, lui, fabrique ses propres lunettes, puis les tourne vers le ciel."},
+    {"type": "texte", "titre": "Sa vraie révolution", "texte": "Ses découvertes, comme les lunes de Jupiter.",
+     "voix": "Sa vraie révolution, ce sont ses découvertes, comme les lunes de Jupiter."}
+   ],
+   "sources": [
+    {"editeur": "NASA", "titre": "StarChild Question of the Month for September 2001", "url": "https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question37.html",
+     "extrait": "The earliest record of an existing telescope is from a patent application in Holland on 2 October 1608. […] The application was made by Dutch spectacle maker Hans Lippershay (sometimes found as Lipperhey). […] However, Galileo did not invent the telescope."},
+    {"editeur": "BBC Sky at Night Magazine", "titre": "Who really invented the telescope?", "url": "https://www.skyatnightmagazine.com/space-science/who-invented-the-telescope",
+     "extrait": "Lipperhey's patent application, dated 2 October 1608, is the oldest known document in history that describes a telescope. […] Before long, he built his own telescopes and started to observe the Moon, the Sun, the planets and the stars. […] revolutionary observations of the moons of Jupiter"},
+    {"editeur": "History of Science Museum, Oxford", "titre": "The telescope", "url": "https://www.cabinet.ox.ac.uk/telescope",
+     "extrait": "The firm documentary record begins on 2 October 1608, when Hans Lippershey (1570 –1619) of Wesel, a master lens grinder and spectacle-maker practicing in Middelburg, asked the Dutch States General to patent an instrument"}
+   ]
+  },
+  {
+   "affirmation": "« Marie Curie a reçu deux prix Nobel, dans deux sciences différentes. »",
+   "verdict": "VRAI",
+   "scene": {"type": "pictogramme", "icone": "pi:medal", "satellites": ["pi:atom", "pi:flask"], "marque": "coche", "fond": "labo"},
+   "panneaux": [
+    {"type": "texte", "titre": "1903", "texte": "Le Nobel de physique, partagé avec Pierre Curie et Henri Becquerel.",
+     "voix": "En mille neuf cent trois, le Nobel de physique, partagé avec Pierre Curie et Henri Becquerel."},
+    {"type": "texte", "titre": "1911", "texte": "Le Nobel de chimie, seule cette fois.",
+     "voix": "En mille neuf cent onze, le Nobel de chimie, seule cette fois."},
+    {"type": "texte", "titre": "Et une première", "texte": "C'est la première femme à recevoir un prix Nobel.",
+     "voix": "Et une première : c'est la première femme à recevoir un prix Nobel."}
+   ],
+   "sources": [
+    {"editeur": "Britannica", "titre": "What awards did Marie Curie win?", "url": "https://www.britannica.com/question/What-awards-did-Marie-Curie-win",
+     "extrait": "With Henri Becquerel and her husband, Pierre Curie, Marie Curie was awarded the 1903 Nobel Prize for Physics. She was the sole winner of the 1911 Nobel Prize for Chemistry. She was the first woman to win a Nobel Prize and the only woman to win the award in two different fields."},
+    {"editeur": "London School of Hygiene & Tropical Medicine", "titre": "Marie Skłodowska-Curie", "url": "https://lshtm.ac.uk/node/109166",
+     "extrait": "the first woman to win a Nobel Prize, the first person to win twice […] the only person to win a Nobel Prize in two different sciences: physics and chemistry. […] Marie was jointly awarded the Nobel Prize in Physics in 1903. […] She went on to win the Nobel Prize for Chemistry in 1911."},
+    {"editeur": "Prix Nobel", "titre": "Marie Curie – Facts", "url": "https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts",
+     "extrait": "Also awarded: Nobel Prize in Chemistry 1911 […] The couple later shared the 1903 Nobel Prize in Physics."}
+   ]
+  },
+  {
+   "affirmation": "« Darwin a fait le tour du monde en bateau. »",
+   "verdict": "VRAI",
+   "scene": {"type": "pictogramme", "icone": "pi:sailboat", "satellites": ["pi:globe-hemisphere-west", "pi:compass"], "marque": "coche", "fond": "ocean"},
+   "panneaux": [
+    {"type": "texte", "titre": "De 1831 à 1836", "texte": "À bord du navire HMS Beagle.",
+     "voix": "De mille huit cent trente et un à mille huit cent trente-six, à bord du navire Beagle."},
+    {"type": "texte", "titre": "Prévu pour 2 ans", "texte": "Le voyage a duré près de 5 ans.",
+     "voix": "Prévu pour deux ans, le voyage a duré près de cinq ans."},
+    {"type": "texte", "titre": "Surprise", "texte": "Il a passé les deux tiers de ce temps à terre.",
+     "voix": "Surprise : il a passé les deux tiers de ce temps à terre."}
+   ],
+   "sources": [
+    {"editeur": "American Museum of Natural History", "titre": "A Five-Year Journey", "url": "https://www.amnh.org/exhibitions/darwin/trip/five.php",
+     "extrait": "The captain and crew of the HMS Beagle originally planned to spend two years on their trip around the world. Instead, the voyage took nearly five years, from December 1831 to October 1836. […] In fact, two-thirds of Darwin's time was spent on dry land"},
+    {"editeur": "National Geographic", "titre": "Darwin's first—and only—trip around the world", "url": "https://www.nationalgeographic.com/history/history-magazine/article/darwin-voyage-beagle-first-only-trip-around-world-scientific-revolution",
+     "extrait": "the route would take the Beagle to South America and then make a circumnavigation of the globe. […] on December 27, 1831, the Beagle sailed out of Plymouth with Darwin on board. […] The Beagle finally docked at Falmouth on October 2, 1836."},
+    {"editeur": "The National Archives (UK)", "titre": "Charles Darwin and the Beagle", "url": "https://media.nationalarchives.gov.uk/index.php/charles-darwin-and-the-beagle",
+     "extrait": "two thirds of Darwin’s time was actually spent on land"}
+   ]
+  }
+ ],
+ "sources_ecran": "TIME · Britannica · HowStuffWorks · NASA · Sky at Night · Musée d'histoire des sciences d'Oxford · LSHTM · Prix Nobel · AMNH · National Geographic · National Archives",
+ "prochain": {"affirmation": "« Les autruches cachent leur tête dans le sable. »"},
+ "voix_score": "Alors, ton score ?",
+ "voix_prochain": "Prochain épisode : les autruches cachent leur tête dans le sable.",
+ "publication": {
+  "legende": "Vrai ou faux ? 🔬 4 idées reçues sur les grands savants. Dis ton score en commentaire 👇\n#vraioufaux #science #histoire #savants #culturegenerale #apprendresurtiktok",
+  "hashtags": ["#vraioufaux", "#science", "#histoire", "#savants", "#culturegenerale", "#apprendresurtiktok"]
+ }
+}
