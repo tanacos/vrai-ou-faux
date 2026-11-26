@@ -689,7 +689,8 @@
     }
    ],
    "prochain": "« Les autruches cachent leur tête dans le sable. »",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/79bd3172832f5a1ea15045fa86f86ea47f958121/vrai_ou_faux_15_savants.mp4"
   }
  ]
 }
