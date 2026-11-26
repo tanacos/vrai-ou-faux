@@ -6,9 +6,16 @@ seulement présumés. Barre une piste (~~ainsi~~) quand elle a servi, et ajoute 
 
 ## Prochain épisode (déjà annoncé)
 
-- **Épisode 15 — les grands savants** : idée 1 imposée « Einstein était nul en maths. » (FAUX présumé ; Britannica
-  « One Good Fact », TIME (Isaacson, « Making the Grade ») et Physics Van de l'université de l'Illinois repérés :
-  « I never failed in mathematics »). Rester sur des faits historiques, sans dénigrer personne.
+- **Épisode 16 — les animaux (suite)** : idée 1 imposée « Les autruches cachent leur tête dans le sable. » (FAUX
+  présumé ; National Geographic Kids « Animal Myths Busted », McGill OSS et Live Science lus le 26/11 : elles
+  baissent la tête pour retourner leurs œufs ou se plaquent au sol). Restent possibles : le rouge rend les taureaux
+  furieux (faux présumé).
+
+## Déjà traité (épisode 15, les grands savants)
+
+- ~~Einstein nul en maths~~ (FAUX), ~~Galilée a inventé le télescope~~ (FAUX), ~~Marie Curie, deux Nobel dans deux
+  sciences~~ (VRAI), ~~Darwin a fait le tour du monde en bateau~~ (VRAI). Écarté : la pomme tombée sur la tête de
+  Newton (une seule source lue dit « no evidence », les autres ne tranchent pas : pas de verdict net).
 
 ## Déjà traité (épisode 14, la technologie)
 

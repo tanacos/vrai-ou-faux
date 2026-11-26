@@ -689,8 +689,11 @@
     }
    ],
    "prochain": "« Les autruches cachent leur tête dans le sable. »",
-   "statut": "hébergé",
-   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/79bd3172832f5a1ea15045fa86f86ea47f958121/vrai_ou_faux_15_savants.mp4"
+   "statut": "programmé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/79bd3172832f5a1ea15045fa86f86ea47f958121/vrai_ou_faux_15_savants.mp4",
+   "publication": "2026-12-02T18:00:00+01:00",
+   "metricool_id": "442685023",
+   "metricool_uuid": "-3589817185600189654"
   }
  ]
 }
