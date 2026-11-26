@@ -1,0 +1,93 @@
+{
+ "script": "/home/claude/vrai-ou-faux/episodes/015-savants/episode.json",
+ "debut": "2026-11-26 06:36:52",
+ "statut": "conforme",
+ "controles": [
+  {
+   "controle": "format vidéo",
+   "ok": true,
+   "detail": "h264 High 1080x1920 yuv420p 30.00 i/s"
+  },
+  {
+   "controle": "format audio",
+   "ok": true,
+   "detail": "aac 48000 Hz 2 canaux"
+  },
+  {
+   "controle": "durée",
+   "ok": true,
+   "detail": "74.80 s (prévu 74.80 s, minimum 61 s)"
+  },
+  {
+   "controle": "poids",
+   "ok": true,
+   "detail": "31.3 Mio"
+  },
+  {
+   "controle": "lecture immédiate (faststart)",
+   "ok": true,
+   "detail": "atome moov en tête de fichier"
+  },
+  {
+   "controle": "sonie intégrée",
+   "ok": true,
+   "detail": "-14.7 LUFS (cible -14,5 ± 1)"
+  },
+  {
+   "controle": "crête vraie",
+   "ok": true,
+   "detail": "-2.5 dBTP (maximum -1)"
+  },
+  {
+   "controle": "nombre d'images",
+   "ok": true,
+   "detail": "2244 images (prévu 2244)"
+  },
+  {
+   "controle": "miniature (1re image)",
+   "ok": true,
+   "detail": "luminosité moyenne de la 1re image : 50/255 (TikTok s'en sert de miniature : ni noire ni délavée)"
+  },
+  {
+   "controle": "pas d'image noire",
+   "ok": true,
+   "detail": "0 image(s) noire(s)"
+  },
+  {
+   "controle": "pas d'image figée",
+   "ok": true,
+   "detail": "plus longue séquence immobile : 0.00 s"
+  },
+  {
+   "controle": "pas de silence",
+   "ok": true,
+   "detail": "aucun trou de 2 s sous -60 dBFS"
+  },
+  {
+   "controle": "synchro son/image",
+   "ok": true,
+   "detail": "écarts aux transitions : +0 ms, +7 ms, +24 ms, +8 ms"
+  },
+  {
+   "controle": "zones sûres TikTok",
+   "ok": true,
+   "detail": "aucun texte hors zone"
+  },
+  {
+   "controle": "textes sans chevauchement",
+   "ok": true,
+   "detail": "aucun texte superposé à un autre"
+  }
+ ],
+ "duree_video": 74.8,
+ "bande_son": {
+  "lufs": -14.630150517457258,
+  "true_peak": -3.0499999999999297,
+  "gain_db": 1.6366096067611107,
+  "max_gr_db": 4.6382201886954375,
+  "duree": 74.8
+ },
+ "credits_pictogrammes": [],
+ "fin": "2026-11-26 06:45:43",
+ "duree_fabrication_s": 549
+}

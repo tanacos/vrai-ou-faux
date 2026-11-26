@@ -1,7 +1,7 @@
 {
  "description": "Journal de la série : un épisode par entrée. Tenu à jour par la routine après chaque programmation.",
- "dernier_numero": 14,
- "prochaine_affirmation": "« Einstein était nul en maths. »",
+ "dernier_numero": 15,
+ "prochaine_affirmation": "« Les autruches cachent leur tête dans le sable. »",
  "episodes": [
   {
    "numero": 1,
@@ -644,6 +644,52 @@
    "publication": "2026-11-28T18:00:00+01:00",
    "metricool_id": "438327555",
    "metricool_uuid": "8370735589862033766"
+  },
+  {
+   "numero": 15,
+   "slug": "savants",
+   "titre": "4 IDÉES REÇUES SUR LES SAVANTS",
+   "theme": "les grands savants",
+   "idees": [
+    {
+     "affirmation": "« Einstein était nul en maths. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://content.time.com/time/specials/packages/article/0,28804,1936731_1936743_1936758,00.html",
+      "https://www.britannica.com/one-good-fact/did-einstein-ever-fail-math",
+      "https://history.howstuffworks.com/history-vs-myth/did-einstein-really-fail-math.htm"
+     ]
+    },
+    {
+     "affirmation": "« Galilée a inventé le télescope. »",
+     "verdict": "FAUX",
+     "sources": [
+      "https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question37.html",
+      "https://www.skyatnightmagazine.com/space-science/who-invented-the-telescope",
+      "https://www.cabinet.ox.ac.uk/telescope"
+     ]
+    },
+    {
+     "affirmation": "« Marie Curie a reçu deux prix Nobel, dans deux sciences différentes. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.britannica.com/question/What-awards-did-Marie-Curie-win",
+      "https://lshtm.ac.uk/node/109166",
+      "https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts"
+     ]
+    },
+    {
+     "affirmation": "« Darwin a fait le tour du monde en bateau. »",
+     "verdict": "VRAI",
+     "sources": [
+      "https://www.amnh.org/exhibitions/darwin/trip/five.php",
+      "https://www.nationalgeographic.com/history/history-magazine/article/darwin-voyage-beagle-first-only-trip-around-world-scientific-revolution",
+      "https://media.nationalarchives.gov.uk/index.php/charles-darwin-and-the-beagle"
+     ]
+    }
+   ],
+   "prochain": "« Les autruches cachent leur tête dans le sable. »",
+   "statut": "fabriqué"
   }
  ]
 }
