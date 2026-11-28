@@ -1,0 +1,453 @@
+{
+ "serie": "INFINIMENT",
+ "numero": 6,
+ "slug": "terres-soleil",
+ "titre": "Combien de Terres dans le Soleil ?",
+ "narration": "narration.txt",
+ "blocs": [
+  "hook",
+  "taille",
+  "cube",
+  "calcul",
+  "trous",
+  "vraies",
+  "masse",
+  "outro"
+ ],
+ "scenes": {
+  "hook": [
+   {
+    "type": "heros",
+    "ambiance": "mystere",
+    "couverture": [
+     "COMBIEN DE *TERRES*",
+     "DANS LE SOLEIL ?"
+    ],
+    "objet": {
+     "type": "soleil",
+     "taille": 0.7
+    },
+    "objet_quand": "debut",
+    "chiffres": [
+     {
+      "quand": "13",
+      "valeur": 1.3,
+      "affichage": "≈ 1,3",
+      "unite": "MILLION DE *TERRES*",
+      "jusqua": "mais"
+     }
+    ],
+    "impacts": [
+     "13"
+    ]
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "mais",
+    "ambiance": "mystere",
+    "titres": [
+     {
+      "quand": "mais",
+      "lignes": [
+       "SI ON POUVAIT",
+       "LES *ÉCRASER*"
+      ]
+     },
+     {
+      "quand": "trou",
+      "lignes": [
+       "SANS LE MOINDRE",
+       "*TROU*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "soleil",
+     "taille": 0.55
+    },
+    "objet_quand": "mais"
+   }
+  ],
+  "taille": {
+   "type": "anneaux",
+   "ambiance": "emerveillement",
+   "expo": [
+    [
+     "debut",
+     7.11
+    ],
+    [
+     "soleil",
+     9.14
+    ]
+   ],
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "LA *TERRE*",
+      "≈ 12 700 KM"
+     ]
+    },
+    {
+     "quand": "soleil",
+     "lignes": [
+      "LE *SOLEIL*",
+      "≈ 1,4 MILLION DE KM"
+     ]
+    },
+    {
+     "quand": "aligne",
+     "lignes": [
+      "*109* TERRES",
+      "D'UN BORD À L'AUTRE"
+     ]
+    }
+   ],
+   "anneaux": [
+    {
+     "quand": "debut",
+     "rayon": 1,
+     "texte": "TERRE",
+     "couleur": "cyan"
+    },
+    {
+     "quand": "soleil",
+     "rayon": 109,
+     "texte": "SOLEIL",
+     "couleur": "or"
+    }
+   ],
+   "impacts": [
+    "109"
+   ]
+  },
+  "cube": {
+   "type": "heros",
+   "ambiance": "tension",
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "UN VOLUME :",
+      "*3* DIRECTIONS"
+     ]
+    },
+    {
+     "quand": "largeur",
+     "lignes": [
+      "109 × 109 × 109"
+     ]
+    },
+    {
+     "quand": "chiffres",
+     "lignes": [
+      "LES CHIFFRES",
+      "*S'ENVOLENT*"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "icone",
+    "nom": "PiCubeFill",
+    "taille": 0.5
+   },
+   "objet_quand": "debut"
+  },
+  "calcul": {
+   "type": "heros",
+   "ambiance": "triomphe",
+   "expo": 9.14,
+   "titres": [
+    {
+     "quand": "debut",
+     "lignes": [
+      "109 × 109 × 109"
+     ]
+    }
+   ],
+   "objet": {
+    "type": "soleil",
+    "taille": 0.6
+   },
+   "objet_quand": "debut",
+   "chiffres": [
+    {
+     "quand": "13",
+     "valeur": 1300000,
+     "affichage": "≈ 1,3",
+     "unite": "MILLION : VOLUME SOLEIL ÷ *VOLUME TERRE*",
+     "source": "SOURCE : BBC SKY AT NIGHT, UAI"
+    }
+   ],
+   "impacts": [
+    "13"
+   ]
+  },
+  "trous": [
+   {
+    "type": "heros",
+    "ambiance": "mystere",
+    "titres": [
+     {
+      "quand": "debut",
+      "lignes": [
+       "UNE TERRE :",
+       "UNE *BOULE*"
+      ]
+     },
+     {
+      "quand": "oranges",
+      "lignes": [
+       "ENTRE DES BOULES :",
+       "DES *TROUS*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "icone",
+     "nom": "PiOrangeFill",
+     "taille": 0.5
+    },
+    "objet_quand": "oranges"
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "meme",
+    "ambiance": "tension",
+    "titres": [
+     {
+      "quand": "meme",
+      "lignes": [
+       "MÊME RANGÉES",
+       "*AU MIEUX*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "icone",
+     "nom": "PiOrangeFill",
+     "taille": 0.4
+    },
+    "objet_quand": "meme",
+    "chiffres": [
+     {
+      "quand": "74%",
+      "valeur": 74,
+      "affichage": "≈ 74 %",
+      "unite": "DE L'ESPACE *REMPLI*",
+      "source": "SOURCE : UAI (ASTROEDU)"
+     }
+    ],
+    "impacts": [
+     "74%"
+    ]
+   }
+  ],
+  "vraies": [
+   {
+    "type": "heros",
+    "ambiance": "resolution",
+    "expo": 9.14,
+    "titres": [
+     {
+      "quand": "debut",
+      "lignes": [
+       "AVEC DE VRAIES",
+       "*BOULES*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "soleil",
+     "taille": 0.6
+    },
+    "objet_quand": "debut",
+    "chiffres": [
+     {
+      "quand": "1",
+      "valeur": 1000000,
+      "affichage": "PRÈS DE 1",
+      "unite": "MILLION DE *TERRES*",
+      "source": "SOURCE : UAI (ASTROEDU)"
+     }
+    ],
+    "impacts": [
+     "1"
+    ]
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "vertigineux",
+    "ambiance": "resolution",
+    "expo": 9.14,
+    "titres": [
+     {
+      "quand": "vertigineux",
+      "lignes": [
+       "ÇA RESTE",
+       "*VERTIGINEUX*"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "soleil",
+     "taille": 0.6
+    },
+    "objet_quand": "vertigineux"
+   }
+  ],
+  "masse": [
+   {
+    "type": "heros",
+    "ambiance": "tension",
+    "titres": [
+     {
+      "quand": "debut",
+      "lignes": [
+       "ET SA *MASSE* ?"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "icone",
+     "nom": "PiScalesFill",
+     "taille": 0.5
+    },
+    "objet_quand": "debut",
+    "chiffres": [
+     {
+      "quand": "333000",
+      "valeur": 333000,
+      "affichage": "≈ 333 000",
+      "unite": "MASSES DE *TERRE*",
+      "source": "SOURCE : BBC SKY AT NIGHT",
+      "jusqua": "moyenne"
+     }
+    ],
+    "impacts": [
+     "333000"
+    ]
+   },
+   {
+    "type": "heros",
+    "a_partir_de": "moyenne",
+    "ambiance": "resolution",
+    "titres": [
+     {
+      "quand": "moyenne",
+      "lignes": [
+       "EN MOYENNE :",
+       "≈ *4 FOIS* MOINS DENSE"
+      ]
+     }
+    ],
+    "objet": {
+     "type": "soleil",
+     "taille": 0.5
+    },
+    "objet_quand": "moyenne",
+    "infos": [
+     {
+      "quand": "moyenne",
+      "texte": "QUE LA TERRE"
+     }
+    ]
+   }
+  ],
+  "outro": {
+   "type": "fin",
+   "ambiance": "triomphe",
+   "prochain": [
+    "COMBIEN D'*ATOMES*",
+    "POUR UN CHEVEU ?"
+   ],
+   "quand": "atomes",
+   "sources_quand": "sources",
+   "objet": {
+    "type": "atome"
+   }
+  }
+ },
+ "voix_libre": {
+  "moteur": "kyutai-1.6b"
+ },
+ "sources": [
+  {
+   "editeur": "BBC Sky at Night Magazine (Jenny Winder, 16/03/2026)",
+   "titre": "This is how many Earths could fit in the Sun",
+   "url": "https://www.skyatnightmagazine.com/space-science/how-many-earths-can-fit-sun",
+   "extraits": [
+    "By volume, it would take 1.3 million Earths to fill the Sun",
+    "(assuming the Earth spheres are squishy and pack in with no gaps!)",
+    "By volume, the Sun is 1,412,000 x10^12 km^3, and Earth is 1.083 x10^12 km^3",
+    "The Sun's diameter is 1,392,000 km (864,000 miles), and Earth's is 12,742 km (7,917 miles), so Earth could line up 109 times across the face of the Sun.",
+    "The Sun's mass is 1,988,500x10^24 kg, and Earth's is 5.9724 x10^24 kg, so one Sun equals about 333,000 Earth masses."
+   ],
+   "sert_a": "fait central (1,3 million de Terres en volume, à condition de les écraser sans trous), diamètres (12 742 km, 1 392 000 km), 109 Terres d'un bord à l'autre, volumes, masse ≈ 333 000 Terres, base du calcul de densité"
+  },
+  {
+   "editeur": "Union astronomique internationale (astroEDU, Natalie Fischer, Haus der Astronomie, 2021)",
+   "titre": "One Million Earths inside our Sun",
+   "url": "https://astroedu.iau.org/en/activities/2101",
+   "extraits": [
+    "Diameter of the Sun: 1.39 million km Diameter of the Earth: 12,742 km Distance from the Sun to Earth: 149.6 million km",
+    "the diameter of the Sun is 109 times the diameter of Earth, and the distance from the Earth to Sun is about 100 times the diameter of the Sun.",
+    "For a rough hypothetical estimation, divide the volume of the Sun by the volume of the Earth:",
+    "This is about 109³ = 1.3 million",
+    "In reality, there will be space between the balls!",
+    "This was determined by Carl Friedrich Gauss. The equation means that only 74.05% of the space in our big solar sphere is actually occupied by the smaller balls.",
+    "The rest is empty.",
+    "Students will learn that in the Sun we could fit nearly 1 million Earths;",
+    "The students will be able to estimate that the numbers vary between 1.3 and 1 million."
+   ],
+   "sert_a": "fait central, 2e éditeur (109³ ≈ 1,3 million ; rapport des diamètres 109), trous entre les boules, ≈ 74 % de l'espace occupé, près de 1 million de Terres entières"
+  },
+  {
+   "editeur": "Universe Today",
+   "titre": "How Many Earths Can Fit in the Sun?",
+   "url": "https://www.universetoday.com/articles/how-many-earths-can-fit-in-the-sun",
+   "extraits": [
+    "The answer is that it would take 1.3 million Earths to fill up the Sun.",
+    "So if you divide the volume of the Sun by the volume of the Earth, you get 1,300,000."
+   ],
+   "sert_a": "fait central, 3e éditeur (1,3 million = volume du Soleil ÷ volume de la Terre)"
+  },
+  {
+   "editeur": "Open University (OpenLearn, « Basic science: understanding numbers », 1.9)",
+   "titre": "Small things, small numbers",
+   "url": "https://www.open.edu/openlearn/mod/oucontent/view.php?id=20665&section=9",
+   "extraits": [
+    "Depending on how thick the hair is, it might be 300,000 to 1,000,000 atoms from one side to the other."
+   ],
+   "sert_a": "sujet du prochain épisode (atomes alignés à travers un cheveu)"
+  },
+  {
+   "editeur": "National Nanotechnology Initiative (nano.gov, gouvernement des États-Unis)",
+   "titre": "Just How Small Is \"Nano\"?",
+   "url": "https://www.nano.gov/about-nanotechnology/just-how-small-is-nano",
+   "extraits": [
+    "A human hair is approximately 80,000–100,000 nanometers wide.",
+    "A single gold atom is about a third of a nanometer in diameter."
+   ],
+   "sert_a": "prochain épisode, 2e éditeur (largeur d'un cheveu, taille d'un atome)"
+  }
+ ],
+ "calcul": "Rapport des diamètres : 1 392 000 / 12 742 = 109,2 (Sky at Night : « line up 109 times » ; UAI : « 109 times »). Terre 12 742 km → « environ 12 700 km ». Soleil 1 392 000 km (Sky at Night), 1,39 million (UAI) → « environ 1,4 million de km ». Volume : 109 × 109 × 109 = 1 295 029 ≈ 1,3 million (UAI : « 109³ = 1.3 million ») ; rapport exact des volumes 1 412 000 / 1,083 = 1 303 786 ≈ 1,3 million (Sky at Night, Universe Today). Boules : 74,05 % d'espace occupé au mieux (UAI) → 0,7405 × 1 303 786 = 965 453 (0,7405 × 109³ = 958 969) : « près de 1 million » (UAI : « nearly 1 million Earths »). Masse : 1 988 500 / 5,9724 = 332 948 ≈ 333 000 (Sky at Night). Densité moyenne relative = rapport des masses / rapport des volumes = 332 948 / 1 303 786 = 0,2554, soit 1 / 0,2554 = 3,92 : « environ 4 fois moins dense en moyenne ». Règle : Terre 1,27 × 10⁷ m (expo 7,11 → 10⁷) ; Soleil 1,39 × 10⁹ m (expo 9,14 → 10⁹). Prochain épisode (2 sources) : Open University « 300,000 to 1,000,000 atoms from one side to the other » ; nano.gov cheveu 80 000 à 100 000 nm, atome d'or ≈ 1/3 nm → 240 000 à 300 000 atomes d'or : la question a une réponse chiffrée, en ordre de grandeur, qui dépend du cheveu et de l'atome.",
+ "images": "Scène « taille » : deux cercles concentriques à l'échelle des diamètres (Terre rayon 1, Soleil rayon 109) ; la Terre y est un petit cercle au centre (comparaison de taille, pas de position). Les objets « soleil » des scènes hook, calcul, vraies et masse sont des illustrations sans échelle. Les pictogrammes (cube, orange, balance) sont génériques : la balance illustre la comparaison des masses, l'orange l'empilement de boules. Aucune image ne montre un empilement réel de Terres. Scène de fin : atome (aperçu du prochain épisode, noyau pas à l'échelle). Règle des puissances de dix : Terre réelle (10⁷ m) puis Soleil réel (10⁹ m) dans « taille » ; 10⁹ m (le Soleil) dans « calcul » et « vraies » ; masquée ailleurs.",
+ "publication": {
+  "titre": "Combien de Terres dans le Soleil ?",
+  "legende": "Il faudrait environ 1,3 million de Terres pour remplir le Soleil, à condition de les écraser sans laisser de trous. INFINIMENT, épisode 6.\nSources : BBC Sky at Night Magazine (diamètres, volumes, masses), Union astronomique internationale (astroEDU : 109³, boules et trous), Universe Today (volumes).\n#infiniment #science #espace #astronomie #soleil #culturegenerale #apprendresurtiktok",
+  "hashtags": [
+   "#infiniment",
+   "#science",
+   "#espace",
+   "#astronomie",
+   "#soleil",
+   "#culturegenerale",
+   "#apprendresurtiktok"
+  ],
+  "contenu_ia": false
+ },
+ "prochain": "Combien d'atomes faut-il aligner pour traverser un cheveu ? (épisode 7, vers le petit)"
+}
