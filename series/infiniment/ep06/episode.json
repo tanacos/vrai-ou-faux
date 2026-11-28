@@ -429,7 +429,7 @@
    "sert_a": "prochain épisode, 2e éditeur (largeur d'un cheveu, taille d'un atome)"
   }
  ],
- "calcul": "Rapport des diamètres : 1 392 000 / 12 742 = 109,2 (Sky at Night : « line up 109 times » ; UAI : « 109 times »). Terre 12 742 km → « environ 12 700 km ». Soleil 1 392 000 km (Sky at Night), 1,39 million (UAI) → « environ 1,4 million de km ». Volume : 109 × 109 × 109 = 1 295 029 ≈ 1,3 million (UAI : « 109³ = 1.3 million ») ; rapport exact des volumes 1 412 000 / 1,083 = 1 303 786 ≈ 1,3 million (Sky at Night, Universe Today). Boules : 74,05 % d'espace occupé au mieux (UAI ; densité maximale d'un empilement infini π/(3√2) = 0,74048 ; dans une boule finie, la paroi en fait perdre un peu : « à peine 74 % », affiché « ≤ 74 % », et « près de 1 million » est une borne haute) → 0,7405 × 1 303 786 = 965 453 (0,7405 × 109³ = 958 969) : « près de 1 million » (UAI : « nearly 1 million Earths »). Masse : 1 988 500 / 5,9724 = 332 948 ≈ 333 000 (Sky at Night). Densité moyenne relative = rapport des masses / rapport des volumes = 332 948 / 1 303 786 = 0,2554, soit 1 / 0,2554 = 3,92 : « environ 4 fois moins dense en moyenne ». Règle : Terre 1,27 × 10⁷ m (expo 7,11 → 10⁷) ; Soleil 1,39 × 10⁹ m (expo 9,14 → 10⁹). Prochain épisode (2 sources) : Open University « 300,000 to 1,000,000 atoms from one side to the other » ; nano.gov cheveu 80 000 à 100 000 nm, atome d'or ≈ 1/3 nm → 240 000 à 300 000 atomes d'or : la question a une réponse chiffrée, en ordre de grandeur, qui dépend du cheveu et de l'atome.",
+ "calcul": "Rapport des diamètres : 1 392 000 / 12 742 = 109,2 (Sky at Night : « line up 109 times » ; UAI : « 109 times »). Terre 12 742 km → « environ 12 700 km ». Soleil 1 392 000 km (Sky at Night), 1,39 million (UAI) → « environ 1,4 million de km ». Volume : 109 × 109 × 109 = 1 295 029 ≈ 1,3 million (UAI : « 109³ = 1.3 million ») ; rapport exact des volumes 1 412 000 / 1,083 = 1 303 786 ≈ 1,3 million (Sky at Night, Universe Today). Boules : 74,05 % d'espace occupé au mieux (UAI ; densité maximale d'un empilement infini π/(3√2) = 0,74048 ; dans une boule finie, la paroi en fait perdre un peu : « à peine 74 % », affiché « ≈ 74 % AU MAXIMUM », et « près de 1 million » est une borne haute) → 0,7405 × 1 303 786 = 965 453 (0,7405 × 109³ = 958 969) : « près de 1 million » (UAI : « nearly 1 million Earths »). Masse : 1 988 500 / 5,9724 = 332 948 ≈ 333 000 (Sky at Night). Densité moyenne relative = rapport des masses / rapport des volumes = 332 948 / 1 303 786 = 0,2554, soit 1 / 0,2554 = 3,92 : « environ 4 fois moins dense en moyenne ». Règle : Terre 1,27 × 10⁷ m (expo 7,11 → 10⁷) ; Soleil 1,39 × 10⁹ m (expo 9,14 → 10⁹). Prochain épisode (2 sources) : Open University « 300,000 to 1,000,000 atoms from one side to the other » ; nano.gov cheveu 80 000 à 100 000 nm, atome d'or ≈ 1/3 nm → 240 000 à 300 000 atomes d'or : la question a une réponse chiffrée, en ordre de grandeur, qui dépend du cheveu et de l'atome.",
  "images": "Scène « taille » : deux cercles concentriques à l'échelle des diamètres (Terre rayon 1, Soleil rayon 109) ; la Terre y est un petit cercle au centre (comparaison de taille, pas de position). Les objets « soleil » des scènes hook, calcul, vraies et masse sont des illustrations sans échelle. Les pictogrammes (cube, orange, balance) sont génériques : la balance illustre la comparaison des masses, l'orange l'empilement de boules. Aucune image ne montre un empilement réel de Terres. Scène de fin : atome (aperçu du prochain épisode, noyau pas à l'échelle). Règle des puissances de dix : Terre réelle (10⁷ m) puis Soleil réel (10⁹ m) dans « taille » ; 10⁹ m (le Soleil) dans « calcul » et « vraies » ; masquée ailleurs.",
  "publication": {
   "titre": "Combien de Terres dans le Soleil ?",
@@ -445,5 +445,21 @@
   ],
   "contenu_ia": false
  },
- "prochain": "Combien d'atomes faut-il aligner pour traverser un cheveu ? (épisode 7, vers le petit)"
+ "prochain": "Combien d'atomes faut-il aligner pour traverser un cheveu ? (épisode 7, vers le petit)",
+ "voix": {
+  "fournisseur": "Kyutai",
+  "modele": "kyutai/tts-1.6b-en_fr",
+  "nom": "Estelle",
+  "voix_16b": "unmute-prod-website/developpeuse-3.wav",
+  "tempo": 1.0,
+  "eclaircir": true,
+  "prise": "voix/prise.mp3",
+  "mots": "voix/prise_mots.json",
+  "horodatage": "faster-whisper medium (transcription indépendante)",
+  "licence": "poids CC BY 4.0 : mention « Voix : Kyutai TTS (CC BY 4.0) » dans la légende ; voix Estelle cédée en CC0",
+  "respirations": {
+   "hook": 0.8,
+   "calcul": 0.8
+  }
+ }
 }
