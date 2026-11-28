@@ -129,8 +129,23 @@
    "publication": "2026-11-30T18:00:00+01:00",
    "metricool_id": "436412910",
    "metricool_uuid": "-8534403314690865375"
+  },
+  {
+   "numero": 6,
+   "slug": "terres-soleil",
+   "titre": "Combien de Terres dans le Soleil ?",
+   "dossier": "series/infiniment/ep06",
+   "sources": [
+    "https://www.skyatnightmagazine.com/space-science/how-many-earths-can-fit-sun",
+    "https://astroedu.iau.org/en/activities/2101",
+    "https://www.universetoday.com/articles/how-many-earths-can-fit-in-the-sun",
+    "https://www.open.edu/openlearn/mod/oucontent/view.php?id=20665&section=9",
+    "https://www.nano.gov/about-nanotechnology/just-how-small-is-nano"
+   ],
+   "prochain": "Combien d'atomes faut-il aligner pour traverser un cheveu ? (épisode 7, vers le petit)",
+   "statut": "en attente de voix"
   }
  ],
- "dernier_numero": 5,
- "prochain_sujet": "Combien de Terres faudrait-il pour remplir le Soleil ? (épisode 6, vers le grand)"
+ "dernier_numero": 6,
+ "prochain_sujet": "Combien d'atomes faut-il aligner pour traverser un cheveu ? (épisode 7, vers le petit)"
 }

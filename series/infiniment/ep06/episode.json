@@ -234,9 +234,9 @@
     "chiffres": [
      {
       "quand": "74%",
-      "valeur": 74,
-      "affichage": "≤ 74 %",
-      "unite": "DE L'ESPACE *REMPLI*",
+      "valeur": 74.05,
+      "affichage": "≈ 74 %",
+      "unite": "AU MAXIMUM : ESPACE *REMPLI*",
       "source": "SOURCE : UAI (ASTROEDU)"
      }
     ],
