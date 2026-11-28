@@ -143,7 +143,8 @@
     "https://www.nano.gov/about-nanotechnology/just-how-small-is-nano"
    ],
    "prochain": "Combien d'atomes faut-il aligner pour traverser un cheveu ? (épisode 7, vers le petit)",
-   "statut": "fabriqué"
+   "statut": "hébergé",
+   "video": "https://raw.githubusercontent.com/tanacos/vrai-ou-faux/e6bc1732aef2bba2a3f390f30b205289becd086b/infiniment_06_terres-soleil.mp4"
   }
  ],
  "dernier_numero": 6,
